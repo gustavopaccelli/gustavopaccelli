@@ -1,0 +1,186 @@
+/* ==========================================================================
+   responsive.css — media queries (mobile-first: ajustes para telas menores
+   e refinamentos para tablets/desktops)
+   ========================================================================== */
+
+/* ---------- Até 900px: menu hambúrguer ---------- */
+@media (max-width: 900px) {
+    .nav-toggle {
+        display: flex;
+    }
+
+    .nav-links {
+        position: absolute;
+        top: var(--nav-height);
+        left: 0;
+        right: 0;
+        background: var(--bg-white);
+        border-bottom: 1px solid var(--border);
+        box-shadow: var(--shadow-md);
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: 8px 0;
+        display: none;
+    }
+
+    .nav-links.open {
+        display: flex;
+    }
+
+    .nav-links a {
+        display: block;
+        padding: 12px 20px;
+        border-bottom: none;
+        border-left: 3px solid transparent;
+    }
+
+    .nav-links a.active {
+        border-left-color: var(--secondary);
+        background: var(--bg-light);
+    }
+}
+
+/* ---------- Até 768px: tablets pequenos e celulares ---------- */
+@media (max-width: 768px) {
+    .hero {
+        padding: 48px 0;
+    }
+
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .hero .subtitle {
+        font-size: 1.1rem;
+    }
+
+    .hero-img {
+        width: 140px;
+        height: 140px;
+    }
+
+    .page-header h1 {
+        font-size: 1.7rem;
+    }
+
+    .section {
+        padding: 40px 0;
+    }
+
+    .section-title {
+        font-size: 1.45rem;
+    }
+
+    /* Timeline acadêmica empilhada */
+    .timeline-item {
+        flex-direction: column;
+    }
+
+    .timeline-marker {
+        flex-direction: row;
+        width: 100%;
+        min-width: 0;
+        margin-right: 0;
+        margin-bottom: 12px;
+        gap: 10px;
+        align-items: center;
+    }
+
+    .timeline-marker::after {
+        display: none;
+    }
+
+    .badge {
+        margin-top: 0;
+    }
+
+    /* Sobre em coluna única */
+    .about-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .about-photo {
+        max-width: 260px;
+        margin: 0 auto;
+    }
+
+    /* Contato em coluna única */
+    .contact-content {
+        grid-template-columns: 1fr;
+    }
+
+    /* Experiência: menos recuo */
+    .experience-timeline {
+        padding-left: 24px;
+        margin-left: 4px;
+    }
+
+    .experience-item::before {
+        left: -33px;
+    }
+
+    .publication-header {
+        flex-direction: column;
+        gap: 8px;
+    }
+}
+
+/* ---------- Até 480px: celulares ---------- */
+@media (max-width: 480px) {
+    .container {
+        padding: 0 16px;
+    }
+
+    .hero h1 {
+        font-size: 1.65rem;
+    }
+
+    .hero-cta .btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    .highlight-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+
+    .highlight-card {
+        padding: 20px 12px;
+    }
+
+    .highlight-card .number {
+        font-size: 1.9rem;
+    }
+
+    .certificates-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .certificate-filters {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .filter-reset {
+        align-self: stretch;
+        text-align: center;
+    }
+
+    .footer-inner {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+/* ---------- 1024px+: desktops ---------- */
+@media (min-width: 1024px) {
+    .hero h1 {
+        font-size: 3rem;
+    }
+
+    .section {
+        padding: 72px 0;
+    }
+}

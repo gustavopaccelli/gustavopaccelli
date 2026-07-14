@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="Gustavo Paccelli da Costa">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1e3a8a"/>
+      <stop offset="100%" stop-color="#0891b2"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" fill="url(#bg)"/>
+  <circle cx="256" cy="190" r="88" fill="#ffffff" opacity="0.92"/>
+  <path d="M256 300c-92 0-152 52-152 128v84h304v-84c0-76-60-128-152-128z" fill="#ffffff" opacity="0.92"/>
+  <text x="256" y="470" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="44" font-weight="700" fill="#1e3a8a">GP</text>
+</svg>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificados e Cursos — Gustavo Paccelli da Costa</title>
+    <meta name="description" content="Galeria interativa com mais de 60 certificados e cursos de Gustavo Paccelli da Costa: educação, pesquisa, gestão, metodologias, tecnologia e dados.">
+    <meta name="keywords" content="Gustavo Paccelli, certificados, cursos, formação complementar, educação, pesquisa, metodologias ativas">
+    <meta name="author" content="Gustavo Paccelli da Costa">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Certificados e Cursos — Gustavo Paccelli da Costa">
+    <meta property="og:description" content="Galeria interativa com filtros por ano, instituição e categoria — formação complementar de 2012 a 2025.">
+    <meta property="og:url" content="https://gustavopaccelli.github.io/gustavopaccelli/certificates.html">
+    <meta property="og:image" content="https://gustavopaccelli.github.io/gustavopaccelli/assets/img/perfil.svg">
+    <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <!-- NAVEGAÇÃO -->
+    <header class="navbar">
+        <div class="container nav-inner">
+            <a href="index.html" class="logo">Gustavo <span>Paccelli</span></a>
+            <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menu" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">Sobre</a></li>
+                <li><a href="education.html">Educação</a></li>
+                <li><a href="research.html">Pesquisa</a></li>
+                <li><a href="experience.html">Experiência</a></li>
+                <li><a href="certificates.html" class="active">Certificados</a></li>
+                <li><a href="contact.html">Contato</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <h1>Certificados e Cursos</h1>
+                <p>Formação complementar contínua de 2012 a 2025 — filtre por ano, instituição ou categoria</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <!-- FILTROS -->
+                <div class="certificate-filters">
+                    <div class="filter-group">
+                        <label for="filter-search">Buscar</label>
+                        <input type="search" id="filter-search" placeholder="Nome do curso ou instituição...">
+                    </div>
+                    <div class="filter-group">
+                        <label for="filter-year">Ano</label>
+                        <select id="filter-year">
+                            <option value="">Todos</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="filter-institution">Instituição</label>
+                        <select id="filter-institution">
+                            <option value="">Todas</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="filter-category">Categoria</label>
+                        <select id="filter-category">
+                            <option value="">Todas</option>
+                        </select>
+                    </div>
+                    <button type="button" id="filter-reset" class="btn btn-ghost btn-small filter-reset">Limpar filtros</button>
+                </div>
+
+                <!-- GRID DE CERTIFICADOS (renderizado por js/certificates.js) -->
+                <div class="certificates-grid" id="certificates-grid" aria-live="polite">
+                    <noscript>
+                        <div class="cert-empty">
+                            A galeria interativa requer JavaScript. Habilite o JavaScript no navegador
+                            ou consulte a lista completa no <a href="http://lattes.cnpq.br/8469347425037002">Currículo Lattes</a>.
+                        </div>
+                    </noscript>
+                </div>
+
+                <p class="cert-total" id="cert-total"></p>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container footer-inner">
+            <p>&copy; <span id="footer-year">2026</span> Gustavo Paccelli da Costa. Todos os direitos reservados.</p>
+            <div class="footer-links">
+                <a href="https://www.linkedin.com/in/gustavopaccelli/" target="_blank" rel="noopener">LinkedIn</a>
+                <a href="http://lattes.cnpq.br/8469347425037002" target="_blank" rel="noopener">Lattes</a>
+                <a href="https://orcid.org/0000-0001-6458-869X" target="_blank" rel="noopener">ORCID</a>
+                <a href="contact.html">Contato</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script src="js/certificates.js"></script>
+</body>
+</html>
