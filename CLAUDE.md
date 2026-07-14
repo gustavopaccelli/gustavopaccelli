@@ -1,0 +1,1 @@
+Esta pasta contém todos os certificados e cursos que realizei para consulta e incorporação ao projeto.
