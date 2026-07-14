@@ -1,16 +1,60 @@
-## Hi there 👋
+# Olá! Eu sou o Gustavo Paccelli 👋
 
-<!--
-**gustavopaccelli/gustavopaccelli** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+**Doutor em Ciências Sociais (UFJF, 2024)** | Professor de Sociologia e Filosofia | Pesquisador de movimentos sociais, ciclos de protestos e democracia no Brasil contemporâneo.
 
-Here are some ideas to get you started:
+- 🔭 Pesquiso **estruturas de mobilização e oportunidades políticas** nos ciclos de protestos brasileiros
+- 📖 8 artigos publicados em periódicos científicos
+- 🏫 Professor no Ensino Médio, pré-vestibular e ensino superior (UFJF)
+- 📫 Contato: **paccelli@outlook.com** | [LinkedIn](https://www.linkedin.com/in/gustavopaccelli/) | [Lattes](http://lattes.cnpq.br/8469347425037002) | [ORCID](https://orcid.org/0000-0001-6458-869X)
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+🌐 **Portfólio online:** https://gustavopaccelli.github.io/gustavopaccelli/
+
+---
+
+## 📁 Sobre este repositório
+
+Este repositório contém meu **portfólio acadêmico-profissional** — um site estático em HTML5 + CSS3 + JavaScript vanilla, hospedado no GitHub Pages.
+
+### Estrutura
+
+```
+├── index.html                 # Home (hero, destaques, expertise)
+├── about.html                 # Sobre (bio, timeline, idiomas, habilidades)
+├── education.html             # Trajetória acadêmica (timeline)
+├── research.html              # Publicações, eventos e atuação editorial
+├── experience.html            # Experiência profissional (timeline)
+├── certificates.html          # Galeria interativa de certificados (filtros)
+├── contact.html               # Formulário e informações de contato
+├── css/
+│   ├── style.css              # Estilos principais (mobile-first)
+│   └── responsive.css         # Media queries
+├── js/
+│   ├── script.js              # Menu mobile, animações, formulário
+│   └── certificates.js        # Dados + filtros dos certificados
+├── assets/
+│   ├── img/                   # Foto de perfil, favicon, logos
+│   └── docs/
+│       └── certificates/      # PDFs dos certificados
+└── sitemap.xml                # SEO
+```
+
+### Como rodar localmente
+
+```bash
+python -m http.server 8000
+# acesse http://localhost:8000
+```
+
+### Como personalizar
+
+1. **Foto de perfil:** substitua `assets/img/perfil.svg` por uma foto real (`perfil.jpg`, mín. 512×512px) e atualize as referências `assets/img/perfil.svg` em `index.html` e `about.html`.
+2. **CV em PDF:** adicione `assets/docs/lattes.pdf` (o botão em `about.html` já aponta para lá).
+3. **Certificados (PDFs):** coloque os arquivos em `assets/docs/certificates/` com o nome `ANO Título.pdf` (ex.: `2025 Extraindo Informações do IBGE.pdf`) — os cards já geram os links automaticamente.
+4. **Novo certificado:** adicione um objeto ao array `CERTIFICATES` em `js/certificates.js`.
+5. **Formulário de contato:** hoje usa `mailto:`. Para envio direto, integre [Formspree](https://formspree.io/) ou [EmailJS](https://www.emailjs.com/) em `js/script.js`.
+
+### Deploy no GitHub Pages
+
+Settings → Pages → **Deploy from a branch** → branch `main`, pasta `/ (root)`.
+
+Guia completo em [`GUIA_IMPLEMENTACAO_GITHUB_PAGES.md`](GUIA_IMPLEMENTACAO_GITHUB_PAGES.md).
