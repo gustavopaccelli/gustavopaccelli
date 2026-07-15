@@ -50,6 +50,7 @@ const CERTIFICATES = [
     { year: 2024, title: 'I Workshop Ultradireita', institution: 'UFJF', hours: null, categories: ['pesquisa'] },
     { year: 2024, title: 'Formação em Linguagens e suas Tecnologias', institution: 'MEC', hours: null, categories: ['educacao'] },
     { year: 2024, title: '- PIA3805-2024 - Marina Tunirê Resistência e Memória na Luta', institution: 'PUC Minas', hours: null, categories: ['educacao', 'direitos-humanos'] },
+    { year: 2024, title: 'Certificado de Participação — SEMIC', institution: 'UFJF', hours: null, categories: ['pesquisa'] },
 
     // ---------- 2023 ----------
     { year: 2023, title: 'A BNCC do Ensino Médio: Ciências Humanas', institution: 'MEC', hours: '50h', categories: ['educacao'] },
@@ -72,12 +73,10 @@ const CERTIFICATES = [
     { year: 2022, title: 'Extensão: TEAIP', institution: 'UFC', hours: null, categories: ['tecnologia', 'educacao'] },
     { year: 2022, title: 'Workshop EBAC', institution: 'EBAC', hours: null, categories: ['tecnologia'] },
     { year: 2022, title: 'Extensão: Introdução à Ciência de Dados com R (2ª edição)', institution: 'UNIFESP', hours: null, categories: ['dados', 'tecnologia'] },
-    { year: 2022, title: 'Extensão: Metodologias, Práticas Pedagógicas e Tecnologias Educacionais', institution: 'ESFAPEM', hours: '180h', categories: ['metodologias', 'tecnologia', 'educacao'] },
     { year: 2022, title: 'Data Analysis: Estatística com Google Sheets (Certificado)', institution: 'Google', hours: null, categories: ['dados', 'tecnologia'] },
     { year: 2022, title: 'Data Analysis: Estatística com Google Sheets — Alura', institution: 'Alura', hours: null, categories: ['dados', 'tecnologia'] },
     { year: 2022, title: 'Data Analysis: Google Sheets — Alura', institution: 'Alura', hours: null, categories: ['dados', 'tecnologia'] },
     { year: 2022, title: 'Data Analysis: Previsões com Google Sheets — Alura', institution: 'Alura', hours: null, categories: ['dados', 'tecnologia'] },
-    { year: 2022, title: 'Extensão: Introdução a Ciência de Dados com R (2ª edição)', institution: 'UNIFESP', hours: null, categories: ['dados', 'tecnologia'] },
     { year: 2022, title: 'Power BI: Explorando Recursos Visuais — Alura', institution: 'Alura', hours: null, categories: ['dados', 'tecnologia'] },
     { year: 2022, title: 'Teste de Usabilidade Parte 1: Seu Produto é Fácil de Usar — Alura', institution: 'Alura', hours: null, categories: ['tecnologia'] },
     { year: 2022, title: 'Teste de Usabilidade Parte 2: Mensurando e Entregando Resultados — Alura', institution: 'Alura', hours: null, categories: ['tecnologia'] },
@@ -96,9 +95,7 @@ const CERTIFICATES = [
     { year: 2022, title: 'UX: Entenda a Experiência de Usuário — Alura', institution: 'Alura', hours: null, categories: ['tecnologia'] },
 
     // ---------- 2021 ----------
-    { year: 2021, title: 'Extensão: Formação de Educadores para metodologia Tô no Rumo', institution: 'UNIFESP', hours: '59h', categories: ['metodologias', 'educacao'] },
     { year: 2021, title: 'Extensão: Formação de Educadores para Metodologia Tô no Rumo', institution: 'UNIFESP', hours: null, categories: ['metodologias', 'educacao'] },
-    { year: 2021, title: 'Extensão: Tecnologia na Educação, Ensino Híbrido e Inovação Pedagógica', institution: 'UFC', hours: '180h', categories: ['tecnologia', 'educacao'] },
     { year: 2021, title: 'Aperfeiçoamento TEEHI', institution: 'UFC', hours: null, categories: ['tecnologia', 'educacao'] },
     { year: 2021, title: 'Curso de Extensão: Tô no Rumo', institution: 'UNIFESP', hours: null, categories: ['metodologias', 'educacao'] },
     { year: 2021, title: 'Google Analytics para Iniciantes', institution: 'Google', hours: null, categories: ['dados', 'tecnologia'] },
@@ -125,11 +122,6 @@ const CERTIFICATES = [
     { year: 2017, title: 'Palestra Dilemas da Representação', institution: 'UFJF', hours: null, categories: ['pesquisa'] },
     { year: 2017, title: 'Jornada de Ciências Sociais (JornadaCSO) — Debatedor', institution: 'UFJF', hours: null, categories: ['pesquisa'] },
     { year: 2017, title: 'Jornada de Ciências Sociais (JornadaCSO) — Ouvinte', institution: 'UFJF', hours: null, categories: ['pesquisa'] },
-
-    // ---------- 2016 ----------
-    { year: 2016, title: 'Parlamento Jovem — Certificado de Conclusão 1', institution: 'Parlamento Jovem de Minas', hours: null, categories: ['educacao'] },
-    { year: 2016, title: 'Parlamento Jovem — Certificado de Conclusão 2', institution: 'Parlamento Jovem de Minas', hours: null, categories: ['educacao'] },
-    { year: 2016, title: 'Parlamento Jovem — Certificado de Conclusão 3', institution: 'Parlamento Jovem de Minas', hours: null, categories: ['educacao'] },
 
     // ---------- 2015 ----------
     { year: 2015, title: 'Doutrinas Políticas', institution: 'ILB / Senado Federal', hours: '20h', categories: ['pesquisa'] },
