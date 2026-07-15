@@ -16,6 +16,18 @@ const CATEGORY_LABELS = {
 };
 
 const CERTIFICATES = [
+    // ---------- 2026 ----------
+    { year: 2026, title: 'A BNCC nos Anos Finais do Ensino Fundamental: Arte', institution: 'MEC', hours: null, categories: ['educacao'] },
+    { year: 2026, title: 'AI Fluency Framework and foundations Anthropic', institution: 'Anthropic', hours: null, categories: ['tecnologia', 'dados'] },
+    { year: 2026, title: 'Claude 101 Anthropic', institution: 'Anthropic', hours: null, categories: ['tecnologia'] },
+    { year: 2026, title: 'Competências Digitais nas Áreas de Conhecimento da BNCC – Ciências Humanas - Ensino Médio', institution: 'MEC', hours: null, categories: ['educacao', 'tecnologia'] },
+    { year: 2026, title: 'Curso de Aperfeiçoamento em Educação e Tecnologia', institution: 'MEC', hours: null, categories: ['educacao', 'tecnologia'] },
+    { year: 2026, title: 'MAIS CIÊNCIAS HUMANAS E SOCIAIS APLICADAS', institution: 'MEC', hours: null, categories: ['educacao'] },
+    { year: 2026, title: 'MAIS LINGUAGENS E SUAS TECNOLOGIAS', institution: 'MEC', hours: null, categories: ['educacao'] },
+    { year: 2026, title: 'Orientação Profissional', institution: 'MEC', hours: null, categories: ['educacao'] },
+    { year: 2026, title: 'Processos de Orientação Educacional e Profissional', institution: 'MEC', hours: null, categories: ['educacao'] },
+    { year: 2026, title: 'Trabalho e Profissionalização', institution: 'MEC', hours: null, categories: ['educacao'] },
+
     // ---------- 2025 ----------
     { year: 2025, title: 'Extraindo Informações do IBGE', institution: 'IBGE', hours: '20h', categories: ['pesquisa', 'dados'] },
     { year: 2025, title: 'Avaliadores de Artigos Científicos', institution: 'ENAP', hours: '20h', categories: ['pesquisa'] },
@@ -26,6 +38,8 @@ const CERTIFICATES = [
     { year: 2025, title: 'Avaliação de Iniciação Científica — Certificado 3', institution: 'UNILA', hours: null, categories: ['pesquisa'] },
     { year: 2025, title: 'Avaliação de Iniciação Científica — Certificado 4', institution: 'UNILA', hours: null, categories: ['pesquisa'] },
     { year: 2025, title: 'Avaliação de Iniciação Científica — Certificado 5', institution: 'UNILA', hours: null, categories: ['pesquisa'] },
+    { year: 2025, title: '- SEMIC participação', institution: 'UFJF', hours: null, categories: ['pesquisa'] },
+    { year: 2025, title: '- PIA3804-2024 - Na fronteira Mulheres Negras na Universidade,', institution: 'PUC Minas', hours: null, categories: ['educacao', 'direitos-humanos'] },
 
     // ---------- 2024 ----------
     { year: 2024, title: 'Formação em Ciências Humanas e Sociais Aplicadas', institution: 'MEC', hours: '180h', categories: ['educacao'] },
@@ -35,6 +49,7 @@ const CERTIFICATES = [
     { year: 2024, title: 'II Jornada do Pensamento Social Brasileiro', institution: 'UFJF', hours: null, categories: ['pesquisa'] },
     { year: 2024, title: 'I Workshop Ultradireita', institution: 'UFJF', hours: null, categories: ['pesquisa'] },
     { year: 2024, title: 'Formação em Linguagens e suas Tecnologias', institution: 'MEC', hours: null, categories: ['educacao'] },
+    { year: 2024, title: '- PIA3805-2024 - Marina Tunirê Resistência e Memória na Luta', institution: 'PUC Minas', hours: null, categories: ['educacao', 'direitos-humanos'] },
 
     // ---------- 2023 ----------
     { year: 2023, title: 'A BNCC do Ensino Médio: Ciências Humanas', institution: 'MEC', hours: '50h', categories: ['educacao'] },
@@ -44,6 +59,7 @@ const CERTIFICATES = [
     { year: 2023, title: 'Gestão Escolar', institution: 'MEC', hours: '80h', categories: ['gestao', 'educacao'] },
     { year: 2023, title: 'Formação em Artes nos Anos Finais', institution: 'MEC', hours: '180h', categories: ['educacao'] },
     { year: 2023, title: 'Certificado de Participação — SEMIC', institution: 'UFJF', hours: null, categories: ['pesquisa'] },
+    { year: 2023, title: 'CertificadoParticipacaoSEMIC', institution: 'UFJF', hours: null, categories: ['pesquisa'] },
 
     // ---------- 2022 ----------
     { year: 2022, title: 'Extensão: Introdução a Ciência de Dados com R', institution: 'UNIFESP', hours: '30h', categories: ['dados', 'tecnologia'] },
@@ -57,9 +73,31 @@ const CERTIFICATES = [
     { year: 2022, title: 'Workshop EBAC', institution: 'EBAC', hours: null, categories: ['tecnologia'] },
     { year: 2022, title: 'Extensão: Introdução à Ciência de Dados com R (2ª edição)', institution: 'UNIFESP', hours: null, categories: ['dados', 'tecnologia'] },
     { year: 2022, title: 'Extensão: Metodologias, Práticas Pedagógicas e Tecnologias Educacionais', institution: 'ESFAPEM', hours: '180h', categories: ['metodologias', 'tecnologia', 'educacao'] },
+    { year: 2022, title: 'Data Analysis: Estatística com Google Sheets (Certificado)', institution: 'Google', hours: null, categories: ['dados', 'tecnologia'] },
+    { year: 2022, title: 'Data Analysis: Estatística com Google Sheets — Alura', institution: 'Alura', hours: null, categories: ['dados', 'tecnologia'] },
+    { year: 2022, title: 'Data Analysis: Google Sheets — Alura', institution: 'Alura', hours: null, categories: ['dados', 'tecnologia'] },
+    { year: 2022, title: 'Data Analysis: Previsões com Google Sheets — Alura', institution: 'Alura', hours: null, categories: ['dados', 'tecnologia'] },
+    { year: 2022, title: 'Extensão: Introdução a Ciência de Dados com R (2ª edição)', institution: 'UNIFESP', hours: null, categories: ['dados', 'tecnologia'] },
+    { year: 2022, title: 'Power BI: Explorando Recursos Visuais — Alura', institution: 'Alura', hours: null, categories: ['dados', 'tecnologia'] },
+    { year: 2022, title: 'Teste de Usabilidade Parte 1: Seu Produto é Fácil de Usar — Alura', institution: 'Alura', hours: null, categories: ['tecnologia'] },
+    { year: 2022, title: 'Teste de Usabilidade Parte 2: Mensurando e Entregando Resultados — Alura', institution: 'Alura', hours: null, categories: ['tecnologia'] },
+    { year: 2022, title: 'UX Acessível: Projetando Interfaces Inclusivas — Alura', institution: 'Alura', hours: null, categories: ['tecnologia'] },
+    { year: 2022, title: 'UX Design: Criando Dashboard com Data Studio — Alura', institution: 'Alura', hours: null, categories: ['tecnologia'] },
+    { year: 2022, title: 'UX Produto: Monitore, Mensure e Teste o Seu Projeto — Alura', institution: 'Alura', hours: null, categories: ['tecnologia'] },
+    { year: 2022, title: 'UX Research: Análise de Concorrentes — Alura', institution: 'Alura', hours: null, categories: ['tecnologia'] },
+    { year: 2022, title: 'UX Research: Análise de Sites com Google Analytics — Alura', institution: 'Alura', hours: null, categories: ['tecnologia', 'dados'] },
+    { year: 2022, title: 'UX Research: Avaliação Heurística — Alura', institution: 'Alura', hours: null, categories: ['tecnologia'] },
+    { year: 2022, title: 'UX Research: Entrevistas com Equipes Internas — Alura', institution: 'Alura', hours: null, categories: ['tecnologia'] },
+    { year: 2022, title: 'UX Research: Entrevistas com Usuários — Alura', institution: 'Alura', hours: null, categories: ['tecnologia'] },
+    { year: 2022, title: 'UX Research: Mapeando a Jornada do Usuário — Alura', institution: 'Alura', hours: null, categories: ['tecnologia'] },
+    { year: 2022, title: 'UX Research: Otimização de Sites — Alura', institution: 'Alura', hours: null, categories: ['tecnologia'] },
+    { year: 2022, title: 'UX Research: Pesquisa Etnográfica — Alura', institution: 'Alura', hours: null, categories: ['tecnologia'] },
+    { year: 2022, title: 'UX Writing: Escrevendo Textos para Usuários — Alura', institution: 'Alura', hours: null, categories: ['tecnologia'] },
+    { year: 2022, title: 'UX: Entenda a Experiência de Usuário — Alura', institution: 'Alura', hours: null, categories: ['tecnologia'] },
 
     // ---------- 2021 ----------
     { year: 2021, title: 'Extensão: Formação de Educadores para metodologia Tô no Rumo', institution: 'UNIFESP', hours: '59h', categories: ['metodologias', 'educacao'] },
+    { year: 2021, title: 'Extensão: Formação de Educadores para Metodologia Tô no Rumo', institution: 'UNIFESP', hours: null, categories: ['metodologias', 'educacao'] },
     { year: 2021, title: 'Extensão: Tecnologia na Educação, Ensino Híbrido e Inovação Pedagógica', institution: 'UFC', hours: '180h', categories: ['tecnologia', 'educacao'] },
     { year: 2021, title: 'Aperfeiçoamento TEEHI', institution: 'UFC', hours: null, categories: ['tecnologia', 'educacao'] },
     { year: 2021, title: 'Curso de Extensão: Tô no Rumo', institution: 'UNIFESP', hours: null, categories: ['metodologias', 'educacao'] },
@@ -76,6 +114,8 @@ const CERTIFICATES = [
 
     // ---------- 2019 ----------
     { year: 2019, title: 'Certificado Global July', institution: 'Global July', hours: null, categories: ['educacao'] },
+    { year: 2019, title: 'Certificado PDPP 2019 Apresentação', institution: 'PDPP', hours: null, categories: ['pesquisa'] },
+    { year: 2019, title: 'Certificado PDPP 2019 Participação', institution: 'PDPP', hours: null, categories: ['pesquisa'] },
 
     // ---------- 2018 ----------
     { year: 2018, title: 'Avaliador — SEMIC', institution: 'UFJF', hours: null, categories: ['pesquisa'] },
@@ -105,7 +145,8 @@ const CERTIFICATES = [
     { year: 2013, title: 'Jornada de Ciências Sociais (JornadaCSO) — Ouvinte', institution: 'UFJF', hours: null, categories: ['pesquisa'] },
 
     // ---------- 2012 ----------
-    { year: 2012, title: 'Apresentação de Trabalho — JornadaCSO', institution: 'UFJF', hours: null, categories: ['pesquisa'] }
+    { year: 2012, title: 'Apresentação de Trabalho — JornadaCSO', institution: 'UFJF', hours: null, categories: ['pesquisa'] },
+    { year: 2012, title: 'JornadasCSO Apresentação', institution: 'UFJF', hours: null, categories: ['pesquisa'] }
 ];
 
 // ---------- Renderização ----------
