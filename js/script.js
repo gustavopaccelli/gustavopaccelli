@@ -82,7 +82,7 @@ const setupContactForm = () => {
 
         const subject = encodeURIComponent(`Contato via portfólio — ${name}`);
         const body = encodeURIComponent(`Nome: ${name}\nEmail: ${email}\n\n${message}`);
-        window.location.href = `mailto:paccelli@outlook.com?subject=${subject}&body=${body}`;
+        window.location.href = `mailto:gustavopaccelli@gmail.com?subject=${subject}&body=${body}`;
 
         const feedback = document.getElementById('form-feedback');
         if (feedback) {
