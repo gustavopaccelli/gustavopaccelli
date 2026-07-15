@@ -5,7 +5,7 @@
 - 🔭 Pesquiso **estruturas de mobilização e oportunidades políticas** nos ciclos de protestos brasileiros
 - 📖 8 artigos publicados em periódicos científicos
 - 🏫 Professor no Ensino Médio, pré-vestibular e ensino superior (UFJF)
-- 📫 Contato: **paccelli@outlook.com** | [LinkedIn](https://www.linkedin.com/in/gustavopaccelli/) | [Lattes](http://lattes.cnpq.br/8469347425037002) | [ORCID](https://orcid.org/0000-0001-6458-869X)
+- 📫 Contato: **gustavopaccelli@gmail.com** | [LinkedIn](https://www.linkedin.com/in/gustavopaccelli/) | [Lattes](http://lattes.cnpq.br/8469347425037002) | [ORCID](https://orcid.org/0000-0001-6458-869X)
 
 🌐 **Portfólio online:** https://gustavopaccelli.github.io/gustavopaccelli/
 
