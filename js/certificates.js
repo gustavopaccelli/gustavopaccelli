@@ -72,7 +72,7 @@ const CERTIFICATES = [
     { year: 2022, title: 'Prática de Pesquisa da Experiência do Usuário', institution: 'EBAC', hours: null, categories: ['tecnologia', 'pesquisa'] },
     { year: 2022, title: 'Extensão: TEAIP', institution: 'UFC', hours: null, categories: ['tecnologia', 'educacao'] },
     { year: 2022, title: 'Workshop EBAC', institution: 'EBAC', hours: null, categories: ['tecnologia'] },
-    { year: 2022, title: 'Extensão: Introdução à Ciência de Dados com R (2ª edição)', institution: 'UNIFESP', hours: null, categories: ['dados', 'tecnologia'] },
+    { year: 2022, title: 'Extensão: Introdução a Ciência de Dados com R (2ª edição)', institution: 'UNIFESP', hours: null, categories: ['dados', 'tecnologia'] },
     { year: 2022, title: 'Data Analysis: Estatística com Google Sheets (Certificado)', institution: 'Google', hours: null, categories: ['dados', 'tecnologia'] },
     { year: 2022, title: 'Data Analysis: Estatística com Google Sheets — Alura', institution: 'Alura', hours: null, categories: ['dados', 'tecnologia'] },
     { year: 2022, title: 'Data Analysis: Google Sheets — Alura', institution: 'Alura', hours: null, categories: ['dados', 'tecnologia'] },
