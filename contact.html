@@ -18,6 +18,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/responsive.css">
+    <!-- EmailJS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/index.min.js"></script>
 </head>
 <body>
     <!-- NAVEGAÇÃO -->
@@ -134,6 +136,13 @@
         </div>
     </footer>
 
+    <script src="js/emailjs-config.js"></script>
+    <script>
+        // Inicializar EmailJS com sua Public Key
+        if (EMAILJS_CONFIG.PUBLIC_KEY && EMAILJS_CONFIG.PUBLIC_KEY !== 'YOUR_PUBLIC_KEY_HERE') {
+            emailjs.init(EMAILJS_CONFIG.PUBLIC_KEY);
+        }
+    </script>
     <script src="js/script.js"></script>
 </body>
 </html>
