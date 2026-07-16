@@ -61,11 +61,9 @@ const CERTIFICATES = [
     { year: 2023, title: 'Gestão de Projetos Educacionais', institution: 'ENAP', location: 'Virtual', hours: "30h", categories: ["gestao", "educacao"] },
     // ---------- 2022 ----------
     { year: 2022, title: 'Análise de Conteúdo — para além de Bardin', institution: 'IBPAD', location: null, hours: "7h", categories: ["pesquisa", "dados"] },
-    { year: 2022, title: 'Data Analysis: Estatística com Google Sheets (Certificado)', institution: 'Google', location: 'São Paulo', hours: "8h", categories: ["dados", "tecnologia"] },
     { year: 2022, title: 'Data Analysis: Estatística com Google Sheets — Alura', institution: 'Google', location: 'Online', hours: "8h", categories: ["dados", "tecnologia"] },
     { year: 2022, title: 'Data Analysis: Google Sheets — Alura', institution: 'Google', location: 'Online', hours: "6h", categories: ["dados", "tecnologia"] },
     { year: 2022, title: 'Data Analysis: Previsões com Google Sheets — Alura', institution: 'Google', location: 'Online', hours: "8h", categories: ["dados", "tecnologia"] },
-    { year: 2022, title: 'Certificado Data Analysis Google Sheets', institution: 'Google', location: 'São Paulo', hours: "8h", categories: ["dados", "tecnologia"] },
     { year: 2022, title: 'Extensão: Introdução a Ciência de Dados com R', institution: 'UNIFESP', location: null, hours: "60h", categories: ["dados", "tecnologia"] },
     { year: 2022, title: 'Extensão: Introdução a Ciência de Dados com R (2ª edição)', institution: 'Google', location: null, hours: "180h", categories: ["dados", "tecnologia"] },
     { year: 2022, title: 'Extensão: TEAIP', institution: 'UFC', location: 'A Distância', hours: "180h", categories: ["tecnologia", "educacao"] },
