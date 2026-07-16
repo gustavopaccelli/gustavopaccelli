@@ -155,15 +155,17 @@ const buildCard = (cert) => {
         .map((cat) => `<span class="cert-tag">${escapeHtml(CATEGORY_LABELS[cat] || cat)}</span>`)
         .join('');
 
+    let certText = `${cert.year} – ${escapeHtml(cert.title)}. ${escapeHtml(cert.institution)}.`;
+    if (cert.location) {
+        certText += ` ${escapeHtml(cert.location)}.`;
+    }
+    if (cert.hours) {
+        certText += ` (Carga horária: ${escapeHtml(cert.hours)})`;
+    }
+
     return `
         <div class="certificate-card reveal visible" data-year="${cert.year}">
-            <div class="cert-header">
-                <h4>${escapeHtml(cert.title)}</h4>
-                <span class="year-badge">${cert.year}</span>
-            </div>
-            <p class="institution">${escapeHtml(cert.institution)}</p>
-            ${cert.location ? `<p class="location">📍 ${escapeHtml(cert.location)}</p>` : ''}
-            ${cert.hours ? `<p class="duration">⏱️ Carga horária: ${escapeHtml(cert.hours)}</p>` : ''}
+            <p class="cert-title">${certText}</p>
             <div class="cert-tags">${tags}</div>
             <div class="cert-actions">
                 <a href="${encodeURI(pdfPath(cert))}" target="_blank" rel="noopener" class="btn btn-small btn-ghost">
