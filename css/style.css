@@ -831,6 +831,13 @@ h1, h2, h3, h4 {
     box-shadow: var(--shadow-md);
 }
 
+.cert-title {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-dark);
+    margin: 0;
+}
+
 .cert-header {
     display: flex;
     justify-content: space-between;
