@@ -18,8 +18,10 @@ const CATEGORY_LABELS = {
 const CERTIFICATES = [
     // ---------- 2026 ----------
     { year: 2026, title: 'A BNCC nos Anos Finais do Ensino Fundamental: Arte', institution: 'MEC', location: 'Virtual', hours: "40h", categories: ["educacao"] },
+    { year: 2026, title: 'AI Fluency for K-12 Educators', institution: 'Anthropic', location: null, hours: null, categories: ["educacao", "tecnologia"] },
     { year: 2026, title: 'AI Fluency Framework and foundations Anthropic', institution: 'Anthropic', location: null, hours: null, categories: ["tecnologia", "dados"] },
     { year: 2026, title: 'Claude 101 Anthropic', institution: 'Anthropic', location: null, hours: null, categories: ["tecnologia"] },
+    { year: 2026, title: 'Claude Platform 101', institution: 'Anthropic', location: null, hours: null, categories: ["tecnologia"] },
     { year: 2026, title: 'Competências Digitais nas Áreas de Conhecimento da BNCC – Ciências Humanas - Ensino Médio', institution: 'MEC', location: 'Virtual', hours: "60h", categories: ["educacao", "tecnologia"] },
     { year: 2026, title: 'Curso de Aperfeiçoamento em Educação e Tecnologia', institution: 'MEC', location: 'Virtual', hours: "180h", categories: ["educacao", "tecnologia"] },
     { year: 2026, title: 'MAIS CIÊNCIAS HUMANAS E SOCIAIS APLICADAS', institution: 'MEC', location: 'Virtual', hours: "180h", categories: ["educacao"] },
