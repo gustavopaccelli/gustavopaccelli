@@ -27,8 +27,6 @@ const CERTIFICATES = [
     { year: 2026, title: 'Orientação Profissional', institution: 'CEFOR', location: 'Virtual', hours: "40h", categories: ["educacao"] },
     { year: 2026, title: 'Processos de Orientação Educacional e Profissional', institution: 'CEFOR', location: 'Virtual', hours: "40h", categories: ["educacao"] },
     { year: 2026, title: 'Trabalho e Profissionalização', institution: 'CEFOR', location: 'Virtual', hours: "40h", categories: ["educacao"] },
-    { year: 2026, title: 'A BNCC nos Anos Finais do Ensino Fundamental: Arte', institution: 'MEC', location: 'Virtual', hours: "40h", categories: ["educacao"] },
-    { year: 2026, title: 'Competências Digitais nas Áreas de Conhecimento da BNCC – Ciências Humanas - Ensino Médio', institution: 'MEC', location: 'Virtual', hours: "60h", categories: ["educacao", "tecnologia"] },
     // ---------- 2025 ----------
     { year: 2025, title: '- PIA3804-2024 - Na fronteira Mulheres Negras na Universidade,', institution: 'UNILA', location: 'Foz do Iguaçu', hours: null, categories: ["educacao", "direitos-humanos"] },
     { year: 2025, title: '- SEMIC participação', institution: 'SEMIC', location: null, hours: null, categories: ["pesquisa"] },
@@ -38,11 +36,6 @@ const CERTIFICATES = [
     { year: 2025, title: 'Avaliação de Iniciação Científica — Certificado 3', institution: 'UNILA', location: 'Foz do Iguaçu', hours: null, categories: ["pesquisa"] },
     { year: 2025, title: 'Avaliação de Iniciação Científica — Certificado 4', institution: 'UNILA', location: 'Foz do Iguaçu', hours: null, categories: ["pesquisa"] },
     { year: 2025, title: 'Avaliação de Iniciação Científica — Certificado 5', institution: 'UNILA', location: 'Foz do Iguaçu', hours: null, categories: ["pesquisa"] },
-    { year: 2025, title: 'Avaliação de Iniciação Científica — Certificado 6', institution: 'UNILA', location: 'Foz do Iguaçu', hours: null, categories: ["pesquisa"] },
-    { year: 2025, title: 'Avaliação de Iniciação Científica — Certificado 7', institution: 'UNILA', location: 'Foz do Iguaçu', hours: null, categories: ["pesquisa"] },
-    { year: 2025, title: 'Avaliação de Iniciação Científica — Certificado 8', institution: 'UNILA', location: 'Foz do Iguaçu', hours: null, categories: ["pesquisa"] },
-    { year: 2025, title: 'Avaliação de Iniciação Científica — Certificado 9', institution: 'UNILA', location: 'Foz do Iguaçu', hours: null, categories: ["pesquisa"] },
-    { year: 2025, title: 'Avaliação de Iniciação Científica — Certificado 10', institution: 'UNILA', location: 'Foz do Iguaçu', hours: null, categories: ["pesquisa"] },
     { year: 2025, title: 'Extraindo Informações do IBGE', institution: 'IBGE', location: 'Rio de Janeiro', hours: "20h", categories: ["pesquisa", "dados"] },
     { year: 2025, title: 'Mentoria de Diretores Escolares', institution: 'MEC', location: 'Virtual', hours: "180h", categories: ["gestao", "educacao"] },
     { year: 2025, title: 'Trabalho e Profissionalização', institution: 'CEFOR', location: 'Virtual', hours: "40h", categories: ["educacao"] },
@@ -57,7 +50,6 @@ const CERTIFICATES = [
     { year: 2024, title: 'I Workshop Ultradireita', institution: 'UFJF', location: null, hours: null, categories: ["pesquisa"] },
     { year: 2024, title: 'II Jornada do Pensamento Social Brasileiro', institution: 'JornadaCSO', location: null, hours: "12h", categories: ["pesquisa"] },
     { year: 2024, title: 'UX Writing', institution: 'Awari', location: 'Virtual', hours: "25h", categories: ["tecnologia"] },
-    { year: 2024, title: 'UX Writing', institution: 'Awari', location: 'Virtual', hours: "25h", categories: ["tecnologia"] },
     // ---------- 2023 ----------
     { year: 2023, title: 'A BNCC do Ensino Médio: Ciências Humanas', institution: 'MEC', location: 'Virtual', hours: "50h", categories: ["educacao"] },
     { year: 2023, title: 'Certificado de Participação — SEMIC', institution: 'SEMIC', location: null, hours: null, categories: ["pesquisa"] },
@@ -67,7 +59,6 @@ const CERTIFICATES = [
     { year: 2023, title: 'Gestão Escolar', institution: 'MEC', location: 'Virtual', hours: "80h", categories: ["gestao", "educacao"] },
     { year: 2023, title: 'Gestão de Projetos', institution: 'ENAP', location: 'Virtual', hours: "10h", categories: ["gestao"] },
     { year: 2023, title: 'Gestão de Projetos Educacionais', institution: 'ENAP', location: 'Virtual', hours: "30h", categories: ["gestao", "educacao"] },
-    { year: 2023, title: 'A BNCC do Ensino Médio: Ciências Humanas', institution: 'MEC', location: 'Virtual', hours: "50h", categories: ["educacao"] },
     // ---------- 2022 ----------
     { year: 2022, title: 'Análise de Conteúdo — para além de Bardin', institution: 'IBPAD', location: null, hours: "7h", categories: ["pesquisa", "dados"] },
     { year: 2022, title: 'Data Analysis: Estatística com Google Sheets (Certificado)', institution: 'Google', location: 'São Paulo', hours: "8h", categories: ["dados", "tecnologia"] },
