@@ -40,13 +40,10 @@ const CERTIFICATES = [
     { year: 2025, title: 'Avaliação de Iniciação Científica — Certificado 5', institution: 'UNILA', location: 'Foz do Iguaçu', hours: null, categories: ["pesquisa"] },
     { year: 2025, title: 'Extraindo Informações do IBGE', institution: 'IBGE', location: 'Rio de Janeiro', hours: "20h", categories: ["pesquisa", "dados"] },
     { year: 2025, title: 'Mentoria de Diretores Escolares', institution: 'MEC', location: 'Virtual', hours: "180h", categories: ["gestao", "educacao"] },
-    { year: 2025, title: 'Trabalho e Profissionalização', institution: 'CEFOR', location: 'Virtual', hours: "40h", categories: ["educacao"] },
     // ---------- 2024 ----------
     { year: 2024, title: '- PIA3805-2024 - Marina Tunirê Resistência e Memória na Luta', institution: 'UNILA', location: 'Foz do Iguaçu', hours: null, categories: ["educacao", "direitos-humanos"] },
     { year: 2024, title: 'Aprendizagem Baseada em Problemas e Projetos', institution: 'MEC', location: 'Virtual', hours: "120h", categories: ["metodologias", "educacao"] },
-    { year: 2024, title: 'Certificado de Participação — SEMIC', institution: 'SEMIC', location: null, hours: null, categories: ["pesquisa"] },
     { year: 2024, title: 'Filosofia I', institution: 'IFRS', location: null, hours: "40h", categories: ["educacao"] },
-    { year: 2024, title: 'Filosofia I', institution: 'UFRGS', location: null, hours: "40h", categories: ["educacao"] },
     { year: 2024, title: 'Formação em Ciências Humanas e Sociais Aplicadas', institution: 'MEC', location: 'Virtual', hours: "180h", categories: ["educacao"] },
     { year: 2024, title: 'Formação em Linguagens e suas Tecnologias', institution: 'MEC', location: 'Virtual', hours: "180h", categories: ["educacao"] },
     { year: 2024, title: 'I Workshop Ultradireita', institution: 'UFJF', location: null, hours: null, categories: ["pesquisa"] },
@@ -55,7 +52,6 @@ const CERTIFICATES = [
     // ---------- 2023 ----------
     { year: 2023, title: 'A BNCC do Ensino Médio: Ciências Humanas', institution: 'MEC', location: 'Virtual', hours: "50h", categories: ["educacao"] },
     { year: 2023, title: 'Certificado de Participação — SEMIC', institution: 'SEMIC', location: null, hours: null, categories: ["pesquisa"] },
-    { year: 2023, title: 'CertificadoParticipacaoSEMIC', institution: 'SEMIC', location: null, hours: null, categories: ["pesquisa"] },
     { year: 2023, title: 'Educação em Direitos Humanos', institution: 'ENAP', location: 'Virtual', hours: "30h", categories: ["direitos-humanos", "educacao"] },
     { year: 2023, title: 'Formação em Artes nos Anos Finais', institution: 'MEC', location: 'A Distância', hours: "180h", categories: ["educacao"] },
     { year: 2023, title: 'Gestão Escolar', institution: 'MEC', location: 'Virtual', hours: "80h", categories: ["gestao", "educacao"] },
