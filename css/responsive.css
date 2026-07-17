@@ -132,6 +132,11 @@
         gap: 12px;
     }
 
+    .publication-actions {
+        align-items: stretch;
+        width: 100%;
+    }
+
     .publication-item .btn {
         width: 100%;
         text-align: center;
