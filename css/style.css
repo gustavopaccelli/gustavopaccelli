@@ -613,11 +613,19 @@ h1, h2, h3, h4 {
     border-radius: var(--radius);
     padding: 22px 24px;
     transition: box-shadow 0.3s, transform 0.3s;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 16px;
 }
 
 .publication-item:hover {
     box-shadow: var(--shadow-md);
     transform: translateX(4px);
+}
+
+.publication-content {
+    flex: 1;
 }
 
 .publication-header {
@@ -661,6 +669,11 @@ h1, h2, h3, h4 {
 .publication-item .doi a {
     color: var(--secondary);
     word-break: break-all;
+}
+
+.publication-item .btn {
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 
 /* ---------- Apresentações / listas simples ---------- */
