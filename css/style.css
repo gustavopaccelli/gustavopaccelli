@@ -1052,6 +1052,41 @@ h1, h2, h3, h4 {
     color: var(--primary);
 }
 
+/* ---------- Ícones de Contato ---------- */
+.contact-icons-group {
+    margin-bottom: 22px;
+}
+
+.contact-icons {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.contact-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--secondary) 100%);
+    text-decoration: none;
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 2px 8px rgba(231, 111, 81, 0.15);
+}
+
+.contact-icon:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(231, 111, 81, 0.25);
+}
+
+.contact-icon .icon-text {
+    font-size: 1.8rem;
+    display: block;
+    line-height: 1;
+}
+
 /* ---------- Idiomas (tabela) ---------- */
 .table-wrap {
     overflow-x: auto;
