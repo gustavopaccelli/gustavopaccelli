@@ -3,19 +3,19 @@
    style.css — estilos principais (mobile-first)
    ========================================================================== */
 
-/* ---------- Variáveis - Sunset Boulevard Theme ---------- */
+/* ---------- Variáveis - Ocean Depths Theme ---------- */
 :root {
-    --primary: #264653;
-    --primary-dark: #1a3240;
-    --primary-light: #f4a261;
-    --secondary: #e76f51;
-    --accent: #f4a261;
-    --accent-dark: #d87f48;
-    --text-dark: #264653;
-    --text-light: #e76f51;
-    --bg-light: #e9c46a;
+    --primary: #1a2332;
+    --primary-dark: #0f1620;
+    --primary-light: #a8dadc;
+    --secondary: #2d8b8b;
+    --accent: #2d8b8b;
+    --accent-dark: #1f6464;
+    --text-dark: #1a2332;
+    --text-light: #2d8b8b;
+    --bg-light: #f1faee;
     --bg-white: #ffffff;
-    --border: #f4a261;
+    --border: #a8dadc;
     --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.06);
     --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
     --shadow-lg: 0 12px 28px rgba(0, 0, 0, 0.12);
