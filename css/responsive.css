@@ -124,6 +124,61 @@
         flex-direction: column;
         gap: 8px;
     }
+
+    /* Publication item em coluna única */
+    .publication-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .publication-actions {
+        align-items: stretch;
+        width: 100%;
+    }
+
+    .publication-item .btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    /* Social links grid em 1 coluna */
+    .social-links-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Reduzir gaps em mobile */
+    .about-grid {
+        gap: 24px;
+    }
+
+    .contact-content {
+        gap: 28px;
+    }
+
+    /* Projetos com padding reduzido */
+    .project-card {
+        padding: 20px;
+    }
+
+    .project-header h3 {
+        font-size: 1.1rem;
+    }
+
+    /* Contact form padding reduzido */
+    .contact-form,
+    .contact-info {
+        padding: 20px;
+    }
+
+    /* Experience timeline reduzido */
+    .experience-item {
+        padding-left: 8px;
+    }
+
+    .experience-item::before {
+        left: -28px;
+    }
 }
 
 /* ---------- Até 480px: celulares ---------- */
@@ -168,9 +223,94 @@
         text-align: center;
     }
 
+    /* Cards com padding reduzido */
+    .card,
+    .publication-item,
+    .project-card {
+        padding: 16px 18px;
+    }
+
+    /* Buttons com melhor área de clique */
+    .btn-small {
+        padding: 10px 18px;
+        font-size: 0.9rem;
+    }
+
+    /* Hero CTA buttons em mobile */
+    .hero-cta {
+        gap: 10px;
+    }
+
+    .hero-cta .btn {
+        flex: 1;
+        min-height: 44px;
+    }
+
+    /* Timeline reduzido em altura */
+    .timeline-item {
+        margin-bottom: 32px;
+    }
+
+    /* Badges e tags menores */
+    .year-badge,
+    .badge {
+        font-size: 0.75rem;
+        padding: 3px 10px;
+    }
+
+    /* Footer links em coluna */
     .footer-inner {
         flex-direction: column;
         text-align: center;
+        gap: 16px;
+    }
+
+    .footer-links {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    /* Info items com melhor espaçamento */
+    .info-item {
+        margin-bottom: 12px;
+    }
+
+    /* Form com melhor spacing */
+    .form-group {
+        margin-bottom: 16px;
+    }
+
+    /* Section padding reduzido */
+    .section {
+        padding: 32px 0;
+    }
+}
+
+/* ---------- 600px - 900px: tablets ---------- */
+@media (min-width: 600px) and (max-width: 900px) {
+    .projects-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+
+    .card-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .publication-item {
+        flex-direction: row;
+        align-items: flex-end;
+    }
+
+    .publication-item .btn {
+        width: auto;
+    }
+
+    .about-grid {
+        gap: 32px;
+    }
+
+    .contact-content {
+        gap: 32px;
     }
 }
 
@@ -182,5 +322,13 @@
 
     .section {
         padding: 72px 0;
+    }
+
+    .publication-item {
+        flex-direction: row;
+    }
+
+    .publication-item .btn {
+        width: auto;
     }
 }
