@@ -42,9 +42,14 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
 });
 
 // ---------- Fade-in ao rolar (IntersectionObserver) ----------
+// O conteúdo é visível por padrão no CSS (sem .pre-reveal). Só aqui,
+// com JS já confirmado disponível, é que aplicamos o estado oculto
+// inicial — assim, se o script falhar ao carregar, nada some.
 const setupReveal = () => {
     const revealEls = document.querySelectorAll('.reveal');
     if (!revealEls.length) return;
+
+    revealEls.forEach((el) => el.classList.add('pre-reveal'));
 
     if (!('IntersectionObserver' in window)) {
         revealEls.forEach((el) => el.classList.add('visible'));

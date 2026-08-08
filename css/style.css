@@ -18,9 +18,9 @@
     --text-muted-soft: #999999;
     --bg-light: #e9c46a;
     --bg-white: #ffffff;
-    --border: #f4a261;
+    --border: #d9cbb4;
     --border-soft: #f5e5c8;
-    --border-strong: #e9c46a;
+    --border-strong: #c7b494;
     --surface-1: #ffffff;
     --surface-2: #faf7f2;
     --surface-strong: #f4a261;
@@ -179,13 +179,13 @@ h4 .icon {
 }
 
 .btn-primary:hover {
-    background: var(--primary-active);
+    background: var(--primary-dark);
     transform: none;
     box-shadow: var(--shadow-md);
 }
 
 .btn-primary:focus {
-    background: var(--primary-active);
+    background: var(--primary-dark);
     outline: 2px solid var(--primary);
     outline-offset: 2px;
 }
@@ -435,7 +435,7 @@ h4 .icon {
     background: var(--surface-2);
     border-color: var(--border-strong);
     box-shadow: var(--shadow-md);
-    transform: none;
+    transform: translateY(-3px);
 }
 
 .highlight-card .number {
@@ -467,7 +467,7 @@ h4 .icon {
     border: 1px solid var(--border);
     color: var(--primary);
     padding: 8px 16px;
-    border-radius: 999px;
+    border-radius: var(--radius-pill);
     font-size: 0.9rem;
     font-weight: 500;
     transition: background 0.25s, color 0.25s, border-color 0.25s;
@@ -493,7 +493,7 @@ h4 .icon {
     background: var(--surface-2);
     border-color: var(--border-strong);
     box-shadow: var(--shadow-md);
-    transform: none;
+    transform: translateY(-3px);
 }
 
 .card h3 {
@@ -624,7 +624,7 @@ h4 .icon {
     background: var(--accent);
     color: var(--text-dark);
     padding: 4px 10px;
-    border-radius: 5px;
+    border-radius: var(--radius-xs);
     font-size: 0.78rem;
     font-weight: 600;
     margin-top: 6px;
@@ -704,7 +704,7 @@ h4 .icon {
 
 .publication-item:hover {
     box-shadow: var(--shadow-md);
-    transform: translateX(4px);
+    transform: translateY(-3px);
 }
 
 .publication-content {
@@ -741,7 +741,7 @@ h4 .icon {
     font-weight: 600;
     font-size: 0.82rem;
     padding: 4px 12px;
-    border-radius: 999px;
+    border-radius: var(--radius-pill);
     white-space: nowrap;
 }
 
@@ -833,11 +833,12 @@ h4 .icon {
     border: 1px solid var(--border);
     border-radius: var(--radius);
     padding: 22px 24px;
-    transition: box-shadow 0.3s;
+    transition: box-shadow 0.3s, transform 0.3s;
 }
 
 .exp-content:hover {
     box-shadow: var(--shadow-md);
+    transform: translateY(-3px);
 }
 
 .exp-content h3 {
@@ -896,7 +897,7 @@ h4 .icon {
 .filter-group input {
     padding: 10px 12px;
     border: 1px solid var(--border);
-    border-radius: 8px;
+    border-radius: var(--radius-md);
     font-family: var(--font-body);
     font-size: 0.92rem;
     background: var(--bg-white);
@@ -981,7 +982,7 @@ h4 .icon {
     font-size: 0.75rem;
     font-weight: 600;
     padding: 3px 10px;
-    border-radius: 999px;
+    border-radius: var(--radius-pill);
 }
 
 .cert-actions {
@@ -1037,7 +1038,7 @@ h4 .icon {
 .form-group textarea {
     padding: 12px 14px;
     border: 1px solid var(--border);
-    border-radius: 8px;
+    border-radius: var(--radius-md);
     font-family: var(--font-body);
     font-size: 0.95rem;
     resize: vertical;
@@ -1053,7 +1054,7 @@ h4 .icon {
 .form-feedback {
     margin-top: 14px;
     padding: 12px 14px;
-    border-radius: 8px;
+    border-radius: var(--radius-md);
     font-size: 0.92rem;
     display: none;
 }
@@ -1147,7 +1148,7 @@ h4 .icon {
     display: block;
     background: var(--bg-white);
     border: 1px solid var(--border);
-    border-radius: 8px;
+    border-radius: var(--radius-md);
     padding: 12px 16px;
     text-decoration: none;
     color: var(--text-dark);
@@ -1158,7 +1159,7 @@ h4 .icon {
 
 .social-link:hover {
     border-color: var(--secondary);
-    transform: translateX(4px);
+    transform: translateY(-3px);
 }
 
 .social-link strong {
@@ -1208,7 +1209,7 @@ h4 .icon {
     border: 1px solid var(--border);
     color: var(--text-dark);
     padding: 4px 12px;
-    border-radius: 4px;
+    border-radius: var(--radius-xs);
     font-size: 0.8rem;
     font-weight: 600;
     white-space: nowrap;
@@ -1233,7 +1234,7 @@ h4 .icon {
     border: 1px solid var(--border);
     color: var(--text-light);
     padding: 6px 12px;
-    border-radius: 999px;
+    border-radius: var(--radius-pill);
     font-size: 0.8rem;
     font-weight: 500;
 }
@@ -1359,14 +1360,17 @@ h4 .icon {
     font-size: 0.92rem;
 }
 
-/* ---------- Animações (fade-in ao rolar) ---------- */
-.reveal {
+/* ---------- Animações (fade-in ao rolar) ----------
+   Progressive enhancement: o conteúdo fica visível por padrão (sem JS).
+   O próprio script.js adiciona a classe .pre-reveal antes de observar o
+   scroll, então só quem tem JS habilitado vê a animação de entrada. */
+.reveal.pre-reveal {
     opacity: 0;
     transform: translateY(24px);
     transition: opacity 0.7s ease, transform 0.7s ease;
 }
 
-.reveal.visible {
+.reveal.pre-reveal.visible {
     opacity: 1;
     transform: translateY(0);
 }
