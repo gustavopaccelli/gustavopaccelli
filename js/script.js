@@ -83,7 +83,7 @@ const setupContactForm = () => {
         // Validação básica
         if (!name || !email || !message) {
             if (feedback) {
-                feedback.textContent = '❌ Por favor, preencha todos os campos.';
+                feedback.textContent = 'Por favor, preencha todos os campos.';
                 feedback.className = 'form-feedback error';
             }
             return;
@@ -91,7 +91,7 @@ const setupContactForm = () => {
 
         if (message.length < 10) {
             if (feedback) {
-                feedback.textContent = '❌ A mensagem deve ter no mínimo 10 caracteres.';
+                feedback.textContent = 'A mensagem deve ter no mínimo 10 caracteres.';
                 feedback.className = 'form-feedback error';
             }
             return;
@@ -101,7 +101,7 @@ const setupContactForm = () => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
             if (feedback) {
-                feedback.textContent = '❌ Por favor, insira um email válido.';
+                feedback.textContent = 'Por favor, insira um email válido.';
                 feedback.className = 'form-feedback error';
             }
             return;
@@ -134,7 +134,7 @@ const setupContactForm = () => {
             window.location.href = `mailto:${CONTACT_EMAIL || 'gustavopaccelli@gmail.com'}?subject=${subject}&body=${body}`;
 
             if (feedback) {
-                feedback.textContent = '⚠️ EmailJS não configurado. Abrindo seu cliente de email. Configure as credenciais em js/emailjs-config.js para envio direto.';
+                feedback.textContent = 'EmailJS não configurado. Abrindo seu cliente de email. Configure as credenciais em js/emailjs-config.js para envio direto.';
                 feedback.className = 'form-feedback warning';
             }
             if (submitBtn) {
@@ -153,14 +153,14 @@ const setupContactForm = () => {
             });
 
             if (feedback) {
-                feedback.innerHTML = '✅ Mensagem enviada com sucesso! Responderei em breve.';
+                feedback.innerHTML = 'Mensagem enviada com sucesso! Responderei em breve.';
                 feedback.className = 'form-feedback success';
             }
             contactForm.reset();
         } catch (error) {
             console.error('Erro ao enviar email:', error);
             if (feedback) {
-                feedback.textContent = '❌ Erro ao enviar a mensagem. Por favor, tente novamente.';
+                feedback.textContent = 'Erro ao enviar a mensagem. Por favor, tente novamente.';
                 feedback.className = 'form-feedback error';
             }
         } finally {
