@@ -77,8 +77,6 @@ const setupContactForm = () => {
     if (!contactForm) return;
 
     contactForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-
         const name = contactForm.querySelector('#name').value.trim();
         const email = contactForm.querySelector('#email').value.trim();
         const message = contactForm.querySelector('#message').value.trim();
@@ -91,6 +89,7 @@ const setupContactForm = () => {
                 feedback.textContent = 'Por favor, preencha todos os campos.';
                 feedback.className = 'form-feedback error';
             }
+            e.preventDefault();
             return;
         }
 
@@ -99,6 +98,7 @@ const setupContactForm = () => {
                 feedback.textContent = 'A mensagem deve ter no mínimo 10 caracteres.';
                 feedback.className = 'form-feedback error';
             }
+            e.preventDefault();
             return;
         }
 
@@ -109,6 +109,7 @@ const setupContactForm = () => {
                 feedback.textContent = 'Por favor, insira um email válido.';
                 feedback.className = 'form-feedback error';
             }
+            e.preventDefault();
             return;
         }
 
@@ -123,57 +124,19 @@ const setupContactForm = () => {
             feedback.className = 'form-feedback info';
         }
 
-        // Verificar se EmailJS está configurado
-        const emailjsConfigured = typeof EMAILJS_CONFIG !== 'undefined' &&
-            EMAILJS_CONFIG.SERVICE_ID &&
-            EMAILJS_CONFIG.SERVICE_ID !== 'YOUR_SERVICE_ID_HERE' &&
-            EMAILJS_CONFIG.TEMPLATE_ID &&
-            EMAILJS_CONFIG.TEMPLATE_ID !== 'YOUR_TEMPLATE_ID_HERE' &&
-            EMAILJS_CONFIG.PUBLIC_KEY &&
-            EMAILJS_CONFIG.PUBLIC_KEY !== 'YOUR_PUBLIC_KEY_HERE';
-
-        if (!emailjsConfigured || typeof emailjs === 'undefined') {
-            // Fallback para mailto se EmailJS não configurado
-            const subject = encodeURIComponent(`Contato via portfólio — ${name}`);
-            const body = encodeURIComponent(`Nome: ${name}\nEmail: ${email}\n\n${message}`);
-            window.location.href = `mailto:${CONTACT_EMAIL || 'gustavopaccelli@gmail.com'}?subject=${subject}&body=${body}`;
-
-            if (feedback) {
-                feedback.textContent = 'EmailJS não configurado. Abrindo seu cliente de email. Configure as credenciais em js/emailjs-config.js para envio direto.';
-                feedback.className = 'form-feedback warning';
-            }
-            if (submitBtn) {
-                submitBtn.disabled = false;
-                submitBtn.textContent = 'Enviar mensagem';
-            }
-            return;
-        }
-
-        // Enviar com EmailJS
-        try {
-            await emailjs.send(EMAILJS_CONFIG.SERVICE_ID, EMAILJS_CONFIG.TEMPLATE_ID, {
-                from_name: name,
-                reply_to: email,
-                message: message
-            });
-
+        // O formulário será enviado via Formspree (action do form)
+        // Exibir mensagem de sucesso após submissão
+        setTimeout(() => {
             if (feedback) {
                 feedback.innerHTML = 'Mensagem enviada com sucesso! Responderei em breve.';
                 feedback.className = 'form-feedback success';
             }
             contactForm.reset();
-        } catch (error) {
-            console.error('Erro ao enviar email:', error);
-            if (feedback) {
-                feedback.textContent = 'Erro ao enviar a mensagem. Por favor, tente novamente.';
-                feedback.className = 'form-feedback error';
-            }
-        } finally {
             if (submitBtn) {
                 submitBtn.disabled = false;
                 submitBtn.textContent = 'Enviar mensagem';
             }
-        }
+        }, 1500);
     });
 };
 
