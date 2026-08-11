@@ -9,5 +9,12 @@ const CONTACT_EMAIL = 'gustavopaccelli@gmail.com';
 
 // Initialize EmailJS
 if (typeof emailjs !== 'undefined') {
-    emailjs.init(EMAILJS_CONFIG.PUBLIC_KEY);
+    try {
+        emailjs.init(EMAILJS_CONFIG.PUBLIC_KEY);
+        console.log('✓ EmailJS inicializado com sucesso');
+    } catch (error) {
+        console.error('✗ Erro ao inicializar EmailJS:', error);
+    }
+} else {
+    console.warn('⚠ SDK EmailJS não carregou. Verifique sua conexão de internet.');
 }
