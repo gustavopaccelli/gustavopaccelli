@@ -1,0 +1,3 @@
+User-agent: *
+
+Sitemap: https://gustavopaccelli.github.io/gustavopaccelli/preview-hugo-academic-cv/sitemap.xml
