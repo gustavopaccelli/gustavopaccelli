@@ -113,7 +113,7 @@ h1, h2, h3, h4 {
 }
 
 .page-header {
-    background: var(--bg-white);
+    background: var(--bg-light);
     color: var(--text-dark);
     padding: 56px 0 48px;
     text-align: center;
@@ -222,6 +222,16 @@ h4 .icon {
     color: #fff;
     border-color: rgba(255, 255, 255, 0.5);
     transition: all 150ms ease;
+}
+
+/* Sobre o gradiente quente do hero, a borda tom-sobre-tom some — usa o Deep Purple */
+.hero .btn-outline {
+    border-color: var(--primary);
+}
+
+.hero .btn-outline:hover {
+    background: var(--primary);
+    color: #fff;
 }
 
 .cta-banner .btn-outline:hover {
@@ -352,7 +362,7 @@ h4 .icon {
 /* ---------- Hero (Home) ---------- */
 .hero {
     padding: 96px 0;
-    background: linear-gradient(135deg, rgba(207, 231, 255, 0.4) 0%, rgba(168, 200, 232, 0.4) 100%), var(--bg-white);
+    background: linear-gradient(135deg, var(--bg-light) 0%, var(--accent) 100%);
     color: var(--text-dark);
     text-align: center;
     border-bottom: 1px solid var(--border);
@@ -381,7 +391,7 @@ h4 .icon {
     font-size: 1.125rem;
     margin-bottom: 6px;
     font-weight: 600;
-    color: var(--text-light);
+    color: var(--primary);
 }
 
 .hero .tagline {
@@ -390,7 +400,7 @@ h4 .icon {
     max-width: 640px;
     margin-left: auto;
     margin-right: auto;
-    color: var(--text-light);
+    color: var(--primary);
     font-weight: 400;
 }
 
