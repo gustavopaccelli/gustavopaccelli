@@ -3,49 +3,95 @@
    style.css — estilos principais (mobile-first)
    ========================================================================== */
 
-/* ---------- Variáveis - Sunset Boulevard Theme ---------- */
+/* ==========================================================================
+   DESIGN SYSTEM — SUNSET BOULEVARD
+   Paleta canônica (theme-factory/themes/sunset-boulevard.md):
+     Burnt Orange #e76f51 · Coral #f4a261 · Warm Sand #e9c46a · Deep Purple #264653
+   Tipografia: serifada em títulos (bold) + sans no corpo.
+
+   Camada 1 — primitivas: as 4 cores da paleta e suas rampas derivadas.
+   Camada 2 — semânticas: papéis (texto, superfície, borda, acento, feedback).
+   Regra: nenhuma cor fora da paleta ou de suas rampas.
+   ========================================================================== */
 :root {
-    --primary: #264653;
-    --primary-dark: #1a3240;
-    --primary-light: #f4a261;
-    --secondary: #e76f51;
-    --secondary-text: #82300f;
-    --accent: #f4a261;
-    --accent-dark: #d87f48;
-    --text-dark: #264653;
-    --text-light: #5a4f47;
-    --text-muted: #666666;
-    --text-muted-soft: #999999;
-    --bg-light: #e9c46a;
+    /* ---- Camada 1 · Paleta canônica ---- */
+    --sunset-orange: #e76f51;   /* Burnt Orange — acento primário */
+    --sunset-coral: #f4a261;    /* Coral — acento quente secundário */
+    --sunset-sand: #e9c46a;     /* Warm Sand — destaque e fundos */
+    --sunset-deep: #264653;     /* Deep Purple — contraste e texto */
+
+    /* ---- Camada 1 · Rampas derivadas ---- */
+    /* Deep Purple */
+    --deep-700: #2d5466;
+    --deep-900: #1a3240;
+    /* Burnt Orange escurecido — atinge AA (5.35:1 no branco) para texto/links */
+    --orange-800: #b34a29;
+    /* Warm Sand diluído — superfícies claras */
+    --sand-50: #fdfaf3;
+    --sand-100: #fbf6e7;
+    --sand-200: #f9efd5;
+    --sand-400: #d9cbb4;
+    --sand-500: #c7b494;
+    /* Neutros quentes (taupe) — derivados da mistura sand + deep */
+    --taupe-600: #7d7066;
+    --taupe-700: #5a4f47;
+    --cream-200: #e8ddd0;
+
+    /* ---- Camada 2 · Papéis semânticos ---- */
+    --primary: var(--sunset-deep);
+    --primary-dark: var(--deep-900);
+    --secondary: var(--sunset-orange);
+    --secondary-text: var(--orange-800);
+    --accent: var(--sunset-coral);
+
+    --text-dark: var(--sunset-deep);
+    --text-light: var(--taupe-700);
+    --text-on-dark: var(--cream-200);
+
     --bg-white: #ffffff;
-    --border: #d9cbb4;
-    --border-soft: #f5e5c8;
-    --border-strong: #c7b494;
+    --bg-light: var(--sand-100);
     --surface-1: #ffffff;
-    --surface-2: #faf7f2;
-    --surface-strong: #f4a261;
-    --surface-dark: #264653;
-    --surface-dark-elevated: #2d5466;
-    --gradient-sky-light: #fce5d5;
-    --gradient-sky-mid: #f4a261;
-    --link-hover: #e76f51;
-    --link-secondary: #d87f48;
-    --semantic-success: #2d6a4f;
-    --semantic-error: #d62828;
+    --surface-2: var(--sand-50);
+    --surface-highlight: var(--sand-200);
+    --surface-dark: var(--sunset-deep);
+
+    --border: var(--sand-400);
+    --border-strong: var(--sand-500);
+
+    /* ---- Camada 2 · Feedback (matizes semânticos harmonizados ao calor da paleta) ---- */
+    --success-bg: #eef6ef;
+    --success-text: #1f5133;
+    --success-border: #c3ddc9;
+    --error-bg: #fdeeea;
+    --error-text: #8c2f16;
+    --error-border: #f3c9bd;
+    --warning-bg: #fdf3df;
+    --warning-text: #7a4b12;
+    --warning-border: #ecd6a3;
+    --info-bg: #eef3f5;
+    --info-text: #1f3d49;
+    --info-border: #c5d6dd;
+
+    /* ---- Gradientes "golden hour": sand → coral → burnt orange ---- */
+    --gradient-hero: linear-gradient(135deg, rgba(233, 196, 106, 0.30) 0%, rgba(244, 162, 97, 0.26) 55%, rgba(231, 111, 81, 0.18) 100%);
+    --gradient-header: linear-gradient(135deg, rgba(233, 196, 106, 0.22) 0%, rgba(244, 162, 97, 0.17) 100%);
+    --gradient-cta: linear-gradient(135deg, var(--sunset-deep) 0%, var(--orange-800) 100%);
+
+    /* ---- Sombras tonalizadas com Deep Purple ---- */
     --shadow-sm: 0 1px 2px rgba(38, 70, 83, 0.06);
     --shadow-md: 0 4px 12px rgba(38, 70, 83, 0.12);
     --shadow-lg: 0 8px 24px rgba(38, 70, 83, 0.16);
+
     --radius: 12px;
     --radius-xs: 4px;
     --radius-sm: 6px;
     --radius-md: 8px;
     --radius-lg: 12px;
-    --radius-xl: 16px;
-    --radius-xxl: 24px;
     --radius-pill: 9999px;
-    --font-heading: 'Poppins', 'Inter', -apple-system, system-ui, 'Segoe UI', 'Helvetica Neue', sans-serif;
-    --font-body: 'Inter', -apple-system, system-ui, 'Segoe UI', 'Helvetica Neue', sans-serif;
-    --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+    /* ---- Tipografia: serifada (bold) em títulos, sans no corpo ---- */
+    --font-heading: 'Bitter', 'DejaVu Serif', Georgia, 'Times New Roman', serif;
+    --font-body: 'Inter', 'DejaVu Sans', -apple-system, system-ui, 'Segoe UI', 'Helvetica Neue', sans-serif;
     --nav-height: 64px;
 }
 
@@ -81,6 +127,7 @@ a {
 
 h1, h2, h3, h4 {
     font-family: var(--font-heading);
+    font-weight: 700;
     line-height: 1.25;
     color: var(--text-dark);
 }
@@ -113,7 +160,7 @@ h1, h2, h3, h4 {
 }
 
 .page-header {
-    background: var(--bg-white);
+    background: var(--gradient-header), var(--bg-white);
     color: var(--text-dark);
     padding: 56px 0 48px;
     text-align: center;
@@ -125,8 +172,8 @@ h1, h2, h3, h4 {
     font-size: 2.25rem;
     margin-bottom: 8px;
     font-family: var(--font-heading);
-    font-weight: 600;
-    letter-spacing: -0.54px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
 }
 
 .page-header p {
@@ -352,7 +399,7 @@ h4 .icon {
 /* ---------- Hero (Home) ---------- */
 .hero {
     padding: 96px 0;
-    background: linear-gradient(135deg, rgba(207, 231, 255, 0.4) 0%, rgba(168, 200, 232, 0.4) 100%), var(--bg-white);
+    background: var(--gradient-hero), var(--bg-white);
     color: var(--text-dark);
     text-align: center;
     border-bottom: 1px solid var(--border);
@@ -373,8 +420,8 @@ h4 .icon {
     font-size: 2.5rem;
     margin-bottom: 10px;
     font-family: var(--font-heading);
-    font-weight: 600;
-    letter-spacing: -0.75px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
 }
 
 .hero .subtitle {
@@ -454,11 +501,11 @@ h4 .icon {
 .highlight-card .number {
     font-family: var(--font-heading);
     font-size: 2.4rem;
-    font-weight: 600;
+    font-weight: 700;
     color: var(--primary);
     line-height: 1.1;
     margin-bottom: 6px;
-    letter-spacing: -0.72px;
+    letter-spacing: -0.01em;
 }
 
 .highlight-card p {
@@ -476,7 +523,7 @@ h4 .icon {
 
 .tag {
     display: inline-block;
-    background: var(--bg-light);
+    background: var(--surface-highlight);
     border: 1px solid var(--border);
     color: var(--primary);
     padding: 8px 16px;
@@ -643,8 +690,8 @@ h4 .icon {
     margin-top: 6px;
 }
 
-.badge-blue {
-    background: var(--secondary-text);
+.badge-alt {
+    background: var(--primary);
     color: #fff;
 }
 
@@ -751,7 +798,7 @@ h4 .icon {
     background: var(--accent);
     color: var(--text-dark);
     font-family: var(--font-heading);
-    font-weight: 600;
+    font-weight: 700;
     font-size: 0.82rem;
     padding: 4px 12px;
     border-radius: var(--radius-pill);
@@ -835,7 +882,7 @@ h4 .icon {
 
 .exp-date {
     font-family: var(--font-heading);
-    font-weight: 600;
+    font-weight: 700;
     color: var(--secondary-text);
     font-size: 0.92rem;
     margin-bottom: 6px;
@@ -989,7 +1036,7 @@ h4 .icon {
 }
 
 .cert-tag {
-    background: var(--bg-light);
+    background: var(--surface-highlight);
     border: 1px solid var(--border);
     color: var(--text-light);
     font-size: 0.75rem;
@@ -1074,30 +1121,30 @@ h4 .icon {
 
 .form-feedback.success {
     display: block;
-    background: #ecfdf5;
-    color: #065f46;
-    border: 1px solid #a7f3d0;
+    background: var(--success-bg);
+    color: var(--success-text);
+    border: 1px solid var(--success-border);
 }
 
 .form-feedback.error {
     display: block;
-    background: #fef2f2;
-    color: #7f1d1d;
-    border: 1px solid #fecaca;
+    background: var(--error-bg);
+    color: var(--error-text);
+    border: 1px solid var(--error-border);
 }
 
 .form-feedback.warning {
     display: block;
-    background: #fffbeb;
-    color: #92400e;
-    border: 1px solid #fde68a;
+    background: var(--warning-bg);
+    color: var(--warning-text);
+    border: 1px solid var(--warning-border);
 }
 
 .form-feedback.info {
     display: block;
-    background: #eff6ff;
-    color: #1e40af;
-    border: 1px solid #bfdbfe;
+    background: var(--info-bg);
+    color: var(--info-text);
+    border: 1px solid var(--info-border);
 }
 
 .contact-info {
@@ -1218,7 +1265,7 @@ h4 .icon {
 
 .project-status {
     display: inline-block;
-    background: var(--bg-light);
+    background: var(--surface-highlight);
     border: 1px solid var(--border);
     color: var(--text-dark);
     padding: 4px 12px;
@@ -1243,7 +1290,7 @@ h4 .icon {
 
 .tech-tag {
     display: inline-block;
-    background: var(--bg-light);
+    background: var(--surface-highlight);
     border: 1px solid var(--border);
     color: var(--text-light);
     padding: 6px 12px;
@@ -1314,7 +1361,7 @@ h4 .icon {
     background: var(--primary);
     color: #fff;
     font-family: var(--font-heading);
-    font-weight: 600;
+    font-weight: 700;
 }
 
 .languages-table tr:nth-child(even) {
@@ -1323,7 +1370,7 @@ h4 .icon {
 
 /* ---------- CTA banner ---------- */
 .cta-banner {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary-text) 100%);
+    background: var(--gradient-cta);
     border-radius: var(--radius);
     color: #fff;
     text-align: center;
@@ -1342,8 +1389,8 @@ h4 .icon {
 
 /* ---------- Footer ---------- */
 .footer {
-    background: var(--text-dark);
-    color: #d1d5db;
+    background: var(--surface-dark);
+    color: var(--text-on-dark);
     padding: 36px 0;
     margin-top: 64px;
 }
@@ -1357,13 +1404,13 @@ h4 .icon {
 }
 
 .footer a {
-    color: #d1d5db;
+    color: var(--text-on-dark);
     text-decoration: none;
     transition: color 0.25s;
 }
 
 .footer a:hover {
-    color: #fff;
+    color: var(--sunset-sand);
 }
 
 .footer-links {
