@@ -147,17 +147,18 @@ const buildCard = (cert) => {
         .map((cat) => `<span class="cert-tag">${escapeHtml(CATEGORY_LABELS[cat] || cat)}</span>`)
         .join('');
 
-    let certText = `${cert.year} – ${escapeHtml(cert.title)}. ${escapeHtml(cert.institution)}.`;
-    if (cert.location) {
-        certText += ` ${escapeHtml(cert.location)}.`;
-    }
-    if (cert.hours) {
-        certText += ` (Carga horária: ${escapeHtml(cert.hours)})`;
-    }
+    // Instituição, local e carga horária vão numa linha secundária, separados
+    // por ponto médio — só entram os campos que existem.
+    const meta = [cert.institution, cert.location, cert.hours]
+        .filter(Boolean)
+        .map((part) => escapeHtml(part))
+        .join(' · ');
 
     return `
         <div class="certificate-card reveal visible" data-year="${cert.year}">
-            <p class="cert-title">${certText}</p>
+            <span class="cert-year">${cert.year}</span>
+            <h3 class="cert-title">${escapeHtml(cert.title)}</h3>
+            <p class="cert-meta">${meta}</p>
             <div class="cert-tags">${tags}</div>
         </div>`;
 };
