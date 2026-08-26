@@ -1,8 +1,13 @@
 /* ==========================================================================
    certificates.js — dados e filtros da galeria de certificados
+
    Para adicionar um certificado novo: acrescente um objeto ao array
-   CERTIFICATES e coloque o PDF em assets/docs/certificates/ com o nome
-   "ANO Título.pdf" (ex.: "2025 Extraindo Informações do IBGE.pdf").
+   CERTIFICATES. A galeria lista apenas os títulos; os documentos não são
+   publicados no site.
+
+   NÃO incluir aqui pareceres de artigos submetidos a periódicos nem
+   avaliações de projetos de iniciação científica: são atividades de
+   avaliação anônima e o documento identifica autores e trabalhos.
    ========================================================================== */
 
 const CATEGORY_LABELS = {
@@ -33,11 +38,6 @@ const CERTIFICATES = [
     { year: 2025, title: '- PIA3804-2024 - Na fronteira Mulheres Negras na Universidade,', institution: 'UNILA', location: 'Foz do Iguaçu', hours: null, categories: ["educacao", "direitos-humanos"] },
     { year: 2025, title: '- SEMIC participação', institution: 'SEMIC', location: null, hours: null, categories: ["pesquisa"] },
     { year: 2025, title: 'Avaliadores de Artigos Científicos', institution: 'ENAP', location: 'Virtual', hours: "20h", categories: ["pesquisa"] },
-    { year: 2025, title: 'Avaliação de Iniciação Científica — Certificado 1', institution: 'UNILA', location: 'Foz do Iguaçu', hours: null, categories: ["pesquisa"] },
-    { year: 2025, title: 'Avaliação de Iniciação Científica — Certificado 2', institution: 'UNILA', location: 'Foz do Iguaçu', hours: null, categories: ["pesquisa"] },
-    { year: 2025, title: 'Avaliação de Iniciação Científica — Certificado 3', institution: 'UNILA', location: 'Foz do Iguaçu', hours: null, categories: ["pesquisa"] },
-    { year: 2025, title: 'Avaliação de Iniciação Científica — Certificado 4', institution: 'UNILA', location: 'Foz do Iguaçu', hours: null, categories: ["pesquisa"] },
-    { year: 2025, title: 'Avaliação de Iniciação Científica — Certificado 5', institution: 'UNILA', location: 'Foz do Iguaçu', hours: null, categories: ["pesquisa"] },
     { year: 2025, title: 'Extraindo Informações do IBGE', institution: 'IBGE', location: 'Rio de Janeiro', hours: "20h", categories: ["pesquisa", "dados"] },
     { year: 2025, title: 'Mentoria de Diretores Escolares', institution: 'MEC', location: 'Virtual', hours: "180h", categories: ["gestao", "educacao"] },
     // ---------- 2024 ----------
@@ -90,10 +90,6 @@ const CERTIFICATES = [
     // ---------- 2021 ----------
     { year: 2021, title: 'Aperfeiçoamento TEEHI', institution: 'Google', location: null, hours: "180h", categories: ["tecnologia", "educacao"] },
     { year: 2021, title: 'Lahps', institution: 'N/A', location: null, hours: "2h", categories: ["educacao"] },
-    { year: 2021, title: 'Revisor — ANA CAROLINA SANTOS MIRANDA', institution: 'UFJF', location: null, hours: null, categories: ["pesquisa"] },
-    { year: 2021, title: 'Revisor — FERNANDA DA SILVA FERREIRA', institution: 'UFJF', location: null, hours: null, categories: ["pesquisa"] },
-    { year: 2021, title: 'Revisor — Julia Gravina de Faria', institution: 'UFJF', location: null, hours: null, categories: ["pesquisa"] },
-    { year: 2021, title: 'Revisor — THIAGO ALMEIDA APOLINÁRIO PRIMO', institution: 'UFJF', location: null, hours: null, categories: ["pesquisa"] },
     { year: 2021, title: 'Curso de Extensão: Tô no Rumo', institution: 'UNIFESP', location: null, hours: "39h", categories: ["metodologias", "educacao"] },
     { year: 2021, title: 'Extensão: Formação de Educadores para Metodologia Tô no Rumo', institution: 'UFJF', location: null, hours: "2h", categories: ["metodologias", "educacao"] },
     { year: 2021, title: 'Google Analytics para Iniciantes', institution: 'Google', location: null, hours: null, categories: ["dados", "tecnologia"] },
@@ -109,12 +105,8 @@ const CERTIFICATES = [
     { year: 2019, title: 'Certificado Global July', institution: 'Global July', location: null, hours: "20h", categories: ["educacao"] },
     { year: 2019, title: 'Certificado PDPP 2019 Apresentação', institution: 'UFRGS', location: null, hours: null, categories: ["pesquisa"] },
     { year: 2019, title: 'Certificado PDPP 2019 Participação', institution: 'UFRGS', location: null, hours: "36h", categories: ["pesquisa"] },
-    { year: 2019, title: 'Revisor — Gabriel Bressan Ramos', institution: 'UFJF', location: null, hours: null, categories: ["pesquisa"] },
-    { year: 2019, title: 'Revisor — Matheus Luciano da Costa Ferreira', institution: 'UFJF', location: null, hours: null, categories: ["pesquisa"] },
     // ---------- 2018 ----------
-    { year: 2018, title: 'Avaliador — SEMIC', institution: 'UFJF', location: null, hours: null, categories: ["pesquisa"] },
     { year: 2018, title: 'ERMECS — Certificado Ouvinte', institution: 'ERMECS', location: null, hours: "20h", categories: ["pesquisa"] },
-    { year: 2018, title: 'Revisor — Jaqueline de Oliveira Moreira', institution: 'UFJF', location: null, hours: null, categories: ["pesquisa"] },
     // ---------- 2017 ----------
     { year: 2017, title: 'Jornada de Ciências Sociais (JornadaCSO) — Debatedor', institution: 'JornadaCSO', location: null, hours: null, categories: ["pesquisa"] },
     { year: 2017, title: 'Jornada de Ciências Sociais (JornadaCSO) — Ouvinte', institution: 'JornadaCSO', location: null, hours: "30h", categories: ["pesquisa"] },
@@ -154,8 +146,6 @@ const escapeHtml = (str) =>
         "'": '&#39;'
     })[c]);
 
-const pdfPath = (cert) => `assets/docs/certificates/${cert.year} ${cert.title}.pdf`;
-
 const buildCard = (cert) => {
     const tags = cert.categories
         .map((cat) => `<span class="cert-tag">${escapeHtml(CATEGORY_LABELS[cat] || cat)}</span>`)
@@ -173,12 +163,6 @@ const buildCard = (cert) => {
         <div class="certificate-card reveal visible" data-year="${cert.year}">
             <p class="cert-title">${certText}</p>
             <div class="cert-tags">${tags}</div>
-            <div class="cert-actions">
-                <a href="${encodeURI(pdfPath(cert))}" target="_blank" rel="noopener" class="btn btn-small btn-ghost">
-                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                    Ver certificado (PDF)
-                </a>
-            </div>
         </div>`;
 };
 

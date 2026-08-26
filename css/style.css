@@ -1008,11 +1008,6 @@ h4 .icon {
     border-radius: var(--radius-pill);
 }
 
-.cert-actions {
-    margin-top: auto;
-    padding-top: 10px;
-}
-
 .cert-total {
     margin-top: 28px;
     text-align: center;
