@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Protestos no Brasil 1985–2024</title>
+<style>
+:root{
+  --font-sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --color-background-primary:#ffffff;--color-background-secondary:#f5f4f0;--color-background-tertiary:#e9e7e1;
+  --color-text-primary:#1c1a17;--color-text-secondary:#6b655c;
+  --color-border-primary:#8a847a;--color-border-secondary:#bdb7ad;--color-border-tertiary:#dcd8d0;
+  --border-radius-md:8px;--border-radius-lg:12px;
+}
+@media (prefers-color-scheme:dark){:root{
+  --color-background-primary:#1b1a18;--color-background-secondary:#26241f;--color-background-tertiary:#34312b;
+  --color-text-primary:#ece9e3;--color-text-secondary:#a8a297;
+  --color-border-primary:#8a847a;--color-border-secondary:#5a554d;--color-border-tertiary:#3a3731;
+}}
+html{background:var(--color-background-primary);color:var(--color-text-primary)}
+body{max-width:1400px;margin:0 auto;padding:0 16px}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@media (max-width:640px){.metrics{grid-template-columns:repeat(2,1fr)!important}}
+</style>
+</head>
+<body>
+
+<h2 class="sr-only">Mapeamento de eventos de protesto no Brasil (1985–2024) segundo a Teoria do Processo Político</h2>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans)}
+.wrap{padding:1rem 0}
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:1.5rem}
+.mc{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:1rem;text-align:center}
+.mc-label{font-size:12px;color:var(--color-text-secondary);margin-bottom:4px}
+.mc-val{font-size:22px;font-weight:500;color:var(--color-text-primary)}
+.section-title{font-size:16px;font-weight:500;color:var(--color-text-primary);margin-bottom:12px;margin-top:1.5rem}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:1rem}
+.fbtn{font-size:12px;padding:5px 12px;border-radius:20px;border:0.5px solid var(--color-border-secondary);background:var(--color-background-primary);color:var(--color-text-secondary);cursor:pointer;transition:all .15s}
+.fbtn.active{background:var(--color-background-tertiary);color:var(--color-text-primary);border-color:var(--color-border-primary);font-weight:500}
+.chart-wrap{position:relative;width:100%;height:220px;margin-bottom:1.5rem}
+.tbl-wrap{overflow-x:auto;border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg)}
+table{width:100%;border-collapse:collapse;font-size:12px;table-layout:fixed}
+thead tr{background:var(--color-background-secondary)}
+th{padding:10px 8px;text-align:left;font-weight:500;font-size:11px;color:var(--color-text-secondary);border-bottom:0.5px solid var(--color-border-tertiary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+td{padding:9px 8px;border-bottom:0.5px solid var(--color-border-tertiary);color:var(--color-text-primary);vertical-align:top;word-break:break-word}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:var(--color-background-secondary)}
+.badge{display:inline-block;font-size:10px;padding:2px 7px;border-radius:10px;font-weight:500;white-space:nowrap}
+.b-esq{background:#E6F1FB;color:#0C447C}
+.b-dir{background:#FAECE7;color:#712B13}
+.b-mist{background:#EAF3DE;color:#3B6D11}
+.b-trab{background:#FAEEDA;color:#633806}
+.b-est{background:#EEEDFE;color:#3C3489}
+.b-fem{background:#FBEAF0;color:#72243E}
+.b-neg{background:#F1EFE8;color:#444441}
+.b-anti{background:#FCEBEB;color:#791F1F}
+.eop-bar{display:flex;gap:2px;align-items:center;margin-top:2px}
+.eop-seg{height:6px;border-radius:2px;flex:1}
+.score-wrap{display:flex;gap:3px;margin-top:2px}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--color-border-tertiary)}
+.dot.on{background:#3266ad}
+.rep-tag{display:inline-block;font-size:10px;padding:1px 5px;border:0.5px solid var(--color-border-tertiary);border-radius:4px;margin:1px;color:var(--color-text-secondary)}
+.hidden{display:none}
+.search-row{display:flex;gap:8px;margin-bottom:1rem;align-items:center}
+.search-row input{flex:1;font-size:13px;padding:7px 10px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-secondary);background:var(--color-background-primary);color:var(--color-text-primary)}
+.legend{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:1rem;font-size:11px;color:var(--color-text-secondary)}
+.legend span{display:flex;align-items:center;gap:4px}
+.legend-dot{width:10px;height:10px;border-radius:2px}
+</style>
+
+<div class="wrap">
+<div class="metrics">
+  <div class="mc"><div class="mc-label">ciclos mapeados</div><div class="mc-val">18</div></div>
+  <div class="mc"><div class="mc-label">período coberto</div><div class="mc-val">1985–2024</div></div>
+  <div class="mc"><div class="mc-label">pico de mobilização</div><div class="mc-val">2013</div></div>
+  <div class="mc"><div class="mc-label">fontes acadêmicas</div><div class="mc-val">BEP/NEPAC</div></div>
+</div>
+
+<div class="section-title">intensidade de mobilização por período (1985–2024)</div>
+<div class="chart-wrap"><canvas id="timelineChart" role="img" aria-label="Gráfico de barras mostrando a intensidade relativa de mobilização de protestos no Brasil entre 1985 e 2024, com pico em 2013.">Dados de intensidade de mobilização por ano entre 1985 e 2024.</canvas></div>
+
+<div class="section-title">tabela analítica — dimensões da teoria do processo político</div>
+
+<div class="legend">
+  <span><span class="legend-dot" style="background:#3266ad"></span>esquerda/trabalho</span>
+  <span><span class="legend-dot" style="background:#D85A30"></span>direita/conservador</span>
+  <span><span class="legend-dot" style="background:#639922"></span>multisetorial</span>
+  <span><span class="legend-dot" style="background:#BA7517"></span>trabalhista/sindical</span>
+  <span><span class="legend-dot" style="background:#7F77DD"></span>estudantil</span>
+  <span><span class="legend-dot" style="background:#D4537E"></span>feminista/gênero</span>
+  <span><span class="legend-dot" style="background:#888780"></span>identidade/raça</span>
+  <span><span class="legend-dot" style="background:#E24B4A"></span>antissistêmico</span>
+</div>
+
+<div class="search-row">
+  <input id="searchInput" type="text" placeholder="Buscar evento, ator, frame..."/>
+</div>
+
+<div class="filters" id="filterBtns">
+  <button class="fbtn active" data-filter="all">todos</button>
+  <button class="fbtn" data-filter="Nova República">nova república</button>
+  <button class="fbtn" data-filter="FHC">era FHC</button>
+  <button class="fbtn" data-filter="Lula/Dilma">Lula / Dilma</button>
+  <button class="fbtn" data-filter="2013–2016">2013–2016</button>
+  <button class="fbtn" data-filter="Pós-2016">pós-2016</button>
+  <button class="fbtn" data-filter="Bolsonaro">era Bolsonaro</button>
+  <button class="fbtn" data-filter="Pós-2022">pós-2022</button>
+</div>
+
+<div class="tbl-wrap">
+<table id="mainTable">
+<colgroup>
+  <col style="width:140px">
+  <col style="width:75px">
+  <col style="width:90px">
+  <col style="width:130px">
+  <col style="width:105px">
+  <col style="width:120px">
+  <col style="width:95px">
+  <col style="width:115px">
+  <col style="width:115px">
+  <col style="width:115px">
+  <col style="width:100px">
+</colgroup>
+<thead>
+  <tr>
+    <th>evento / ciclo</th>
+    <th>período</th>
+    <th>ciclo PPT</th>
+    <th>atores principais</th>
+    <th>repertório</th>
+    <th>EOP (abertura · aliados · instab. · repressão)</th>
+    <th>estrutura mobilização</th>
+    <th>frame diagnóstico</th>
+    <th>frame prognóstico</th>
+    <th>frame motivação</th>
+    <th>resultado</th>
+  </tr>
+</thead>
+<tbody id="tableBody"></tbody>
+</table>
+</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const data = [
+  {
+    nome:"Diretas Já (atos finais)",
+    periodo:"Jan–Mar 1985",
+    ciclo:"Nova República",
+    tipo:"b-mist",
+    atores:["PMDB","CUT","UNE","Igreja Católica","artistas"],
+    repertorio:["comício de massa","marcha","concentração pública"],
+    eop:[4,5,5,2],
+    estrutura:"coalizão ampla (partidos oposição + sindicatos + mov. estudantil)",
+    f_diag:"regime militar como ilegítimo e anacrônico",
+    f_prog:"eleições diretas para presidente",
+    f_motiv:"soberania popular e democracia",
+    resultado:"parcial: eleição indireta de Tancredo (1985)",
+    ano:1985, intens:7
+  },
+  {
+    nome:"Greve Geral — CUT/CGT",
+    periodo:"Ago 1989",
+    ciclo:"Nova República",
+    tipo:"b-trab",
+    atores:["CUT","CGT","trabalhadores urbanos"],
+    repertorio:["greve geral","paralisação","piquete"],
+    eop:[3,3,3,3],
+    estrutura:"sindicatos nacionais (CUT e CGT)",
+    f_diag:"arrocho salarial e hiperinflação Plano Verão",
+    f_prog:"reajuste salarial e negociação coletiva",
+    f_motiv:"dignidade do trabalhador",
+    resultado:"negociações parciais; novo plano econômico",
+    ano:1989, intens:5
+  },
+  {
+    nome:"Caras Pintadas / Fora Collor",
+    periodo:"Ago–Set 1992",
+    ciclo:"Nova República",
+    tipo:"b-est",
+    atores:["UNE","UBES","estudantes secundaristas","CNBB"],
+    repertorio:["marcha","comício","ato simbólico (rosto pintado)"],
+    eop:[4,4,5,1],
+    estrutura:"mov. estudantil + sociedade civil difusa",
+    f_diag:"corrupção sistêmica no governo Collor (PC Farias)",
+    f_prog:"impeachment presidencial imediato",
+    f_motiv:"ética na política e defesa da democracia",
+    resultado:"impeachment de Collor (29 set. 1992)",
+    ano:1992, intens:8
+  },
+  {
+    nome:"Marcha dos 100 mil Sem-Terra (MST)",
+    periodo:"Fev 1997",
+    ciclo:"FHC",
+    tipo:"b-esq",
+    atores:["MST","Via Campesina","CUT"],
+    repertorio:["marcha","acampamento","ocupação de terra"],
+    eop:[2,2,3,4],
+    estrutura:"movimento camponês organizado (MST)",
+    f_diag:"concentração fundiária e violência rural (Eldorado dos Carajás)",
+    f_prog:"reforma agrária acelerada pelo Estado",
+    f_motiv:"justiça social e direito à terra",
+    resultado:"limitado: pressão simbólica; assentamentos pontuais",
+    ano:1997, intens:4
+  },
+  {
+    nome:"Protestos Anti-Privatização / FMI",
+    periodo:"1999–2002",
+    ciclo:"FHC",
+    tipo:"b-esq",
+    atores:["CUT","PT","MST","movimentos anti-ALCA"],
+    repertorio:["marcha","ato público","plebiscito popular"],
+    eop:[2,2,2,3],
+    estrutura:"coalizão PT + sindicatos + mov. sociais",
+    f_diag:"neoliberalismo e soberania nacional ameaçados",
+    f_prog:"alternativa petista; reversão das privatizações",
+    f_motiv:"soberania nacional e anticapitalismo",
+    resultado:"vitória eleitoral do PT (Lula 2002); ALCA bloqueada",
+    ano:2001, intens:4
+  },
+  {
+    nome:"Marcha contra o Racismo e pela Igualdade",
+    periodo:"Nov 2005",
+    ciclo:"Lula/Dilma",
+    tipo:"b-neg",
+    atores:["MNU","CONEN","movimentos negros","ONGs"],
+    repertorio:["marcha","ato simbólico","ocupação de espaço público"],
+    eop:[4,4,3,2],
+    estrutura:"organizações do mov. negro (MNU, CONEN)",
+    f_diag:"racismo estrutural e desigualdade racial persistentes",
+    f_prog:"cotas raciais, criminalização do racismo, reparação",
+    f_motiv:"dignidade e identidade negra",
+    resultado:"aprovação parcial de políticas de cotas (lei 2012)",
+    ano:2005, intens:3
+  },
+  {
+    nome:"Jornadas de Junho 2013 — fase MPL",
+    periodo:"Jun 2013 (1ª–2ª sem.)",
+    ciclo:"2013–2016",
+    tipo:"b-esq",
+    atores:["MPL","estudantes","trabalhadores jovens urbanos"],
+    repertorio:["marcha","bloqueio de via","confronto com polícia"],
+    eop:[3,2,3,5],
+    estrutura:"rede horizontal MPL + redes sociais",
+    f_diag:"tarifa do transporte público como injustiça urbana",
+    f_prog:"revogação do aumento da passagem; passe livre",
+    f_motiv:"cidade como direito coletivo",
+    resultado:"revogação do aumento em SP/RJ; popularização da pauta urbana",
+    ano:2013, intens:10
+  },
+  {
+    nome:"Jornadas de Junho 2013 — fase mosaico",
+    periodo:"Jun 2013 (3ª–4ª sem.)",
+    ciclo:"2013–2016",
+    tipo:"b-mist",
+    atores:["multidão difusa","PT","PSDB","grupos direita/esquerda"],
+    repertorio:["marcha massiva","ato público","vandalismo episódico"],
+    eop:[3,2,4,4],
+    estrutura:"ausência de coordenação central; Facebook/WhatsApp",
+    f_diag:"corrupção, má gestão pública, déficit democrático",
+    f_prog:"difuso: PEC 37, reforma política, saúde/educação",
+    f_motiv:"indignação difusa contra 'o sistema'",
+    resultado:"aprovação PEC 37 revertida; abertura oportunidade política para direita",
+    ano:2013, intens:10
+  },
+  {
+    nome:"Protestos Anti-Copa (Junho 2014)",
+    periodo:"Jun–Jul 2014",
+    ciclo:"2013–2016",
+    tipo:"b-esq",
+    atores:["MPL","MTST","movimentos sociais urbanos"],
+    repertorio:["marcha","bloqueio de via","acampamento","black bloc"],
+    eop:[3,2,3,5],
+    estrutura:"redes informais + MTST + MPL",
+    f_diag:"megaeventos como transferência de renda aos ricos",
+    f_prog:"moradia digna; transporte gratuito; saúde e educação",
+    f_motiv:"'não vai ter copa' / prioridades sociais",
+    resultado:"repressão policial intensa; debate internacional sobre violações",
+    ano:2014, intens:6
+  },
+  {
+    nome:"Ciclo pró-impeachment (Vem pra Rua/MBL)",
+    periodo:"Mar 2015–Abr 2016",
+    ciclo:"2013–2016",
+    tipo:"b-dir",
+    atores:["Vem pra Rua","MBL","classe média","FIESP","setores empresariais"],
+    repertorio:["marcha massiva","ato em Av. Paulista","camiseta verde-amarela"],
+    eop:[4,4,5,1],
+    estrutura:"organizações liberais-conservadoras + mídia hegemônica + redes sociais",
+    f_diag:"PT como partido corrupto; Dilma como incompetente",
+    f_prog:"impeachment e 'volta à normalidade'",
+    f_motiv:"anticorrupção e antipetismo",
+    resultado:"impeachment de Dilma Rousseff (31 ago. 2016)",
+    ano:2015, intens:9
+  },
+  {
+    nome:"Fora Temer / Ciclo pós-impeachment",
+    periodo:"Jun–Out 2016",
+    ciclo:"Pós-2016",
+    tipo:"b-mist",
+    atores:["CUT","MST","PT","movimentos de direitos","estudantes"],
+    repertorio:["marcha","greve estudantil","ocupação de escola"],
+    eop:[2,2,3,3],
+    estrutura:"coalizão de esquerda reativa (Frente Brasil Popular)",
+    f_diag:"golpe parlamentar e ilegitimidade de Temer",
+    f_prog:"eleições diretas imediatas (Diretas Já 2016)",
+    f_motiv:"democracia e reversão do impeachment",
+    resultado:"limitado: Temer permaneceu; debate sobre democracia",
+    ano:2016, intens:5
+  },
+  {
+    nome:"Greve Geral contra Reforma Trabalhista",
+    periodo:"28 Abr 2017",
+    ciclo:"Pós-2016",
+    tipo:"b-trab",
+    atores:["CUT","CTB","CSP-Conlutas","trabalhadores informais","estudantes"],
+    repertorio:["greve geral","paralisação nacional","piquete","manifestação"],
+    eop:[2,2,3,3],
+    estrutura:"centrais sindicais (CUT, CTB, Força Sindical)",
+    f_diag:"reforma trabalhista como destruição de direitos históricos",
+    f_prog:"rejeição das reformas trabalhista e previdenciária",
+    f_motiv:"defesa da CLT e do estado de bem-estar social",
+    resultado:"parcial: reforma aprovada; mobilização enfraquecida",
+    ano:2017, intens:6
+  },
+  {
+    nome:"#EleNão — Mulheres contra Bolsonaro",
+    periodo:"Set–Out 2018",
+    ciclo:"Bolsonaro",
+    tipo:"b-fem",
+    atores:["feministas","LGBTQIA+","movimentos negros","estudantes","mulheres de todas as classes"],
+    repertorio:["marcha","ato público","hashtag+mobilização digital"],
+    eop:[3,2,4,2],
+    estrutura:"redes feministas + articulação digital (Facebook/Instagram)",
+    f_diag:"Bolsonaro como ameaça aos direitos das mulheres e minorias",
+    f_prog:"derrota eleitoral de Bolsonaro",
+    f_motiv:"feminismo interseccional e defesa da democracia",
+    resultado:"Bolsonaro eleito; maior mobilização feminista da história do país",
+    ano:2018, intens:7
+  },
+  {
+    nome:"Protestos em Defesa da Educação",
+    periodo:"Maio 2019",
+    ciclo:"Bolsonaro",
+    tipo:"b-est",
+    atores:["UNE","UBES","professores","ANDES","CNTE","sindicatos docentes"],
+    repertorio:["marcha","greve docente","ato público","ocupação de reitoria"],
+    eop:[2,2,3,3],
+    estrutura:"sindicatos docentes + mov. estudantil",
+    f_diag:"cortes orçamentários como desmonte da educação pública",
+    f_prog:"reversão dos bloqueios do MEC e Capes",
+    f_motiv:"universidade pública e ciência como bem comum",
+    resultado:"parcial: desbloqueio parcial de verbas; debate educacional reaceso",
+    ano:2019, intens:5
+  },
+  {
+    nome:"Manifestações Anti-Bolsonaro (Covid)",
+    periodo:"2020–2021",
+    ciclo:"Bolsonaro",
+    tipo:"b-mist",
+    atores:["PSOL","PT","PCdoB","movimentos sociais","ativistas de saúde"],
+    repertorio:["panelada","buzina de carro","lambe-lambe","ato com distanciamento"],
+    eop:[2,1,3,4],
+    estrutura:"coalizão difusa anti-Bolsonaro; baixa coordenação",
+    f_diag:"negacionismo e genocídio na gestão da pandemia",
+    f_prog:"impeachment de Bolsonaro; vacinação universal",
+    f_motiv:"direito à vida e responsabilização do Estado",
+    resultado:"CPIs da Covid; pressão por vacinação; Bolsonaro manteve-se",
+    ano:2021, intens:6
+  },
+  {
+    nome:"7 de Setembro Pró-Bolsonaro",
+    periodo:"Set 2021",
+    ciclo:"Bolsonaro",
+    tipo:"b-dir",
+    atores:["bolsonaristas","militares da reserva","caminhoneiros","classe média conservadora"],
+    repertorio:["marcha em Brasília/SP","concentração em frente ao STF","discurso presidencial"],
+    eop:[3,4,2,1],
+    estrutura:"base bolsonarista + aparato de Estado (presidência)",
+    f_diag:"STF como inimigo da democracia e da 'família brasileira'",
+    f_prog:"intervenção militar; derrocada do STF",
+    f_motiv:"patriotismo autoritário; anticomunismo",
+    resultado:"Bolsonaro recuou; movimento autocrático continuou subterrâneo",
+    ano:2021, intens:6
+  },
+  {
+    nome:"Acampamentos Golpistas pós-eleição 2022",
+    periodo:"Out–Dez 2022",
+    ciclo:"Pós-2022",
+    tipo:"b-anti",
+    atores:["bolsonaristas radicais","militares da reserva","empresários golpistas"],
+    repertorio:["acampamento permanente","bloqueio de rodovia","petição antidemocráticas"],
+    eop:[2,3,2,2],
+    estrutura:"base bolsonarista + redes de milícia digital + Telegram",
+    f_diag:"fraude eleitoral (narrativa falsa); eleição roubada",
+    f_prog:"intervenção militar e anulação do resultado",
+    f_motiv:"lealdade pessoal a Bolsonaro; milenarismo autoritário",
+    resultado:"acampamentos dissolvidos; investigações criminais em curso",
+    ano:2022, intens:5
+  },
+  {
+    nome:"8 de Janeiro — Ataques às Sedes dos Poderes",
+    periodo:"8 Jan 2023",
+    ciclo:"Pós-2022",
+    tipo:"b-anti",
+    atores:["bolsonaristas radicais","infiltrados de milícias","agitadores externos"],
+    repertorio:["invasão","vandalismo","depredação patrimonial","confronto com forças de segurança"],
+    eop:[2,2,2,3],
+    estrutura:"redes Telegram + financiadores empresariais + omissão institucional",
+    f_diag:"'comunistas no poder' / resultado eleitoral como golpe",
+    f_prog:"retorno de Bolsonaro ao poder",
+    f_motiv:"radicalismo autocrático e identidade ultraconservadora",
+    resultado:"1.400+ presos; investigações STF; condenação de Bolsonaro (2025)",
+    ano:2023, intens:8
+  }
+];
+
+const eopColors = ['#3266ad','#639922','#BA7517','#E24B4A'];
+const eopLabels = ['abertura sist.','aliados inst.','instab. elites','repressão'];
+
+function renderScore(val){
+  let h='<div class="score-wrap">';
+  for(let i=1;i<=5;i++) h+=`<div class="dot ${i<=val?'on':''}"></div>`;
+  return h+'</div>';
+}
+
+function renderEOP(arr){
+  return '<div style="font-size:10px;color:var(--color-text-secondary)">'+
+    arr.map((v,i)=>`<div style="display:flex;align-items:center;gap:4px;margin-bottom:2px"><span style="min-width:52px">${['abertura','aliados','instab.','repressão'][i]}</span>${renderScore(v)}</div>`).join('')+
+  '</div>';
+}
+
+function renderRep(arr){
+  return arr.map(r=>`<span class="rep-tag">${r}</span>`).join('');
+}
+
+function renderRow(d){
+  const ators = d.atores.slice(0,3).map(a=>`<div style="font-size:11px;color:var(--color-text-secondary)">${a}</div>`).join('');
+  return `<tr class="data-row" data-ciclo="${d.ciclo}">
+    <td><strong style="font-size:12px">${d.nome}</strong><br><span style="font-size:11px;color:var(--color-text-secondary)">${d.periodo}</span></td>
+    <td><span style="font-size:11px">${d.periodo.split('–')[0].replace(/[^0-9]/g,'').slice(0,4)||d.ano}</span></td>
+    <td><span class="badge ${d.tipo}" style="font-size:10px">${d.ciclo}</span></td>
+    <td>${ators}</td>
+    <td>${renderRep(d.repertorio)}</td>
+    <td>${renderEOP(d.eop)}</td>
+    <td><span style="font-size:11px;color:var(--color-text-secondary)">${d.estrutura}</span></td>
+    <td><span style="font-size:11px">${d.f_diag}</span></td>
+    <td><span style="font-size:11px">${d.f_prog}</span></td>
+    <td><span style="font-size:11px">${d.f_motiv}</span></td>
+    <td><span style="font-size:11px">${d.resultado}</span></td>
+  </tr>`;
+}
+
+const tbody = document.getElementById('tableBody');
+function renderTable(filter, search){
+  const q = (search||'').toLowerCase();
+  const rows = data.filter(d=>{
+    const cicloMatch = filter==='all' || d.ciclo===filter;
+    if(!cicloMatch) return false;
+    if(!q) return true;
+    const hay = [d.nome,d.periodo,d.ciclo,...d.atores,...d.repertorio,d.estrutura,d.f_diag,d.f_prog,d.f_motiv,d.resultado].join(' ').toLowerCase();
+    return hay.includes(q);
+  });
+  tbody.innerHTML = rows.map(renderRow).join('') || '<tr><td colspan="11" style="text-align:center;padding:2rem;color:var(--color-text-secondary)">nenhum evento encontrado</td></tr>';
+}
+
+let activeFilter='all', searchVal='';
+renderTable(activeFilter, searchVal);
+
+document.getElementById('filterBtns').addEventListener('click',e=>{
+  if(!e.target.classList.contains('fbtn')) return;
+  document.querySelectorAll('.fbtn').forEach(b=>b.classList.remove('active'));
+  e.target.classList.add('active');
+  activeFilter=e.target.dataset.filter;
+  renderTable(activeFilter, searchVal);
+});
+
+document.getElementById('searchInput').addEventListener('input',e=>{
+  searchVal=e.target.value;
+  renderTable(activeFilter, searchVal);
+});
+
+const years=['1985','1988','1989','1992','1995','1997','1999','2002','2005','2007','2013','2014','2015','2016','2017','2018','2019','2020','2021','2022','2023','2024'];
+const intensity=[7,3,5,8,3,4,3,4,3,2,10,7,9,8,6,7,5,5,7,6,8,3];
+new Chart(document.getElementById('timelineChart'),{
+  type:'bar',
+  data:{
+    labels:years,
+    datasets:[{
+      label:'Intensidade relativa de mobilização',
+      data:intensity,
+      backgroundColor:intensity.map(v=>v>=9?'#D85A30':v>=7?'#3266ad':'#9FE1CB'),
+      borderRadius:3
+    }]
+  },
+  options:{
+    responsive:true,
+    maintainAspectRatio:false,
+    plugins:{
+      legend:{display:false},
+      tooltip:{callbacks:{label:ctx=>' intensidade: '+ctx.raw+'/10'}}
+    },
+    scales:{
+      y:{min:0,max:11,ticks:{font:{size:11}},grid:{color:'rgba(128,128,128,0.1)'}},
+      x:{ticks:{font:{size:10},maxRotation:45},grid:{display:false}}
+    }
+  }
+});
+</script>
+
+</body>
+</html>
