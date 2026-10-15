@@ -4,73 +4,78 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Protestos no Brasil 1985–2024</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root{
-  --font-sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
-  --color-background-primary:#ffffff;--color-background-secondary:#f5f4f0;--color-background-tertiary:#e9e7e1;
-  --color-text-primary:#1c1a17;--color-text-secondary:#6b655c;
-  --color-border-primary:#8a847a;--color-border-secondary:#bdb7ad;--color-border-tertiary:#dcd8d0;
-  --border-radius-md:8px;--border-radius-lg:12px;
-}
-@media (prefers-color-scheme:dark){:root{
-  --color-background-primary:#1b1a18;--color-background-secondary:#26241f;--color-background-tertiary:#34312b;
-  --color-text-primary:#ece9e3;--color-text-secondary:#a8a297;
-  --color-border-primary:#8a847a;--color-border-secondary:#5a554d;--color-border-tertiary:#3a3731;
-}}
-html{background:var(--color-background-primary);color:var(--color-text-primary)}
-body{max-width:1400px;margin:0 auto;padding:0 16px}
+:root{--ink:#181d26;--body:#333840;--muted:#41454d;--line:#dddddd;--strong:#9297a0;--soft:#f8fafc;--cream:#f5e9d4;--cream-line:#d9c7a8;--oxide:#aa2d00}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:#fff;color:var(--body)}
+body{font:15px/1.6 'IBM Plex Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+.pbar{height:64px;border-bottom:1px solid #dddddd;display:flex;align-items:center;justify-content:space-between;padding:0 48px;background:#fff}
+.pback{font:500 14px/1 'IBM Plex Sans',system-ui,sans-serif;color:#41454d;text-decoration:none}
+.pback:hover{color:#181d26}
+.plogo{font:500 22px/1 'Newsreader',Georgia,serif;color:#181d26;text-decoration:none;letter-spacing:-.01em}
+.eyebrow{font:500 13px/1.4 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:#aa2d00;margin:0 0 20px}
+@media (max-width:768px){.pbar{padding:0 20px}}
 .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-@media (max-width:640px){.metrics{grid-template-columns:repeat(2,1fr)!important}}
+.wrap{max-width:1400px;margin:0 auto;padding:72px 48px 96px}
+.phead h1{font:400 56px/1.04 'Newsreader',Georgia,serif;color:var(--ink);letter-spacing:-.02em;margin-bottom:20px;max-width:22ch;text-wrap:balance}
+.phead p.lede{font:400 20px/1.5 'Newsreader',Georgia,serif;color:var(--body);max-width:68ch;margin-bottom:56px}
+.metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));background:var(--cream);border-radius:12px;padding:40px 48px;margin-bottom:72px}
+.mc{padding:0 24px;border-right:1px solid var(--cream-line)}
+.mc:first-child{padding-left:0}.mc:last-child{border-right:none}
+.mc-label{font:500 12px/1.4 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:12px;order:2}
+.mc{display:flex;flex-direction:column;min-width:0}
+.mc-val{font:400 clamp(28px,3.2vw,44px)/1.05 'Newsreader',Georgia,serif;color:var(--ink);order:1;overflow-wrap:anywhere}
+@media (max-width:1100px){.metrics{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:28px}.mc:nth-child(2){border-right:none}.mc:nth-child(3){padding-left:0}}
+.section-title{font:400 32px/1.2 'Newsreader',Georgia,serif;color:var(--ink);margin:0 0 24px;padding-top:24px;border-top:1px solid var(--ink)}
+.section-title::first-letter{text-transform:uppercase}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.fbtn{font:500 13px/1 'IBM Plex Sans',system-ui,sans-serif;padding:10px 14px;min-height:40px;border-radius:10px;border:1px solid var(--line);background:#fff;color:var(--muted);cursor:pointer;transition:all .15s}
+.fbtn:hover{border-color:var(--ink);color:var(--ink)}
+.fbtn.active{background:var(--ink);color:#fff;border-color:var(--ink)}
+.chart-wrap{position:relative;width:100%;height:260px;margin-bottom:72px}
+.tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px}
+table{width:100%;border-collapse:collapse;font-size:12.5px;table-layout:fixed;min-width:1240px}
+thead tr{background:#fff}
+th{padding:14px 10px;text-align:left;font:500 10.5px/1.35 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--ink);vertical-align:bottom}
+td{padding:14px 10px;border-bottom:1px solid var(--line);color:var(--ink);vertical-align:top;word-break:break-word}
+td strong{font:500 15px/1.3 'Newsreader',Georgia,serif;color:var(--ink)}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:var(--soft)}
+.badge{display:inline-block;font:500 10px/1.3 'IBM Plex Mono',monospace;letter-spacing:.04em;padding:3px 7px;border-radius:4px;white-space:normal}
+.b-esq{background:#e7eef6;color:#1f4e79}
+.b-dir{background:#f8e7df;color:#aa2d00}
+.b-mist{background:#e8f0e4;color:#2f6b3a}
+.b-trab{background:#f5e9d4;color:#7a520e}
+.b-est{background:#ecebf7;color:#4a3f8f}
+.b-fem{background:#f6e6ee;color:#8a2a50}
+.b-neg{background:#eeeeec;color:#41454d}
+.b-anti{background:#f3dcd6;color:#7a1a0c}
+.score-wrap{display:flex;gap:3px;margin-top:2px}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--line)}
+.dot.on{background:var(--ink)}
+.rep-tag{display:inline-block;font-size:11px;padding:1px 6px;border:1px solid var(--line);border-radius:4px;margin:1px;color:var(--muted);background:#fff}
+.hidden{display:none}
+.search-row{display:flex;gap:8px;margin-bottom:16px;align-items:center}
+.search-row input{flex:1;font:400 15px 'IBM Plex Sans',system-ui,sans-serif;height:44px;padding:0 16px;border-radius:6px;border:1px solid var(--line);background:#fff;color:var(--ink)}
+.search-row input:focus{outline:2px solid var(--ink);outline-offset:1px;border-color:var(--ink)}
+.legend{display:flex;flex-wrap:wrap;gap:8px 18px;margin-bottom:24px;font-size:13px;color:var(--muted)}
+.legend span{display:flex;align-items:center;gap:6px}
+.legend-dot{width:10px;height:10px;border-radius:2px}
+@media (max-width:768px){.wrap{padding:48px 20px 64px}.phead h1{font-size:38px}.metrics{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:28px;padding:28px 24px}.mc:nth-child(2){border-right:none}.mc:nth-child(3){padding-left:0}}
 </style>
 </head>
 <body>
 
 <h2 class="sr-only">Mapeamento de eventos de protesto no Brasil (1985–2024) segundo a Teoria do Processo Político</h2>
 
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:var(--font-sans)}
-.wrap{padding:1rem 0}
-.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:1.5rem}
-.mc{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:1rem;text-align:center}
-.mc-label{font-size:12px;color:var(--color-text-secondary);margin-bottom:4px}
-.mc-val{font-size:22px;font-weight:500;color:var(--color-text-primary)}
-.section-title{font-size:16px;font-weight:500;color:var(--color-text-primary);margin-bottom:12px;margin-top:1.5rem}
-.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:1rem}
-.fbtn{font-size:12px;padding:5px 12px;border-radius:20px;border:0.5px solid var(--color-border-secondary);background:var(--color-background-primary);color:var(--color-text-secondary);cursor:pointer;transition:all .15s}
-.fbtn.active{background:var(--color-background-tertiary);color:var(--color-text-primary);border-color:var(--color-border-primary);font-weight:500}
-.chart-wrap{position:relative;width:100%;height:220px;margin-bottom:1.5rem}
-.tbl-wrap{overflow-x:auto;border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg)}
-table{width:100%;border-collapse:collapse;font-size:12px;table-layout:fixed}
-thead tr{background:var(--color-background-secondary)}
-th{padding:10px 8px;text-align:left;font-weight:500;font-size:11px;color:var(--color-text-secondary);border-bottom:0.5px solid var(--color-border-tertiary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-td{padding:9px 8px;border-bottom:0.5px solid var(--color-border-tertiary);color:var(--color-text-primary);vertical-align:top;word-break:break-word}
-tr:last-child td{border-bottom:none}
-tr:hover td{background:var(--color-background-secondary)}
-.badge{display:inline-block;font-size:10px;padding:2px 7px;border-radius:10px;font-weight:500;white-space:nowrap}
-.b-esq{background:#E6F1FB;color:#0C447C}
-.b-dir{background:#FAECE7;color:#712B13}
-.b-mist{background:#EAF3DE;color:#3B6D11}
-.b-trab{background:#FAEEDA;color:#633806}
-.b-est{background:#EEEDFE;color:#3C3489}
-.b-fem{background:#FBEAF0;color:#72243E}
-.b-neg{background:#F1EFE8;color:#444441}
-.b-anti{background:#FCEBEB;color:#791F1F}
-.eop-bar{display:flex;gap:2px;align-items:center;margin-top:2px}
-.eop-seg{height:6px;border-radius:2px;flex:1}
-.score-wrap{display:flex;gap:3px;margin-top:2px}
-.dot{width:8px;height:8px;border-radius:50%;background:var(--color-border-tertiary)}
-.dot.on{background:#3266ad}
-.rep-tag{display:inline-block;font-size:10px;padding:1px 5px;border:0.5px solid var(--color-border-tertiary);border-radius:4px;margin:1px;color:var(--color-text-secondary)}
-.hidden{display:none}
-.search-row{display:flex;gap:8px;margin-bottom:1rem;align-items:center}
-.search-row input{flex:1;font-size:13px;padding:7px 10px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-secondary);background:var(--color-background-primary);color:var(--color-text-primary)}
-.legend{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:1rem;font-size:11px;color:var(--color-text-secondary)}
-.legend span{display:flex;align-items:center;gap:4px}
-.legend-dot{width:10px;height:10px;border-radius:2px}
-</style>
 
+
+<header class="pbar"><a href="../projects.html" class="pback">← Projetos</a><a href="../index.html" class="plogo">Gustavo Paccelli</a></header>
 <div class="wrap">
+<div class="phead"><p class="eyebrow">Projeto · Teoria do Processo Político</p><h1>Protestos no Brasil, 1985–2024</h1><p class="lede">Mapeamento de eventos de protesto no Brasil (1985–2024) segundo a Teoria do Processo Político.</p></div>
 <div class="metrics">
   <div class="mc"><div class="mc-label">ciclos mapeados</div><div class="mc-val">18</div></div>
   <div class="mc"><div class="mc-label">período coberto</div><div class="mc-val">1985–2024</div></div>
@@ -84,14 +89,14 @@ tr:hover td{background:var(--color-background-secondary)}
 <div class="section-title">tabela analítica — dimensões da teoria do processo político</div>
 
 <div class="legend">
-  <span><span class="legend-dot" style="background:#3266ad"></span>esquerda/trabalho</span>
-  <span><span class="legend-dot" style="background:#D85A30"></span>direita/conservador</span>
-  <span><span class="legend-dot" style="background:#639922"></span>multisetorial</span>
-  <span><span class="legend-dot" style="background:#BA7517"></span>trabalhista/sindical</span>
-  <span><span class="legend-dot" style="background:#7F77DD"></span>estudantil</span>
-  <span><span class="legend-dot" style="background:#D4537E"></span>feminista/gênero</span>
-  <span><span class="legend-dot" style="background:#888780"></span>identidade/raça</span>
-  <span><span class="legend-dot" style="background:#E24B4A"></span>antissistêmico</span>
+  <span><span class="legend-dot" style="background:#1f4e79"></span>esquerda/trabalho</span>
+  <span><span class="legend-dot" style="background:#aa2d00"></span>direita/conservador</span>
+  <span><span class="legend-dot" style="background:#2f6b3a"></span>multisetorial</span>
+  <span><span class="legend-dot" style="background:#7a520e"></span>trabalhista/sindical</span>
+  <span><span class="legend-dot" style="background:#4a3f8f"></span>estudantil</span>
+  <span><span class="legend-dot" style="background:#8a2a50"></span>feminista/gênero</span>
+  <span><span class="legend-dot" style="background:#41454d"></span>identidade/raça</span>
+  <span><span class="legend-dot" style="background:#7a1a0c"></span>antissistêmico</span>
 </div>
 
 <div class="search-row">
@@ -112,9 +117,9 @@ tr:hover td{background:var(--color-background-secondary)}
 <div class="tbl-wrap">
 <table id="mainTable">
 <colgroup>
-  <col style="width:140px">
+  <col style="width:170px">
   <col style="width:75px">
-  <col style="width:90px">
+  <col style="width:120px">
   <col style="width:130px">
   <col style="width:105px">
   <col style="width:120px">
@@ -493,8 +498,8 @@ new Chart(document.getElementById('timelineChart'),{
     datasets:[{
       label:'Intensidade relativa de mobilização',
       data:intensity,
-      backgroundColor:intensity.map(v=>v>=9?'#D85A30':v>=7?'#3266ad':'#9FE1CB'),
-      borderRadius:3
+      backgroundColor:intensity.map(v=>v>=9?'#aa2d00':v>=7?'#181d26':'#d9c7a8'),
+      borderRadius:4
     }]
   },
   options:{
@@ -505,8 +510,8 @@ new Chart(document.getElementById('timelineChart'),{
       tooltip:{callbacks:{label:ctx=>' intensidade: '+ctx.raw+'/10'}}
     },
     scales:{
-      y:{min:0,max:11,ticks:{font:{size:11}},grid:{color:'rgba(128,128,128,0.1)'}},
-      x:{ticks:{font:{size:10},maxRotation:45},grid:{display:false}}
+      y:{min:0,max:11,ticks:{font:{family:'IBM Plex Mono',size:11},color:'#41454d'},grid:{color:'#eeeeee'},border:{display:false}},
+      x:{ticks:{font:{family:'IBM Plex Mono',size:11},color:'#41454d',maxRotation:0,autoSkip:false},grid:{display:false}}
     }
   }
 });
