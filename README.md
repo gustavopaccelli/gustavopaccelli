@@ -22,6 +22,7 @@ Este repositório contém meu **portfólio acadêmico-profissional** — um site
 ├── about.html                 # Sobre (bio, timeline, idiomas, habilidades)
 ├── education.html             # Trajetória acadêmica (timeline)
 ├── research.html              # Publicações, eventos e atuação editorial
+├── projects.html              # Projetos de pesquisa e visualizações
 ├── experience.html            # Experiência profissional (timeline)
 ├── certificates.html          # Galeria interativa de certificados (filtros)
 ├── contact.html               # Formulário e informações de contato
@@ -32,7 +33,8 @@ Este repositório contém meu **portfólio acadêmico-profissional** — um site
 │
 ├── js/
 │   ├── script.js              # Menu mobile, animações, formulário
-│   └── certificates.js        # Dados + filtros dos certificados
+│   ├── certificates.js        # Dados + filtros dos certificados
+│   └── emailjs-config.js      # Chaves públicas do EmailJS (formulário de contato)
 │
 ├── assets/
 │   ├── img/
@@ -40,9 +42,9 @@ Este repositório contém meu **portfólio acadêmico-profissional** — um site
 │   │   └── favicon.ico        # Ícone do site
 │   └── docs/
 │       ├── lattes.pdf         # CV Lattes completo
-│       ├── cv-resumido.pdf    # CV resumido (2 páginas)
-│       └── certificates/      # PDFs dos certificados
+│       └── cv-resumido.pdf    # CV resumido (2 páginas)
 │
+├── projects/                  # Visualizações interativas (HTML autônomo)
 ├── docs/                      # Documentos de planejamento do projeto
 ├── README.md                  # Documentação do projeto
 ├── .gitignore                 # Arquivos a ignorar no Git
@@ -60,9 +62,9 @@ python -m http.server 8000
 
 1. **Foto de perfil:** substitua `assets/img/perfil.jpg` (atualmente um avatar placeholder) pela sua foto real, 512×512px ou maior.
 2. **CVs em PDF:** substitua os placeholders `assets/docs/lattes.pdf` e `assets/docs/cv-resumido.pdf` pelos seus CVs reais — os botões em `about.html` já apontam para lá.
-3. **Certificados (PDFs):** coloque os arquivos em `assets/docs/certificates/` com o nome `ANO Título.pdf` (ex.: `2025 Extraindo Informações do IBGE.pdf`) — os cards já geram os links automaticamente.
+3. **Certificados:** a galeria lista apenas os títulos. Os PDFs não vão para o repositório, porque o site é público e eles trazem CPF e outros dados pessoais (ver `CLAUDE.md`).
 4. **Novo certificado:** adicione um objeto ao array `CERTIFICATES` em `js/certificates.js`.
-5. **Formulário de contato:** hoje usa `mailto:`. Para envio direto, integre [Formspree](https://formspree.io/) ou [EmailJS](https://www.emailjs.com/) em `js/script.js`.
+5. **Formulário de contato:** envia pelo EmailJS; configuração em `js/emailjs-config.js` e passo a passo em `EMAILJS_SETUP.md`.
 
 ### Deploy no GitHub Pages
 
