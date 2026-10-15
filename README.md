@@ -45,7 +45,6 @@ Este repositório contém meu **portfólio acadêmico-profissional** — um site
 │       └── cv-resumido.pdf    # CV resumido (2 páginas)
 │
 ├── projects/                  # Visualizações interativas (HTML autônomo)
-├── docs/                      # Documentos de planejamento do projeto
 ├── README.md                  # Documentação do projeto
 ├── .gitignore                 # Arquivos a ignorar no Git
 └── sitemap.xml                # Mapa do site (para SEO)
@@ -69,5 +68,3 @@ python -m http.server 8000
 ### Deploy no GitHub Pages
 
 Settings → Pages → **Deploy from a branch** → branch `main`, pasta `/ (root)`.
-
-Guia completo em [`docs/GUIA_IMPLEMENTACAO_GITHUB_PAGES.md`](docs/GUIA_IMPLEMENTACAO_GITHUB_PAGES.md).
