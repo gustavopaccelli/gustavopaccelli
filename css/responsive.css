@@ -1,21 +1,26 @@
 /* ==========================================================================
-   responsive.css — media queries (mobile-first: ajustes para telas menores
-   e refinamentos para tablets/desktops)
+   responsive.css — media queries
    ========================================================================== */
+
+/* ---------- Até 1024px ---------- */
+@media (max-width: 1024px) {
+    :root { --gutter: 32px; }
+    .hero-grid { grid-template-columns: minmax(0, 1fr) 260px; gap: 48px; }
+    .hero-img { width: 260px; height: 325px; }
+    .hero h1 { font-size: 3.5rem; }
+    .split { grid-template-columns: 180px minmax(0, 1fr); gap: 48px; }
+    .about-grid { grid-template-columns: 260px minmax(0, 1fr); gap: 48px; }
+}
 
 /* ---------- Até 900px: menu hambúrguer ---------- */
 @media (max-width: 900px) {
-    .nav-toggle {
-        display: flex;
-    }
-
+    .nav-toggle { display: flex; }
     .nav-links {
         position: absolute;
         top: var(--nav-height);
-        left: 0;
-        right: 0;
-        background: var(--bg-white);
-        border-bottom: 1px solid var(--border);
+        left: 0; right: 0;
+        background: var(--canvas);
+        border-bottom: 1px solid var(--hairline);
         box-shadow: var(--shadow-md);
         flex-direction: column;
         align-items: stretch;
@@ -23,312 +28,76 @@
         padding: 8px 0;
         display: none;
     }
-
-    .nav-links.open {
-        display: flex;
-    }
-
+    .nav-links.open { display: flex; }
     .nav-links a {
-        display: block;
-        padding: 12px 20px;
+        line-height: 1.4;
+        padding: 14px var(--gutter);
         border-bottom: none;
-        border-left: 3px solid transparent;
+        border-left: 2px solid transparent;
     }
-
-    .nav-links a.active {
-        border-left-color: var(--secondary);
-        background: var(--bg-light);
-    }
+    .nav-links a.active { border-left-color: var(--oxide); background: var(--surface-soft); }
 }
 
-/* ---------- Até 768px: tablets pequenos e celulares ---------- */
+/* ---------- Até 768px ---------- */
 @media (max-width: 768px) {
-    .hero {
-        padding: 48px 0;
-    }
+    :root { --gutter: 20px; }
+    .section { padding: 64px 0; }
+    .section + .section:not(.section-alt) > .container { padding-top: 64px; }
+    .section-alt + .section:not(.section-alt) { padding-top: 64px; }
+    .section-title { font-size: 1.875rem; }
 
-    .hero h1 {
-        font-size: 2rem;
-    }
+    .page-header { padding: 64px 0 40px; }
+    .page-header h1 { font-size: 2.75rem; }
+    .page-header p { font-size: 1.25rem; }
 
-    .hero .subtitle {
-        font-size: 1.1rem;
-    }
+    .hero { padding: 48px 0 64px; }
+    .hero-grid { grid-template-columns: 1fr; gap: 32px; }
+    .hero-img { order: -1; width: 160px; height: 200px; }
+    .hero h1 { font-size: 2.75rem; }
+    .hero-lede { font-size: 1.3125rem; }
+    .social-links { margin-left: 0; width: 100%; margin-top: 8px; }
 
-    .hero-img {
-        width: 140px;
-        height: 140px;
-    }
+    .split { grid-template-columns: 1fr; gap: 20px; }
+    .highlight-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 32px; }
+    .highlight-card { padding: 0 20px; }
+    .highlight-card:nth-child(2) { border-right: none; padding-right: 0; }
+    .highlight-card:nth-child(3) { padding-left: 0; }
+    .highlight-card .number { font-size: 3.5rem; }
+    .expertise-list { grid-template-columns: 1fr; }
 
-    .page-header h1 {
-        font-size: 1.7rem;
-    }
+    .cta-banner { flex-direction: column; align-items: flex-start; padding: 40px 24px; gap: 28px; }
+    .cta-banner h2 { font-size: 2.25rem; }
 
-    .section {
-        padding: 40px 0;
-    }
+    .timeline-item { flex-direction: column; }
+    .timeline-marker { flex-direction: row; width: 100%; min-width: 0; margin: 0 0 12px; gap: 12px; align-items: center; }
+    .timeline-marker::after { display: none; }
+    .badge { margin-top: 0; }
+    .timeline-content, .exp-content, .card, .project-card { padding: 24px; }
 
-    .section-title {
-        font-size: 1.45rem;
-    }
+    .about-grid { grid-template-columns: 1fr; gap: 28px; }
+    .about-photo { max-width: 240px; }
 
-    /* Timeline acadêmica empilhada */
-    .timeline-item {
-        flex-direction: column;
-    }
+    .contact-content { grid-template-columns: 1fr; gap: 28px; }
+    .contact-form, .contact-info { padding: 24px; }
 
-    .timeline-marker {
-        flex-direction: row;
-        width: 100%;
-        min-width: 0;
-        margin-right: 0;
-        margin-bottom: 12px;
-        gap: 10px;
-        align-items: center;
-    }
+    .experience-timeline { padding-left: 24px; }
+    .experience-item::before { left: -30px; }
 
-    .timeline-marker::after {
-        display: none;
-    }
+    .publication-item { flex-direction: column; gap: 16px; }
+    .publication-actions { flex-direction: row; align-items: center; justify-content: space-between; width: 100%; }
+    .publication-header { flex-direction: column; gap: 8px; }
 
-    .badge {
-        margin-top: 0;
-    }
-
-    /* Sobre em coluna única */
-    .about-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .about-photo {
-        max-width: 260px;
-        margin: 0 auto;
-    }
-
-    /* Contato em coluna única */
-    .contact-content {
-        grid-template-columns: 1fr;
-    }
-
-    /* Experiência: menos recuo */
-    .experience-timeline {
-        padding-left: 24px;
-        margin-left: 4px;
-    }
-
-    .experience-item::before {
-        left: -33px;
-    }
-
-    .publication-header {
-        flex-direction: column;
-        gap: 8px;
-    }
-
-    /* Publication item em coluna única */
-    .publication-item {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 12px;
-    }
-
-    .publication-actions {
-        align-items: stretch;
-        width: 100%;
-    }
-
-    .publication-item .btn {
-        width: 100%;
-        text-align: center;
-    }
-
-    /* Social links grid em 1 coluna */
-    .social-links-grid {
-        grid-template-columns: 1fr;
-    }
-
-    /* Reduzir gaps em mobile */
-    .about-grid {
-        gap: 24px;
-    }
-
-    .contact-content {
-        gap: 28px;
-    }
-
-    /* Projetos com padding reduzido */
-    .project-card {
-        padding: 20px;
-    }
-
-    .project-header h3 {
-        font-size: 1.1rem;
-    }
-
-    /* Contact form padding reduzido */
-    .contact-form,
-    .contact-info {
-        padding: 20px;
-    }
-
-    /* Experience timeline reduzido */
-    .experience-item {
-        padding-left: 8px;
-    }
-
-    .experience-item::before {
-        left: -28px;
-    }
+    .social-links-grid { grid-template-columns: 1fr; }
+    .projects-grid { grid-template-columns: 1fr; }
 }
 
-/* ---------- Até 480px: celulares ---------- */
+/* ---------- Até 480px ---------- */
 @media (max-width: 480px) {
-    .container {
-        padding: 0 16px;
-    }
-
-    .hero h1 {
-        font-size: 1.65rem;
-    }
-
-    .hero-cta .btn {
-        width: 100%;
-        text-align: center;
-    }
-
-    .highlight-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 12px;
-    }
-
-    .highlight-card {
-        padding: 20px 12px;
-    }
-
-    .highlight-card .number {
-        font-size: 1.9rem;
-    }
-
-    .certificates-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .certificate-filters {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .filter-reset {
-        align-self: stretch;
-        text-align: center;
-    }
-
-    /* Cards com padding reduzido */
-    .card,
-    .publication-item,
-    .project-card {
-        padding: 16px 18px;
-    }
-
-    /* Buttons com melhor área de clique */
-    .btn-small {
-        padding: 8px 20px;
-        font-size: 0.9rem;
-    }
-
-    /* Hero CTA buttons em mobile */
-    .hero-cta {
-        gap: 10px;
-    }
-
-    .hero-cta .btn {
-        flex: 1;
-        min-height: 44px;
-    }
-
-    /* Timeline reduzido em altura */
-    .timeline-item {
-        margin-bottom: 32px;
-    }
-
-    /* Badges e tags menores */
-    .year-badge,
-    .badge {
-        font-size: 0.75rem;
-        padding: 3px 10px;
-    }
-
-    /* Footer links em coluna */
-    .footer-inner {
-        flex-direction: column;
-        text-align: center;
-        gap: 16px;
-    }
-
-    .footer-links {
-        flex-direction: column;
-        gap: 8px;
-    }
-
-    /* Info items com melhor espaçamento */
-    .info-item {
-        margin-bottom: 12px;
-    }
-
-    /* Form com melhor spacing */
-    .form-group {
-        margin-bottom: 16px;
-    }
-
-    /* Section padding reduzido */
-    .section {
-        padding: 32px 0;
-    }
-}
-
-/* ---------- 600px - 900px: tablets ---------- */
-@media (min-width: 600px) and (max-width: 900px) {
-    .projects-grid {
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    }
-
-    .card-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .publication-item {
-        flex-direction: row;
-        align-items: flex-end;
-    }
-
-    .publication-item .btn {
-        width: auto;
-    }
-
-    .about-grid {
-        gap: 32px;
-    }
-
-    .contact-content {
-        gap: 32px;
-    }
-}
-
-/* ---------- 1024px+: desktops ---------- */
-@media (min-width: 1024px) {
-    .hero h1 {
-        font-size: 3rem;
-    }
-
-    .section {
-        padding: 72px 0;
-    }
-
-    .publication-item {
-        flex-direction: row;
-    }
-
-    .publication-item .btn {
-        width: auto;
-    }
+    .hero h1 { font-size: 2.25rem; }
+    .page-header h1 { font-size: 2.25rem; }
+    .hero-cta .btn { flex: 1; min-height: 48px; }
+    .certificates-grid { grid-template-columns: 1fr; }
+    .certificate-filters { flex-direction: column; align-items: stretch; }
+    .filter-reset { align-self: stretch; }
+    .footer-inner { flex-direction: column; align-items: flex-start; }
 }
