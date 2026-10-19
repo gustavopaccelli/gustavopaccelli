@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Quanto vale a bolsa? Valores e reajustes das bolsas CAPES e CNPq, 1994–2026</title>
+<meta name="description" content="Levantamento de dados: valores mensais e reajustes das bolsas de mestrado, doutorado e iniciação científica (CAPES e CNPq), 1994–2026, com poder de compra pelo IPCA, razão ao salário mínimo, literatura e fontes.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#ffffff; --surface:#ffffff; --ink:#181d26; --ink-2:#41454d; --ink-3:#5f6670;
+  --line:#dddddd; --band-a:#f8fafc; --band-b:transparent;
+  --gain:#2f6b5a; --loss:#aa2d00; --warn-bg:#f5e9d4; --warn-ink:#6b4a0e;
+  --ok-bg:#e6efe9; --ok-ink:#1f5a40; --mid-bg:#eceef2; --mid-ink:#3c4658;
+  --lv:#aa2d00;
+  --serif:"Newsreader",Georgia,"Times New Roman",serif;
+  --sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+.pbar{height:64px;border-bottom:1px solid #dddddd;display:flex;align-items:center;justify-content:space-between;padding:0 48px;background:#fff}
+.pback{font:500 14px/1 var(--sans);color:#41454d;text-decoration:none}
+.pback:hover{color:#181d26}
+.plogo{font:500 22px/1 var(--serif);color:#181d26;text-decoration:none;letter-spacing:-.01em}
+@media (max-width:768px){.pbar{padding:0 20px}}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.55 var(--sans);padding:env(safe-area-inset-top,0) 0 env(safe-area-inset-bottom,0)}
+.wrap{max-width:1000px;margin:0 auto;padding:20px 16px 64px}
+h1,h2,h3{font-family:var(--serif);font-weight:500;line-height:1.15;margin:0}
+h1{font-size:clamp(28px,6vw,44px);letter-spacing:-.01em;max-width:22ch}
+h2{font-size:clamp(21px,4vw,27px);margin-bottom:6px}
+h3{font-size:18px}
+p{margin:0 0 .8em}
+a{color:var(--lv)}
+.lead{color:var(--ink-2);max-width:64ch;margin-top:14px}
+.muted{color:var(--ink-3)}
+:focus-visible{outline:3px solid var(--lv);outline-offset:2px;border-radius:4px}
+.callout{margin-top:18px;border:1.5px solid var(--line);border-left:5px solid #b07a1c;background:var(--surface);border-radius:8px;padding:12px 14px;font-size:14.5px;color:var(--ink-2);max-width:78ch}
+.callout strong{color:var(--ink)}
+
+.controls{position:sticky;top:0;z-index:5;background:var(--bg);padding:12px 0 10px;margin-top:22px;border-bottom:1px solid var(--line)}
+.ctl-row{display:flex;flex-wrap:wrap;gap:8px 20px;align-items:center}
+.seg{display:flex;gap:6px;flex-wrap:wrap}
+.seg button{font:500 15px var(--sans);color:var(--ink);background:var(--surface);border:1.5px solid var(--line);border-radius:999px;padding:9px 16px;min-height:44px;cursor:pointer}
+.seg button[aria-selected="true"]{background:var(--lv);border-color:var(--lv);color:#fff}
+.seg.mode button[aria-selected="true"]{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.seg-note{font-size:13px;color:var(--ink-3);margin:8px 0 0}
+
+section{margin-top:44px}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 14px}
+.sub{color:var(--ink-2);font-size:15px;margin:0 0 14px;max-width:66ch}
+
+.legend{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:13.5px;color:var(--ink-2);margin-bottom:8px}
+.legend span{display:inline-flex;align-items:center;gap:7px}
+.legend svg{width:26px;height:8px}
+.chart{position:relative;touch-action:pan-y}
+.chart svg{display:block;width:100%;height:auto;overflow:visible}
+.tip{position:absolute;pointer-events:none;background:var(--ink);color:var(--bg);font-size:13px;line-height:1.4;padding:8px 10px;border-radius:8px;min-width:190px;max-width:240px;opacity:0;transition:opacity .12s;z-index:2}
+.tip b{font-weight:600}
+.gov-legend{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12.5px;color:var(--ink-3);margin-top:10px}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px 20px;margin:16px 0 0;padding:14px 0 0;border-top:1px solid var(--line)}
+.facts dt{font-size:13px;color:var(--ink-3)}
+.facts dd{margin:2px 0 0;font:600 17px/1.3 var(--sans);font-variant-numeric:tabular-nums}
+.facts dd small{display:block;font:400 13px var(--sans);color:var(--ink-3)}
+
+.cols{display:grid;gap:24px;grid-template-columns:1fr}
+@media(min-width:840px){.cols{grid-template-columns:1fr 1fr}}
+.rows{list-style:none;margin:0;padding:0}
+.row{display:grid;grid-template-columns:96px 1fr;gap:4px 12px;align-items:center;padding:10px 0;border-top:1px solid var(--line)}
+.row:first-child{border-top:0}
+.who strong{display:block;font-size:15px}
+.who span{font-size:12.5px;color:var(--ink-3);line-height:1.3;display:block}
+.track{position:relative;height:26px;display:flex;align-items:center}
+.bar{height:20px;border-radius:3px;background:var(--lv);min-width:2px;transition:width .35s ease}
+.val{font:600 14px var(--sans);font-variant-numeric:tabular-nums;margin-left:8px;white-space:nowrap}
+.detail{grid-column:2;font-size:12.5px;color:var(--ink-3);line-height:1.4}
+.div{display:grid;grid-template-columns:1fr 1fr;width:100%;height:26px;position:relative}
+.div::after{content:"";position:absolute;left:50%;top:-4px;bottom:-4px;border-left:1.5px solid var(--ink-3)}
+.half{display:flex;align-items:center}
+.half.l{justify-content:flex-end}
+.half .bar.neg{background:var(--loss)}
+.half .bar.pos{background:var(--gain)}
+.half.l .val{margin:0 8px 0 0;order:-1}
+.zero-text{font-size:13px;color:var(--ink-3)}
+.nd{font-size:13px;color:var(--ink-3);padding:3px 10px;border:1.5px dashed var(--ink-3);border-radius:6px}
+
+.tablewrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+table{border-collapse:collapse;width:100%;min-width:820px;font-size:14px}
+th,td{text-align:left;vertical-align:top;padding:10px 10px;border-top:1px solid var(--line)}
+th{font-weight:600;color:var(--ink-2);border-top:0;border-bottom:1.5px solid var(--ink-3);font-size:13px}
+td.n{font-variant-numeric:tabular-nums;white-space:nowrap}
+td .p{display:block;font-size:12.5px;color:var(--ink-3)}
+.tag{display:inline-block;font-size:12px;font-weight:600;border-radius:6px;padding:2px 8px;margin-bottom:4px}
+.tag.o{background:var(--ok-bg);color:var(--ok-ink)}
+.tag.i{background:var(--mid-bg);color:var(--mid-ink)}
+.tag.e{background:var(--warn-bg);color:var(--warn-ink)}
+.src{font-size:12.5px;color:var(--ink-2);max-width:52ch}
+.refs a{white-space:nowrap}
+.btn{font:500 14px var(--sans);background:transparent;color:var(--ink);border:1.5px solid var(--ink-3);border-radius:8px;padding:9px 14px;min-height:44px;cursor:pointer;margin:12px 8px 0 0}
+@media (max-width:720px){
+  #evt{min-width:0} #evt thead{display:none}
+  #evt,#evt tbody,#evt tr,#evt td{display:block;width:100%}
+  #evt tr{border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin-bottom:10px}
+  #evt td{border:0;padding:5px 0}
+  #evt td.when strong{font-size:16px}
+  #evt td.empty{display:none}
+  #evt td[data-label]:not(.when)::before{content:attr(data-label);display:block;font-size:12px;color:var(--ink-3)}
+  #evt td.n{white-space:normal} .src{max-width:none}
+}
+
+/* card */
+.card{max-width:560px;margin:0 auto;background:var(--surface);border:1.5px solid var(--ink);border-radius:4px;box-shadow:6px 6px 0 var(--ink);overflow:hidden}
+.card header{padding:22px 20px 16px;background:var(--ink);color:var(--bg)}
+.card header h2{font-size:clamp(26px,6vw,34px);color:var(--bg);margin:0 0 8px;max-width:20ch}
+.card header p{margin:0;font-size:14px;opacity:.85}
+.blk{padding:18px 20px;border-top:1.5px solid var(--ink)}
+.blk h3{font-size:19px;margin-bottom:6px}
+.blk p{font-size:15px;color:var(--ink-2);margin:0 0 10px}
+.eq{display:grid;grid-template-columns:76px 1fr;gap:6px 12px;align-items:center;margin-top:12px;font-size:13.5px}
+.eq .lbl{font-weight:600}
+.eq .bars{display:flex;flex-direction:column;gap:4px}
+.eq .b{height:18px;border-radius:2px;display:flex;align-items:center;padding-left:6px;font-size:12.5px;font-weight:600;white-space:nowrap;font-variant-numeric:tabular-nums}
+.eq .b.ghost{border:1.5px dashed var(--ink-3);color:var(--ink-2)}
+.eq .b.now{color:#fff;min-width:max-content;padding-right:8px}
+.three{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:6px}
+.three>div{border-top:3px solid var(--ink);padding-top:8px}
+.three .big{font:700 24px/1.1 var(--serif);font-variant-numeric:tabular-nums}
+.three .big.neg{color:var(--loss)} .three .big.pos{color:var(--gain)}
+.three small{display:block;font-size:12.5px;color:var(--ink-2);line-height:1.35;margin-top:4px}
+.gaps{display:flex;flex-direction:column;gap:12px;margin-top:10px}
+.gap-l{font-size:13px;font-weight:600;margin-bottom:3px}
+.gap-b{height:30px;border-radius:3px;background:var(--loss);color:#fff;font-size:12.5px;font-weight:600;display:flex;align-items:center;padding:0 8px;white-space:nowrap}
+.gap-s{font-size:12.5px;color:var(--ink-2);margin-top:3px}
+blockquote{margin:0 0 12px;padding-left:12px;border-left:3px solid var(--lv);font-size:15px;line-height:1.45}
+blockquote cite{display:block;font-style:normal;font-size:12.5px;color:var(--ink-3);margin-top:3px}
+.card footer{padding:14px 20px 18px;border-top:1.5px solid var(--ink);font-size:12.5px;color:var(--ink-3);line-height:1.45}
+
+details{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:2px 16px;margin-top:10px}
+summary{cursor:pointer;font-weight:600;padding:12px 0;min-height:44px}
+details p,details li{font-size:14.5px;color:var(--ink-2);max-width:74ch}
+details ul,details ol{padding-left:20px;margin:0 0 12px}
+@media (prefers-reduced-motion:reduce){.bar,.tip{transition:none}}
+
+.top .eyebrow{font:600 13px var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--lv);margin:0 0 8px}
+.top h1{max-width:26ch}
+.meta{font-size:13.5px;color:var(--ink-3);margin-top:10px}
+.toc{display:flex;flex-wrap:wrap;gap:6px 6px;margin-top:18px}
+.toc a{display:inline-flex;align-items:center;line-height:1.2;white-space:nowrap;font-size:13.5px;text-decoration:none;color:var(--ink-2);border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 12px;min-height:32px}
+.toc a:hover{border-color:var(--lv);color:var(--lv)}
+.prose{font-family:var(--serif);font-size:17.5px;line-height:1.7;max-width:70ch}
+.prose h3{font-size:19px;margin:26px 0 8px}
+.prose p{margin:0 0 1em}
+.prose li{margin-bottom:.5em}
+.prose a.cite{text-decoration:none;border-bottom:1px dotted var(--ink-3);color:inherit}
+.prose a.cite:hover{color:var(--lv);border-bottom-color:var(--lv)}
+.abstract{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px 18px;font-family:var(--serif);font-size:16.5px;line-height:1.65;max-width:72ch}
+.abstract p{margin:0 0 .8em}.abstract .kw{margin:0;font-size:15px;color:var(--ink-2)}
+.plain{margin-top:14px;border-left:5px solid var(--lv);background:var(--surface);border-radius:0 10px 10px 0;padding:12px 16px;max-width:72ch}
+.plain h3{font-size:17px;margin-bottom:6px}.plain p{margin:0;font-size:15.5px;color:var(--ink-2)}
+.h3{font-family:var(--serif);font-size:20px;margin:30px 0 6px}
+figure{margin:22px 0 0}
+.fig-title{font:600 15px var(--sans);color:var(--ink);margin-bottom:8px}
+.fonte{font-size:12.5px;color:var(--ink-3);margin:8px 0 0}
+table.tab{min-width:640px;font-size:13.5px;margin-top:22px}
+table.tab caption{caption-side:top;text-align:left;font:600 15px var(--sans);color:var(--ink);padding-bottom:8px}
+table.tab th,table.tab td{padding:7px 9px}
+.refs-list{list-style:none;padding:0;margin:0;font-size:14.5px;color:var(--ink-2);max-width:78ch}
+.refs-list li{margin:0 0 10px;padding-left:2.2em;text-indent:-2.2em;line-height:1.5}
+.note{font-size:13px;color:var(--ink-3);max-width:78ch}
+.srclist{font-size:13.5px;color:var(--ink-2);max-width:78ch;padding-left:2em}
+.srclist li{margin-bottom:6px}
+.cite-box{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px;font-size:14.5px;max-width:78ch;word-break:break-word}
+.ctl-row{margin-top:0}
+figure+.prose,.fonte+.prose{margin-top:20px}
+.tablewrap+.fonte{margin-bottom:6px}
+@media print{.controls,.toc,.btn{display:none!important}body{background:#fff}.panel,.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+<header class="pbar"><a href="../projects.html" class="pback">← Projetos</a><a href="../index.html" class="plogo">Gustavo Paccelli</a></header>
+<div class="wrap">
+
+<header class="top">
+  <p class="eyebrow">Levantamento de dados e divulgação científica</p>
+  <h1>Quanto vale a bolsa? Valores e reajustes das bolsas CAPES e CNPq, 1994–2026</h1>
+  <p class="lead">Série mensal dos valores das bolsas de mestrado, doutorado e iniciação científica, com reajustes por governo, poder de compra pelo IPCA e razão ao salário mínimo.</p>
+  <p class="meta">Versão 2.0 · atualizada em 19/10/2026 · dados de inflação até <span id="lastMonth"></span><span id="byline"></span></p>
+  <nav class="toc" aria-label="Sumário">
+    <a href="#resumo">Resumo</a><a href="#intro">1 Introdução</a><a href="#metodos">2 Material e métodos</a><a href="#resultados">3 Resultados</a><a href="#discussao">4 Discussão</a><a href="#lacuna">5 O período 1985–1994</a><a href="#limites">6 Limites e pontos em aberto</a><a href="#referencias">Referências</a><a href="#citar">Como citar</a>
+  </nav>
+</header>
+
+<section id="resumo" aria-labelledby="h-resumo">
+  <h2 id="h-resumo">Resumo</h2>
+  <div class="abstract">
+    <p>Este levantamento reconstrói a série mensal dos valores das bolsas de mestrado, doutorado e iniciação científica pagas pela CAPES e pelo CNPq entre jul/1994 e set/2026, a partir de atos oficiais, relatórios de gestão e documentos secundários classificados por grau de confiança. Os valores nominais foram deflacionados pelo IPCA/IBGE e comparados ao salário mínimo. O valor nominal do mestrado passou de R$ 724,52 para R$ 2.100,00 (190%), mas o poder de compra diminuiu cerca de 66% e a razão ao salário mínimo foi de 11,2 para 1,3. A série registra dois períodos de quase dez anos sem reajuste (jul/1994 a mar/2004; abr/2013 a fev/2023). O período de 1985 a 1994 não é contabilizado, por razões documentais e de comparabilidade monetária discutidas na seção 5. O texto situa os resultados na literatura sobre financiamento da pós-graduação e dos seus efeitos, sem estimar efeitos causais dos valores brasileiros.</p>
+    <p class="kw"><strong>Palavras-chave:</strong> bolsas de pós-graduação; CAPES; CNPq; financiamento da pesquisa; poder de compra; série histórica; política científica.</p>
+  </div>
+  <aside class="plain" aria-label="Em linguagem simples">
+    <h3>Em linguagem simples</h3>
+    <p>Quem faz mestrado ou doutorado no Brasil costuma receber uma bolsa mensal da CAPES ou do CNPq, e quem faz iniciação científica na graduação recebe do CNPq. Esse valor só muda quando o governo publica uma portaria. Enquanto ela não sai, os preços sobem e a bolsa compra menos. Esta página reúne todos os valores e reajustes desde o Plano Real (1994), mostra quanto cada um valia em dinheiro de hoje e quantos salários mínimos representava. O resultado: a bolsa de mestrado, que equivalia a 11,2 salários mínimos em 1994, equivale a 1,3 hoje.</p>
+  </aside>
+</section>
+
+<section id="intro" aria-labelledby="h-intro">
+  <h2 id="h-intro">1 Introdução</h2>
+  <div class="prose">
+    <p>As bolsas de estudo são um dos principais mecanismos pelos quais os sistemas nacionais de pós-graduação sustentam a dedicação de estudantes à pesquisa. No Brasil, a CAPES e o CNPq, criados em 1951, financiam e avaliam a formação de pesquisadores desde então (<a class="cite" href="#ref-guimaraes">GUIMARÃES; ALMEIDA, 2012</a>; <a class="cite" href="#ref-barreto">DE SÁ BARRETO; DOMINGUES; BORGES, 2014</a>). Estudos econométricos para o período 1994–2014 identificam o número de programas de pós-graduação como a variável que mais explica a produção brasileira de artigos científicos (<a class="cite" href="#ref-hayne">HAYNE; WYSE, 2018</a>), e uma função de produção de conhecimento estimada para universidades brasileiras entre 2003 e 2011 associa a produção científica, entre outros fatores, à razão entre docentes e pós-graduandos e ao total investido em pesquisa e em seu apoio (<a class="cite" href="#ref-duarte">DUARTE et al., 2020</a>).</p>
+    <p>Fora do Brasil, uma literatura empírica relaciona o tipo de apoio financeiro a resultados da formação doutoral. Em dados de uma universidade norte-americana, estudantes com <em>fellowships</em> ou assistências de pesquisa apresentaram taxas de conclusão mais altas e menor tempo até o título do que os sustentados por assistência de ensino, dispensa de mensalidades ou recursos próprios (<a class="cite" href="#ref-ehrenberg">EHRENBERG; MAVROS, 1992</a>). Resultado compatível aparece em uma coorte da Université libre de Bruxelles, na qual bolsas de pesquisa se associam a maior probabilidade de conclusão (<a class="cite" href="#ref-haert">VAN DER HAERT et al., 2014</a>). Em Portugal, doutores que tiveram bolsa durante o doutorado apresentam melhor desempenho de pesquisa ao longo da carreira do que os autofinanciados (<a class="cite" href="#ref-horta18">HORTA; CATTANEO; MEOLI, 2018</a>), e o efeito do financiamento sobre o tempo de conclusão depende de o estudante publicar durante o curso (<a class="cite" href="#ref-horta19">HORTA; CATTANEO; MEOLI, 2019</a>). Comparando contemplados e menções honrosas do programa de bolsas da National Science Foundation, nos Estados Unidos, <a class="cite" href="#ref-graddy">Graddy-Reed, Lanahan e D’Agostino (2021)</a> encontram efeitos positivos sobre conclusão, inserção em pós-doutorado ou carreira de pesquisa e produtividade. O estudo clássico de <a class="cite" href="#ref-bowen">Bowen e Rudenstine (1992)</a> já tratava da relação entre tipo de apoio financeiro, conclusão e tempo até o título em grandes universidades norte-americanas. Os efeitos não são uniformes: cortes húngaros em bolsas de doutorado aumentaram em cerca de 1 ponto percentual a chance de conclusão, mas reduziram de modo persistente a entrada de mulheres e de estudantes de primeira geração universitária (<a class="cite" href="#ref-rossello">ROSSELLO, 2025</a>).</p>
+    <p>Para o Brasil, <a class="cite" href="#ref-helene">Helene e Xavier (2006)</a> estimaram que, entre 1994 e 2004, as bolsas de pós-graduação da CAPES e do CNPq perderam cerca de 60% do poder de compra e que o investimento da CAPES em bolsas, corrigido pela inflação, diminuiu 51% entre 1995 e 2004 (<a class="cite" href="#ref-helene">HELENE; XAVIER, 2006</a>). <a class="cite" href="#ref-jardim">Jardim (2020)</a>, ao avaliar a Meta 14 do Plano Nacional de Educação com dados da CAPES, do CNPq e do IBGE, aponta a relevância da concessão de bolsas para a taxa de titulação e a necessidade de ampliar o financiamento da pós-graduação (<a class="cite" href="#ref-jardim">JARDIM, 2020</a>).</p>
+    <p>A relação entre a formação de pesquisadores e benefícios sociais mais amplos é tratada por uma literatura sobre retornos do investimento em pesquisa. Em regiões periféricas da União Europeia, o investimento em pesquisa e desenvolvimento do setor de ensino superior associa-se positivamente à inovação, mas a intensidade dessa associação depende de características socioeconômicas de cada região (<a class="cite" href="#ref-bilbao">BILBAO-OSORIO; RODRÍGUEZ-POSE, 2004</a>). A transposição desses resultados ao caso brasileiro exige cautela: os estudos citados medem contextos, indicadores e períodos distintos, e nenhum dos que localizei estima o retorno social das bolsas brasileiras.</p>
+    <p>Apesar da importância atribuída às bolsas, não localizei, nas buscas realizadas, uma série pública, mensal e documentada dos seus valores e reajustes, com data de vigência e fonte para cada degrau, que cubra o período do Plano Real aos dias atuais. Séries anuais disponíveis, como a do Instituto Questão de Ciência (IQC), diferem das datas registradas em documentos da CAPES (seção 6). Este levantamento procura preencher essa lacuna descritiva. Ele não mede efeitos das bolsas sobre desfechos: fornece o insumo, o valor real pago ao longo do tempo, que qualquer análise desse tipo precisa. Os objetivos são (i) reconstruir a série de valores de jul/1994 a set/2026; (ii) descrever os reajustes por governo, em termos nominais e reais; e (iii) documentar o grau de confiança de cada dado e as razões do recorte temporal.</p>
+  </div>
+</section>
+
+<section id="metodos" aria-labelledby="h-met">
+  <h2 id="h-met">2 Material e métodos</h2>
+  <div class="prose">
+    <h3>2.1 Fontes e classificação dos dados</h3>
+    <p>Os valores e as datas de vigência foram obtidos em atos oficiais (Portaria Conjunta CAPES/CNPq nº 1/2013 e Portaria CAPES nº 33/2023, lidas no Catálogo de Atos Administrativos da CAPES), em relatórios de gestão da CAPES (2004 e 2006), em páginas oficiais de valores da CAPES e do CNPq e, quando o ato não estava acessível, em reportagens e notas de universidades com valores concordantes entre si. Cada reajuste recebe uma de três classificações: <strong>oficial</strong> (ato ou documento oficial lido), <strong>imprensa ou entidade</strong> (fontes secundárias concordantes) e <strong>parcial ou estimado</strong> (informação incompleta ou data de vigência não confirmada). A busca bibliográfica da introdução não foi sistemática: priorizei estudos empíricos com desenho identificável e panoramas do sistema brasileiro, localizados em bases de metadados e confirmados por DOI no Crossref em 19/10/2026; as sínteses dos estudos se baseiam nos seus resumos.</p>
+    <h3>2.2 Deflação e salário mínimo</h3>
+    <p>O poder de compra no mês <em>m</em> é o valor nominal vigente multiplicado pelo IPCA acumulado até set/2026 e dividido pelo IPCA acumulado até o fim de <em>m</em>, de modo que todos os valores reais estão em reais de set/2026. A série mensal do IPCA vem do Sistema Gerenciador de Séries Temporais do Banco Central (série 433, dados do IBGE) e, para 1985–1994, do SIDRA/IBGE (tabela 1737); conferi jan, mar e jun/1994, meses em que as duas séries se sobrepõem e os valores coincidem. O salário mínimo vem da série 1619 do Banco Central, e a razão ao salário mínimo é o valor da bolsa dividido pelo mínimo vigente no mês.</p>
+    <h3>2.3 Unidade de análise</h3>
+    <p>Os reajustes são agrupados por mandato presidencial: Itamar Franco (apenas jul–dez/1994), Fernando Henrique Cardoso (dois mandatos), Lula (três mandatos), Dilma Rousseff (até ago/2016), Michel Temer (a partir de set/2016) e Jair Bolsonaro. A variação nominal do mandato é o valor final dividido pelo inicial, menos 1. A variação real mede a mesma razão com os dois valores deflacionados para a mesma data, do 1º dia do primeiro mês ao fim do último. O agrupamento é descritivo: o valor real de um mandato depende do número, da magnitude e da data dos reajustes, mas também da inflação do período e do valor herdado, e não permite atribuir a um governo, isoladamente, a trajetória observada.</p>
+    <h3>2.4 Reprodutibilidade</h3>
+    <p>As duas tabelas de dados (reajustes e série mensal) podem ser baixadas em CSV ao fim da seção 3. Todas as fontes têm link na lista de fontes dos dados.</p>
+  </div>
+</section>
+
+<section id="resultados" aria-labelledby="h-res">
+  <h2 id="h-res">3 Resultados</h2>
+  <div class="prose">
+    <p>Entre jul/1994 e set/2026, o valor nominal da bolsa de mestrado subiu 190% (de R$ 724,52 a R$ 2.100,00), enquanto o IPCA acumulou 740% no mesmo intervalo. Em termos reais, o mestrado perdeu 65,5% do poder de compra, e passou de 11,2 para 1,3 salários mínimos. O doutorado segue trajetória análoga, e a iniciação científica, cuja série é mais curta, pode ser vista na mesma figura (Figura 1). Há dois períodos longos sem reajuste: de jul/1994 a fev/2004 (9 anos e 8 meses; IPCA de 147%, com perda real de 59,5% no mestrado) e de abr/2013 a jan/2023 (9 anos e 10 meses; IPCA de 76% e perda real de 43,3%). Os reajustes concentram-se em 2004–2013 e em 2023.</p>
+  </div>
+
+  <div class="controls">
+    <div class="ctl-row">
+      <div class="seg" id="seg" role="tablist" aria-label="Nível de bolsa"></div>
+      <div class="seg mode" id="mode" role="tablist" aria-label="Unidade do gráfico"></div>
+    </div>
+    <p class="seg-note" id="segNote"></p>
+  </div>
+
+  <figure>
+    <figcaption class="fig-title">Figura 1. Valor mensal da bolsa, jul/1994 a set/2026.</figcaption>
+    <p class="sub" id="chartSub"></p>
+    <div class="panel">
+      <div class="legend" id="legend"></div>
+      <div class="chart" id="chart1"><div class="tip" id="tip" role="status"></div></div>
+      <div class="gov-legend" id="govLegend"></div>
+      <dl class="facts" id="facts"></dl>
+    </div>
+    <p class="fonte">Fonte: elaboração própria a partir de CAPES, CNPq, IBGE e Banco Central (ver fontes dos dados).</p>
+  </figure>
+
+  <div class="prose">
+    <p>A Figura 2 e a Tabela 1 apresentam, por governo, o reajuste nominal e a variação real. No mestrado, a variação real do mandato foi positiva em Lula 1 (+1,2%), Lula 2 (+4,5%) e Lula 3 (+17,8%) e negativa nos demais, com os maiores recuos em FHC 1 (−30,3%), FHC 2 (−28,5%) e Bolsonaro (−21,2%), mandatos sem reajuste nominal. Lula 3 está em curso e tem um único reajuste, em fev/2023, desde então corroído pela inflação (+17,3% até set/2026). O resultado de cada mandato deve ser lido com as ressalvas da seção 2.3.</p>
+  </div>
+
+  <figure>
+    <figcaption class="fig-title">Figura 2. Reajuste nominal e variação real por governo.</figcaption>
+    <div class="panel">
+      <div class="cols">
+        <div><h3>Reajuste nominal</h3><ul class="rows" id="rowsNom"></ul></div>
+        <div><h3>Variação real (IPCA)</h3><ul class="rows" id="rowsReal"></ul></div>
+      </div>
+    </div>
+    <p class="fonte">Fonte: elaboração própria. Sarney e Collor: ver seção 5.</p>
+  </figure>
+
+  <div class="tablewrap"><table class="tab"><caption>Tabela 1. Reajuste por governo, mestrado e doutorado: variação nominal e real do 1º dia do primeiro mês ao fim do último mês do mandato.</caption><thead><tr><th>Governo</th><th>Período</th><th>Reajustes</th><th>Mestrado<br>nominal</th><th>Mestrado<br>real</th><th>Doutorado<br>nominal</th><th>Doutorado<br>real</th><th>IPCA no<br>mandato</th></tr></thead><tbody><tr><td>Itamar Franco</td><td>jul–dez/1994 (Plano Real)</td><td class="n">0</td><td class="n">0,0%</td><td class="n">−15,7%</td><td class="n">0,0%</td><td class="n">−15,7%</td><td class="n">+18,6%</td></tr><tr><td>FHC 1</td><td>1995–1998</td><td class="n">0</td><td class="n">0,0%</td><td class="n">−30,3%</td><td class="n">0,0%</td><td class="n">−30,3%</td><td class="n">+43,5%</td></tr><tr><td>FHC 2</td><td>1999–2002</td><td class="n">0</td><td class="n">0,0%</td><td class="n">−28,5%</td><td class="n">0,0%</td><td class="n">−28,5%</td><td class="n">+39,9%</td></tr><tr><td>Lula 1</td><td>2003–2006</td><td class="n">2</td><td class="n">+29,7%</td><td class="n">+1,2%</td><td class="n">+29,9%</td><td class="n">+1,3%</td><td class="n">+28,2%</td></tr><tr><td>Lula 2</td><td>2007–2010</td><td class="n">1</td><td class="n">+27,7%</td><td class="n">+4,5%</td><td class="n">+29,1%</td><td class="n">+5,7%</td><td class="n">+22,2%</td></tr><tr><td>Dilma 1</td><td>2011–2014</td><td class="n">2</td><td class="n">+25,0%</td><td class="n">−1,6%</td><td class="n">+22,2%</td><td class="n">−3,8%</td><td class="n">+27,0%</td></tr><tr><td>Dilma 2</td><td>2015–ago/2016</td><td class="n">0</td><td class="n">0,0%</td><td class="n">−14,3%</td><td class="n">0,0%</td><td class="n">−14,3%</td><td class="n">+16,7%</td></tr><tr><td>Temer</td><td>set/2016–2018</td><td class="n">0</td><td class="n">0,0%</td><td class="n">−7,1%</td><td class="n">0,0%</td><td class="n">−7,1%</td><td class="n">+7,7%</td></tr><tr><td>Bolsonaro</td><td>2019–2022</td><td class="n">0</td><td class="n">0,0%</td><td class="n">−21,2%</td><td class="n">0,0%</td><td class="n">−21,2%</td><td class="n">+26,9%</td></tr><tr><td>Lula 3</td><td>2023–set/2026 (em curso)</td><td class="n">1</td><td class="n">+40,0%</td><td class="n">+17,8%</td><td class="n">+40,9%</td><td class="n">+18,5%</td><td class="n">+18,9%</td></tr></tbody></table></div>
+  <p class="fonte">Fonte: elaboração própria. IC omitida por confirmação parcial da série.</p>
+
+  <h3 class="h3">Tabela 2. Cada reajuste, com fonte e grau de confiança</h3>
+  <p class="sub">Etiqueta verde: ato ou documento oficial lido. Azul: imprensa, universidade ou entidade, com valores concordantes. Amarela: informação parcial ou data de vigência não confirmada. Os números entre colchetes remetem à lista de fontes dos dados.</p>
+  <div class="panel">
+    <div class="tablewrap"><table id="evt"></table></div>
+    <button class="btn" id="csv" type="button">Baixar reajustes (CSV)</button>
+    <button class="btn" id="csvm" type="button">Baixar série mensal (CSV)</button>
+  </div>
+
+  <h3 class="h3">Card para compartilhar</h3>
+  <p class="sub">Síntese visual dos resultados, com os números calculados nesta página. As falas citadas são posições de cada parte, atribuídas à fonte.</p>
+  <article class="card" id="card"></article>
+</section>
+
+<section id="discussao" aria-labelledby="h-dis">
+  <h2 id="h-dis">4 Discussão</h2>
+  <div class="prose">
+    <p>A série mostra que o valor nominal e o poder de compra seguem trajetórias distintas. O primeiro muda em degraus, a cada portaria. O segundo diminui continuamente entre uma portaria e outra, à taxa da inflação, e só se recompõe, em parte, quando há reajuste. Esse mecanismo é aritmético e independe de juízo de valor: com valor fixo em reais, cada ponto percentual de inflação reduz proporcionalmente o que a bolsa compra.</p>
+    <p>O cálculo aqui apresentado converge com a estimativa de <a class="cite" href="#ref-helene">Helene e Xavier (2006)</a>. Entre jul/1994 e fev/2004, a perda real do mestrado foi de 59,5%, contra os cerca de 60% que os autores estimaram para 1994–2004 com outro procedimento (<a class="cite" href="#ref-helene">HELENE; XAVIER, 2006</a>). A convergência dá suporte à série, embora não seja uma validação independente completa, porque os dois cálculos partem do mesmo valor nominal congelado. Também conferi o resultado com duas referências da imprensa: o mestrado de mai/1995 equivale a 7,2 salários mínimos (reportagem do Estadão, com dados da ANPG, cita “mais de 7”) e o de 2022, a 1,24 (a mesma reportagem cita 1,2).</p>
+    <p>A literatura da introdução sugere por que a trajetória importa, mas não permite quantificar seu efeito no Brasil. Estudos em outros países relacionam o tipo de apoio financeiro à conclusão, ao tempo até o título e ao desempenho de pesquisa (<a class="cite" href="#ref-ehrenberg">EHRENBERG; MAVROS, 1992</a>; <a class="cite" href="#ref-horta18">HORTA; CATTANEO; MEOLI, 2018</a>; <a class="cite" href="#ref-haert">VAN DER HAERT et al., 2014</a>), e mostram que reduções de bolsas podem ter efeitos distributivos, como a menor entrada de grupos sub-representados (<a class="cite" href="#ref-rossello">ROSSELLO, 2025</a>). No contexto brasileiro, a produção científica se associa ao tamanho do sistema de pós-graduação (<a class="cite" href="#ref-hayne">HAYNE; WYSE, 2018</a>; <a class="cite" href="#ref-duarte">DUARTE et al., 2020</a>). Se a perda de poder de compra das bolsas afetou conclusão, permanência ou composição social dos pós-graduandos no Brasil é uma questão empírica em aberto, que esta série permite formular com melhor precisão e não responde. Respondê-la exigiria dados individuais de bolsistas (por exemplo, da Plataforma Sucupira e do Currículo Lattes) e um delineamento capaz de separar o efeito do valor de outros fatores, como a oferta de bolsas, o ciclo econômico e as mudanças nas regras de acúmulo.</p>
+    <p>Além disso, o valor é apenas uma dimensão do financiamento. <a class="cite" href="#ref-helene">Helene e Xavier (2006)</a> tratam tanto do valor quanto do número de bolsas, e esta série não traz a cobertura (quantos estudantes recebem bolsa). Ficam de fora, ainda, as agências estaduais, cujos valores próprios podem diferir dos da CAPES e do CNPq, como mostra a série do IQC para a FAPESP.</p>
+  </div>
+</section>
+
+<section id="lacuna" aria-labelledby="h-lac">
+  <h2 id="h-lac">5 O período 1985–1994: por que não é contabilizado</h2>
+  <div class="prose">
+    <p>Esta página começa em jul/1994, não na redemocratização (1985). A decisão tem dois fundamentos, um documental e outro metodológico, e não significa que o período seja irrelevante para a história das bolsas.</p>
+    <h3>5.1 Fundamento documental</h3>
+    <p>O Relatório de Gestão da CAPES de 2004 afirma que os valores das bolsas no país “não eram corrigidos desde 1994” e fala em dez anos de congelamento, com os valores de R$ 724,52 (mestrado) e R$ 1.072,89 (doutorado) vigentes desde então. Não localizei, em fonte verificável, os valores mensais pagos entre 1985 e o início do Plano Real. A série do IQC começa em 1995; o Centro de Memória do CNPq publica, para 1985–1995, quantidades de bolsas-ano e não mensalidades; e os relatórios de gestão da CAPES disponíveis no portal, pelo endereço que testei, começam em 2001. Sem o ato que fixou cada valor e a data da sua vigência, qualquer número para esse período seria estimativa sem lastro.</p>
+    <h3>5.2 Fundamento metodológico: comparabilidade monetária</h3>
+    <p>Mesmo com os valores em mãos, a conversão em poder de compra comparável ao de 1994–2026 seria problemática. Entre 1980 e 1994, a inflação brasileira superou, em média, 100% ao ano (<a class="cite" href="#ref-ayres">AYRES et al., 2019</a>). O período teve sucessivos planos de estabilização, com congelamento de preços e salários (<a class="cite" href="#ref-cardoso">CARDOSO; DORNBUSCH, 1987</a>), e uma fragmentação progressiva da moeda (<a class="cite" href="#ref-saad">SAAD-FILHO; MOLLO, 2002</a>). Antes do Real, os valores estavam expressos em moedas diferentes (cruzado, cruzado novo, cruzeiro e cruzeiro real), e o real foi instituído em 1º/07/1994 como equivalente a CR$ 2.750.</p>
+    <p>A Tabela 3 quantifica o problema com o IPCA do IBGE. O índice acumulou 2.477% em 1993, e a mediana da variação mensal foi de 30,5% em 1993 e de 42,7% no primeiro semestre de 1994, contra 0,5% ao mês entre jul/1994 e set/2026. Nesse regime, um erro de um único mês na data de vigência, ou na diferença entre o mês de competência e o de pagamento, altera em torno de 30% a 43% o valor real estimado; no período posterior ao Real, o mesmo erro altera menos de 1%. Entre jan/1985 e jun/1994, os preços medidos pelo IPCA multiplicaram-se por aproximadamente 1,7 bilhão de vezes. A incerteza sobre a data exata de cada reajuste, que na série posterior a 1994 é de pouca consequência, passaria a dominar o resultado.</p>
+    <div class="tablewrap"><table class="tab"><caption>Tabela 3. IPCA, 1985 a jun/1994 (IBGE): inflação acumulada no ano e dispersão da variação mensal.</caption><thead><tr><th>Ano</th><th>Meses</th><th>IPCA acumulado</th><th>Variação mensal (mín.–máx.)</th><th>Mediana mensal</th></tr></thead><tbody><tr><td>1985</td><td class="n">12</td><td class="n">242%</td><td class="n">7,2% a 15,1%</td><td class="n">10,7%</td></tr><tr><td>1986</td><td class="n">12</td><td class="n">80%</td><td class="n">0,8% a 14,4%</td><td class="n">2,7%</td></tr><tr><td>1987</td><td class="n">12</td><td class="n">363%</td><td class="n">4,9% a 21,4%</td><td class="n">13,7%</td></tr><tr><td>1988</td><td class="n">12</td><td class="n">980%</td><td class="n">15,7% a 28,7%</td><td class="n">21,8%</td></tr><tr><td>1989</td><td class="n">12</td><td class="n">1.973%</td><td class="n">6,8% a 51,5%</td><td class="n">31,2%</td></tr><tr><td>1990</td><td class="n">12</td><td class="n">1.621%</td><td class="n">7,6% a 82,4%</td><td class="n">15,0%</td></tr><tr><td>1991</td><td class="n">12</td><td class="n">473%</td><td class="n">5,0% a 25,2%</td><td class="n">15,6%</td></tr><tr><td>1992</td><td class="n">12</td><td class="n">1.119%</td><td class="n">19,9% a 25,9%</td><td class="n">23,4%</td></tr><tr><td>1993</td><td class="n">12</td><td class="n">2.477%</td><td class="n">25,0% a 36,8%</td><td class="n">30,5%</td></tr><tr><td>1994 (jan–jun)</td><td class="n">6</td><td class="n">757%</td><td class="n">40,3% a 47,4%</td><td class="n">42,7%</td></tr></tbody></table></div>
+    <p class="fonte">Fonte: IBGE, SIDRA, tabela 1737. Cálculo próprio: acumulado = produto de (1 + variação mensal).</p>
+    <h3>5.3 Implicações</h3>
+    <p>Por esses dois motivos, optei por não imputar valores nem apresentar números reais para 1985–1994, em vez de apresentar uma precisão que os dados não sustentam. Nas figuras, Sarney, Collor e a maior parte de Itamar aparecem como “sem série verificada”. A conclusão da seção 3 sobre os dois períodos de congelamento vale para o recorte observado, e não para a história anterior das bolsas. Estudos com o período 1985–1994 devem ser lidos como lacuna, e não como ausência de reajustes.</p>
+    <h3>5.4 Protocolo para estender a série</h3>
+    <ol>
+      <li>Obter os atos que fixaram valores de bolsas de mestrado, doutorado e IC (portarias da CAPES, resoluções normativas do CNPq) no Diário Oficial da União, nos relatórios de atividades de CAPES e CNPq e na Memória CAPES, ou por pedido de acesso à informação (Fala.BR).</li>
+      <li>Registrar, para cada ato, a moeda, o valor, a data de publicação e a data de efeitos financeiros.</li>
+      <li>Converter os valores para a moeda de cada período e, em seguida, para reais, com os fatores previstos na legislação de cada troca monetária.</li>
+      <li>Deflacionar com o IPCA mensal do IBGE (tabela 1737 do SIDRA), usando a mesma convenção de mês desta série.</li>
+      <li>Testar a sensibilidade do resultado a erros de ±1 mês na data de vigência, que no período 1985–1994 equivalem a variações de dezenas de pontos percentuais.</li>
+      <li>Classificar cada ponto pelo mesmo critério de confiança desta página e publicar as fontes.</li>
+    </ol>
+  </div>
+</section>
+
+<section id="limites" aria-labelledby="h-lim">
+  <h2 id="h-lim">6 Limites e pontos em aberto</h2>
+  <div class="prose">
+    <ul>
+      <li><strong>Datas de 2005–2006 da versão anterior, corrigidas.</strong> O reajuste de 18% foi concedido em 26/04/2004, retroativo a março (Relatório de Gestão da CAPES 2004), e o de cerca de 10%, em jul/2006 (Relatório de Gestão 2006). A série anual do IQC mostra R$ 855 em 2006 e R$ 940 em 2007, o que não coincide com esses documentos; usei os documentos da CAPES.</li>
+      <li><strong>Reajuste de 2008 (jun/2008).</strong> Li o texto do anúncio do CNPq em uma republicação e a referência à RN-015/2008 (DOU de 11/06/2008) na tabela do CNPq; não li a norma. Para fechar: consultar o DOU de 11/06/2008, seção 1, p. 29.</li>
+      <li><strong>Reajuste de 2012 (jul/2012).</strong> Confirmado em reproduções do DOU em páginas de universidades e na imprensa, não na portaria. Para fechar: consultar o ato da CAPES e do CNPq publicado no DOU de jul/2012.</li>
+      <li><strong>Iniciação científica.</strong> É paga pelo CNPq (PIBIC). A série começa em jun/2004 (R$ 241,51), o valor mais antigo localizado. O R$ 300 (2005) tem como data o mês do anúncio, e o R$ 360 (mar/2010) vem de fontes secundárias. O valor pago ao bolsista pode variar conforme a universidade e a forma e o momento em que ela aplica o reajuste.</li>
+      <li><strong>Depois de fev/2023.</strong> Não encontrei reajuste. Conferi a página de valores da CAPES (modificada em 17/02/2023), a tabela do CNPq (atualizada em 17/07/2025) e reportagens de 2026 que descrevem os valores como inalterados. Valores com data de corte em set/2026.</li>
+      <li><strong>Escopo.</strong> Não incluídos: pós-doutorado, bolsas no exterior, taxas de bancada, PIBID e agências estaduais. A bibliografia da introdução não resulta de revisão sistemática.</li>
+      <li><strong>Inferência.</strong> A página descreve valores e não estima efeitos; as falas do card (ANPG, SBPC, bolsista) são posições dessas partes.</li>
+    </ul>
+  </div>
+</section>
+
+<section aria-labelledby="h-fq">
+  <h2 id="h-fq">Perguntas frequentes</h2>
+  <details><summary>O que são as bolsas de mestrado, doutorado e iniciação científica?</summary>
+    <p>São auxílios mensais pagos a estudantes que se dedicam à pesquisa. As de mestrado e doutorado são pagas pela CAPES e pelo CNPq; a de iniciação científica (PIBIC), pelo CNPq. Os valores vigentes estão fixados na Portaria CAPES nº 33/2023 e na tabela de valores do CNPq.</p></details>
+  <details><summary>Por que corrigir os valores pela inflação?</summary>
+    <p>Porque R$ 1.000 de 1994 compravam muito mais do que R$ 1.000 de hoje. Para comparar épocas, convertem-se todos os valores para o poder de compra de uma mesma data. Aqui, set/2026.</p></details>
+  <details><summary>O que significa “salários mínimos”?</summary>
+    <p>É a razão entre o valor da bolsa e o salário mínimo do mesmo mês. Mostra quanto a bolsa representa em relação a um piso salarial que é reajustado todos os anos.</p></details>
+  <details><summary>Por que a série começa em 1994?</summary>
+    <p>Porque os valores anteriores ao Plano Real não foram localizados em fonte verificável e, mesmo se fossem, a hiperinflação e as trocas de moeda impediriam uma comparação confiável. A seção 5 explica.</p></details>
+  <details><summary>Os valores são os mesmos em todo o país?</summary>
+    <p>Os da CAPES e do CNPq, sim. Agências estaduais, como a FAPESP, têm valores próprios e ficam fora deste levantamento.</p></details>
+</section>
+
+<section id="referencias" aria-labelledby="h-ref">
+  <h2 id="h-ref">Referências</h2>
+  <ul class="refs-list">
+<li id="ref-ayres">AYRES, J.; GARCIA, M.; GUILLÉN, D.; KEHOE, P. J. <em>The monetary and fiscal history of Brazil, 1960-2016</em>. Cambridge, MA: National Bureau of Economic Research, 2019. (NBER Working Paper, n. 25421). DOI: <a href="https://doi.org/10.3386/w25421">10.3386/w25421</a>.</li>
+<li id="ref-bilbao">BILBAO-OSORIO, B.; RODRÍGUEZ-POSE, A. From R&amp;D to innovation and economic growth in the EU. <em>Growth and Change</em>, v. 35, n. 4, p. 434-455, 2004. DOI: <a href="https://doi.org/10.1111/j.1468-2257.2004.00256.x">10.1111/j.1468-2257.2004.00256.x</a>.</li>
+<li id="ref-bowen">BOWEN, W. G.; RUDENSTINE, N. L. <em>In pursuit of the PhD</em>. Princeton: Princeton University Press, 1992. DOI: <a href="https://doi.org/10.1515/9781400862474">10.1515/9781400862474</a>.</li>
+<li id="ref-cardoso">CARDOSO, E.; DORNBUSCH, R. <em>Brazil's tropical plan</em>. Cambridge, MA: National Bureau of Economic Research, 1987. (NBER Working Paper, n. 2142). DOI: <a href="https://doi.org/10.3386/w2142">10.3386/w2142</a>.</li>
+<li id="ref-barreto">DE SÁ BARRETO, F. C.; DOMINGUES, I.; BORGES, M. N. The Brazilian National Graduate Program, past, present and future: a short review. <em>Policy Futures in Education</em>, v. 12, n. 5, p. 695-706, 2014. DOI: <a href="https://doi.org/10.2304/pfie.2014.12.5.695">10.2304/pfie.2014.12.5.695</a>.</li>
+<li id="ref-duarte">DUARTE, M. G. P. <em>et al</em>. Drivers of scientific-technological production in Brazilian higher education and research institutions. <em>Revista de Economia Contemporânea</em>, v. 24, n. 3, 2020. DOI: <a href="https://doi.org/10.1590/198055272432">10.1590/198055272432</a>.</li>
+<li id="ref-ehrenberg">EHRENBERG, R. G.; MAVROS, P. G. <em>Do doctoral students' financial support patterns affect their times-to-degree and completion probabilities?</em> Cambridge, MA: National Bureau of Economic Research, 1992. (NBER Working Paper, n. 4070). DOI: <a href="https://doi.org/10.3386/w4070">10.3386/w4070</a>.</li>
+<li id="ref-graddy">GRADDY-REED, A.; LANAHAN, L.; D'AGOSTINO, J. Training across the academy: the impact of R&amp;D funding on graduate students. <em>Research Policy</em>, v. 50, n. 5, art. 104224, 2021. DOI: <a href="https://doi.org/10.1016/j.respol.2021.104224">10.1016/j.respol.2021.104224</a>.</li>
+<li id="ref-guimaraes">GUIMARÃES, J. A.; ALMEIDA, E. C. E. Quality assurance of post-graduate education: the case of CAPES, the Brazilian Agency for Support and Evaluation of Graduate Education. <em>Higher Learning Research Communications</em>, v. 2, n. 3, 2012. DOI: <a href="https://doi.org/10.18870/hlrc.v2i3.78">10.18870/hlrc.v2i3.78</a>.</li>
+<li id="ref-hayne">HAYNE, L. A.; WYSE, A. T. S. Econometric analysis of Brazilian scientific production and comparison with BRICS. <em>Science, Technology and Society</em>, v. 23, n. 1, p. 25-46, 2018. DOI: <a href="https://doi.org/10.1177/0971721817744442">10.1177/0971721817744442</a>.</li>
+<li id="ref-helene">HELENE, A. F.; XAVIER, G. F. Financial support of graduate programs in Brazil: quo vadis? <em>Brazilian Journal of Medical and Biological Research</em>, v. 39, n. 7, p. 839-849, 2006. DOI: <a href="https://doi.org/10.1590/S0100-879X2006000700001">10.1590/S0100-879X2006000700001</a>.</li>
+<li id="ref-horta18">HORTA, H.; CATTANEO, M.; MEOLI, M. PhD funding as a determinant of PhD and career research performance. <em>Studies in Higher Education</em>, v. 43, n. 3, p. 542-570, 2018. DOI: <a href="https://doi.org/10.1080/03075079.2016.1185406">10.1080/03075079.2016.1185406</a>.</li>
+<li id="ref-horta19">HORTA, H.; CATTANEO, M.; MEOLI, M. The impact of Ph.D. funding on time to Ph.D. completion. <em>Research Evaluation</em>, v. 28, n. 2, p. 182-195, 2019. DOI: <a href="https://doi.org/10.1093/reseval/rvz002">10.1093/reseval/rvz002</a>.</li>
+<li id="ref-jardim">JARDIM, C. E. A expansão e o financiamento da pós-graduação no Brasil e a Meta 14 do Plano Nacional de Educação. <em>FINEDUCA – Revista de Financiamento da Educação</em>, v. 10, 2020. DOI: <a href="https://doi.org/10.22491/fineduca-2236-5907-v10-87919">10.22491/fineduca-2236-5907-v10-87919</a>.</li>
+<li id="ref-rossello">ROSSELLO, G. The effect on science of government cuts to doctoral scholarships. <em>Studies in Higher Education</em>, v. 51, n. 3, p. 665-683, 2025. DOI: <a href="https://doi.org/10.1080/03075079.2025.2484656">10.1080/03075079.2025.2484656</a>.</li>
+<li id="ref-saad">SAAD-FILHO, A.; MOLLO, M. de L. R. Inflation and stabilization in Brazil: a political economy analysis. <em>Review of Radical Political Economics</em>, v. 34, n. 2, p. 109-135, 2002. DOI: <a href="https://doi.org/10.1177/048661340203400201">10.1177/048661340203400201</a>.</li>
+<li id="ref-haert">VAN DER HAERT, M. <em>et al</em>. Are dropout and degree completion in doctoral study significantly dependent on type of financial support and field of research? <em>Studies in Higher Education</em>, v. 39, n. 10, p. 1885-1909, 2014. DOI: <a href="https://doi.org/10.1080/03075079.2013.806458">10.1080/03075079.2013.806458</a>.</li>
+  </ul>
+  <p class="note">Todos os DOIs foram conferidos no Crossref em 19/10/2026. A leitura dos estudos baseia-se nos seus resumos; recomenda-se consultar os textos completos antes de citar resultados específicos.</p>
+</section>
+
+<section aria-labelledby="h-fd">
+  <h2 id="h-fd">Fontes dos dados</h2>
+  <ol id="srcList" class="srclist"></ol>
+</section>
+
+<section id="citar" aria-labelledby="h-cit">
+  <h2 id="h-cit">Como citar</h2>
+  <p class="cite-box" id="citeText"></p>
+  <details><summary>Histórico de versões</summary>
+    <ul>
+      <li><strong>2.0 (19/10/2026):</strong> ampliação da série (1994–2026), texto acadêmico, seção sobre o período 1985–1994, bibliografia verificada. Correção de três datas da versão anterior: reajuste de 18% em mar/2004 (e não em 2005–2006), reajuste de 2008 em jun/2008 (e não em jul) e IC a R$ 360 em mar/2010 (e não em 2008).</li>
+      <li><strong>1.0 (16/10/2026):</strong> primeira versão, com série a partir de 2003.</li>
+    </ul>
+  </details>
+</section>
+</div>
+
+<script type="application/json" id="data">{"months": ["1994-07", "1994-08", "1994-09", "1994-10", "1994-11", "1994-12", "1995-01", "1995-02", "1995-03", "1995-04", "1995-05", "1995-06", "1995-07", "1995-08", "1995-09", "1995-10", "1995-11", "1995-12", "1996-01", "1996-02", "1996-03", "1996-04", "1996-05", "1996-06", "1996-07", "1996-08", "1996-09", "1996-10", "1996-11", "1996-12", "1997-01", "1997-02", "1997-03", "1997-04", "1997-05", "1997-06", "1997-07", "1997-08", "1997-09", "1997-10", "1997-11", "1997-12", "1998-01", "1998-02", "1998-03", "1998-04", "1998-05", "1998-06", "1998-07", "1998-08", "1998-09", "1998-10", "1998-11", "1998-12", "1999-01", "1999-02", "1999-03", "1999-04", "1999-05", "1999-06", "1999-07", "1999-08", "1999-09", "1999-10", "1999-11", "1999-12", "2000-01", "2000-02", "2000-03", "2000-04", "2000-05", "2000-06", "2000-07", "2000-08", "2000-09", "2000-10", "2000-11", "2000-12", "2001-01", "2001-02", "2001-03", "2001-04", "2001-05", "2001-06", "2001-07", "2001-08", "2001-09", "2001-10", "2001-11", "2001-12", "2002-01", "2002-02", "2002-03", "2002-04", "2002-05", "2002-06", "2002-07", "2002-08", "2002-09", "2002-10", "2002-11", "2002-12", "2003-01", "2003-02", "2003-03", "2003-04", "2003-05", "2003-06", "2003-07", "2003-08", "2003-09", "2003-10", "2003-11", "2003-12", "2004-01", "2004-02", "2004-03", "2004-04", "2004-05", "2004-06", "2004-07", "2004-08", "2004-09", "2004-10", "2004-11", "2004-12", "2005-01", "2005-02", "2005-03", "2005-04", "2005-05", "2005-06", "2005-07", "2005-08", "2005-09", "2005-10", "2005-11", "2005-12", "2006-01", "2006-02", "2006-03", "2006-04", "2006-05", "2006-06", "2006-07", "2006-08", "2006-09", "2006-10", "2006-11", "2006-12", "2007-01", "2007-02", "2007-03", "2007-04", "2007-05", "2007-06", "2007-07", "2007-08", "2007-09", "2007-10", "2007-11", "2007-12", "2008-01", "2008-02", "2008-03", "2008-04", "2008-05", "2008-06", "2008-07", "2008-08", "2008-09", "2008-10", "2008-11", "2008-12", "2009-01", "2009-02", "2009-03", "2009-04", "2009-05", "2009-06", "2009-07", "2009-08", "2009-09", "2009-10", "2009-11", "2009-12", "2010-01", "2010-02", "2010-03", "2010-04", "2010-05", "2010-06", "2010-07", "2010-08", "2010-09", "2010-10", "2010-11", "2010-12", "2011-01", "2011-02", "2011-03", "2011-04", "2011-05", "2011-06", "2011-07", "2011-08", "2011-09", "2011-10", "2011-11", "2011-12", "2012-01", "2012-02", "2012-03", "2012-04", "2012-05", "2012-06", "2012-07", "2012-08", "2012-09", "2012-10", "2012-11", "2012-12", "2013-01", "2013-02", "2013-03", "2013-04", "2013-05", "2013-06", "2013-07", "2013-08", "2013-09", "2013-10", "2013-11", "2013-12", "2014-01", "2014-02", "2014-03", "2014-04", "2014-05", "2014-06", "2014-07", "2014-08", "2014-09", "2014-10", "2014-11", "2014-12", "2015-01", "2015-02", "2015-03", "2015-04", "2015-05", "2015-06", "2015-07", "2015-08", "2015-09", "2015-10", "2015-11", "2015-12", "2016-01", "2016-02", "2016-03", "2016-04", "2016-05", "2016-06", "2016-07", "2016-08", "2016-09", "2016-10", "2016-11", "2016-12", "2017-01", "2017-02", "2017-03", "2017-04", "2017-05", "2017-06", "2017-07", "2017-08", "2017-09", "2017-10", "2017-11", "2017-12", "2018-01", "2018-02", "2018-03", "2018-04", "2018-05", "2018-06", "2018-07", "2018-08", "2018-09", "2018-10", "2018-11", "2018-12", "2019-01", "2019-02", "2019-03", "2019-04", "2019-05", "2019-06", "2019-07", "2019-08", "2019-09", "2019-10", "2019-11", "2019-12", "2020-01", "2020-02", "2020-03", "2020-04", "2020-05", "2020-06", "2020-07", "2020-08", "2020-09", "2020-10", "2020-11", "2020-12", "2021-01", "2021-02", "2021-03", "2021-04", "2021-05", "2021-06", "2021-07", "2021-08", "2021-09", "2021-10", "2021-11", "2021-12", "2022-01", "2022-02", "2022-03", "2022-04", "2022-05", "2022-06", "2022-07", "2022-08", "2022-09", "2022-10", "2022-11", "2022-12", "2023-01", "2023-02", "2023-03", "2023-04", "2023-05", "2023-06", "2023-07", "2023-08", "2023-09", "2023-10", "2023-11", "2023-12", "2024-01", "2024-02", "2024-03", "2024-04", "2024-05", "2024-06", "2024-07", "2024-08", "2024-09", "2024-10", "2024-11", "2024-12", "2025-01", "2025-02", "2025-03", "2025-04", "2025-05", "2025-06", "2025-07", "2025-08", "2025-09", "2025-10", "2025-11", "2025-12", "2026-01", "2026-02", "2026-03", "2026-04", "2026-05", "2026-06", "2026-07", "2026-08", "2026-09"], "ipca": [6.84, 1.86, 1.53, 2.62, 2.81, 1.71, 1.7, 1.02, 1.55, 2.43, 2.67, 2.26, 2.36, 0.99, 0.99, 1.41, 1.47, 1.56, 1.34, 1.03, 0.35, 1.26, 1.22, 1.19, 1.11, 0.44, 0.15, 0.3, 0.32, 0.47, 1.18, 0.5, 0.51, 0.88, 0.41, 0.54, 0.22, -0.02, 0.06, 0.23, 0.17, 0.43, 0.71, 0.46, 0.34, 0.24, 0.5, 0.02, -0.12, -0.51, -0.22, 0.02, -0.12, 0.33, 0.7, 1.05, 1.1, 0.56, 0.3, 0.19, 1.09, 0.56, 0.31, 1.19, 0.95, 0.6, 0.62, 0.13, 0.22, 0.42, 0.01, 0.23, 1.61, 1.31, 0.23, 0.14, 0.32, 0.59, 0.57, 0.46, 0.38, 0.58, 0.41, 0.52, 1.33, 0.7, 0.28, 0.83, 0.71, 0.65, 0.52, 0.36, 0.6, 0.8, 0.21, 0.42, 1.19, 0.65, 0.72, 1.31, 3.02, 2.1, 2.25, 1.57, 1.23, 0.97, 0.61, -0.15, 0.2, 0.34, 0.78, 0.29, 0.34, 0.52, 0.76, 0.61, 0.47, 0.37, 0.51, 0.71, 0.91, 0.69, 0.33, 0.44, 0.69, 0.86, 0.58, 0.59, 0.61, 0.87, 0.49, -0.02, 0.25, 0.17, 0.35, 0.75, 0.55, 0.36, 0.59, 0.41, 0.43, 0.21, 0.1, -0.21, 0.19, 0.05, 0.21, 0.33, 0.31, 0.48, 0.44, 0.44, 0.37, 0.25, 0.28, 0.28, 0.24, 0.47, 0.18, 0.3, 0.38, 0.74, 0.54, 0.49, 0.48, 0.55, 0.79, 0.74, 0.53, 0.28, 0.26, 0.45, 0.36, 0.28, 0.48, 0.55, 0.2, 0.48, 0.47, 0.36, 0.24, 0.15, 0.24, 0.28, 0.41, 0.37, 0.75, 0.78, 0.52, 0.57, 0.43, 0.0, 0.01, 0.04, 0.45, 0.75, 0.83, 0.63, 0.83, 0.8, 0.79, 0.77, 0.47, 0.15, 0.16, 0.37, 0.53, 0.43, 0.52, 0.5, 0.56, 0.45, 0.21, 0.64, 0.36, 0.08, 0.43, 0.41, 0.57, 0.59, 0.6, 0.79, 0.86, 0.6, 0.47, 0.55, 0.37, 0.26, 0.03, 0.24, 0.35, 0.57, 0.54, 0.92, 0.55, 0.69, 0.92, 0.67, 0.46, 0.4, 0.01, 0.25, 0.57, 0.42, 0.51, 0.78, 1.24, 1.22, 1.32, 0.71, 0.74, 0.79, 0.62, 0.22, 0.54, 0.82, 1.01, 0.96, 1.27, 0.9, 0.43, 0.61, 0.78, 0.35, 0.52, 0.44, 0.08, 0.26, 0.18, 0.3, 0.38, 0.33, 0.25, 0.14, 0.31, -0.23, 0.24, 0.19, 0.16, 0.42, 0.28, 0.44, 0.29, 0.32, 0.09, 0.22, 0.4, 1.26, 0.33, -0.09, 0.48, 0.45, -0.21, 0.15, 0.32, 0.43, 0.75, 0.57, 0.13, 0.01, 0.19, 0.11, -0.04, 0.1, 0.51, 1.15, 0.21, 0.25, 0.07, -0.31, -0.38, 0.26, 0.36, 0.24, 0.64, 0.86, 0.89, 1.35, 0.25, 0.86, 0.93, 0.31, 0.83, 0.53, 0.96, 0.87, 1.16, 1.25, 0.95, 0.73, 0.54, 1.01, 1.62, 1.06, 0.47, 0.67, -0.68, -0.36, -0.29, 0.59, 0.41, 0.62, 0.53, 0.84, 0.71, 0.61, 0.23, -0.08, 0.12, 0.23, 0.26, 0.24, 0.28, 0.56, 0.42, 0.83, 0.16, 0.38, 0.46, 0.21, 0.38, -0.02, 0.44, 0.56, 0.39, 0.52, 0.16, 1.31, 0.56, 0.43, 0.26, 0.24, 0.26, -0.11, 0.48, 0.09, 0.18, 0.33, 0.33, 0.7, 0.88, 0.67, 0.58, 0.16, 0.07, -0.32, 0.82], "idx": [9.159032847255393, 9.329390858214342, 9.472130538345022, 9.720300358449661, 9.993440798522096, 10.164328636176823, 10.337122222991828, 10.442560869666345, 10.604420563146174, 10.862107982830626, 11.152126265972203, 11.404164319583174, 11.673302597525337, 11.788868293240839, 11.905578089343923, 12.073446740403671, 12.250926407487604, 12.442040859444411, 12.608764206960966, 12.738634478292663, 12.783219698966688, 12.944288267173668, 13.102208584033187, 13.258124866183183, 13.405290052197817, 13.464273328427486, 13.48446973842013, 13.524923147635388, 13.568202901707823, 13.631973455345848, 13.79283074211893, 13.861794895829524, 13.932490049798256, 14.055095962236479, 14.112721855681649, 14.188930553702331, 14.220146200920476, 14.217302171680293, 14.2258325529833, 14.258551967855162, 14.282791506200516, 14.344207509677178, 14.446051382995888, 14.512503219357669, 14.561845730303485, 14.596794160056213, 14.669778130856493, 14.672712086482663, 14.655104831978884, 14.580363797335792, 14.548286996981654, 14.55119665438105, 14.533735218395792, 14.5816965446165, 14.683768420428814, 14.837947988843316, 15.00116541672059, 15.085171943054227, 15.13042745888339, 15.159175271055268, 15.324410281509769, 15.410226979086223, 15.457998682721392, 15.641948867045777, 15.790547381282712, 15.885290665570409, 15.983779467696944, 16.00455838100495, 16.039768409443163, 16.107135436762825, 16.1087461503065, 16.145796266452205, 16.405743586342087, 16.62065882732317, 16.658886342626012, 16.68220878350569, 16.73559185161291, 16.834331843537427, 16.93028753504559, 17.008166857706797, 17.072797891766083, 17.171820119538328, 17.242224582028435, 17.331884149854982, 17.562398209048055, 17.68533499651139, 17.734853934501622, 17.882053222157985, 18.00901580003531, 18.12607440273554, 18.220329989629768, 18.285923177592437, 18.39563871665799, 18.542803826391257, 18.58174371442668, 18.65978703802727, 18.881838503779797, 19.004570454054363, 19.141403361323558, 19.3921557453569, 19.977798848866676, 20.397332624692876, 20.856272608748466, 21.18371608870582, 21.444275796596898, 21.65228527182389, 21.784364211982016, 21.751687665664043, 21.795191040995373, 21.86929469053476, 22.03987518912093, 22.10379082716938, 22.178943715981756, 22.294274223304864, 22.463710707401983, 22.600739342717134, 22.706962817627904, 22.790978580053128, 22.907212570811403, 23.069853780064168, 23.279789449462754, 23.440419996664044, 23.517773382653036, 23.621251585536708, 23.784238221476908, 23.988782670181607, 24.12791760966866, 24.270272323565706, 24.418320984739456, 24.630760377306686, 24.751451103155485, 24.746500812934855, 24.80836706496719, 24.850541288977634, 24.937518183489058, 25.124549569865227, 25.262734592499488, 25.353680437032487, 25.50326715161098, 25.607830546932586, 25.717944218284394, 25.771951901142792, 25.797723853043934, 25.743548632952542, 25.792461375355153, 25.80535760604283, 25.85954885701552, 25.94488536824367, 26.02531451288523, 26.150236022547077, 26.265297061046283, 26.380864368114885, 26.47847356627691, 26.5446697501926, 26.618994825493136, 26.693528011004513, 26.757592478230922, 26.883353162878606, 26.931743198571787, 27.0125384281675, 27.115186074194536, 27.315838451143577, 27.463343978779754, 27.597914364275773, 27.730384353224295, 27.88290146716703, 28.10317638875765, 28.311139894034458, 28.461188935472844, 28.540880264492166, 28.615086553179843, 28.74385444266915, 28.84733231866276, 28.928104849155016, 29.066959752430957, 29.226828031069328, 29.285281687131466, 29.425851039229695, 29.564152539114072, 29.670583488254884, 29.741792888626694, 29.786405577959638, 29.857892951346738, 29.941495051610506, 30.06425518132211, 30.175492925493003, 30.4018091224342, 30.63894323358919, 30.798265738403856, 30.97381585311276, 31.107003261281147, 31.107003261281147, 31.110113961607276, 31.122558007191916, 31.262609518224277, 31.49707908961096, 31.75850484605473, 31.958583426584873, 32.22383966902553, 32.48163038637774, 32.738235266430124, 32.99031967798164, 33.14537418046815, 33.195092241738855, 33.248204389325636, 33.37122274556614, 33.548090226117644, 33.69234701408995, 33.86754721856322, 34.03688495465603, 34.2274915104021, 34.381515222198914, 34.45371640416553, 34.674220189152194, 34.79904738183314, 34.8268866197386, 34.976642232203474, 35.12004646535551, 35.32023073020804, 35.52862009151627, 35.741791812065365, 36.02415196738068, 36.333959674300154, 36.55196343234596, 36.72375766047798, 36.92573832761061, 37.06236355942277, 37.158725704677266, 37.16987332238867, 37.2590810183624, 37.38948780192667, 37.602607882397656, 37.8056619649626, 38.15347405504026, 38.363318162342985, 38.628025057663145, 38.98340288819365, 39.24459168754455, 39.425116809307255, 39.58281727654448, 39.58677555827214, 39.685742497167816, 39.91195122940167, 40.07958142456516, 40.28398728983045, 40.59820239069113, 41.101620100335694, 41.603059865559786, 42.15222025578518, 42.45150101960126, 42.765642127146315, 43.10349069995077, 43.37073234229046, 43.466147953443496, 43.7008651523921, 44.059212246641714, 44.50421029033279, 44.93145070911999, 45.502080133125816, 45.91159885432394, 46.10901872939753, 46.390283743646854, 46.7521279568473, 46.91576040469627, 47.1597223588007, 47.36722513717942, 47.40511891728916, 47.528372226474104, 47.61392329648176, 47.7567650663712, 47.93824077362341, 48.09643696817638, 48.21667806059681, 48.284181409881654, 48.43386237225229, 48.322464488796115, 48.43843840356922, 48.530471436536004, 48.60812019083446, 48.812274295635966, 48.94894866366374, 49.164324037783864, 49.30690057749343, 49.46468265934141, 49.50920087373481, 49.618121115657026, 49.81659360011965, 50.444282679481155, 50.61074881232345, 50.56519913839236, 50.807912094256636, 51.03654769868079, 50.929370948513565, 51.005765004936336, 51.16898345295213, 51.389010081799825, 51.77442765741333, 52.06954189506058, 52.137232299524165, 52.142446022754115, 52.24151667019735, 52.29898233853457, 52.27806274559916, 52.33034080834475, 52.597225546467314, 53.20209364025169, 53.313818036896215, 53.44710258198845, 53.48451555379584, 53.31871355557907, 53.11610244406787, 53.254204310422445, 53.44591944593997, 53.57418965261022, 53.917064466386925, 54.38075122079785, 54.86473990666294, 55.6054138954029, 55.7444274301414, 56.223829506040616, 56.7467111204468, 56.92262592492019, 57.39508372009703, 57.69927766381355, 58.25319072938616, 58.759993488731816, 59.44160941320111, 60.18462953086612, 60.756383511409354, 61.199905111042646, 61.53038459864228, 62.15184148308857, 63.158701315114605, 63.82818354905481, 64.12817601173536, 64.55783479101399, 64.11884151443509, 63.88801368498312, 63.70273844529667, 64.07858460212393, 64.34130679899263, 64.74022290114638, 65.08334608252247, 65.63004618961565, 66.09601951756193, 66.49920523661906, 66.65215340866328, 66.59883168593635, 66.67875028395947, 66.83211140961258, 67.00587489927757, 67.16668899903584, 67.35475572823313, 67.73194236031124, 68.01641651822455, 68.58095277532581, 68.69068229976634, 68.95170689250546, 69.26888474421098, 69.41434940217383, 69.67812392990209, 69.66418830511611, 69.97071073365862, 70.36254671376712, 70.63696064595081, 71.00427284130976, 71.11787967785585, 72.04952390163578, 72.45300123548495, 72.76454914079753, 72.95373696856359, 73.12882593728814, 73.31896088472509, 73.2383100277519, 73.5898539158851, 73.65608478440939, 73.78866573702133, 74.0321683339535, 74.27647448945557, 74.79640981088174, 75.4546182172175, 75.96016415927285, 76.40073311139663, 76.52297428437487, 76.57654036637392, 76.33149543720153, 76.95741369978657], "idx_prev": 8.572662717386178, "sm": [64.79, 64.79, 70.0, 70.0, 70.0, 70.0, 70.0, 70.0, 70.0, 70.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 112.0, 112.0, 112.0, 112.0, 112.0, 112.0, 112.0, 112.0, 112.0, 112.0, 112.0, 112.0, 120.0, 120.0, 120.0, 120.0, 120.0, 120.0, 120.0, 120.0, 120.0, 120.0, 120.0, 120.0, 130.0, 130.0, 130.0, 130.0, 130.0, 130.0, 130.0, 130.0, 130.0, 130.0, 130.0, 130.0, 136.0, 136.0, 136.0, 136.0, 136.0, 136.0, 136.0, 136.0, 136.0, 136.0, 136.0, 151.0, 151.0, 151.0, 151.0, 151.0, 151.0, 151.0, 151.0, 151.0, 151.0, 151.0, 151.0, 180.0, 180.0, 180.0, 180.0, 180.0, 180.0, 180.0, 180.0, 180.0, 180.0, 180.0, 180.0, 200.0, 200.0, 200.0, 200.0, 200.0, 200.0, 200.0, 200.0, 200.0, 200.0, 200.0, 200.0, 240.0, 240.0, 240.0, 240.0, 240.0, 240.0, 240.0, 240.0, 240.0, 240.0, 240.0, 240.0, 240.0, 260.0, 260.0, 260.0, 260.0, 260.0, 260.0, 260.0, 260.0, 260.0, 260.0, 260.0, 260.0, 300.0, 300.0, 300.0, 300.0, 300.0, 300.0, 300.0, 300.0, 300.0, 300.0, 300.0, 350.0, 350.0, 350.0, 350.0, 350.0, 350.0, 350.0, 350.0, 350.0, 350.0, 350.0, 350.0, 380.0, 380.0, 380.0, 380.0, 380.0, 380.0, 380.0, 380.0, 380.0, 380.0, 380.0, 415.0, 415.0, 415.0, 415.0, 415.0, 415.0, 415.0, 415.0, 415.0, 415.0, 415.0, 465.0, 465.0, 465.0, 465.0, 465.0, 465.0, 465.0, 465.0, 465.0, 465.0, 465.0, 510.0, 510.0, 510.0, 510.0, 510.0, 510.0, 510.0, 510.0, 510.0, 510.0, 510.0, 510.0, 540.0, 540.0, 545.0, 545.0, 545.0, 545.0, 545.0, 545.0, 545.0, 545.0, 545.0, 545.0, 622.0, 622.0, 622.0, 622.0, 622.0, 622.0, 622.0, 622.0, 622.0, 622.0, 622.0, 622.0, 678.0, 678.0, 678.0, 678.0, 678.0, 678.0, 678.0, 678.0, 678.0, 678.0, 678.0, 678.0, 724.0, 724.0, 724.0, 724.0, 724.0, 724.0, 724.0, 724.0, 724.0, 724.0, 724.0, 724.0, 788.0, 788.0, 788.0, 788.0, 788.0, 788.0, 788.0, 788.0, 788.0, 788.0, 788.0, 788.0, 880.0, 880.0, 880.0, 880.0, 880.0, 880.0, 880.0, 880.0, 880.0, 880.0, 880.0, 880.0, 937.0, 937.0, 937.0, 937.0, 937.0, 937.0, 937.0, 937.0, 937.0, 937.0, 937.0, 937.0, 954.0, 954.0, 954.0, 954.0, 954.0, 954.0, 954.0, 954.0, 954.0, 954.0, 954.0, 954.0, 998.0, 998.0, 998.0, 998.0, 998.0, 998.0, 998.0, 998.0, 998.0, 998.0, 998.0, 998.0, 1039.0, 1045.0, 1045.0, 1045.0, 1045.0, 1045.0, 1045.0, 1045.0, 1045.0, 1045.0, 1045.0, 1045.0, 1100.0, 1100.0, 1100.0, 1100.0, 1100.0, 1100.0, 1100.0, 1100.0, 1100.0, 1100.0, 1100.0, 1100.0, 1212.0, 1212.0, 1212.0, 1212.0, 1212.0, 1212.0, 1212.0, 1212.0, 1212.0, 1212.0, 1212.0, 1212.0, 1302.0, 1302.0, 1302.0, 1302.0, 1320.0, 1320.0, 1320.0, 1320.0, 1320.0, 1320.0, 1320.0, 1320.0, 1412.0, 1412.0, 1412.0, 1412.0, 1412.0, 1412.0, 1412.0, 1412.0, 1412.0, 1412.0, 1412.0, 1412.0, 1518.0, 1518.0, 1518.0, 1518.0, 1518.0, 1518.0, 1518.0, 1518.0, 1518.0, 1518.0, 1518.0, 1518.0, 1621.0, 1621.0, 1621.0, 1621.0, 1621.0, 1621.0, 1621.0, 1621.0, 1621.0], "levels": {"M": {"name": "Mestrado", "short": "Mestrado", "color": "#0E7490", "agency": "CAPES e CNPq", "steps": [["1994-07", 724.52, "o", [1]], ["2004-03", 855.0, "o", [1, 2]], ["2006-07", 940.0, "o", [4]], ["2008-06", 1200.0, "i", [5]], ["2012-07", 1350.0, "i", [6]], ["2013-04", 1500.0, "o", [7]], ["2023-02", 2100.0, "o", [8, 9, 10, 11]]]}, "D": {"name": "Doutorado", "short": "Doutorado", "color": "#5B4BB7", "agency": "CAPES e CNPq", "steps": [["1994-07", 1072.89, "o", [1]], ["2004-03", 1267.0, "o", [1, 2]], ["2006-07", 1394.0, "o", [4]], ["2008-06", 1800.0, "i", [5]], ["2012-07", 2000.0, "i", [6]], ["2013-04", 2200.0, "o", [7]], ["2023-02", 3100.0, "o", [8, 9, 10, 11]]]}, "IC": {"name": "Iniciação científica", "short": "IC", "color": "#B7791F", "agency": "CNPq (PIBIC)", "steps": [["2004-06", 241.51, "i", [12, 13]], ["2005-07", 300.0, "i", [13, 14]], ["2010-03", 360.0, "i", [15]], ["2012-07", 400.0, "i", [6]], ["2023-02", 700.0, "o", [9, 10]]]}}, "govs": [{"name": "Itamar Franco", "short": "It", "start": "1994-07", "end": "1994-12", "period": "jul–dez/1994 (Plano Real)"}, {"name": "FHC 1", "short": "F1", "start": "1995-01", "end": "1998-12", "period": "1995–1998"}, {"name": "FHC 2", "short": "F2", "start": "1999-01", "end": "2002-12", "period": "1999–2002"}, {"name": "Lula 1", "short": "L1", "start": "2003-01", "end": "2006-12", "period": "2003–2006"}, {"name": "Lula 2", "short": "L2", "start": "2007-01", "end": "2010-12", "period": "2007–2010"}, {"name": "Dilma 1", "short": "D1", "start": "2011-01", "end": "2014-12", "period": "2011–2014"}, {"name": "Dilma 2", "short": "D2", "start": "2015-01", "end": "2016-08", "period": "2015–ago/2016"}, {"name": "Temer", "short": "T", "start": "2016-09", "end": "2018-12", "period": "set/2016–2018"}, {"name": "Bolsonaro", "short": "B", "start": "2019-01", "end": "2022-12", "period": "2019–2022"}, {"name": "Lula 3", "short": "L3", "start": "2023-01", "end": "2026-09", "period": "2023–set/2026 (em curso)"}], "metrics": {"M": [{"gov": "Itamar Franco", "short": "It", "period": "jul–dez/1994 (Plano Real)", "start": "1994-07", "end": "1994-12", "partial": false, "start_val": 724.52, "end_val": 724.52, "nom_pct": 0.0, "infl_pct": 18.56676240816746, "real_pct": -15.659331528553654, "steps": [], "nd": false}, {"gov": "FHC 1", "short": "F1", "period": "1995–1998", "start": "1995-01", "end": "1998-12", "partial": false, "start_val": 724.52, "end_val": 724.52, "nom_pct": 0.0, "infl_pct": 43.459514804720165, "real_pct": -30.29392289795354, "steps": [], "nd": false}, {"gov": "FHC 2", "short": "F2", "period": "1999–2002", "start": "1999-01", "end": "2002-12", "partial": false, "start_val": 724.52, "end_val": 724.52, "nom_pct": 0.0, "infl_pct": 39.88312376603038, "real_pct": -28.511748016679416, "steps": [], "nd": false}, {"gov": "Lula 1", "short": "L1", "period": "2003–2006", "start": "2003-01", "end": "2006-12", "partial": false, "start_val": 724.52, "end_val": 940.0, "nom_pct": 29.741069949759847, "infl_pct": 28.20419465479409, "real_pct": 1.1987714591585652, "steps": [{"date": "2004-03", "from": 724.52, "to": 855.0, "pct": 18.009164688345393}, {"date": "2006-07", "from": 855.0, "to": 940.0, "pct": 9.941520467836252}], "nd": false}, {"gov": "Lula 2", "short": "L2", "period": "2007–2010", "start": "2007-01", "end": "2010-12", "partial": false, "start_val": 940.0, "end_val": 1200.0, "nom_pct": 27.65957446808511, "infl_pct": 22.21145307839578, "real_pct": 4.457946659217327, "steps": [{"date": "2008-06", "from": 940.0, "to": 1200.0, "pct": 27.65957446808511}], "nd": false}, {"gov": "Dilma 1", "short": "D1", "period": "2011–2014", "start": "2011-01", "end": "2014-12", "partial": false, "start_val": 1200.0, "end_val": 1500.0, "nom_pct": 25.0, "infl_pct": 27.033798240629636, "real_pct": -1.600989869465419, "steps": [{"date": "2012-07", "from": 1200.0, "to": 1350.0, "pct": 12.5}, {"date": "2013-04", "from": 1350.0, "to": 1500.0, "pct": 11.111111111111116}], "nd": false}, {"gov": "Dilma 2", "short": "D2", "period": "2015–ago/2016", "start": "2015-01", "end": "2016-08", "partial": false, "start_val": 1500.0, "end_val": 1500.0, "nom_pct": 0.0, "infl_pct": 16.67320804341912, "real_pct": -14.290519925717904, "steps": [], "nd": false}, {"gov": "Temer", "short": "T", "period": "set/2016–2018", "start": "2016-09", "end": "2018-12", "partial": false, "start_val": 1500.0, "end_val": 1500.0, "nom_pct": 0.0, "infl_pct": 7.681555880082502, "real_pct": -7.133585521959695, "steps": [], "nd": false}, {"gov": "Bolsonaro", "short": "B", "period": "2019–2022", "start": "2019-01", "end": "2022-12", "partial": false, "start_val": 1500.0, "end_val": 1500.0, "nom_pct": 0.0, "infl_pct": 26.927265760803355, "real_pct": -21.214721359828438, "steps": [], "nd": false}, {"gov": "Lula 3", "short": "L3", "period": "2023–set/2026 (em curso)", "start": "2023-01", "end": "2026-09", "partial": false, "start_val": 1500.0, "end_val": 2100.0, "nom_pct": 39.99999999999999, "infl_pct": 18.871097829389537, "real_pct": 17.774633663210395, "steps": [{"date": "2023-02", "from": 1500.0, "to": 2100.0, "pct": 39.99999999999999}], "nd": false}], "D": [{"gov": "Itamar Franco", "short": "It", "period": "jul–dez/1994 (Plano Real)", "start": "1994-07", "end": "1994-12", "partial": false, "start_val": 1072.89, "end_val": 1072.89, "nom_pct": 0.0, "infl_pct": 18.56676240816746, "real_pct": -15.659331528553654, "steps": [], "nd": false}, {"gov": "FHC 1", "short": "F1", "period": "1995–1998", "start": "1995-01", "end": "1998-12", "partial": false, "start_val": 1072.89, "end_val": 1072.89, "nom_pct": 0.0, "infl_pct": 43.459514804720165, "real_pct": -30.29392289795354, "steps": [], "nd": false}, {"gov": "FHC 2", "short": "F2", "period": "1999–2002", "start": "1999-01", "end": "2002-12", "partial": false, "start_val": 1072.89, "end_val": 1072.89, "nom_pct": 0.0, "infl_pct": 39.88312376603038, "real_pct": -28.511748016679416, "steps": [], "nd": false}, {"gov": "Lula 1", "short": "L1", "period": "2003–2006", "start": "2003-01", "end": "2006-12", "partial": false, "start_val": 1072.89, "end_val": 1394.0, "nom_pct": 29.929442906542135, "infl_pct": 28.20419465479409, "real_pct": 1.3457034353622221, "steps": [{"date": "2004-03", "from": 1072.89, "to": 1267.0, "pct": 18.09225549683564}, {"date": "2006-07", "from": 1267.0, "to": 1394.0, "pct": 10.023677979479096}], "nd": false}, {"gov": "Lula 2", "short": "L2", "period": "2007–2010", "start": "2007-01", "end": "2010-12", "partial": false, "start_val": 1394.0, "end_val": 1800.0, "nom_pct": 29.124820659971306, "infl_pct": 22.21145307839578, "real_pct": 5.656890092895606, "steps": [{"date": "2008-06", "from": 1394.0, "to": 1800.0, "pct": 29.124820659971306}], "nd": false}, {"gov": "Dilma 1", "short": "D1", "period": "2011–2014", "start": "2011-01", "end": "2014-12", "partial": false, "start_val": 1800.0, "end_val": 2200.0, "nom_pct": 22.222222222222232, "infl_pct": 27.033798240629636, "real_pct": -3.787634539032858, "steps": [{"date": "2012-07", "from": 1800.0, "to": 2000.0, "pct": 11.111111111111116}, {"date": "2013-04", "from": 2000.0, "to": 2200.0, "pct": 10.000000000000009}], "nd": false}, {"gov": "Dilma 2", "short": "D2", "period": "2015–ago/2016", "start": "2015-01", "end": "2016-08", "partial": false, "start_val": 2200.0, "end_val": 2200.0, "nom_pct": 0.0, "infl_pct": 16.67320804341912, "real_pct": -14.290519925717915, "steps": [], "nd": false}, {"gov": "Temer", "short": "T", "period": "set/2016–2018", "start": "2016-09", "end": "2018-12", "partial": false, "start_val": 2200.0, "end_val": 2200.0, "nom_pct": 0.0, "infl_pct": 7.681555880082502, "real_pct": -7.133585521959695, "steps": [], "nd": false}, {"gov": "Bolsonaro", "short": "B", "period": "2019–2022", "start": "2019-01", "end": "2022-12", "partial": false, "start_val": 2200.0, "end_val": 2200.0, "nom_pct": 0.0, "infl_pct": 26.927265760803355, "real_pct": -21.21472135982845, "steps": [], "nd": false}, {"gov": "Lula 3", "short": "L3", "period": "2023–set/2026 (em curso)", "start": "2023-01", "end": "2026-09", "partial": false, "start_val": 2200.0, "end_val": 3100.0, "nom_pct": 40.90909090909092, "infl_pct": 18.871097829389537, "real_pct": 18.539404011672822, "steps": [{"date": "2023-02", "from": 2200.0, "to": 3100.0, "pct": 40.90909090909092}], "nd": false}], "IC": [{"gov": "Itamar Franco", "short": "It", "period": "jul–dez/1994 (Plano Real)", "nd": true}, {"gov": "FHC 1", "short": "F1", "period": "1995–1998", "nd": true}, {"gov": "FHC 2", "short": "F2", "period": "1999–2002", "nd": true}, {"gov": "Lula 1", "short": "L1", "period": "2003–2006", "start": "2004-06", "end": "2006-12", "partial": true, "start_val": 241.51, "end_val": 300.0, "nom_pct": 24.218458862987035, "infl_pct": 14.157215513283216, "real_pct": 8.813497512588775, "steps": [{"date": "2005-07", "from": 241.51, "to": 300.0, "pct": 24.218458862987035}], "nd": false}, {"gov": "Lula 2", "short": "L2", "period": "2007–2010", "start": "2007-01", "end": "2010-12", "partial": false, "start_val": 300.0, "end_val": 360.0, "nom_pct": 19.999999999999996, "infl_pct": 22.21145307839578, "real_pct": -1.8095301403356912, "steps": [{"date": "2010-03", "from": 300.0, "to": 360.0, "pct": 19.999999999999996}], "nd": false}, {"gov": "Dilma 1", "short": "D1", "period": "2011–2014", "start": "2011-01", "end": "2014-12", "partial": false, "start_val": 360.0, "end_val": 400.0, "nom_pct": 11.111111111111116, "infl_pct": 27.033798240629636, "real_pct": -12.534213217302593, "steps": [{"date": "2012-07", "from": 360.0, "to": 400.0, "pct": 11.111111111111116}], "nd": false}, {"gov": "Dilma 2", "short": "D2", "period": "2015–ago/2016", "start": "2015-01", "end": "2016-08", "partial": false, "start_val": 400.0, "end_val": 400.0, "nom_pct": 0.0, "infl_pct": 16.67320804341912, "real_pct": -14.290519925717915, "steps": [], "nd": false}, {"gov": "Temer", "short": "T", "period": "set/2016–2018", "start": "2016-09", "end": "2018-12", "partial": false, "start_val": 400.0, "end_val": 400.0, "nom_pct": 0.0, "infl_pct": 7.681555880082502, "real_pct": -7.133585521959684, "steps": [], "nd": false}, {"gov": "Bolsonaro", "short": "B", "period": "2019–2022", "start": "2019-01", "end": "2022-12", "partial": false, "start_val": 400.0, "end_val": 400.0, "nom_pct": 0.0, "infl_pct": 26.927265760803355, "real_pct": -21.21472135982845, "steps": [], "nd": false}, {"gov": "Lula 3", "short": "L3", "period": "2023–set/2026 (em curso)", "start": "2023-01", "end": "2026-09", "partial": false, "start_val": 400.0, "end_val": 700.0, "nom_pct": 75.0, "infl_pct": 18.871097829389537, "real_pct": 47.218292079013025, "steps": [{"date": "2023-02", "from": 400.0, "to": 700.0, "pct": 75.0}], "nd": false}]}, "events": [{"key": "1994-07", "label": "jul/1994", "tag": "Valor vigente desde o Plano Real", "conf": "o", "note": "A CAPES afirma que os valores \"não eram corrigidos desde 1994\" e fala em dez anos de congelamento até 2004. O mês exato de início do valor de R$ 724,52 não aparece no relatório; usei jul/1994 (início do Real) como ponto de partida da série.", "M": [null, 724.52], "D": [null, 1072.89], "IC": null, "src": [1]}, {"key": "2004-03", "label": "mar/2004", "tag": "Reajuste de 18% (anunciado em 26/04/2004, retroativo a março)", "conf": "o", "note": "Primeiro reajuste desde 1994. O CNPq já havia reajustado e a CAPES igualou os valores.", "M": [724.52, 855.0], "D": [1072.89, 1267.0], "IC": null, "src": [1, 2, 3], "M_pct": 18.009164688345393, "D_pct": 18.09225549683564}, {"key": "2004-06", "label": "jun/2004 (primeira referência)", "tag": "Valor da IC encontrado mais antigo", "conf": "e", "note": "R$ 241,51 em edital de jun/2004 noticiado pela UFSC; a Agência Brasil (2005) confirma \"R$ 241\" como valor anterior a R$ 300. Não localizei o valor da IC antes de 2004.", "M": null, "D": null, "IC": [null, 241.51], "src": [12, 13]}, {"key": "2005-07", "label": "jul/2005 (anúncio)", "tag": "IC passa a R$ 300", "conf": "i", "note": "Anúncio de 05/07/2005; a data de vigência não consta na reportagem. Editais de 2009 ainda indicam R$ 300.", "M": null, "D": null, "IC": [241.51, 300.0], "src": [13, 14], "IC_pct": 24.218458862987035}, {"key": "2006-07", "label": "jul/2006", "tag": "Reajuste de cerca de 10%", "conf": "o", "note": "Relatório de Gestão da CAPES 2006: reajuste \"a partir do mês de julho\".", "M": [855.0, 940.0], "D": [1267.0, 1394.0], "IC": null, "src": [4], "M_pct": 9.941520467836252, "D_pct": 10.023677979479096}, {"key": "2008-06", "label": "jun/2008", "tag": "Reajuste de 27% (mestrado) e 29% (doutorado)", "conf": "i", "note": "Anúncio do CNPq de 30/04/2008, com vigência em 1º/06/2008 (o CNPq cita a RN-015/2008, DOU de 11/06/2008). Li o texto do anúncio em republicação, não na página do CNPq. Os 20% anunciados antes para março de 2008 foram adiados por demora no Orçamento.", "M": [940.0, 1200.0], "D": [1394.0, 1800.0], "IC": null, "src": [5], "M_pct": 27.65957446808511, "D_pct": 29.124820659971306}, {"key": "2010-03", "label": "mar/2010", "tag": "IC passa a R$ 360 (+20%)", "conf": "i", "note": "Texto de questão do Enem 2010 (PPL) e notícia da UFPI de 04/05/2010 coincidem. Não localizei o ato do CNPq.", "M": null, "D": null, "IC": [300.0, 360.0], "src": [15], "IC_pct": 19.999999999999996}, {"key": "2012-07", "label": "jul/2012", "tag": "Portaria CAPES nº 96/2012", "conf": "i", "note": "Efeitos a partir de 1º/07/2012, pagos a partir de agosto. Li as reproduções do DOU em páginas de universidades e na imprensa, não a portaria.", "M": [1200.0, 1350.0], "D": [1800.0, 2000.0], "IC": [360.0, 400.0], "src": [6], "M_pct": 12.5, "D_pct": 11.111111111111116, "IC_pct": 11.111111111111116}, {"key": "2013-04", "label": "abr/2013", "tag": "Portaria Conjunta CAPES/CNPq nº 1/2013", "conf": "o", "note": "DOU de 03/04/2013, seção 1, p. 26. Efeitos financeiros a partir de 1º/04/2013. Revogada pela Portaria CAPES nº 33/2023.", "M": [1350.0, 1500.0], "D": [2000.0, 2200.0], "IC": null, "src": [7], "M_pct": 11.111111111111116, "D_pct": 10.000000000000009}, {"key": "2023-02", "label": "fev/2023", "tag": "Portaria CAPES nº 33/2023", "conf": "o", "note": "DOU de 17/02/2023, seção 1, p. 149. Efeitos financeiros a partir de 1º/02/2023. O CNPq aplicou os mesmos valores (Portaria CNPq nº 1.502/2023, citada na tabela do CNPq). Valores ainda vigentes na página da CAPES e na tabela do CNPq (atualizada em 17/07/2025).", "M": [1500.0, 2100.0], "D": [2200.0, 3100.0], "IC": [400.0, 700.0], "src": [8, 9, 10, 11], "M_pct": 39.99999999999999, "D_pct": 40.90909090909092, "IC_pct": 75.0}], "sources": {"1": ["CAPES, Relatório de Gestão 2004 (pp. sobre reajuste das bolsas)", "https://www.gov.br/capes/pt-br/centrais-de-conteudo/CAPES_RelatorioGestao_2004.pdf/@@display-file/file", "o"], "2": ["Agência Brasil, 26/04/2004: Capes reajusta bolsas de mestrado e doutorado", "https://memoria.ebc.com.br/agenciabrasil//noticia/2004-04-26/capes-reajusta-bolsas-de-mestrado-e-doutorado", "i"], "3": ["Folha de S.Paulo, 2004: Bolsas do CNPq ganham aumento após 10 anos (só trecho de busca)", "https://www1.folha.uol.com.br/folha/educacao/ult305u14767.shtml", "e"], "4": ["CAPES, Relatório de Gestão 2006", "https://www.gov.br/capes/pt-br/centrais-de-conteudo/CAPES_RelatorioGestao_2006.pdf/@@display-file/file", "o"], "5": ["CNPq, anúncio de 30/04/2008 (republicado em blog)", "https://tremordeterra.blogspot.com/2008/05/cnpq-reajuste-do-valor-das-bolsas-de.html", "i"], "6": ["UFSM, 2012: reajuste de bolsas (valores M, D, IC e vigência 1º/07/2012)", "https://www.ufsm.br/2012/07/19/coordenadoria-de-iniciacao-cientifica-informa-sobre-reajuste-de-bolsas-de-pesquisa", "i"], "7": ["CAPES, Catálogo de Atos: Portaria Conjunta CAPES/CNPq nº 1/2013", "https://cad.capes.gov.br/ato-administrativo-detalhar?idAtoAdmElastic=558", "o"], "8": ["CAPES, Catálogo de Atos: Portaria nº 33/2023", "https://cad.capes.gov.br/ato-administrativo-detalhar?idAtoAdmElastic=10902", "o"], "9": ["CNPq, 16/02/2023: Governo Federal anuncia reajuste de bolsas do CNPq e da CAPES", "https://www.gov.br/cnpq/pt-br/assuntos/noticias/cnpq-em-acao/governo-federal-anuncia-reajuste-de-bolsas-do-cnpq-e-da-capes", "o"], "10": ["CNPq, Tabela de Valores de Bolsas no País (atualizada em 17/07/2025)", "https://www.gov.br/cnpq/pt-br/acesso-a-informacao/bolsas-e-auxilios/copy_of_modalidades/tabela-de-valores-no-pais", "o"], "11": ["CAPES, Valores de Bolsas (modificada em 17/02/2023)", "https://www.gov.br/capes/pt-br/acesso-a-informacao/acoes-e-programas/bolsas/prestacao-de-contas/valores-de-bolsas", "o"], "12": ["UFSC, jun/2004: CNPq oferece 3.000 bolsas de IC (R$ 241,51)", "https://noticias.ufsc.br/2004/06/cnpq-oferece-3-000-bolsas-para-iniciacao-cientifica/", "i"], "13": ["Agência Brasil, 05/07/2005: CNPq elevará a R$ 300 valor de bolsas de IC", "https://memoria.ebc.com.br/agenciabrasil//noticia/2005-07-05/cnpq-elevara-r-300-valor-de-bolsas-para-projetos-de-iniciacao-cientifica", "i"], "14": ["Fiocruz, Edital PIBIC 2009 (mensalidade de R$ 300,00)", "http://www.castelo.fiocruz.br/vpplr/pibic/edital_pibic_2009.pdf", "i"], "15": ["Enem 2010 (PPL), questão sobre o reajuste da IC para R$ 360 em mar/2010", "https://plataformaassaad.com.br/questao-180-caderno-azul-enem-2010-ppl/", "i"], "16": ["Banco Central do Brasil, SGS 433: IPCA mensal", "https://api.bcb.gov.br/dados/serie/bcdata.sgs.433/dados?formato=json", "o"], "17": ["Banco Central do Brasil, SGS 1619: salário mínimo", "https://api.bcb.gov.br/dados/serie/bcdata.sgs.1619/dados?formato=json", "o"], "18": ["IQC, série nominal das bolsas de pós-graduação 1995–2023 (fonte secundária, usada só para conferência)", "https://iqc.org.br/observatorio/dados/bolsas/valores-nominais-das-bolsas-de-pos-graduacao-de-1995-a-2022/", "s"], "19": ["Estadão/Bem Paraná, dez/2022: bolsas da Capes sem reajuste (R$ 724 em 1995, ANPG)", "https://www.bemparana.com.br/noticias/geral/bolsas-da-capes-sem-reajuste-qual-seria-o-valor-corrigido-pela-inflacao/", "i"], "20": ["CNPq, Centro de Memória: Fomento e Bolsas 1985–1995 (só quantidades de bolsas)", "http://centrodememoria.cnpq.br/fomento90.html", "s"], "21": ["IBGE, SIDRA, tabela 1737: IPCA, variação mensal (consultada para jan/1985 a jun/1994)", "https://sidra.ibge.gov.br/tabela/1737", "o"]}, "stats": {"ipca_since": 740.2351534621664, "last": "2026-09", "peak": {"M": {"peak_date": "1994-07", "peak_val": 6087.671733864087, "min_date": "2023-01", "min_val": 1773.6660374423982}, "D": {"peak_date": "1994-07", "peak_val": 9014.798937980237, "min_date": "2023-01", "min_val": 2601.3768549155175}, "IC": {"peak_date": "2005-07", "peak_val": 930.6224810958353, "min_date": "2023-01", "min_val": 472.97760998463957}}, "now": {"M": 2100.0, "D": 3100.0, "IC": 700.0}, "real_vs_start": {"M": -65.50405324389845, "D": -65.6121004880165, "IC": -13.11250029991664}, "nom_vs_start": {"M": 189.8470711643571, "D": 188.93922023693014, "IC": 189.8430706803031}, "sm_start": {"M": 11.182589905849667, "D": 16.559499922827598, "IC": 0.9288846153846153}, "sm_now": {"M": 1.2954966070326959, "D": 1.9123997532387416, "IC": 0.431832202344232}, "first_M": "1994-07", "eq_start_M": 6087.671733864087, "first_D": "1994-07", "eq_start_D": 9014.798937980237, "first_IC": "2004-06", "eq_start_IC": 805.6394791152317, "freeze1": {"months": 116, "ipca": 146.75901614972045, "real_M": -59.47463174382035}, "freeze2": {"ipca": 76.25469125381706, "real_M": -43.2639214941552}, "after2023_real_M": -21.231148444880287, "now_vs_2013_real_M": -32.82514162920963, "ipca_since_2023": 17.25942334010302, "sm_last": 1621.0, "check": {"M_1995_05_em_SM": 7.2452, "M_2022_em_SM": 1.2376237623762376, "M_1994_em_2012_set": 2793.9864388977185}}, "last": "2026-09"}</script>
+<script>
+(function(){
+const D=JSON.parse(document.getElementById('data').textContent);
+const N=D.months.length, IL=D.idx[N-1], S=D.stats;
+const MES=['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
+const ml=k=>MES[+k.slice(5)-1]+'/'+k.slice(0,4);
+const nf=(v,d=0)=>v.toLocaleString('pt-BR',{minimumFractionDigits:d,maximumFractionDigits:d});
+const brl=(v,d=0)=>'R$ '+nf(v,d);
+const pc=(v,d=1)=>(v>0.049?'+':v<-0.049?'−':'')+nf(Math.abs(v),d)+'%';
+const LV=['M','D','IC'];
+const st={level:'M',mode:'brl'};
+const $=id=>document.getElementById(id);
+const NS='http://www.w3.org/2000/svg';
+const el=(t,a={},p)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e};
+const valAt=(lv,k)=>{let v=null;for(const s of D.levels[lv].steps){if(s[0]<=k)v=s[1]}return v};
+
+$('lastMonth').textContent=ml(D.last);
+const META={autor:'Gustavo Paccelli',url:''};
+$('byline').textContent=META.autor?' · '+META.autor:'';
+(function(){const d0=new Date(),t=d0.getDate()+' '+MES[d0.getMonth()]+'. '+d0.getFullYear();
+  const a=META.autor?'PACCELLI, Gustavo. ':'';
+  const ttl='Quanto vale a bolsa? Valores e reajustes das bolsas CAPES e CNPq, 1994–2026';
+  $('citeText').innerHTML=a+(META.autor?'':'')+ttl+'. Levantamento de dados, versão 2.0, 19 out. 2026.'+(META.url?' Disponível em: '+META.url+'.':'')+' Acesso em: '+t+'.';})();
+
+/* seletores */
+LV.forEach(lv=>{const b=document.createElement('button');b.type='button';b.setAttribute('role','tab');b.textContent=D.levels[lv].name;b.dataset.lv=lv;
+  b.addEventListener('click',()=>{st.level=lv;renderAll()});$('seg').appendChild(b)});
+[['brl','Em reais'],['sm','Em salários mínimos']].forEach(([m,t])=>{const b=document.createElement('button');b.type='button';b.setAttribute('role','tab');b.textContent=t;b.dataset.m=m;
+  b.addEventListener('click',()=>{st.mode=m;renderAll()});$('mode').appendChild(b)});
+
+function niceMax(mx,cands){for(const s of cands){if(Math.ceil(mx/s)<=6)return{step:s,max:Math.ceil(mx/s)*s}}const s=cands[cands.length-1];return{step:s,max:Math.ceil(mx/s)*s}}
+
+/* gráfico principal */
+function renderChart(){
+  const lv=st.level,L=D.levels[lv],first=L.steps[0][0],i0=D.months.indexOf(first);
+  const nom=D.months.map(m=>m>=first?valAt(lv,m):null);
+  const real=nom.map((v,i)=>v==null?null:v*IL/D.idx[i]);
+  const sm=nom.map((v,i)=>v==null?null:v/D.sm[i]);
+  const host=$('chart1');const old=host.querySelector('svg');if(old)old.remove();
+  const W=Math.max(300,host.clientWidth),H=W<520?320:380;
+  const m={l:W<520?44:54,r:10,t:30,b:28};
+  const iw=W-m.l-m.r,ih=H-m.t-m.b;
+  const isSM=st.mode==='sm';
+  const main=isSM?sm:real;
+  const mx=Math.max(...main.filter(v=>v!=null),...(isSM?[]:nom.filter(v=>v!=null)));
+  const {step,max}=isSM?niceMax(mx,[0.5,1,2,2.5,3,5]):niceMax(mx,[100,200,250,500,1000,2000,2500]);
+  const X=i=>m.l+iw*i/(N-1),Y=v=>m.t+ih*(1-v/max);
+  const unit=isSM?'salários mínimos':`reais de ${ml(D.last)}`;
+  const svg=el('svg',{viewBox:`0 0 ${W} ${H}`,width:W,height:H,role:'img','aria-label':`Gráfico de linhas do valor mensal da bolsa de ${L.name.toLowerCase()} de ${ml(first)} a ${ml(D.last)}, em ${unit}.`});
+  host.prepend(svg);
+  D.govs.forEach((g,gi)=>{
+    const a=D.months.indexOf(g.start),b=D.months.indexOf(g.end);
+    const x0=X(a)-(a===0?0:iw/(N-1)/2),x1=X(b)+(b===N-1?0:iw/(N-1)/2);
+    el('rect',{x:x0,y:m.t,width:x1-x0,height:ih,fill:gi%2?'var(--band-b)':'var(--band-a)'},svg);
+    const w=x1-x0; if(w>=16){const t=el('text',{x:(x0+x1)/2,y:m.t-10,'text-anchor':'middle','font-size':11.5,fill:'var(--ink-2)','font-family':'var(--sans)','font-weight':600},svg);
+      t.textContent=w>(W<520?74:66)?g.name:g.short;}
+  });
+  for(let v=0;v<=max+1e-9;v+=step){
+    el('line',{x1:m.l,x2:W-m.r,y1:Y(v),y2:Y(v),stroke:'var(--line)','stroke-width':v===0?1.5:1},svg);
+    const t=el('text',{x:m.l-6,y:Y(v)+4,'text-anchor':'end','font-size':11.5,fill:'var(--ink-3)','font-family':'var(--sans)'},svg);
+    t.textContent=nf(v,step<1?1:0);
+  }
+  D.months.forEach((k,i)=>{if(k.endsWith('-01')&&(+k.slice(0,4)-1995)%5===0){
+    const t=el('text',{x:X(i),y:H-8,'text-anchor':'middle','font-size':11.5,fill:'var(--ink-3)','font-family':'var(--sans)'},svg);t.textContent=k.slice(0,4);
+    el('line',{x1:X(i),x2:X(i),y1:m.t+ih,y2:m.t+ih+4,stroke:'var(--ink-3)'},svg);}});
+  if(!isSM){
+    let d=`M${X(i0)},${Y(nom[i0])}`;
+    for(let i=i0+1;i<N;i++){if(nom[i]!==nom[i-1])d+=` H${X(i)} V${Y(nom[i])}`}
+    d+=` H${X(N-1)}`;
+    el('path',{d,fill:'none',stroke:'var(--ink)','stroke-width':1.6,'stroke-dasharray':'5 3'},svg);
+  }
+  let r='';main.forEach((v,i)=>{if(v!=null)r+=(r?'L':'M')+X(i).toFixed(1)+','+Y(v).toFixed(1)+' '});
+  el('path',{d:r,fill:'none',stroke:L.color,'stroke-width':2.4,'stroke-linejoin':'round'},svg);
+  L.steps.slice(1).forEach(s=>{const i=D.months.indexOf(s[0]);const v=isSM?sm[i]:nom[i];
+    el('circle',{cx:X(i),cy:Y(v),r:4,fill:'var(--surface)',stroke:'var(--ink)','stroke-width':1.8},svg);});
+  const cur=el('line',{y1:m.t,y2:m.t+ih,stroke:'var(--ink)','stroke-width':1,opacity:0},svg);
+  const dot=el('circle',{r:4.5,fill:L.color,stroke:'var(--surface)','stroke-width':2,opacity:0},svg);
+  const tip=$('tip');
+  function show(ev){
+    const rect=svg.getBoundingClientRect();const px=(ev.clientX-rect.left)*(W/rect.width);
+    let i=Math.round((px-m.l)/iw*(N-1));i=Math.max(i0,Math.min(N-1,i));
+    cur.setAttribute('x1',X(i));cur.setAttribute('x2',X(i));cur.setAttribute('opacity',1);
+    dot.setAttribute('cx',X(i));dot.setAttribute('cy',Y(main[i]));dot.setAttribute('opacity',1);
+    const k=D.months[i];const g=D.govs.find(g=>g.start<=k&&k<=g.end);
+    tip.innerHTML=`<b>${ml(k)}</b> (${g?g.name:''})<br>Valor pago: ${brl(nom[i],2)}<br>Em R$ de ${ml(D.last)}: ${brl(real[i])}<br>Em salários mínimos: ${nf(sm[i],2)}`;
+    tip.style.opacity=1;const tw=tip.offsetWidth;let left=X(i)+12;if(left+tw>W)left=X(i)-tw-12;
+    tip.style.left=Math.max(0,left)+'px';tip.style.top=(m.t+6)+'px';
+  }
+  function hide(){cur.setAttribute('opacity',0);dot.setAttribute('opacity',0);tip.style.opacity=0}
+  svg.addEventListener('pointermove',show);svg.addEventListener('pointerdown',show);svg.addEventListener('pointerleave',hide);
+
+  $('legend').innerHTML=(isSM?'':`<span><svg viewBox="0 0 26 8" aria-hidden="true"><line x1="0" x2="26" y1="4" y2="4" stroke="var(--ink)" stroke-width="2" stroke-dasharray="5 3"/></svg>Valor pago (R$ correntes)</span>`)+
+    `<span><svg viewBox="0 0 26 8" aria-hidden="true"><line x1="0" x2="26" y1="4" y2="4" stroke="${L.color}" stroke-width="3"/></svg>${isSM?'Valor em salários mínimos':'Corrigido pelo IPCA (R$ de '+ml(D.last)+')'}</span>`+
+    `<span><svg viewBox="0 0 26 8" aria-hidden="true"><circle cx="13" cy="4" r="3" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.6"/></svg>Reajuste</span>`;
+  $('chartSub').textContent=isSM
+    ?'Quantos salários mínimos a bolsa compra em cada mês. O salário mínimo sobe todo ano; a bolsa só quando há portaria. Toque ou passe o cursor sobre o gráfico para ler os valores.'
+    :'A linha tracejada mostra o valor pago em reais. A linha colorida mostra o mesmo valor corrigido pelo IPCA para preços de '+ml(D.last)+': cada reajuste a faz subir e a inflação a faz descer até a próxima portaria. Toque ou passe o cursor sobre o gráfico para ler os valores.';
+  const smi=sm.map((v,i)=>[v,i]).filter(x=>x[0]!=null);
+  const smMin=smi.reduce((a,b)=>b[0]<a[0]?b:a), smMax=smi.reduce((a,b)=>b[0]>a[0]?b:a);
+  const pk=S.peak[lv];
+  $('facts').innerHTML=isSM?
+    `<div><dt>Em ${ml(first)}</dt><dd>${nf(sm[i0],1)} salários mínimos<small>${brl(nom[i0],2)}</small></dd></div>`+
+    `<div><dt>Mínimo da série</dt><dd>${nf(smMin[0],2)} salários mínimos<small>${ml(D.months[smMin[1]])}</small></dd></div>`+
+    `<div><dt>Em ${ml(D.last)}</dt><dd>${nf(sm[N-1],2)} salários mínimos<small>${brl(nom[N-1])} para um mínimo de ${brl(D.sm[N-1])}</small></dd></div>`
+    :`<div><dt>Valor vigente</dt><dd>${brl(valAt(lv,D.last))}<small>desde ${ml(L.steps[L.steps.length-1][0])}</small></dd></div>`+
+    `<div><dt>Maior poder de compra</dt><dd>${brl(pk.peak_val)}<small>${ml(pk.peak_date)}, em R$ de ${ml(D.last)}</small></dd></div>`+
+    `<div><dt>Menor poder de compra</dt><dd>${brl(pk.min_val)}<small>${ml(pk.min_date)}, em R$ de ${ml(D.last)}</small></dd></div>`;
+}
+
+/* barras por governo */
+const PRE=[{gov:'Sarney',period:'1985–1990'},{gov:'Collor',period:'1990–1992'}];
+function renderRows(){
+  const lv=st.level,rows=D.metrics[lv];
+  const ok=rows.filter(r=>!r.nd);
+  const mxN=Math.max(...ok.map(r=>r.nom_pct),1);
+  const nom=$('rowsNom');nom.innerHTML='';
+  const nd=(r,txt)=>`<div class="who"><strong>${r.gov}</strong><span>${r.period}</span></div><div class="track"><span class="nd">${txt}</span></div>`;
+  PRE.forEach(r=>{const li=document.createElement('li');li.className='row';li.innerHTML=nd(r,'sem série verificada');nom.appendChild(li)});
+  rows.forEach(r=>{
+    const li=document.createElement('li');li.className='row';
+    if(r.nd){li.innerHTML=nd(r,'sem série verificada');nom.appendChild(li);return}
+    const w=r.nom_pct/mxN*78;
+    li.innerHTML=`<div class="who"><strong>${r.gov}</strong><span>${r.period}</span></div>
+      <div class="track">${r.nom_pct>0?`<div class="bar" style="width:${w}%"></div><span class="val">${pc(r.nom_pct)}</span>`:`<span class="zero-text">Sem reajuste</span>`}</div>
+      <div class="detail">${r.steps.length?`${r.steps.length===1?'1 reajuste':r.steps.length+' reajustes'}: `+r.steps.map(s=>`${ml(s.date)} ${pc(s.pct)}`).join('; ')+`. ${brl(r.start_val,2)} para ${brl(r.end_val,2)}.`:`Valor mantido em ${brl(r.start_val,2)}.`}${r.partial?` Série a partir de ${ml(r.start)}.`:''}</div>`;
+    nom.appendChild(li);
+  });
+  const Sx=Math.max(...ok.map(r=>Math.abs(r.real_pct)),5);
+  const real=$('rowsReal');real.innerHTML='';
+  PRE.forEach(r=>{const li=document.createElement('li');li.className='row';li.innerHTML=nd(r,'sem série verificada');real.appendChild(li)});
+  rows.forEach(r=>{
+    const li=document.createElement('li');li.className='row';
+    if(r.nd){li.innerHTML=nd(r,'sem série verificada');real.appendChild(li);return}
+    const w=Math.abs(r.real_pct)/Sx*70,neg=r.real_pct<0;
+    const bar=`<div class="bar ${neg?'neg':'pos'}" style="width:${w}%"></div>`;
+    const val=`<span class="val" style="color:${neg?'var(--loss)':'var(--gain)'}">${pc(r.real_pct)}</span>`;
+    li.innerHTML=`<div class="who"><strong>${r.gov}</strong><span>${r.period}</span></div>
+      <div class="track"><div class="div"><div class="half l">${neg?val+bar:''}</div><div class="half">${neg?'':bar+val}</div></div></div>
+      <div class="detail">IPCA no mandato: ${pc(r.infl_pct)}.</div>`;
+    real.appendChild(li);
+  });
+}
+
+/* tabela */
+const SL={o:'Oficial',i:'Imprensa ou entidade',e:'Parcial ou estimado'};
+const refs=ids=>ids.map(i=>`<a href="${D.sources[i][1]}" target="_blank" rel="noopener">[${i}]</a>`).join(' ');
+function cell(v,p,lab){if(!v)return `<td class="n empty" data-label="${lab}">–</td>`;
+  const a=v[0]?brl(v[0],2)+' → ':'';
+  return `<td class="n" data-label="${lab}">${a}<strong>${brl(v[1],2)}</strong>${p!=null?`<span class="p">${pc(p)}</span>`:''}</td>`}
+function renderTable(){
+  let h='<thead><tr><th>Vigência</th><th>Mestrado</th><th>Doutorado</th><th>Iniciação científica</th><th>Fonte</th></tr></thead><tbody>';
+  D.events.forEach(e=>{
+    h+=`<tr><td class="when"><strong>${e.label}</strong><span class="p muted" style="display:block;font-size:12.5px">${e.tag}</span></td>`+
+      cell(e.M,e.M_pct,'Mestrado')+cell(e.D,e.D_pct,'Doutorado')+cell(e.IC,e.IC_pct,'Iniciação científica')+
+      `<td data-label="Fonte"><span class="tag ${e.conf}">${SL[e.conf]}</span><div class="src">${e.note} <span class="refs">${refs(e.src)}</span></div></td></tr>`;
+  });
+  $('evt').innerHTML=h+'</tbody>';
+  $('srcList').innerHTML=Object.keys(D.sources).map(i=>`<li value="${i}"><a href="${D.sources[i][1]}" target="_blank" rel="noopener">${D.sources[i][0]}</a></li>`).join('');
+}
+function dl(name,content){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['\ufeff'+content],{type:'text/csv;charset=utf-8'}));a.download=name;document.body.appendChild(a);a.click();a.remove()}
+const q=s=>'"'+String(s).replace(/"/g,'""')+'"';
+$('csv').addEventListener('click',()=>{
+  let c='vigencia,nivel,valor_anterior,valor_novo,reajuste_pct,confianca,fontes,observacao\n';
+  D.events.forEach(e=>LV.forEach(lv=>{const v=e[lv];if(!v)return;
+    c+=[q(e.label),q(D.levels[lv].name),v[0]??'',v[1],e[lv+'_pct']!=null?e[lv+'_pct'].toFixed(2):'',q(SL[e.conf]),q(e.src.map(i=>D.sources[i][1]).join(' ')),q(e.note)].join(',')+'\n'}));
+  dl('reajustes_bolsas_capes_cnpq.csv',c);
+});
+$('csvm').addEventListener('click',()=>{
+  let c='mes,mestrado_nominal,doutorado_nominal,ic_nominal,mestrado_real_set2026,doutorado_real_set2026,ic_real_set2026,salario_minimo,ipca_mensal_pct\n';
+  D.months.forEach((k,i)=>{
+    const nomv=LV.map(lv=>k>=D.levels[lv].steps[0][0]?valAt(lv,k):null);
+    const row=[k,...nomv.map(v=>v==null?'':v),...nomv.map(v=>v==null?'':(v*IL/D.idx[i]).toFixed(2)),D.sm[i],D.ipca[i]];
+    c+=row.join(',')+'\n';});
+  dl('serie_mensal_bolsas_1994_2026.csv',c);
+});
+
+/* card */
+function renderCard(){
+  const L=D.levels,F1=S.freeze1,F2=S.freeze2,sm95=S.check.M_1995_05_em_SM,sm22=S.check.M_2022_em_SM;
+  const eq=LV.map(lv=>{const e=S['eq_start_'+lv],now=S.now[lv],w=now/e*100,f=L[lv].steps[0];
+    return `<div class="lbl">${lv==='IC'?'IC':L[lv].name}</div><div class="bars"><div class="b ghost" style="width:100%">${brl(f[1],2)} (${f[0].slice(0,4)}) = ${brl(e)}</div><div class="b now" style="width:${w}%;background:${L[lv].color}">${brl(now)} vigente</div></div>`}).join('');
+  $('card').innerHTML=`
+  <header><h2>Por que o reajuste das bolsas importa</h2><p>Bolsas CAPES e CNPq de mestrado, doutorado e iniciação científica, 1994 a ${D.last.slice(0,4)}</p></header>
+  <div class="blk"><h3>O valor é fixo, o custo de vida não</h3>
+    <p>A bolsa tem valor em reais definido por portaria. Enquanto a portaria não muda, a inflação reduz o que esse valor compra. Cada reajuste recompõe parte dessa perda.</p>
+    <p style="margin:0"><strong>Entre jul/1994 e ${ml(D.last)}, o IPCA acumulou ${nf(S.ipca_since,0)}%.</strong> O valor pago ao mestrando subiu ${nf(S.nom_vs_start.M,0)}%.</p>
+    <div class="eq">${eq}</div>
+    <p class="muted" style="font-size:12.5px;margin:10px 0 0">Tracejado: o valor inicial da série e seu equivalente a preços de ${ml(D.last)}. Colorido: valor vigente. Diferença real de ${pc(S.real_vs_start.M,0)} no mestrado e ${pc(S.real_vs_start.D,0)} no doutorado. A IC conta a partir de ${ml(L.IC.steps[0][0])}.</p></div>
+  <div class="blk"><h3>Em salários mínimos</h3>
+    <div class="three">
+      <div><div class="big">${nf(S.sm_start.M,1)}</div><small>salários mínimos pagos ao mestrando em jul/1994</small></div>
+      <div><div class="big">${nf(sm22,1)}</div><small>em dez/2022, antes do reajuste de 2023</small></div>
+      <div><div class="big">${nf(S.sm_now.M,1)}</div><small>em ${ml(D.last)}, com R$ 2.100 e mínimo de ${brl(S.sm_last)}</small></div>
+    </div></div>
+  <div class="blk"><h3>Dois períodos de quase dez anos sem reajuste</h3>
+    <div class="gaps">
+      <div><div class="gap-l">jul/1994 a fev/2004: 9 anos e 8 meses</div><div class="gap-b" style="width:98%">IPCA ${pc(F1.ipca,0)}</div><div class="gap-s">poder de compra do mestrado: ${pc(F1.real_M,1)}</div></div>
+      <div><div class="gap-l">abr/2013 a jan/2023: 9 anos e 10 meses</div><div class="gap-b" style="width:100%">IPCA ${pc(F2.ipca,0)}</div><div class="gap-s">poder de compra do mestrado (R$ 1.500): ${pc(F2.real_M,1)}</div></div>
+    </div></div>
+  <div class="blk"><h3>O reajuste de 2023 e depois dele</h3>
+    <div class="three">
+      <div><div class="big pos">+40%</div><small>mestrado em fev/2023; doutorado ${pc(D.metrics.D[9].nom_pct,1)} e IC ${pc(D.metrics.IC[9].nom_pct,0)}</small></div>
+      <div><div class="big neg">${pc(S.after2023_real_M,1)}</div><small>mestrado em fev/2023 frente ao poder de compra de abr/2013</small></div>
+      <div><div class="big neg">${pc(S.now_vs_2013_real_M,1)}</div><small>mestrado em ${ml(D.last)}; IPCA desde fev/2023: ${pc(S.ipca_since_2023,1)}</small></div>
+    </div></div>
+  <div class="blk"><h3>O que dizem os interessados</h3>
+    <blockquote>"A perda histórica do valor real das bolsas passa de 50%."<cite>Nota da ANPG, citada pela Agência Brasil em 01/04/2013</cite></blockquote>
+    <blockquote>"Esperamos agora pelas próximas medidas para garantir a atratividade da pesquisa acadêmica, especialmente para os jovens cientistas."<cite>Renato Janine, presidente da SBPC, em 16/02/2023 (CNPq)</cite></blockquote>
+    <blockquote style="margin-bottom:0">"A bolsa é o nosso salário."<cite>Julya Vieira, doutoranda e bolsista do CNPq, em 16/02/2023 (CNPq)</cite></blockquote></div>
+  <footer>Valores: CAPES, CNPq e atos oficiais. Inflação: IPCA/IBGE via Banco Central (SGS 433); salário mínimo: SGS 1619; consulta em 16/10/2026. As falas são posições de cada parte. Esta análise não mediu efeitos do valor da bolsa sobre permanência ou atratividade. Valores de IC têm confirmação parcial e o valor pago pode variar conforme a universidade e a forma e o momento em que ela aplica o reajuste.</footer>`;
+}
+
+function renderAll(){
+  const lv=st.level;
+  document.documentElement.style.setProperty('--lv',D.levels[lv].color);
+  $('seg').querySelectorAll('button').forEach(b=>b.setAttribute('aria-selected',b.dataset.lv===lv));
+  $('mode').querySelectorAll('button').forEach(b=>b.setAttribute('aria-selected',b.dataset.m===st.mode));
+  $('segNote').textContent=lv==='IC'?'Iniciação científica é paga pelo CNPq (PIBIC). A série começa em jun/2004, o valor mais antigo que consegui confirmar, e tem confirmação parcial.':'Mesmo valor pago pela CAPES e pelo CNPq. Série a partir de jul/1994.';
+  $('govLegend').innerHTML=D.govs.map(g=>`<span><strong>${g.short}</strong> ${g.name}</span>`).join('');
+  renderChart();renderRows();
+}
+renderTable();renderCard();renderAll();
+let rt;window.addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(renderChart,120)});
+})();
+</script>
+</body>
+</html>
