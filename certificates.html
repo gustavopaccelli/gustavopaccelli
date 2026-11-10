@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Certificados e Cursos — Gustavo Paccelli da Costa</title>
-    <meta name="description" content="Galeria interativa com mais de 60 certificados e cursos de Gustavo Paccelli da Costa: educação, pesquisa, gestão, metodologias, tecnologia e dados.">
+    <meta name="description" content="Galeria interativa com mais de 80 certificados e cursos de Gustavo Paccelli da Costa, organizados por área de formação: educação, pesquisa, tecnologia, dados, gestão, metodologias e direitos humanos.">
     <meta name="keywords" content="Gustavo Paccelli, certificados, cursos, formação complementar, educação, pesquisa, metodologias ativas">
     <meta name="author" content="Gustavo Paccelli da Costa">
     <meta property="og:type" content="website">
     <meta property="og:title" content="Certificados e Cursos — Gustavo Paccelli da Costa">
-    <meta property="og:description" content="Galeria interativa com filtros por ano, instituição e categoria — formação complementar de 2012 a 2026.">
+    <meta property="og:description" content="Galeria interativa de certificados por área de formação, com filtros por ano e carga horária — formação complementar de 2012 a 2026.">
     <meta property="og:url" content="https://gustavopaccelli.github.io/gustavopaccelli/certificates.html">
     <meta property="og:image" content="https://gustavopaccelli.github.io/gustavopaccelli/assets/img/perfil.jpg">
     <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico">
@@ -44,18 +44,21 @@
         <section class="page-header">
             <div class="container">
                 <h1>Certificados e Cursos</h1>
-                <p>Formação complementar contínua de 2012 a 2026 — filtre por ano, instituição ou categoria</p>
+                <p>Formação complementar contínua de 2012 a 2026 — organizada por área de formação</p>
             </div>
         </section>
 
         <section class="section">
             <div class="container">
+                <!-- TOTAIS POR ÁREA (renderizados por js/certificates.js) -->
+                <div class="area-stats" id="area-stats" aria-label="Certificados por área de formação">
+                    <noscript>
+                        <p class="cert-total">Os totais por área requerem JavaScript.</p>
+                    </noscript>
+                </div>
+
                 <!-- FILTROS -->
                 <div class="certificate-filters">
-                    <div class="filter-group">
-                        <label for="filter-search">Buscar</label>
-                        <input type="search" id="filter-search" placeholder="Nome do curso ou instituição...">
-                    </div>
                     <div class="filter-group">
                         <label for="filter-year">Ano</label>
                         <select id="filter-year">
@@ -63,22 +66,16 @@
                         </select>
                     </div>
                     <div class="filter-group">
-                        <label for="filter-institution">Instituição</label>
-                        <select id="filter-institution">
-                            <option value="">Todas</option>
-                        </select>
-                    </div>
-                    <div class="filter-group">
-                        <label for="filter-category">Categoria</label>
-                        <select id="filter-category">
+                        <label for="filter-hours">Carga horária</label>
+                        <select id="filter-hours">
                             <option value="">Todas</option>
                         </select>
                     </div>
                     <button type="button" id="filter-reset" class="btn btn-ghost btn-small filter-reset">Limpar filtros</button>
                 </div>
 
-                <!-- GRID DE CERTIFICADOS (renderizado por js/certificates.js) -->
-                <div class="certificates-grid" id="certificates-grid" aria-live="polite">
+                <!-- LISTA AGRUPADA POR ÁREA (renderizada por js/certificates.js) -->
+                <div id="certificate-groups" aria-live="polite">
                     <noscript>
                         <div class="cert-empty">
                             A galeria interativa requer JavaScript. Habilite o JavaScript no navegador

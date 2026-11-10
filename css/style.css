@@ -509,6 +509,26 @@ p { text-wrap: pretty; }
     border-radius: var(--radius-xs);
 }
 .cert-total { margin-top: 32px; color: var(--muted); font-family: var(--font-mono); font-size: 0.8125rem; letter-spacing: 0.04em; }
+
+/* Totais por área de formação */
+.area-stats { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 16px; margin-bottom: 40px; }
+.area-stat {
+    display: flex; flex-direction: column; gap: 4px;
+    padding: 20px;
+    background: var(--canvas);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-md);
+    color: var(--ink);
+    text-decoration: none;
+    transition: border-color 150ms ease;
+}
+.area-stat:hover { border-color: var(--border-strong); color: var(--ink); }
+.area-count { font-family: var(--font-heading); font-size: 2.5rem; line-height: 1; color: var(--oxide); }
+.area-name { font-size: 0.9375rem; font-weight: 600; margin-top: 8px; }
+.area-hours { font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); letter-spacing: 0.02em; }
+.cert-group { scroll-margin-top: 96px; margin-bottom: 48px; }
+.cert-group-title { font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 16px; display: flex; align-items: baseline; gap: 10px; }
+.cert-group-count { font-family: var(--font-mono); font-size: 0.875rem; color: var(--muted); font-weight: 400; }
 .cert-empty {
     grid-column: 1 / -1;
     text-align: center;
