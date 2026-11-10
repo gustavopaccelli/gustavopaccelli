@@ -1,6 +1,6 @@
 /* ==========================================================================
    script.js — funcionalidades gerais do portfólio
-   (menu mobile, link ativo, scroll suave, animações, formulário de contato)
+   (menu mobile, link ativo, animações, ano no rodapé)
    ========================================================================== */
 
 // ---------- Menu mobile (hambúrguer) ----------
@@ -71,112 +71,6 @@ const setupReveal = () => {
     revealEls.forEach((el) => observer.observe(el));
 };
 
-// ---------- Formulário de contato ----------
-const setupContactForm = () => {
-    const contactForm = document.getElementById('contact-form');
-    if (!contactForm) return;
-
-    contactForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-
-        const name = contactForm.querySelector('#name').value.trim();
-        const email = contactForm.querySelector('#email').value.trim();
-        const message = contactForm.querySelector('#message').value.trim();
-        const feedback = document.getElementById('form-feedback');
-        const submitBtn = contactForm.querySelector('button[type="submit"]');
-
-        // Validação básica
-        if (!name || !email || !message) {
-            if (feedback) {
-                feedback.textContent = 'Por favor, preencha todos os campos.';
-                feedback.className = 'form-feedback error';
-            }
-            return;
-        }
-
-        if (message.length < 10) {
-            if (feedback) {
-                feedback.textContent = 'A mensagem deve ter no mínimo 10 caracteres.';
-                feedback.className = 'form-feedback error';
-            }
-            return;
-        }
-
-        // Validação de email simples
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email)) {
-            if (feedback) {
-                feedback.textContent = 'Por favor, insira um email válido.';
-                feedback.className = 'form-feedback error';
-            }
-            return;
-        }
-
-        // Mostrar estado de carregamento
-        if (submitBtn) {
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'Enviando...';
-        }
-
-        if (feedback) {
-            feedback.textContent = 'Enviando mensagem...';
-            feedback.className = 'form-feedback info';
-        }
-
-        // Verificar se EmailJS está configurado
-        const emailjsConfigured = typeof EMAILJS_CONFIG !== 'undefined' &&
-            EMAILJS_CONFIG.SERVICE_ID &&
-            EMAILJS_CONFIG.SERVICE_ID !== 'YOUR_SERVICE_ID_HERE' &&
-            EMAILJS_CONFIG.TEMPLATE_ID &&
-            EMAILJS_CONFIG.TEMPLATE_ID !== 'YOUR_TEMPLATE_ID_HERE' &&
-            EMAILJS_CONFIG.PUBLIC_KEY &&
-            EMAILJS_CONFIG.PUBLIC_KEY !== 'YOUR_PUBLIC_KEY_HERE';
-
-        if (!emailjsConfigured || typeof emailjs === 'undefined') {
-            // Fallback para mailto se EmailJS não configurado
-            const subject = encodeURIComponent(`Contato via portfólio — ${name}`);
-            const body = encodeURIComponent(`Nome: ${name}\nEmail: ${email}\n\n${message}`);
-            window.location.href = `mailto:${CONTACT_EMAIL || 'gustavopaccelli@gmail.com'}?subject=${subject}&body=${body}`;
-
-            if (feedback) {
-                feedback.textContent = 'EmailJS não configurado. Abrindo seu cliente de email. Configure as credenciais em js/emailjs-config.js para envio direto.';
-                feedback.className = 'form-feedback warning';
-            }
-            if (submitBtn) {
-                submitBtn.disabled = false;
-                submitBtn.textContent = 'Enviar mensagem';
-            }
-            return;
-        }
-
-        // Enviar com EmailJS
-        try {
-            await emailjs.send(EMAILJS_CONFIG.SERVICE_ID, EMAILJS_CONFIG.TEMPLATE_ID, {
-                from_name: name,
-                reply_to: email,
-                message: message
-            });
-
-            if (feedback) {
-                feedback.innerHTML = 'Mensagem enviada com sucesso! Responderei em breve.';
-                feedback.className = 'form-feedback success';
-            }
-            contactForm.reset();
-        } catch (error) {
-            console.error('Erro ao enviar email:', error);
-            if (feedback) {
-                feedback.textContent = 'Erro ao enviar a mensagem. Por favor, tente novamente.';
-                feedback.className = 'form-feedback error';
-            }
-        } finally {
-            if (submitBtn) {
-                submitBtn.disabled = false;
-                submitBtn.textContent = 'Enviar mensagem';
-            }
-        }
-    });
-};
-
 // ---------- Ano atual no rodapé ----------
 const setFooterYear = () => {
     const yearEl = document.getElementById('footer-year');
@@ -188,6 +82,5 @@ const setFooterYear = () => {
 document.addEventListener('DOMContentLoaded', () => {
     activateNavLink();
     setupReveal();
-    setupContactForm();
     setFooterYear();
 });

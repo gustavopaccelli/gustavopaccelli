@@ -539,27 +539,9 @@ p { text-wrap: pretty; }
 }
 
 /* ---------- Contato ---------- */
-.contact-content { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 48px; align-items: start; }
-.contact-form { background: var(--canvas); border: 1px solid var(--hairline); border-radius: var(--radius-lg); padding: 32px; }
-.form-group { margin-bottom: 20px; display: flex; flex-direction: column; gap: 6px; }
-.form-group label { font-weight: 500; font-size: 0.875rem; color: var(--ink); }
-.form-group input, .form-group textarea {
-    padding: 12px 16px;
-    min-height: 44px;
-    border: 1px solid var(--hairline);
-    border-radius: var(--radius-sm);
-    font-family: var(--font-body);
-    font-size: 0.9375rem;
-    color: var(--ink);
-    resize: vertical;
-}
-.form-group input:focus, .form-group textarea:focus { outline: 2px solid var(--ink); outline-offset: 1px; border-color: var(--ink); }
-.form-feedback { margin-top: 14px; padding: 12px 16px; border-radius: var(--radius-sm); font-size: 0.9375rem; display: none; }
-.form-feedback.success { display: block; background: #edf5ef; color: #1d4a33; border: 1px solid #b9d6c3; }
-.form-feedback.error { display: block; background: #fbeeec; color: #7a1a0c; border: 1px solid #ebc2ba; }
-.form-feedback.warning { display: block; background: #fbf3e2; color: #6b4a0e; border: 1px solid #e8d3a5; }
-.form-feedback.info { display: block; background: var(--surface-soft); color: var(--ink); border: 1px solid var(--hairline); }
-.contact-info { background: var(--cream); border-radius: var(--radius-lg); padding: 32px; }
+.contact-content { max-width: 880px; margin: 0 auto; }
+.contact-info { background: var(--cream); border-radius: var(--radius-lg); padding: 40px; }
+.contact-details { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 32px; }
 .contact-info h3 { font-size: 1.75rem; margin-bottom: 20px; }
 .info-item { margin-bottom: 16px; font-size: 0.9375rem; }
 .info-item strong {
@@ -577,7 +559,7 @@ p { text-wrap: pretty; }
 .contact-info hr { border: none; border-top: 1px solid var(--cream-line); margin: 24px 0; }
 .social-links-large { display: flex; flex-direction: column; gap: 10px; }
 .social-links-large h4 { font-size: 1.25rem; margin-bottom: 12px; }
-.social-links-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.social-links-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
 .social-link {
     display: block;
     background: var(--canvas);
