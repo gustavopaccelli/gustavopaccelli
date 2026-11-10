@@ -40,7 +40,7 @@ const CERTIFICATES = [
     { year: 2025, area: 'dados', title: 'Extraindo Informações do IBGE', institution: 'IBGE', location: 'Rio de Janeiro', hours: "20h", categories: ["pesquisa", "dados"] },
     { year: 2025, area: 'gestao', title: 'Mentoria de Diretores Escolares', institution: 'MEC', location: 'Virtual', hours: "180h", categories: ["gestao", "educacao"] },
     // ---------- 2024 ----------
-    { year: 2024, area: 'metodologias', title: 'Aprendizagem Baseada em Problemas e Projetos', institution: 'MEC', location: 'Virtual', hours: "120h", categories: ["metodologias", "educacao"] },
+    { year: 2024, area: 'educacao', title: 'Aprendizagem Baseada em Problemas e Projetos', institution: 'MEC', location: 'Virtual', hours: "120h", categories: ["metodologias", "educacao"] },
     { year: 2024, area: 'educacao', title: 'Filosofia I', institution: 'IFRS', location: null, hours: "40h", categories: ["educacao"] },
     { year: 2024, area: 'educacao', title: 'Formação em Ciências Humanas e Sociais Aplicadas', institution: 'MEC', location: 'Virtual', hours: "180h", categories: ["educacao"] },
     { year: 2024, area: 'educacao', title: 'Formação em Linguagens e suas Tecnologias', institution: 'MEC', location: 'Virtual', hours: "180h", categories: ["educacao"] },
@@ -62,7 +62,7 @@ const CERTIFICATES = [
     { year: 2022, area: 'dados', title: 'Extensão: Introdução a Ciência de Dados com R', institution: 'UNIFESP', location: null, hours: "60h", categories: ["dados", "tecnologia"] },
     { year: 2022, area: 'dados', title: 'Extensão: Introdução a Ciência de Dados com R (2ª edição)', institution: 'Google', location: null, hours: "180h", categories: ["dados", "tecnologia"] },
     { year: 2022, area: 'tecnologia', title: 'Extensão: TEAIP', institution: 'UFC', location: 'A Distância', hours: "180h", categories: ["tecnologia", "educacao"] },
-    { year: 2022, area: 'metodologias', title: 'Metodologias Ativas', institution: 'Nova Escola', location: 'São Paulo', hours: "10h", categories: ["metodologias", "educacao"] },
+    { year: 2022, area: 'educacao', title: 'Metodologias Ativas', institution: 'Nova Escola', location: 'São Paulo', hours: "10h", categories: ["metodologias", "educacao"] },
     { year: 2022, area: 'pesquisa', title: 'Pesquisa de Mercado', institution: 'FGV', location: 'Rio de Janeiro', hours: "5h", categories: ["pesquisa"] },
     { year: 2022, area: 'dados', title: 'Power BI: Explorando Recursos Visuais — Alura', institution: 'Alura', location: 'Online', hours: "8h", categories: ["dados", "tecnologia"] },
     { year: 2022, area: 'tecnologia', title: 'Prática de Pesquisa da Experiência do Usuário', institution: 'EBAC', location: 'Online', hours: "6h", categories: ["tecnologia", "pesquisa"] },
@@ -87,8 +87,8 @@ const CERTIFICATES = [
     // ---------- 2021 ----------
     { year: 2021, area: 'tecnologia', title: 'Aperfeiçoamento TEEHI', institution: 'Google', location: null, hours: "180h", categories: ["tecnologia", "educacao"] },
     { year: 2021, area: 'educacao', title: 'Lahps', institution: 'N/A', location: null, hours: "2h", categories: ["educacao"] },
-    { year: 2021, area: 'metodologias', title: 'Curso de Extensão: Tô no Rumo', institution: 'UNIFESP', location: null, hours: "39h", categories: ["metodologias", "educacao"] },
-    { year: 2021, area: 'metodologias', title: 'Extensão: Formação de Educadores para Metodologia Tô no Rumo', institution: 'UFJF', location: null, hours: "2h", categories: ["metodologias", "educacao"] },
+    { year: 2021, area: 'educacao', title: 'Curso de Extensão: Tô no Rumo', institution: 'UNIFESP', location: null, hours: "39h", categories: ["metodologias", "educacao"] },
+    { year: 2021, area: 'educacao', title: 'Extensão: Formação de Educadores para Metodologia Tô no Rumo', institution: 'UFJF', location: null, hours: "2h", categories: ["metodologias", "educacao"] },
     { year: 2021, area: 'dados', title: 'Google Analytics para Iniciantes', institution: 'Google', location: null, hours: null, categories: ["dados", "tecnologia"] },
     // ---------- 2020 ----------
     { year: 2020, area: 'educacao', title: 'Atualização Profissional', institution: 'USINA', location: 'Virtual', hours: "24h", categories: ["educacao"] },
