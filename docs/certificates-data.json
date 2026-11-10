@@ -1,0 +1,875 @@
+{
+  "metadata": {
+    "total_certificates": 102,
+    "years_covered": [
+      2012,
+      2026
+    ],
+    "categories": [
+      "educacao",
+      "pesquisa",
+      "gestao",
+      "metodologias",
+      "tecnologia",
+      "dados",
+      "direitos-humanos"
+    ]
+  },
+  "certificates": {
+    "2026": [
+      {
+        "title": "- Competências Digitais nas Áreas de Conhecimento da BNCC – Ciências Humanas - Ensino Médio",
+        "institution": "N/A",
+        "categories": [
+          "educacao"
+        ],
+        "filename": "2026 - Competências Digitais nas Áreas de Conhecimento da BNCC – Ciências Humanas - Ensino Médio.pdf"
+      },
+      {
+        "title": "- Curso de Aperfeiçoamento em Educação e Tecnologia",
+        "institution": "N/A",
+        "categories": [
+          "educacao"
+        ],
+        "filename": "2026 - Curso de Aperfeiçoamento em Educação e Tecnologia.pdf"
+      },
+      {
+        "title": "- MAIS CIÊNCIAS HUMANAS E SOCIAIS APLICADAS",
+        "institution": "N/A",
+        "categories": [
+          "educacao"
+        ],
+        "filename": "2026 - MAIS CIÊNCIAS HUMANAS E SOCIAIS APLICADAS.pdf"
+      },
+      {
+        "title": "- MAIS LINGUAGENS E SUAS TECNOLOGIAS",
+        "institution": "N/A",
+        "categories": [
+          "educacao"
+        ],
+        "filename": "2026 - MAIS LINGUAGENS E SUAS TECNOLOGIAS.pdf"
+      },
+      {
+        "title": "- Orientação Profissional",
+        "institution": "N/A",
+        "categories": [
+          "educacao"
+        ],
+        "filename": "2026 - Orientação Profissional.pdf"
+      },
+      {
+        "title": "- Processos de Orientação Educacional e Profissional",
+        "institution": "N/A",
+        "categories": [
+          "gestao"
+        ],
+        "filename": "2026 - Processos de Orientação Educacional e Profissional.pdf"
+      },
+      {
+        "title": "- Trabalho e Profissionalização",
+        "institution": "N/A",
+        "categories": [
+          "educacao"
+        ],
+        "filename": "2026 - Trabalho e Profissionalização.pdf"
+      },
+      {
+        "title": "A BNCC nos Anos Finais do Ensino Fundamental_ Arte",
+        "institution": "N/A",
+        "categories": [
+          "educacao"
+        ],
+        "filename": "2026 A BNCC nos Anos Finais do Ensino Fundamental_ Arte.pdf"
+      },
+      {
+        "title": "Competências Digitais – Ciências Humanas - Ensino Médio",
+        "institution": "N/A",
+        "categories": [
+          "educacao"
+        ],
+        "filename": "2026 Competências Digitais – Ciências Humanas - Ensino Médio.pdf"
+      }
+    ],
+    "2025": [
+      {
+        "title": "- PIA3804-2024 - Na fronteira Mulheres Negras na Universidade,",
+        "institution": "UNILA",
+        "categories": [
+          "educacao"
+        ],
+        "filename": "2025 - PIA3804-2024 - Na fronteira Mulheres Negras na Universidade,.pdf"
+      },
+      {
+        "title": "- SEMIC participação",
+        "institution": "SEMIC",
+        "categories": [
+          "educacao"
+        ],
+        "filename": "2025 - SEMIC participação.pdf"
+      },
+      {
+        "title": "Avaliadores de Artigos Científicos",
+        "institution": "N/A",
+        "categories": [
+          "pesquisa"
+        ],
+        "filename": "2025 Avaliadores de Artigos Científicos.pdf"
+      },
+      {
+        "title": "Extraindo Informações do IBGE",
+        "institution": "N/A",
+        "categories": [
+          "educacao"
+        ],
+        "filename": "2025 Extraindo Informações do IBGE.pdf"
+      },
+      {
+        "title": "Mentoria de Diretores Escolares",
+        "institution": "N/A",
+        "categories": [
+          "gestao"
+        ],
+        "filename": "2025 Mentoria de Diretores Escolares.pdf"
+      },
+      {
+        "title": "Trabalho e Profissionalização",
+        "institution": "N/A",
+        "categories": [
+          "educacao"
+        ],
+        "filename": "2025 Trabalho e Profissionalização.pdf"
+      },
+      {
+        "title": "UNILA certificado_avalicao_proposta_iniciacao_PIA3804-2024",
+        "institution": "UNILA",
+        "categories": [
+          "educacao"
+        ],
+        "filename": "2025 UNILA certificado_avalicao_proposta_iniciacao_PIA3804-2024.pdf"
+      },
+      {
+        "title": "UNILA certificado_avalicao_proposta_iniciacao_PIA3805-2024",
+        "institution": "UNILA",
+        "categories": [
+          "educacao"
+        ],
+        "filename": "2025 UNILA certificado_avalicao_proposta_iniciacao_PIA3805-2024.pdf"
+      },
+      {
+        "title": "UNILA certificado_avalicao_proposta_iniciacao_PIA4091-2025",
+        "institution": "UNILA",
+        "categories": [
+          "educacao"
+        ],
+        "filename": "2025 UNILA certificado_avalicao_proposta_iniciacao_PIA4091-2025.pdf"
+      },
+      {
+        "title": "UNILA certificado_avalicao_proposta_iniciacao_PIA4141-2025",
+        "institution": "UNILA",
+        "categories": [
+          "educacao"
+        ],
+        "filename": "2025 UNILA certificado_avalicao_proposta_iniciacao_PIA4141-2025.pdf"
+      },
+      {
+        "title": "UNILA certificado_avalicao_proposta_iniciacao_PIA4142-2025",
+        "institution": "UNILA",
+        "categories": [
+          "educacao"
+        ],
+        "filename": "2025 UNILA certificado_avalicao_proposta_iniciacao_PIA4142-2025.pdf"
+      }
+    ],
+    "2024": [
+      {
+        "title": "- Formação em Linguagens e suas Tecnologias",
+        "institution": "N/A",
+        "categories": [
+          "educacao"
+        ],
+        "filename": "2024 - Formação em Linguagens e suas Tecnologias.pdf"
+      },
+      {
+        "title": "- PIA3805-2024 - Marina Tunirê Resistência e Memória na Luta",
+        "institution": "UNILA",
+        "categories": [
+          "educacao"
+        ],
+        "filename": "2024 - PIA3805-2024 - Marina Tunirê Resistência e Memória na Luta.pdf"
+      },
+      {
+        "title": "- SEMIC participação",
+        "institution": "SEMIC",
+        "categories": [
+          "educacao"
+        ],
+        "filename": "2024 - SEMIC participação.pdf"
+      },
+      {
+        "title": "Aprendizagem Baseada em Problemas e Projetos",
+        "institution": "N/A",
+        "categories": [
+          "metodologias"
+        ],
+        "filename": "2024 Aprendizagem Baseada em Problemas e Projetos.pdf"
+      },
+      {
+        "title": "Certificado I WorkShop Ultradireita - Gustavo Pacelli",
+        "institution": "N/A",
+        "categories": [
+          "educacao"
+        ],
+        "filename": "2024 Certificado I WorkShop Ultradireita - Gustavo Pacelli.pdf"
+      },
+      {
+        "title": "Filosofia 1 UFRGS",
+        "institution": "UFRGS",
+        "categories": [
+          "educacao"
+        ],
+        "filename": "2024 Filosofia 1 UFRGS.pdf"
+      },
+      {
+        "title": "Formação em Ciências Humanas e Sociais Aplicadas",
+        "institution": "N/A",
+        "categories": [
+          "educacao"
+        ],
+        "filename": "2024 Formação em Ciências Humanas e Sociais Aplicadas.pdf"
+      },
+      {
+        "title": "II Jornada do Pensamento Social Brasileiro",
+        "institution": "N/A",
+        "categories": [
+          "educacao"
+        ],
+        "filename": "2024 II Jornada do Pensamento Social Brasileiro.pdf"
+      },
+      {
+        "title": "UX Writting",
+        "institution": "N/A",
+        "categories": [
+          "tecnologia"
+        ],
+        "filename": "2024 UX Writting.pdf"
+      }
+    ],
+    "2023": [
+      {
+        "title": "- SEMIC participação",
+        "institution": "SEMIC",
+        "categories": [
+          "educacao"
+        ],
+        "filename": "2023 - SEMIC participação.pdf"
+      },
+      {
+        "title": "A BNCC do Ensino Médio_ Ciências Humanas MEC",
+        "institution": "MEC",
+        "categories": [
+          "educacao"
+        ],
+        "filename": "2023 A BNCC do Ensino Médio_ Ciências Humanas MEC.pdf"
+      },
+      {
+        "title": "CertificadoParticipacaoSEMIC",
+        "institution": "SEMIC",
+        "categories": [
+          "educacao"
+        ],
+        "filename": "2023 CertificadoParticipacaoSEMIC.pdf"
+      },
+      {
+        "title": "ENAP Educação em direitos humanos",
+        "institution": "ENAP",
+        "categories": [
+          "direitos-humanos",
+          "educacao"
+        ],
+        "filename": "2023 ENAP Educação em direitos humanos.pdf"
+      },
+      {
+        "title": "ENAP Gestão de Projetos",
+        "institution": "ENAP",
+        "categories": [
+          "gestao",
+          "metodologias"
+        ],
+        "filename": "2023 ENAP Gestão de Projetos.pdf"
+      },
+      {
+        "title": "ENAP Gestão de Projetos Educacionais",
+        "institution": "ENAP",
+        "categories": [
+          "gestao",
+          "metodologias"
+        ],
+        "filename": "2023 ENAP Gestão de Projetos Educacionais.pdf"
+      },
+      {
+        "title": "Formação em Artes nos Anos Finais MEC",
+        "institution": "MEC",
+        "categories": [
+          "educacao"
+        ],
+        "filename": "2023 Formação em Artes nos Anos Finais MEC.pdf"
+      },
+      {
+        "title": "Gestão Escolar MEC",
+        "institution": "MEC",
+        "categories": [
+          "gestao"
+        ],
+        "filename": "2023 Gestão Escolar MEC.pdf"
+      }
+    ],
+    "2022": [
+      {
+        "title": "Análise de Conteúdo — para além de Bardin",
+        "institution": "N/A",
+        "categories": [
+          "dados"
+        ],
+        "filename": "2022 Análise de Conteúdo — para além de Bardin.pdf"
+      },
+      {
+        "title": "Certificado Data Analysis Google Sheets",
+        "institution": "N/A",
+        "categories": [
+          "tecnologia"
+        ],
+        "filename": "2022 Certificado Data Analysis Google Sheets.pdf"
+      },
+      {
+        "title": "Data Analysis: Estatística com Google Sheets — Alura",
+        "institution": "Alura",
+        "categories": [
+          "dados",
+          "tecnologia"
+        ],
+        "filename": "2022 Data Analysis: Estatística com Google Sheets — Alura.pdf"
+      },
+      {
+        "title": "Data Analysis: Google Sheets — Alura",
+        "institution": "Alura",
+        "categories": [
+          "tecnologia"
+        ],
+        "filename": "2022 Data Analysis: Google Sheets — Alura.pdf"
+      },
+      {
+        "title": "Data Analysis: Previsões com Google Sheets — Alura",
+        "institution": "Alura",
+        "categories": [
+          "tecnologia"
+        ],
+        "filename": "2022 Data Analysis: Previsões com Google Sheets — Alura.pdf"
+      },
+      {
+        "title": "Extensão: Introdução a Ciência de Dados com R",
+        "institution": "N/A",
+        "categories": [
+          "dados"
+        ],
+        "filename": "2022 Extensão: Introdução a Ciência de Dados com R.pdf"
+      },
+      {
+        "title": "Extensão: TEAIP",
+        "institution": "N/A",
+        "categories": [
+          "educacao"
+        ],
+        "filename": "2022 Extensão: TEAIP.pdf"
+      },
+      {
+        "title": "Metodologias Ativas",
+        "institution": "N/A",
+        "categories": [
+          "metodologias"
+        ],
+        "filename": "2022 Metodologias Ativas.pdf"
+      },
+      {
+        "title": "Pesquisa de Mercado",
+        "institution": "N/A",
+        "categories": [
+          "pesquisa"
+        ],
+        "filename": "2022 Pesquisa de Mercado.pdf"
+      },
+      {
+        "title": "Power BI: Explorando Recursos Visuais — Alura",
+        "institution": "Alura",
+        "categories": [
+          "tecnologia"
+        ],
+        "filename": "2022 Power BI: Explorando Recursos Visuais — Alura.pdf"
+      },
+      {
+        "title": "Prática de Pesquisa da Experiência do Usuário",
+        "institution": "N/A",
+        "categories": [
+          "pesquisa"
+        ],
+        "filename": "2022 Prática de Pesquisa da Experiência do Usuário.pdf"
+      },
+      {
+        "title": "Teste de Usabilidade Parte 1: Seu Produto é Fácil de Usar — Alura",
+        "institution": "Alura",
+        "categories": [
+          "educacao",
+          "tecnologia"
+        ],
+        "filename": "2022 Teste de Usabilidade Parte 1: Seu Produto é Fácil de Usar — Alura.pdf"
+      },
+      {
+        "title": "Teste de Usabilidade Parte 2: Mensurando e Entregando Resultados — Alura",
+        "institution": "Alura",
+        "categories": [
+          "educacao",
+          "tecnologia"
+        ],
+        "filename": "2022 Teste de Usabilidade Parte 2: Mensurando e Entregando Resultados — Alura.pdf"
+      },
+      {
+        "title": "Transcrição Semiautomatizada de Vídeos",
+        "institution": "N/A",
+        "categories": [
+          "educacao"
+        ],
+        "filename": "2022 Transcrição Semiautomatizada de Vídeos.pdf"
+      },
+      {
+        "title": "UX Acessível: Projetando Interfaces Inclusivas — Alura",
+        "institution": "Alura",
+        "categories": [
+          "tecnologia"
+        ],
+        "filename": "2022 UX Acessível: Projetando Interfaces Inclusivas — Alura.pdf"
+      },
+      {
+        "title": "UX Design: Criando Dashboard com Data Studio — Alura",
+        "institution": "Alura",
+        "categories": [
+          "tecnologia"
+        ],
+        "filename": "2022 UX Design: Criando Dashboard com Data Studio — Alura.pdf"
+      },
+      {
+        "title": "UX Produto: Monitore, Mensure e Teste o Seu Projeto — Alura",
+        "institution": "Alura",
+        "categories": [
+          "tecnologia"
+        ],
+        "filename": "2022 UX Produto: Monitore, Mensure e Teste o Seu Projeto — Alura.pdf"
+      },
+      {
+        "title": "UX Research: Análise de Concorrentes — Alura",
+        "institution": "Alura",
+        "categories": [
+          "dados",
+          "tecnologia"
+        ],
+        "filename": "2022 UX Research: Análise de Concorrentes — Alura.pdf"
+      },
+      {
+        "title": "UX Research: Análise de Sites com Google Analytics — Alura",
+        "institution": "Alura",
+        "categories": [
+          "dados",
+          "tecnologia"
+        ],
+        "filename": "2022 UX Research: Análise de Sites com Google Analytics — Alura.pdf"
+      },
+      {
+        "title": "UX Research: Avaliação Heurística — Alura",
+        "institution": "Alura",
+        "categories": [
+          "tecnologia"
+        ],
+        "filename": "2022 UX Research: Avaliação Heurística — Alura.pdf"
+      },
+      {
+        "title": "UX Research: Entrevistas com Equipes Internas — Alura",
+        "institution": "Alura",
+        "categories": [
+          "tecnologia"
+        ],
+        "filename": "2022 UX Research: Entrevistas com Equipes Internas — Alura.pdf"
+      },
+      {
+        "title": "UX Research: Entrevistas com Usuários — Alura",
+        "institution": "Alura",
+        "categories": [
+          "tecnologia"
+        ],
+        "filename": "2022 UX Research: Entrevistas com Usuários — Alura.pdf"
+      },
+      {
+        "title": "UX Research: Mapeando a Jornada do Usuário — Alura",
+        "institution": "Alura",
+        "categories": [
+          "educacao",
+          "tecnologia"
+        ],
+        "filename": "2022 UX Research: Mapeando a Jornada do Usuário — Alura.pdf"
+      },
+      {
+        "title": "UX Research: Otimização de Sites — Alura",
+        "institution": "Alura",
+        "categories": [
+          "tecnologia"
+        ],
+        "filename": "2022 UX Research: Otimização de Sites — Alura.pdf"
+      },
+      {
+        "title": "UX Research: Pesquisa Etnográfica — Alura",
+        "institution": "Alura",
+        "categories": [
+          "pesquisa",
+          "tecnologia"
+        ],
+        "filename": "2022 UX Research: Pesquisa Etnográfica — Alura.pdf"
+      },
+      {
+        "title": "UX Writing: Escrevendo Textos para Usuários — Alura",
+        "institution": "Alura",
+        "categories": [
+          "tecnologia"
+        ],
+        "filename": "2022 UX Writing: Escrevendo Textos para Usuários — Alura.pdf"
+      },
+      {
+        "title": "UX: Entenda a Experiência de Usuário — Alura",
+        "institution": "Alura",
+        "categories": [
+          "tecnologia"
+        ],
+        "filename": "2022 UX: Entenda a Experiência de Usuário — Alura.pdf"
+      },
+      {
+        "title": "Workshop EBAC",
+        "institution": "EBAC",
+        "categories": [
+          "educacao"
+        ],
+        "filename": "2022 Workshop EBAC.pdf"
+      },
+      {
+        "title": "Workshop de UX Design (Introdutório)",
+        "institution": "N/A",
+        "categories": [
+          "tecnologia"
+        ],
+        "filename": "2022 Workshop de UX Design (Introdutório).pdf"
+      }
+    ],
+    "2021": [
+      {
+        "title": "Aperfeiçoamento TEEHI",
+        "institution": "N/A",
+        "categories": [
+          "educacao"
+        ],
+        "filename": "2021 Aperfeiçoamento TEEHI.pdf"
+      },
+      {
+        "title": "Curso de Extensão: Tô no Rumo",
+        "institution": "N/A",
+        "categories": [
+          "educacao"
+        ],
+        "filename": "2021 Curso de Extensão: Tô no Rumo.pdf"
+      },
+      {
+        "title": "Google Analytics para Iniciantes",
+        "institution": "N/A",
+        "categories": [
+          "tecnologia"
+        ],
+        "filename": "2021 Google Analytics para Iniciantes.pdf"
+      },
+      {
+        "title": "Google Analytics para iniciantes",
+        "institution": "N/A",
+        "categories": [
+          "tecnologia"
+        ],
+        "filename": "2021 Google Analytics para iniciantes.pdf"
+      },
+      {
+        "title": "Lahps",
+        "institution": "N/A",
+        "categories": [
+          "educacao"
+        ],
+        "filename": "2021 Lahps.pdf"
+      },
+      {
+        "title": "Revisor — ANA CAROLINA SANTOS MIRANDA",
+        "institution": "Revisor ad hoc",
+        "categories": [
+          "pesquisa"
+        ],
+        "filename": "2021 Revisor — ANA CAROLINA SANTOS MIRANDA.pdf"
+      },
+      {
+        "title": "Revisor — FERNANDA DA SILVA FERREIRA",
+        "institution": "Revisor ad hoc",
+        "categories": [
+          "pesquisa"
+        ],
+        "filename": "2021 Revisor — FERNANDA DA SILVA FERREIRA.pdf"
+      },
+      {
+        "title": "Revisor — Julia Gravina de Faria",
+        "institution": "Revisor ad hoc",
+        "categories": [
+          "pesquisa"
+        ],
+        "filename": "2021 Revisor — Julia Gravina de Faria.pdf"
+      },
+      {
+        "title": "Revisor — THIAGO ALMEIDA APOLINÁRIO PRIMO",
+        "institution": "Revisor ad hoc",
+        "categories": [
+          "pesquisa"
+        ],
+        "filename": "2021 Revisor — THIAGO ALMEIDA APOLINÁRIO PRIMO.pdf"
+      }
+    ],
+    "2020": [
+      {
+        "title": "Atualização Profissional",
+        "institution": "N/A",
+        "categories": [
+          "educacao"
+        ],
+        "filename": "2020 Atualização Profissional.pdf"
+      },
+      {
+        "title": "Colóquio do Curso de História",
+        "institution": "N/A",
+        "categories": [
+          "educacao"
+        ],
+        "filename": "2020 Colóquio do Curso de História.pdf"
+      },
+      {
+        "title": "Economia Solidária",
+        "institution": "N/A",
+        "categories": [
+          "educacao"
+        ],
+        "filename": "2020 Economia Solidária.pdf"
+      },
+      {
+        "title": "Extensão: Tecnologias Digitais na Educação",
+        "institution": "N/A",
+        "categories": [
+          "educacao"
+        ],
+        "filename": "2020 Extensão: Tecnologias Digitais na Educação.pdf"
+      },
+      {
+        "title": "Movimentos Sociais e Sociedade Moderna",
+        "institution": "N/A",
+        "categories": [
+          "educacao"
+        ],
+        "filename": "2020 Movimentos Sociais e Sociedade Moderna.pdf"
+      },
+      {
+        "title": "Política Internacional Brasil",
+        "institution": "N/A",
+        "categories": [
+          "educacao"
+        ],
+        "filename": "2020 Política Internacional Brasil.pdf"
+      },
+      {
+        "title": "Política Pública e Assistência Social",
+        "institution": "N/A",
+        "categories": [
+          "educacao"
+        ],
+        "filename": "2020 Política Pública e Assistência Social.pdf"
+      }
+    ],
+    "2019": [
+      {
+        "title": "Certificado Global July",
+        "institution": "Global July",
+        "categories": [
+          "educacao"
+        ],
+        "filename": "2019 Certificado Global July.pdf"
+      },
+      {
+        "title": "Certificado PDPP 2019 Apresentação",
+        "institution": "PDPP",
+        "categories": [
+          "educacao"
+        ],
+        "filename": "2019 Certificado PDPP 2019 Apresentação.pdf"
+      },
+      {
+        "title": "Certificado PDPP 2019 Participação",
+        "institution": "PDPP",
+        "categories": [
+          "educacao"
+        ],
+        "filename": "2019 Certificado PDPP 2019 Participação.pdf"
+      },
+      {
+        "title": "Revisor — Gabriel Bressan Ramos",
+        "institution": "Revisor ad hoc",
+        "categories": [
+          "pesquisa"
+        ],
+        "filename": "2019 Revisor — Gabriel Bressan Ramos.pdf"
+      },
+      {
+        "title": "Revisor — Matheus Luciano da Costa Ferreira",
+        "institution": "Revisor ad hoc",
+        "categories": [
+          "pesquisa"
+        ],
+        "filename": "2019 Revisor — Matheus Luciano da Costa Ferreira.pdf"
+      }
+    ],
+    "2018": [
+      {
+        "title": "Avaliador — SEMIC",
+        "institution": "SEMIC",
+        "categories": [
+          "educacao"
+        ],
+        "filename": "2018 Avaliador — SEMIC.pdf"
+      },
+      {
+        "title": "ERMECS — Certificado Ouvinte",
+        "institution": "MEC",
+        "categories": [
+          "educacao"
+        ],
+        "filename": "2018 ERMECS — Certificado Ouvinte.pdf"
+      },
+      {
+        "title": "Revisor — Jaqueline de Oliveira Moreira",
+        "institution": "Revisor ad hoc",
+        "categories": [
+          "pesquisa"
+        ],
+        "filename": "2018 Revisor — Jaqueline de Oliveira Moreira.pdf"
+      }
+    ],
+    "2017": [
+      {
+        "title": "Jornada de Ciências Sociais (JornadaCSO) — Debatedor",
+        "institution": "JornadaCSO",
+        "categories": [
+          "educacao"
+        ],
+        "filename": "2017 Jornada de Ciências Sociais (JornadaCSO) — Debatedor.pdf"
+      },
+      {
+        "title": "Jornada de Ciências Sociais (JornadaCSO) — Ouvinte",
+        "institution": "JornadaCSO",
+        "categories": [
+          "educacao"
+        ],
+        "filename": "2017 Jornada de Ciências Sociais (JornadaCSO) — Ouvinte.pdf"
+      },
+      {
+        "title": "Palestra Dilemas da Representação",
+        "institution": "N/A",
+        "categories": [
+          "educacao"
+        ],
+        "filename": "2017 Palestra Dilemas da Representação.pdf"
+      }
+    ],
+    "2015": [
+      {
+        "title": "Doutrinas Políticas",
+        "institution": "N/A",
+        "categories": [
+          "educacao"
+        ],
+        "filename": "2015 Doutrinas Políticas.pdf"
+      },
+      {
+        "title": "Liberalismo",
+        "institution": "N/A",
+        "categories": [
+          "educacao"
+        ],
+        "filename": "2015 Liberalismo.pdf"
+      }
+    ],
+    "2014": [
+      {
+        "title": "Apresentação de Trabalho — UFF",
+        "institution": "UFF",
+        "categories": [
+          "educacao"
+        ],
+        "filename": "2014 Apresentação de Trabalho — UFF.pdf"
+      },
+      {
+        "title": "Jornada de Ciências Sociais (JornadaCSO) — Ouvinte",
+        "institution": "JornadaCSO",
+        "categories": [
+          "educacao"
+        ],
+        "filename": "2014 Jornada de Ciências Sociais (JornadaCSO) — Ouvinte.pdf"
+      },
+      {
+        "title": "Minicurso: O Século dos Chefes",
+        "institution": "N/A",
+        "categories": [
+          "educacao"
+        ],
+        "filename": "2014 Minicurso: O Século dos Chefes.pdf"
+      }
+    ],
+    "2013": [
+      {
+        "title": "Jornada de Ciências Sociais (JornadaCSO) — Ouvinte",
+        "institution": "JornadaCSO",
+        "categories": [
+          "educacao"
+        ],
+        "filename": "2013 Jornada de Ciências Sociais (JornadaCSO) — Ouvinte.pdf"
+      },
+      {
+        "title": "Minicurso Estatística CSO — JornadaCSO",
+        "institution": "JornadaCSO",
+        "categories": [
+          "dados",
+          "educacao"
+        ],
+        "filename": "2013 Minicurso Estatística CSO — JornadaCSO.pdf"
+      }
+    ],
+    "2012": [
+      {
+        "title": "Apresentação de Trabalho — JornadaCSO",
+        "institution": "JornadaCSO",
+        "categories": [
+          "educacao"
+        ],
+        "filename": "2012 Apresentação de Trabalho — JornadaCSO.pdf"
+      },
+      {
+        "title": "JornadasCSO Apresentação",
+        "institution": "JornadaCSO",
+        "categories": [
+          "educacao"
+        ],
+        "filename": "2012 JornadasCSO Apresentação.pdf"
+      }
+    ]
+  }
+}

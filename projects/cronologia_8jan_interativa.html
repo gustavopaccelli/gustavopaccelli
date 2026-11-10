@@ -4,84 +4,85 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Cronologia causal do 8 de Janeiro — Process Tracing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#faf9f7; --ink:#1c1a17; --muted:#6b655c; --line:#d8d3ca; --card:#ffffff;
-    --c-conj:#6b7f96; --c-oper:#c08a2e; --c-t0:#b03636; --c-t1:#3f7f6f;
+    --bg:#ffffff; --ink:#181d26; --body:#333840; --muted:#41454d; --line:#dddddd; --card:#ffffff; --cream:#f5e9d4; --soft:#f8fafc;
+    --c-conj:#4a5a70; --c-oper:#b07a1c; --c-t0:#aa2d00; --c-t1:#2f6b5a;
   }
   *{box-sizing:border-box}
-  body{margin:0;background:var(--bg);color:var(--ink);
-    font:15px/1.55 "Iowan Old Style","Palatino Linotype",Georgia,serif;}
-  .wrap{max-width:1400px;margin:0 auto;padding:28px 24px 80px}
-  h1{font-size:26px;margin:0 0 4px;letter-spacing:-.01em}
-  .sub{color:var(--muted);font-size:14px;margin:0 0 22px;max-width:78ch}
-  .sub code{font-size:12px;background:#efece7;padding:1px 5px;border-radius:3px}
+  body{margin:0;background:var(--bg);color:var(--body);font:15px/1.6 'IBM Plex Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  .pbar{height:64px;border-bottom:1px solid #dddddd;display:flex;align-items:center;justify-content:space-between;padding:0 48px;background:#fff}
+.pback{font:500 14px/1 'IBM Plex Sans',system-ui,sans-serif;color:#41454d;text-decoration:none}
+.pback:hover{color:#181d26}
+.plogo{font:500 22px/1 'Newsreader',Georgia,serif;color:#181d26;text-decoration:none;letter-spacing:-.01em}
+.eyebrow{font:500 13px/1.4 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:#aa2d00;margin:0 0 20px}
+@media (max-width:768px){.pbar{padding:0 20px}}
+  .wrap{max-width:1400px;margin:0 auto;padding:72px 48px 96px}
+  h1{font:400 56px/1.04 'Newsreader',Georgia,serif;color:var(--ink);margin:0 0 20px;letter-spacing:-.02em;max-width:20ch;text-wrap:balance}
+  .sub{font:400 20px/1.5 'Newsreader',Georgia,serif;color:var(--body);margin:0 0 48px;max-width:72ch;text-wrap:pretty}
+  .sub code{font:500 14px 'IBM Plex Mono',monospace;background:var(--soft);border:1px solid var(--line);padding:1px 6px;border-radius:4px}
 
-  .toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:6px}
+  .toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding-top:24px;border-top:1px solid var(--ink)}
   .chip{border:1px solid var(--line);background:#fff;color:var(--ink);
-    font:600 12px/1 ui-sans-serif,system-ui,sans-serif;letter-spacing:.02em;
-    padding:8px 12px;border-radius:999px;cursor:pointer;transition:.15s;display:flex;align-items:center;gap:7px}
-  .chip:hover{border-color:#a8a196}
+    font:500 13px/1 'IBM Plex Sans',system-ui,sans-serif;
+    padding:10px 14px;min-height:40px;border-radius:10px;cursor:pointer;transition:.15s;display:flex;align-items:center;gap:8px}
+  .chip:hover{border-color:var(--ink)}
   .chip .dot{width:9px;height:9px;border-radius:50%;display:inline-block}
   .chip.off{opacity:.34}
-  .chip.mode{border-radius:6px}
   .chip.mode.on{background:var(--ink);color:#fff;border-color:var(--ink)}
   .spacer{flex:1}
 
-  .stage{background:var(--card);border:1px solid var(--line);border-radius:10px;
-    padding:6px 0 0;margin:14px 0 0;overflow:hidden}
+  .stage{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:6px 0 0;margin:20px 0 0;overflow:hidden}
   svg{display:block;width:100%;height:auto}
   .ev{cursor:pointer}
   .ev circle{transition:r .12s, stroke-width .12s}
   .ev:hover circle{stroke-width:3.5}
-  .ev.sel circle{stroke:#1c1a17;stroke-width:3.5}
-  .lbl{font:11px/1.2 ui-sans-serif,system-ui,sans-serif;fill:var(--ink);pointer-events:none}
-  .lbl.key{font-weight:700}
+  .ev.sel circle{stroke:#181d26;stroke-width:3.5}
+  .lbl{font:11px/1.2 'IBM Plex Sans',system-ui,sans-serif;fill:var(--ink);pointer-events:none}
+  .lbl.key{font-weight:600}
   .lbl.dim{fill:var(--muted)}
   .axis{stroke:var(--line);stroke-width:1.5}
   .tick{stroke:var(--line);stroke-width:1}
-  .tickt{font:10px ui-sans-serif,system-ui,sans-serif;fill:var(--muted)}
-  .bandttl{font:700 11.5px ui-sans-serif,system-ui,sans-serif;letter-spacing:.06em;text-transform:uppercase}
-  .bandsub{font:10.5px ui-sans-serif,system-ui,sans-serif;fill:var(--muted)}
+  .tickt{font:10px 'IBM Plex Mono',monospace;fill:var(--muted)}
+  .bandttl{font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase}
+  .bandsub{font:10.5px 'IBM Plex Sans',system-ui,sans-serif;fill:var(--muted)}
   .stem{stroke-width:1;opacity:.5}
   .span rect{opacity:.10}
-  .spanlbl{font:italic 10.5px ui-sans-serif,system-ui,sans-serif;fill:var(--muted)}
+  .spanlbl{font:italic 10.5px 'IBM Plex Sans',system-ui,sans-serif;fill:var(--muted)}
 
-  .detail{margin-top:16px;background:var(--card);border:1px solid var(--line);
-    border-radius:10px;padding:20px 22px;min-height:120px}
-  .detail .placeholder{color:var(--muted);font-style:italic}
-  .dhead{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;margin-bottom:2px}
-  .did{font:700 12px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.04em;
-    padding:3px 7px;border-radius:4px;color:#fff}
-  .ddate{font-weight:700;font-size:18px}
-  .dphase{font:600 11px ui-sans-serif,system-ui,sans-serif;letter-spacing:.06em;
-    text-transform:uppercase;color:var(--muted)}
-  .dmech{margin:14px 0 16px;padding:12px 16px;border-left:3px solid var(--ink);background:#f4f1ec}
-  .dmech b{display:block;font:600 10.5px ui-sans-serif,system-ui,sans-serif;
-    letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
-  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px 22px}
-  .f b{display:block;font:600 10.5px ui-sans-serif,system-ui,sans-serif;
-    letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
-  .f span{font-size:14px}
-  .src{margin-top:16px;padding-top:12px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}
-  .src a{color:#2f5d8a}
-  .badge{display:inline-block;font:600 10px ui-sans-serif,system-ui,sans-serif;
-    padding:2px 7px;border-radius:3px;margin-left:6px;vertical-align:1px}
-  .b-ok{background:#e3efe6;color:#2c6140}
-  .b-ver{background:#fbf0d8;color:#8a6410}
-  .b-ctx{background:#e9eaef;color:#4e5470}
-  .b-inf{background:#f6e6e6;color:#8a3535}
+  .detail{margin-top:20px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:32px;min-height:120px}
+  .detail .placeholder{color:var(--muted);font:italic 18px 'Newsreader',Georgia,serif}
+  .dhead{display:flex;gap:12px;align-items:baseline;flex-wrap:wrap;margin-bottom:4px}
+  .did{font:500 12px 'IBM Plex Mono',monospace;letter-spacing:.04em;padding:4px 8px;border-radius:4px;color:#fff}
+  .ddate{font:400 28px/1.2 'Newsreader',Georgia,serif;color:var(--ink)}
+  .dphase{font:500 12px 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+  .dmech{margin:20px 0;padding:20px 24px;border-radius:10px;background:var(--cream);font:400 18px/1.5 'Newsreader',Georgia,serif;color:var(--ink)}
+  .dmech b{display:block;font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px 28px}
+  .f b{display:block;font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+  .f span{font-size:15px;color:var(--ink)}
+  .src{margin-top:20px;padding-top:16px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}
+  .src a{color:#aa2d00}
+  .badge{display:inline-block;font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.04em;text-transform:uppercase;padding:3px 7px;border-radius:4px;margin-left:6px;vertical-align:1px}
+  .b-ok{background:#e6efe9;color:#1f5a40}
+  .b-ver{background:#f5e9d4;color:#6b4a0e}
+  .b-ctx{background:#eceef2;color:#3c4658}
+  .b-inf{background:#f6e3dc;color:#7a1a0c}
 
-  .tip{position:fixed;pointer-events:none;background:#1c1a17;color:#fff;
-    padding:7px 10px;border-radius:6px;font:12px/1.4 ui-sans-serif,system-ui,sans-serif;
-    max-width:280px;opacity:0;transition:opacity .1s;z-index:10}
-  .foot{margin-top:26px;color:var(--muted);font-size:12.5px;max-width:88ch}
-  .foot b{color:var(--ink)}
+  .tip{position:fixed;pointer-events:none;background:#181d26;color:#fff;padding:8px 12px;border-radius:8px;font:12px/1.45 'IBM Plex Sans',system-ui,sans-serif;max-width:280px;opacity:0;transition:opacity .1s;z-index:10}
+  .foot{margin-top:40px;padding-top:24px;border-top:1px solid var(--line);color:var(--muted);font-size:14px;max-width:88ch}
+  .foot b{color:var(--ink);font-weight:600}
+  @media (max-width:768px){.wrap{padding:48px 20px 64px}h1{font-size:38px}.sub{font-size:18px}.detail{padding:20px}}
 </style>
 </head>
 <body>
+<header class="pbar"><a href="../projects.html" class="pback">← Projetos</a><a href="../index.html" class="plogo">Gustavo Paccelli</a></header>
 <div class="wrap">
 
+<p class="eyebrow">Projeto · Process tracing</p>
 <h1>Cronologia causal do 8 de Janeiro de 2023</h1>
 <p class="sub">62 sub-eventos codificados em <b>escala quebrada</b>: nove anos de gestação conjuntural, dez semanas de articulação, nove horas de execução e três anos de resposta institucional, cada faixa com sua própria escala. Clique num ponto para ver a codificação completa do <i>codebook</i>. Fonte dos dados: <code>process_tracing_8jan_eventos.json</code>.</p>
 
@@ -106,7 +107,7 @@
 <div class="tip" id="tip"></div>
 
 <script>
-const C = {conj:'#6b7f96', oper:'#c08a2e', t0:'#b03636', t1:'#3f7f6f'};
+const C = {conj:'#4a5a70', oper:'#b07a1c', t0:'#aa2d00', t1:'#2f6b5a'};
 const BADGE = {ok:['Confirmado','b-ok'], ver:['A verificar','b-ver'], ctx:['Contextual','b-ctx'], inf:['Inferência','b-inf']};
 
 // pos = posição relativa (0–1) dentro da própria faixa. k = evento-chave.
@@ -233,7 +234,7 @@ function render(){
     if(mode==='geral' && gi<geo.length-1){
       const xb=g.x+g.w+GAP/2;
       svg.appendChild(el('path',{d:`M${xb-5},${AX-13} l10,7 l-10,7 l10,7`,
-        fill:'none',stroke:'#b8b2a8','stroke-width':2,'stroke-linecap':'round'}));
+        fill:'none',stroke:'#9297a0','stroke-width':2,'stroke-linecap':'round'}));
     }
     // faixas de intervalo
     SPANS.filter(s=>s.b===bi).forEach(s=>{
