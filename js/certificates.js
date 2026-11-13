@@ -128,10 +128,7 @@ const CERTIFICATES = [
 
 const statsEl = document.getElementById('area-stats');
 const groupsEl = document.getElementById('certificate-groups');
-const filterYear = document.getElementById('filter-year');
-const filterHours = document.getElementById('filter-hours');
 const totalEl = document.getElementById('cert-total');
-const resetBtn = document.getElementById('filter-reset');
 
 const escapeHtml = (str) =>
     String(str).replace(/[&<>"']/g, (c) => ({
@@ -146,13 +143,6 @@ const escapeHtml = (str) =>
 const hoursOf = (cert) => {
     const m = cert.hours ? String(cert.hours).match(/(\d+)\s*h/) : null;
     return m ? parseInt(m[1], 10) : null;
-};
-
-const HOUR_RANGES = {
-    'ate-20': { label: 'Até 20 h', test: (h) => h !== null && h <= 20 },
-    '21-60': { label: '21 a 60 h', test: (h) => h !== null && h >= 21 && h <= 60 },
-    '61-180': { label: '61 a 180 h', test: (h) => h !== null && h >= 61 && h <= 180 },
-    'sem-info': { label: 'Não informada', test: (h) => h === null }
 };
 
 const formatNumber = (n) => n.toLocaleString('pt-BR');
@@ -199,35 +189,9 @@ const buildCard = (cert) => {
         </div>`;
 };
 
-const populateFilters = () => {
-    const years = [...new Set(CERTIFICATES.map((c) => c.year))].sort((a, b) => b - a);
-    years.forEach((year) => {
-        const opt = document.createElement('option');
-        opt.value = year;
-        opt.textContent = year;
-        filterYear.appendChild(opt);
-    });
-
-    Object.entries(HOUR_RANGES).forEach(([value, range]) => {
-        const opt = document.createElement('option');
-        opt.value = value;
-        opt.textContent = range.label;
-        filterHours.appendChild(opt);
-    });
-};
-
-const matchesFilters = (cert) => {
-    if (filterYear.value && String(cert.year) !== filterYear.value) return false;
-    if (filterHours.value && !HOUR_RANGES[filterHours.value].test(hoursOf(cert))) return false;
-    return true;
-};
-
-const applyFilters = () => {
-    const filtered = CERTIFICATES.filter(matchesFilters);
-
+const renderGroups = () => {
     groupsEl.innerHTML = AREA_TOTALS.map((a) => {
-        const items = filtered.filter((c) => c.area === a.key);
-        if (!items.length) return '';
+        const items = CERTIFICATES.filter((c) => c.area === a.key);
         return `
         <section class="cert-group" id="area-${a.key}" aria-labelledby="heading-${a.key}">
             <h3 class="cert-group-title" id="heading-${a.key}">
@@ -235,23 +199,12 @@ const applyFilters = () => {
             </h3>
             <div class="certificates-grid">${items.map(buildCard).join('')}</div>
         </section>`;
-    }).join('') || '<div class="cert-empty">Nenhum certificado encontrado com os filtros selecionados.</div>';
+    }).join('');
 
-    totalEl.textContent =
-        filtered.length === CERTIFICATES.length
-            ? `Total: ${CERTIFICATES.length} certificados e cursos`
-            : `Exibindo ${filtered.length} de ${CERTIFICATES.length} certificados`;
+    totalEl.textContent = `Total: ${CERTIFICATES.length} certificados e cursos`;
 };
 
 if (groupsEl) {
-    populateFilters();
     renderStats();
-    applyFilters();
-
-    [filterYear, filterHours].forEach((el) => el.addEventListener('change', applyFilters));
-    resetBtn.addEventListener('click', () => {
-        filterYear.value = '';
-        filterHours.value = '';
-        applyFilters();
-    });
+    renderGroups();
 }
