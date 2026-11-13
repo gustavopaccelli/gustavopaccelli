@@ -459,27 +459,6 @@ p { text-wrap: pretty; }
 .responsibilities { padding-left: 20px; display: flex; flex-direction: column; gap: 6px; font-size: 0.9375rem; }
 
 /* ---------- Certificados ---------- */
-.certificate-filters {
-    display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-end;
-    background: var(--cream);
-    border-radius: var(--radius-md);
-    padding: 24px;
-    margin-bottom: 40px;
-}
-.filter-group { display: flex; flex-direction: column; gap: 6px; flex: 1; min-width: 160px; }
-.filter-group label { font-family: var(--font-mono); font-size: 0.75rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
-.filter-group select, .filter-group input {
-    height: 44px;
-    padding: 0 14px;
-    border: 1px solid var(--cream-line);
-    border-radius: var(--radius-sm);
-    font-family: var(--font-body);
-    font-size: 0.9375rem;
-    background: var(--canvas);
-    color: var(--ink);
-}
-.filter-group select:focus, .filter-group input:focus { outline: 2px solid var(--ink); outline-offset: 1px; border-color: var(--ink); }
-.filter-reset { align-self: flex-end; }
 .certificates-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
 .certificate-card {
     background: var(--canvas);
