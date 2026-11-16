@@ -1,0 +1,1122 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Protesto e violência no Brasil</title>
+<meta name="description" content="Painel sobre protesto e violência política no Brasil e na América Latina, 2018–2026, com dados da ACLED lidos pela teoria do confronto político.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:wght@400;600&display=swap">
+<style>
+:root {
+  --color-fg: #1d2127; --color-fg-muted: #5c6470; --color-bg: #fbfbf9; --color-panel: #ffffff; --color-border-line: #e3e4e0;
+  --color-ok: #2f7d4f; --color-warn: #b7791f; --color-bad: #b42318;
+  --c1: #3d6fb4; --c2: #c2502a; --c3: #8a8f99; --c4: #2a8a7a; --c5: #8b5bb5; --c6: #b88a1a;
+  --cds-chart-muted: #a7acb4; --cds-chart-grid: #ecedea; --cds-chart-axis: #c9cbc6; --cds-chart-reference: #9aa0a8;
+  --cds-text-secondary: #5c6470; --cds-surface-popover: #ffffff; --cds-border: #d9dbd6; --cds-shadow-popover: 0 4px 16px rgba(20,24,30,.12);
+  --font-anthropic-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-anthropic-serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --cds-font-size-caption: 12.5px; --cds-font-size-body: 15px; --cds-font-size-heading: 18px; --cds-font-size-title: 1.6rem; --cds-font-weight-medium: 600;
+  --cds-gap-xs: 4px; --cds-gap-sm: 8px; --cds-gap-md: 14px; --cds-gap-lg: 20px; --cds-gap-xl: 40px;
+  --cds-pad-xs: 4px; --cds-pad-sm: 8px; --cds-pad-md: 12px; --cds-pad-lg: 18px; --cds-pad-xl: 28px; --cds-radius: 10px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --color-fg: #e8e9ea; --color-fg-muted: #a3a9b2; --color-bg: #15171b; --color-panel: #1d2025; --color-border-line: #30343b;
+  --c1: #6f9be0; --c2: #e57b55; --c3: #9aa0aa; --c4: #4fb8a6; --c5: #b08ae0; --c6: #d8ab3e;
+  --cds-chart-muted: #6c727c; --cds-chart-grid: #2a2e34; --cds-chart-axis: #474c55; --cds-chart-reference: #7b818b;
+  --cds-text-secondary: #a3a9b2; --cds-surface-popover: #23262c; --cds-border: #3a3f47; --cds-shadow-popover: 0 4px 16px rgba(0,0,0,.45);
+  color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --color-fg: #e8e9ea; --color-fg-muted: #a3a9b2; --color-bg: #15171b; --color-panel: #1d2025; --color-border-line: #30343b;
+  --c1: #6f9be0; --c2: #e57b55; --c3: #9aa0aa; --c4: #4fb8a6; --c5: #b08ae0; --c6: #d8ab3e;
+  --cds-chart-muted: #6c727c; --cds-chart-grid: #2a2e34; --cds-chart-axis: #474c55; --cds-chart-reference: #7b818b;
+  --cds-text-secondary: #a3a9b2; --cds-surface-popover: #23262c; --cds-border: #3a3f47; --cds-shadow-popover: 0 4px 16px rgba(0,0,0,.45);
+  color-scheme: dark; }
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--color-bg); color: var(--color-fg); font: 15px/1.5 var(--font-anthropic-sans);
+  padding-block: 40px 64px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+#dash-root { max-width: 1120px; margin: 0 auto; }
+.dash-select { font: inherit; font-size: 13px; color: var(--color-fg); background-color: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: 6px; padding: 5px 8px; }
+.dash-select:focus-visible, a:focus-visible { outline: 2px solid var(--c1); outline-offset: 2px; }
+.pv a { color: inherit; }
+.pv-refs ol { margin: 0; padding-left: 22px; display: flex; flex-direction: column; gap: 6px; font-size: 13.5px; line-height: 1.5; max-width: 90ch; }
+.pv-refs a { word-break: break-all; }
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js" integrity="sha384-CjloA8y00+1SDAUkjs099PVfnY2KmDC2BZnws9kh8D/lX1s46w6EPhpXdqMfjK6i" crossorigin="anonymous"></script>
+<script>
+// Substituto mínimo do runtime `dash` do painel publicado: dados embutidos, cálculos e desenhos.
+window.dash = (function () {
+  const CSV = {"brasil_ano": "ano,pacificos,com_intervencao,forca_excessiva,violentas,turba,demonstracoes,mortes_protesto,violencia_politica,taxa_violencia,taxa_repressao\n2018,6471,66,8,616,366,7161,78,9150,8.6,1.03\n2019,3288,51,7,383,183,3729,20,6797,10.27,1.56\n2020,2472,67,5,259,307,2803,50,6948,9.24,2.57\n2021,4039,36,4,314,269,4393,43,7518,7.15,0.91\n2022,3722,64,6,560,348,4352,78,10179,12.87,1.61\n2023,1589,40,5,266,295,1900,55,10141,14.0,2.37\n2024,1001,33,5,224,253,1263,61,9573,17.74,3.01\n2025,1499,47,8,259,336,1813,65,10354,14.29,3.03\n2026,1408,40,7,219,363,1674,42,9801,13.08,2.81\n", "brasil_mes": "mes,pacificos,violentas,reprimidas,turba\n2018-01,241,60,3,17\n2018-02,352,60,7,38\n2018-03,715,104,10,52\n2018-04,316,73,8,41\n2018-05,3344,129,21,12\n2018-06,188,35,4,14\n2018-07,198,27,5,25\n2018-08,212,37,3,58\n2018-09,390,21,5,35\n2018-10,133,26,6,20\n2018-11,153,17,0,18\n2018-12,229,27,2,36\n2019-01,181,24,5,49\n2019-02,164,26,5,4\n2019-03,384,41,3,1\n2019-04,203,28,4,7\n2019-05,670,39,10,17\n2019-06,480,62,6,28\n2019-07,126,26,5,16\n2019-08,335,29,3,16\n2019-09,227,25,1,8\n2019-10,151,24,3,4\n2019-11,274,29,8,11\n2019-12,93,30,5,22\n2020-01,138,26,9,31\n2020-02,191,40,6,30\n2020-03,346,29,5,41\n2020-04,191,11,6,20\n2020-05,203,15,14,23\n2020-06,225,12,8,16\n2020-07,202,8,3,21\n2020-08,278,24,6,25\n2020-09,210,25,3,25\n2020-10,145,29,3,23\n2020-11,206,24,9,28\n2020-12,137,16,0,24\n2021-01,386,30,4,30\n2021-02,255,35,4,19\n2021-03,278,28,5,17\n2021-04,190,20,1,23\n2021-05,380,20,11,23\n2021-06,370,24,1,25\n2021-07,506,26,5,28\n2021-08,206,29,1,19\n2021-09,838,39,0,16\n2021-10,293,29,4,28\n2021-11,186,23,2,16\n2021-12,151,11,2,25\n2022-01,151,21,0,28\n2022-02,223,28,1,24\n2022-03,315,36,9,25\n2022-04,296,34,3,44\n2022-05,163,23,0,29\n2022-06,172,34,2,27\n2022-07,154,44,1,43\n2022-08,159,41,3,28\n2022-09,328,26,5,29\n2022-10,1368,190,37,23\n2022-11,280,38,4,21\n2022-12,113,45,5,27\n2023-01,163,33,6,15\n2023-02,113,13,1,16\n2023-03,205,25,3,14\n2023-04,129,24,6,25\n2023-05,183,22,6,27\n2023-06,152,20,6,24\n2023-07,115,35,4,37\n2023-08,118,22,5,37\n2023-09,139,24,3,31\n2023-10,102,13,2,22\n2023-11,94,20,2,21\n2023-12,76,15,1,26\n2024-01,87,21,3,17\n2024-02,44,20,5,7\n2024-03,159,17,1,17\n2024-04,91,11,3,10\n2024-05,69,26,1,23\n2024-06,93,20,0,25\n2024-07,69,13,1,21\n2024-08,76,17,2,27\n2024-09,75,19,5,28\n2024-10,76,25,8,25\n2024-11,111,25,6,34\n2024-12,51,10,3,19\n2025-01,65,12,2,22\n2025-02,90,26,3,24\n2025-03,157,30,6,34\n2025-04,99,23,8,16\n2025-05,133,38,5,24\n2025-06,97,15,5,28\n2025-07,106,16,2,15\n2025-08,138,24,4,38\n2025-09,199,22,7,37\n2025-10,139,23,5,39\n2025-11,119,16,5,34\n2025-12,157,14,3,25\n2026-01,158,21,3,30\n2026-02,84,20,0,32\n2026-03,164,22,6,27\n2026-04,151,21,2,37\n2026-05,120,26,7,32\n2026-06,90,12,6,30\n2026-07,72,32,2,30\n2026-08,103,17,5,51\n2026-09,135,16,4,44\n2026-10,331,32,12,50\n", "brasil_uf": "uf,demonstracoes,violentas,reprimidas,turba,taxa_violencia,taxa_repressao,violencia_politica,mortes_vp,saques_depredacao\nSao Paulo,4726,386,127,225,8.17,2.69,3480,2860,449\nMinas Gerais,2673,145,30,136,5.42,1.12,4348,3757,396\nRio de Janeiro,2150,359,58,169,16.7,2.7,16625,10383,272\nBahia,2014,327,33,190,16.24,1.64,11352,11570,331\nRio Grande do Sul,1721,80,15,21,4.65,0.87,1546,1715,118\nPara,1624,211,30,101,12.99,1.85,3630,3939,68\nPernambuco,1505,355,18,79,23.59,1.2,6269,6084,114\nParana,1503,61,22,57,4.06,1.46,1183,1186,271\nDistrito Federal,1010,55,27,39,5.45,2.67,302,267,39\nSanta Catarina,918,56,11,31,6.1,1.2,926,879,89\nMato Grosso,843,36,11,59,4.27,1.3,2790,2433,73\nAmazonas,776,79,11,496,10.18,1.42,4014,3996,85\nAlagoas,761,224,8,222,29.43,1.05,3030,2612,15\nMato Grosso do Sul,705,40,6,170,5.67,0.85,1794,1412,844\nEspirito Santo,676,129,11,122,19.08,1.63,2366,1733,95\nParaiba,569,87,7,60,15.29,1.23,2141,1829,62\nRio Grande do Norte,565,57,7,20,10.09,1.24,1133,1185,96\nCeara,557,52,14,126,9.34,2.51,2038,2251,175\nAcre,543,17,8,26,3.13,1.47,781,689,14\nGoias,540,35,6,40,6.48,1.11,779,908,71\nPiaui,528,68,10,75,12.88,1.89,1732,1582,39\nMaranhao,470,92,7,35,19.57,1.49,1047,1061,46\nRoraima,417,13,6,89,3.12,1.44,715,590,19\nSergipe,403,69,3,14,17.12,0.74,794,967,20\nTocantins,361,20,4,15,5.54,1.11,670,628,15\nRondonia,343,31,5,85,9.04,1.46,881,649,39\nAmapa,223,21,4,23,9.42,1.79,1526,1641,3\n", "latam_pais": "pais,regiao,demonstracoes,violentas,reprimidas,mortes,taxa_violencia,taxa_repressao\nMexico,North America,47473,2037,584,79,4.29,1.23\nBrazil,South America,27414,2881,452,16,10.51,1.65\nArgentina,South America,17801,875,286,21,4.92,1.61\nVenezuela,South America,17034,587,572,143,3.45,3.36\nChile,South America,16699,3926,625,57,23.51,3.74\nColombia,South America,12425,1373,286,166,11.05,2.3\nPeru,South America,11263,1083,253,91,9.62,2.25\nBolivia,South America,7697,664,149,50,8.63,1.94\nParaguay,South America,6389,212,109,12,3.32,1.71\nHonduras,Central America,5784,630,112,18,10.89,1.94\nEcuador,South America,4189,393,74,8,9.38,1.77\nPanama,Central America,3782,240,142,4,6.35,3.75\nHaiti,Caribbean,3481,1568,195,270,45.04,5.6\nGuatemala,Central America,3467,178,55,3,5.13,1.59\nCosta Rica,Central America,2205,111,53,1,5.03,2.4\nNicaragua,Central America,1310,299,243,332,22.82,18.55\nEl Salvador,Central America,1212,28,12,1,2.31,0.99\nTrinidad and Tobago,Caribbean,996,176,16,2,17.67,1.61\nPuerto Rico,Caribbean,651,20,28,0,3.07,4.3\nCuba,Caribbean,645,40,138,1,6.2,21.4\nJamaica,Caribbean,579,96,12,0,16.58,2.07\nGuadeloupe,Caribbean,559,166,12,0,29.7,2.15\nDominican Republic,Caribbean,538,99,31,8,18.4,5.76\nGuyana,South America,536,79,17,5,14.74,3.17\nUruguay,South America,527,28,10,0,5.31,1.9\n", "global_2025": "pais,demonstracoes,posicao\nIndia,20606,1\nUnited States,18710,2\nYemen,8204,3\nPakistan,7258,4\nMexico,7166,5\nFrance,6594,6\nSouth Korea,6034,7\nTurkey,5586,8\nIndonesia,4335,9\nSpain,4142,10\nIran,3610,11\nItaly,3164,12\nSerbia,2897,13\nBangladesh,2850,14\nGermany,2841,15\nBrazil,1815,19\n", "brasil_ecologia": "ano,protestos,motins,confrontos_armados,violencia_civis,explosoes,desenv_estrategicos,mortes_confrontos,mortes_civis,mortes_total\n2018,6545,982,4693,3628,463,1865,3741,3659,7481\n2019,3346,566,3770,2672,172,2260,3253,2651,5925\n2020,2544,566,3287,3232,122,1725,2789,2984,5823\n2021,4079,583,3609,3544,96,1252,3144,3343,6537\n2022,3792,908,4517,5267,47,901,3615,4729,8422\n2023,1634,561,4553,5248,45,1099,4203,4822,9081\n2024,1039,477,4163,5139,18,1061,3677,4635,8374\n2025,1554,595,4569,5429,20,1742,4076,4899,9045\n2026,1455,582,4519,4891,28,1767,3847,4113,8003\n", "brasil_subtipo": "disorder_type,event_type,sub_event_type,eventos,mortes,letalidade,pop_media\nPolitical violence,Violence against civilians,Attack,38318,35768,93.3,110718.0\nPolitical violence,Battles,Armed clash,37679,32345,85.8,121802.0\nDemonstrations,Protests,Peaceful protest,25489,0,0.0,11475.0\nStrategic developments,Strategic developments,Other,9002,0,0.0,\nStrategic developments,Strategic developments,Looting/property destruction,3854,0,0.0,\nDemonstrations,Riots,Violent demonstration,3100,8,0.3,61014.0\nPolitical violence,Riots,Mob violence,2720,475,17.5,55242.0\nPolitical violence,Explosions/Remote violence,Remote explosive/landmine/IED,973,12,1.2,104200.0\nPolitical violence,Violence against civilians,Abduction/forced disappearance,589,0,0.0,58081.0\nDemonstrations,Protests,Protest with intervention,444,0,0.0,18417.0\nStrategic developments,Strategic developments,Arrests,389,0,0.0,\nStrategic developments,Strategic developments,Disrupted weapons use,364,3,0.8,\nPolitical violence,Violence against civilians,Sexual violence,143,67,46.9,99062.0\nStrategic developments,Strategic developments,Change to group/activity,58,0,0.0,\nPolitical violence; Demonstrations,Protests,Excessive force against protesters,55,9,16.4,16670.0\n", "pais_ano": "pais,ano,demonstracoes,violentas,reprimidas,turba,violencia_politica,mortes_vp,taxa_violencia,taxa_repressao\nArgentina,2018,2025,101,32,28,85,25,4.99,1.58\nArgentina,2019,1184,74,28,43,76,24,6.25,2.36\nArgentina,2020,2860,104,47,30,73,14,3.64,1.64\nArgentina,2021,2954,147,50,41,77,13,4.98,1.69\nArgentina,2022,2626,130,31,43,69,16,4.95,1.18\nArgentina,2023,2561,140,31,44,55,6,5.47,1.21\nArgentina,2024,1867,84,23,17,20,4,4.5,1.23\nArgentina,2025,1724,95,44,19,21,10,5.51,2.55\nArgentina,2026,1719,84,39,6,6,0,4.89,2.27\nBolivia,2018,311,26,13,15,25,23,8.36,4.18\nBolivia,2019,584,132,22,32,40,9,22.6,3.77\nBolivia,2020,725,81,16,51,53,1,11.17,2.21\nBolivia,2021,948,80,22,49,54,6,8.44,2.32\nBolivia,2022,1177,94,22,60,66,9,7.99,1.87\nBolivia,2023,1178,46,14,72,85,14,3.9,1.19\nBolivia,2024,1549,93,27,74,84,18,6.0,1.74\nBolivia,2025,1225,112,13,91,112,24,9.14,1.06\nBolivia,2026,1099,54,15,50,89,47,4.91,1.36\nBrazil,2018,7161,616,74,366,9150,7475,8.6,1.03\nBrazil,2019,3729,383,58,183,6797,5924,10.27,1.56\nBrazil,2020,2803,259,72,307,6948,5821,9.24,2.57\nBrazil,2021,4393,314,40,269,7518,6534,7.15,0.91\nBrazil,2022,4352,560,70,348,10179,8422,12.87,1.61\nBrazil,2023,1900,266,45,295,10141,9080,14.0,2.37\nBrazil,2024,1263,224,38,253,9573,8372,17.74,3.01\nBrazil,2025,1813,259,55,336,10354,9041,14.29,3.03\nBrazil,2026,1674,219,47,363,9801,8002,13.08,2.81\nChile,2018,2354,380,86,74,128,6,16.14,3.65\nChile,2019,4167,1439,220,107,193,8,34.53,5.28\nChile,2020,2629,919,167,86,222,17,34.96,6.35\nChile,2021,1970,373,49,92,275,18,18.93,2.49\nChile,2022,1676,301,39,87,248,33,17.96,2.33\nChile,2023,1369,176,19,94,211,37,12.86,1.39\nChile,2024,1384,181,24,95,172,54,13.08,1.73\nChile,2025,1150,157,21,104,168,16,13.65,1.83\nChile,2026,830,116,24,102,162,18,13.98,2.89\nColombia,2018,481,69,11,59,1832,1477,14.35,2.29\nColombia,2019,744,125,51,65,1788,1415,16.8,6.85\nColombia,2020,785,99,18,55,1955,1717,12.61,2.29\nColombia,2021,2816,500,125,182,2354,2013,17.76,4.44\nColombia,2022,1529,151,15,206,2743,2340,9.88,0.98\nColombia,2023,2380,205,37,325,2819,2004,8.61,1.55\nColombia,2024,1909,121,12,177,2356,1751,6.34,0.63\nColombia,2025,1781,103,17,181,2902,2292,5.78,0.95\nColombia,2026,1364,115,18,185,2223,1786,8.43,1.32\nCosta Rica,2018,317,19,11,1,1,1,5.99,3.47\nCosta Rica,2019,354,19,12,7,20,10,5.37,3.39\nCosta Rica,2020,610,45,17,6,15,9,7.38,2.79\nCosta Rica,2021,203,11,7,4,12,3,5.42,3.45\nCosta Rica,2022,169,5,1,6,12,1,2.96,0.59\nCosta Rica,2023,224,5,1,2,6,1,2.23,0.45\nCosta Rica,2024,207,5,2,9,28,15,2.42,0.97\nCosta Rica,2025,121,2,2,2,16,5,1.65,1.65\nCosta Rica,2026,113,4,5,3,9,0,3.54,4.42\nCuba,2018,14,0,9,0,0,0,0.0,64.29\nCuba,2019,18,0,8,0,8,2,0.0,44.44\nCuba,2020,48,2,9,10,71,3,4.17,18.75\nCuba,2021,154,19,41,7,89,0,12.34,26.62\nCuba,2022,211,8,33,16,81,4,3.79,15.64\nCuba,2023,41,2,8,21,67,6,4.88,19.51\nCuba,2024,82,5,21,12,43,3,6.1,25.61\nCuba,2025,77,4,9,12,49,5,5.19,11.69\nCuba,2026,393,18,39,13,62,7,4.58,9.92\nDominican Republic,2018,71,25,9,5,25,17,35.21,12.68\nDominican Republic,2019,29,6,2,4,18,17,20.69,6.9\nDominican Republic,2020,64,3,5,2,16,10,4.69,7.81\nDominican Republic,2021,54,10,2,4,6,3,18.52,3.7\nDominican Republic,2022,96,18,4,20,43,18,18.75,4.17\nDominican Republic,2023,92,18,5,6,28,16,19.57,5.43\nDominican Republic,2024,48,5,1,9,34,13,10.42,2.08\nDominican Republic,2025,84,14,3,5,23,24,16.67,3.57\nDominican Republic,2026,184,44,6,10,41,30,23.91,3.26\nEcuador,2018,169,19,4,5,13,14,11.24,2.37\nEcuador,2019,380,71,11,21,32,11,18.68,2.89\nEcuador,2020,393,14,10,39,44,19,3.56,2.54\nEcuador,2021,499,55,3,26,29,5,11.02,0.6\nEcuador,2022,1616,122,21,76,1454,1591,7.55,1.3\nEcuador,2023,368,29,6,194,2576,2810,7.88,1.63\nEcuador,2024,368,32,4,139,2551,2872,8.7,1.09\nEcuador,2025,396,51,15,74,3317,4066,12.88,3.79\nEcuador,2026,379,16,12,52,2650,3255,4.22,3.17\nEl Salvador,2018,163,9,2,4,764,944,5.52,1.23\nEl Salvador,2019,108,9,0,3,787,899,8.33,0.0\nEl Salvador,2020,208,5,4,2,386,394,2.4,1.92\nEl Salvador,2021,277,4,2,6,460,431,1.44,0.72\nEl Salvador,2022,161,0,0,4,334,320,0.0,0.0\nEl Salvador,2023,90,0,2,2,79,69,0.0,2.22\nEl Salvador,2024,95,0,0,3,26,22,0.0,0.0\nEl Salvador,2025,110,1,2,3,20,10,0.91,1.82\nEl Salvador,2026,106,1,1,0,14,9,0.94,0.94\nGuadeloupe,2018,42,8,1,2,3,1,19.05,2.38\nGuadeloupe,2019,10,1,0,0,0,0,10.0,0.0\nGuadeloupe,2020,26,0,1,2,3,1,0.0,3.85\nGuadeloupe,2021,210,89,2,1,2,0,42.38,0.95\nGuadeloupe,2022,103,45,4,0,0,0,43.69,3.88\nGuadeloupe,2023,74,14,1,2,2,0,18.92,1.35\nGuadeloupe,2024,44,9,1,9,9,0,20.45,2.27\nGuadeloupe,2025,50,0,2,0,0,0,0.0,4.0\nGuadeloupe,2026,118,40,2,0,1,0,33.9,1.69\nGuatemala,2018,208,16,3,34,871,789,7.69,1.44\nGuatemala,2019,354,50,8,91,1165,1115,14.12,2.26\nGuatemala,2020,200,24,3,40,682,570,12.0,1.5\nGuatemala,2021,721,20,6,39,696,684,2.77,0.83\nGuatemala,2022,509,17,8,42,842,773,3.34,1.57\nGuatemala,2023,1028,35,23,46,946,887,3.4,2.24\nGuatemala,2024,116,3,1,16,369,415,2.59,0.86\nGuatemala,2025,331,13,3,48,814,796,3.93,0.91\nGuatemala,2026,342,29,5,35,812,861,8.48,1.46\nGuyana,2018,95,2,1,2,5,1,2.11,1.05\nGuyana,2019,49,0,0,1,4,2,0.0,0.0\nGuyana,2020,102,55,11,9,17,4,53.92,10.78\nGuyana,2021,41,4,0,2,6,1,9.76,0.0\nGuyana,2022,65,3,1,4,10,0,4.62,1.54\nGuyana,2023,52,4,4,5,12,1,7.69,7.69\nGuyana,2024,77,0,0,3,6,2,0.0,0.0\nGuyana,2025,55,11,0,1,10,7,20.0,0.0\nGuyana,2026,41,2,2,3,6,1,4.88,4.88\nHaiti,2018,331,134,24,29,182,247,40.48,7.25\nHaiti,2019,788,421,42,41,341,392,53.43,5.33\nHaiti,2020,422,175,21,32,551,708,41.47,4.98\nHaiti,2021,502,264,30,34,656,808,52.59,5.98\nHaiti,2022,469,240,23,30,915,1618,51.17,4.9\nHaiti,2023,284,96,16,140,1232,2489,33.8,5.63\nHaiti,2024,383,156,17,83,1456,3606,40.73,4.44\nHaiti,2025,302,82,22,91,1770,4768,27.15,7.28\nHaiti,2026,266,66,10,47,1087,2885,24.81,3.76\nHonduras,2018,515,80,30,27,684,785,15.53,5.83\nHonduras,2019,823,175,34,31,831,1007,21.26,4.13\nHonduras,2020,591,50,15,24,654,721,8.46,2.54\nHonduras,2021,795,31,2,19,624,708,3.9,0.25\nHonduras,2022,1117,104,6,22,612,697,9.31,0.54\nHonduras,2023,809,91,7,15,544,666,11.25,0.87\nHonduras,2024,623,51,9,3,429,486,8.19,1.44\nHonduras,2025,511,48,9,9,502,558,9.39,1.76\nHonduras,2026,390,37,7,19,560,608,9.49,1.79\nJamaica,2018,25,7,1,10,195,227,28.0,4.0\nJamaica,2019,24,5,0,3,253,277,20.83,0.0\nJamaica,2020,27,7,0,19,259,269,25.93,0.0\nJamaica,2021,64,10,1,14,282,302,15.63,1.56\nJamaica,2022,148,36,2,14,389,396,24.32,1.35\nJamaica,2023,122,14,5,15,422,418,11.48,4.1\nJamaica,2024,107,10,1,13,351,349,9.35,0.93\nJamaica,2025,62,7,2,9,286,300,11.29,3.23\nJamaica,2026,73,7,3,8,213,237,9.59,4.11\nMexico,2018,4484,207,75,622,8118,9609,4.62,1.67\nMexico,2019,5085,281,81,531,7743,9150,5.53,1.59\nMexico,2020,5917,274,107,492,7230,8310,4.63,1.81\nMexico,2021,6446,296,49,519,7362,8201,4.59,0.76\nMexico,2022,6398,311,55,381,7266,8031,4.86,0.86\nMexico,2023,5998,235,65,355,6663,7132,3.92,1.08\nMexico,2024,5992,189,72,350,7633,8336,3.15,1.2\nMexico,2025,7153,244,80,361,8106,8110,3.41,1.12\nMexico,2026,6095,184,74,255,5814,5505,3.02,1.21\nNicaragua,2018,976,288,178,12,59,24,29.51,18.24\nNicaragua,2019,220,9,41,10,77,29,4.09,18.64\nNicaragua,2020,67,2,10,7,63,28,2.99,14.93\nNicaragua,2021,25,0,7,2,45,35,0.0,28.0\nNicaragua,2022,11,0,5,1,13,7,0.0,45.45\nNicaragua,2023,4,0,1,0,15,13,0.0,25.0\nNicaragua,2024,3,0,0,1,15,16,0.0,0.0\nNicaragua,2025,4,0,1,0,10,8,0.0,25.0\nNicaragua,2026,0,0,0,3,11,6,,\nPanama,2018,523,19,32,4,6,2,3.63,6.12\nPanama,2019,370,15,11,5,12,2,4.05,2.97\nPanama,2020,353,9,9,8,19,4,2.55,2.55\nPanama,2021,493,14,6,4,12,5,2.84,1.22\nPanama,2022,626,37,21,5,7,1,5.91,3.35\nPanama,2023,744,64,25,3,7,5,8.6,3.36\nPanama,2024,268,5,12,6,18,5,1.87,4.48\nPanama,2025,405,77,26,2,5,0,19.01,6.42\nPanama,2026,130,3,2,0,5,4,2.31,1.54\nParaguay,2018,274,20,10,8,19,6,7.3,3.65\nParaguay,2019,541,29,15,21,42,25,5.36,2.77\nParaguay,2020,740,39,7,5,31,18,5.27,0.95\nParaguay,2021,1264,39,13,17,54,35,3.09,1.03\nParaguay,2022,1114,23,16,41,72,34,2.06,1.44\nParaguay,2023,793,48,28,18,37,8,6.05,3.53\nParaguay,2024,817,7,7,10,14,6,0.86,0.86\nParaguay,2025,846,7,13,5,7,0,0.83,1.54\nParaguay,2026,608,11,5,1,2,1,1.81,0.82\nPeru,2018,406,63,21,23,37,16,15.52,5.17\nPeru,2019,614,101,28,74,105,30,16.45,4.56\nPeru,2020,1063,121,62,144,164,16,11.38,5.83\nPeru,2021,1255,115,30,126,134,25,9.16,2.39\nPeru,2022,2041,224,40,123,130,22,10.98,1.96\nPeru,2023,3115,193,46,117,141,56,6.2,1.48\nPeru,2024,1381,132,11,174,237,45,9.56,0.8\nPeru,2025,1388,134,15,180,261,44,9.65,1.08\nPeru,2026,933,78,18,54,108,38,8.36,1.93\nPuerto Rico,2018,89,4,0,0,142,125,4.49,0.0\nPuerto Rico,2019,63,3,4,1,153,151,4.76,6.35\nPuerto Rico,2020,35,2,1,1,140,114,5.71,2.86\nPuerto Rico,2021,132,2,8,1,212,181,1.52,6.06\nPuerto Rico,2022,138,6,4,6,259,226,4.35,2.9\nPuerto Rico,2023,85,2,6,2,216,188,2.35,7.06\nPuerto Rico,2024,58,1,2,0,246,205,1.72,3.45\nPuerto Rico,2025,51,0,3,1,205,175,0.0,5.88\nPuerto Rico,2026,114,1,0,0,139,122,0.88,0.0\nTrinidad and Tobago,2018,112,15,5,8,285,241,13.39,4.46\nTrinidad and Tobago,2019,50,3,2,3,218,178,6.0,4.0\nTrinidad and Tobago,2020,92,25,4,3,188,161,27.17,4.35\nTrinidad and Tobago,2021,123,12,3,5,243,185,9.76,2.44\nTrinidad and Tobago,2022,266,79,1,4,348,290,29.7,0.38\nTrinidad and Tobago,2023,144,30,0,10,411,333,20.83,0.0\nTrinidad and Tobago,2024,149,10,1,3,391,325,6.71,0.67\nTrinidad and Tobago,2025,60,2,0,6,266,185,3.33,0.0\nTrinidad and Tobago,2026,81,0,3,5,180,168,0.0,3.7\nUruguay,2018,49,7,1,3,3,0,14.29,2.04\nUruguay,2019,51,5,0,8,12,3,9.8,0.0\nUruguay,2020,56,2,0,1,4,2,3.57,0.0\nUruguay,2021,56,1,5,1,1,0,1.79,8.93\nUruguay,2022,113,5,1,2,4,1,4.42,0.88\nUruguay,2023,100,3,2,2,3,1,3.0,2.0\nUruguay,2024,46,1,1,1,1,0,2.17,2.17\nUruguay,2025,56,4,0,0,0,0,7.14,0.0\nUruguay,2026,64,1,0,0,1,0,1.56,0.0\nVenezuela,2018,2170,143,165,102,1919,3055,6.59,7.6\nVenezuela,2019,2807,176,196,101,2267,3191,6.27,6.98\nVenezuela,2020,2632,123,127,76,1895,2588,4.67,4.83\nVenezuela,2021,1964,18,15,40,1407,1715,0.92,0.76\nVenezuela,2022,2265,16,8,41,877,1069,0.71,0.35\nVenezuela,2023,2874,34,22,59,656,747,1.18,0.77\nVenezuela,2024,1626,72,28,33,506,528,4.43,1.72\nVenezuela,2025,696,5,11,26,339,398,0.72,1.58\nVenezuela,2026,2836,65,16,31,312,409,2.29,0.56\n", "vp_mes": "mes,brasil,mexico,colombia,outros_latam,pct_brasil\n2018-01,836,646,192,517,38.2\n2018-02,780,600,135,533,38.1\n2018-03,892,631,110,469,42.4\n2018-04,916,575,175,527,41.8\n2018-05,661,669,146,514,33.2\n2018-06,767,607,130,492,38.4\n2018-07,818,702,151,489,37.9\n2018-08,1040,734,169,490,42.7\n2018-09,543,723,142,455,29.1\n2018-10,664,840,139,469,31.4\n2018-11,690,669,174,507,33.8\n2018-12,579,712,172,399,31.1\n2019-01,874,759,163,587,36.7\n2019-02,451,827,168,446,23.8\n2019-03,617,579,207,450,33.3\n2019-04,503,643,177,544,26.9\n2019-05,584,597,179,599,29.8\n2019-06,534,634,160,678,26.6\n2019-07,601,635,152,593,30.3\n2019-08,549,657,147,672,27.1\n2019-09,482,640,131,547,26.8\n2019-10,577,678,141,662,28.0\n2019-11,533,642,103,656,27.6\n2019-12,562,523,80,526,33.2\n2020-01,782,630,186,630,35.1\n2020-02,568,610,165,512,30.6\n2020-03,630,602,166,470,33.7\n2020-04,629,622,119,562,32.6\n2020-05,535,729,142,505,28.0\n2020-06,459,651,140,460,26.8\n2020-07,532,631,152,454,30.1\n2020-08,520,597,152,419,30.8\n2020-09,554,546,195,406,32.6\n2020-10,650,488,136,478,37.1\n2020-11,565,602,214,453,30.8\n2020-12,573,560,195,439,32.4\n2021-01,663,651,206,571,31.7\n2021-02,500,584,167,469,29.1\n2021-03,582,661,246,461,29.8\n2021-04,601,655,253,457,30.6\n2021-05,629,681,281,507,30.0\n2021-06,616,708,214,482,30.5\n2021-07,592,625,224,483,30.8\n2021-08,622,531,201,409,35.3\n2021-09,678,532,156,456,37.2\n2021-10,726,598,198,418,37.4\n2021-11,682,576,133,431,37.4\n2021-12,652,573,128,413,36.9\n2022-01,695,618,253,547,32.9\n2022-02,620,549,279,510,31.7\n2022-03,724,574,227,661,33.1\n2022-04,770,561,199,568,36.7\n2022-05,885,664,241,668,36.0\n2022-06,820,641,193,519,37.7\n2022-07,934,571,304,608,38.6\n2022-08,1002,625,209,519,42.5\n2022-09,929,549,199,628,40.3\n2022-10,932,651,216,600,38.8\n2022-11,899,584,218,477,41.3\n2022-12,813,557,166,490,40.1\n2023-01,901,625,207,580,39.0\n2023-02,787,510,218,601,37.2\n2023-03,874,553,250,618,38.1\n2023-04,792,556,207,760,34.2\n2023-05,920,624,227,790,35.9\n2023-06,833,536,208,648,37.4\n2023-07,916,639,282,668,36.6\n2023-08,930,641,300,732,35.7\n2023-09,891,553,264,760,36.1\n2023-10,866,539,239,643,37.9\n2023-11,761,477,226,580,37.2\n2023-12,711,475,207,559,36.4\n2024-01,830,506,243,681,36.7\n2024-02,726,541,191,512,36.9\n2024-03,905,547,204,628,39.6\n2024-04,798,631,200,525,37.0\n2024-05,735,654,172,682,32.8\n2024-06,715,707,176,547,33.3\n2024-07,756,705,153,616,33.9\n2024-08,858,632,215,618,36.9\n2024-09,862,648,210,576,37.5\n2024-10,863,794,235,687,33.5\n2024-11,802,678,201,639,34.6\n2024-12,781,611,180,688,34.6\n2025-01,901,727,232,829,33.5\n2025-02,759,706,212,729,31.5\n2025-03,801,668,267,859,30.9\n2025-04,797,734,280,670,32.1\n2025-05,819,691,237,773,32.5\n2025-06,790,773,190,670,32.6\n2025-07,936,729,264,686,35.8\n2025-08,986,676,277,655,38.0\n2025-09,913,632,292,633,37.0\n2025-10,914,660,234,686,36.6\n2025-11,912,587,229,722,37.2\n2025-12,853,545,189,621,38.6\n2026-01,1024,628,166,658,41.4\n2026-02,870,589,219,641,37.5\n2026-03,945,591,223,717,38.2\n2026-04,927,622,239,713,37.1\n2026-05,931,612,220,745,37.1\n2026-06,895,505,188,652,40.0\n2026-07,1041,559,234,712,40.9\n2026-08,958,540,263,704,38.9\n2026-09,1044,576,205,679,41.7\n2026-10,977,511,226,532,43.5\n", "civis_latam": "pais,eventos_contra_civis,mortes_civis,mortes,violencia_politica,pct_mortes_civis,mortes_por_evento\nMexico,47879,54211,67038,60219,80.9,1.13\nBrazil,36164,32182,60781,70810,52.9,0.89\nColombia,11592,10677,15197,18834,70.3,0.92\nEcuador,7620,8734,11371,10006,76.8,1.15\nHaiti,3829,5963,14889,7161,40.0,1.56\nVenezuela,4673,5173,13462,10007,38.4,1.11\nHonduras,4143,4784,5653,4905,84.6,1.15\nGuatemala,3796,3578,6042,6407,59.2,0.94\nJamaica,1690,1796,2534,2436,70.9,1.06\nEl Salvador,1655,1794,3110,2870,57.7,1.08\nTrinidad and Tobago,1919,1525,1902,2354,80.2,0.79\nPuerto Rico,1250,1049,1369,1577,76.6,0.84\nBelize,633,378,487,833,77.6,0.6\nNicaragua,409,335,492,441,68.1,0.82\nPeru,779,182,345,1212,52.8,0.23\n"};
+  const raw = {}; const calcs = {}; const cache = {}; const draws = [];
+  const rows = (id) => raw[id] || (raw[id] = d3.csvParse(CSV[id]));
+  const value = (id) => {
+    if (id in cache) return cache[id];
+    if (CSV[id]) return (cache[id] = rows(id));
+    const c = calcs[id];
+    return (cache[id] = c ? c.fn(...c.inputs.map(value)) : null);
+  };
+  return {
+    colors: ['var(--c1)', 'var(--c2)', 'var(--c3)', 'var(--c4)', 'var(--c5)', 'var(--c6)'],
+    data(id) {
+      if (!CSV[id] && !calcs[id]) return { status: 'missing', data: [], columns: [] };
+      const v = value(id);
+      return { status: 'ok', data: v, columns: CSV[id] ? rows(id).columns : [], truncated: false, refreshing: false };
+    },
+    calc(id, def) { calcs[id] = def; },
+    draw(name, fn) {
+      if (fn) { draws.push([name, fn]); return; }
+      draws.filter(([n]) => n === name).forEach(([n, f]) => document.querySelectorAll(`[data-draw="${n}"]`).forEach((el) => f(el)));
+    },
+    _runAll() { draws.forEach(([n, f]) => document.querySelectorAll(`[data-draw="${n}"]`).forEach((el) => { try { f(el); } catch (e) { console.error(n, e); } })); },
+    onData(fn) { fn(); }, params() { return {}; }, setParams() {}, setLink() {}
+  };
+})();
+</script>
+</head>
+<body>
+<div id="dash-root">
+<style>
+.pv { display: flex; flex-direction: column; gap: var(--cds-gap-xl); font-family: var(--font-anthropic-sans); color: var(--color-fg); }
+.pv-head { display: flex; flex-direction: column; gap: var(--cds-gap-sm); max-width: 72ch; }
+.pv-eyebrow { font-size: var(--cds-font-size-caption); letter-spacing: .08em; text-transform: uppercase; color: var(--color-fg-muted); margin: 0; }
+.pv h1 { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: 2.1rem; line-height: 1.15; margin: 0; text-wrap: balance; }
+.pv h2 { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); margin: 0; text-wrap: balance; }
+.pv h3 { font-size: var(--cds-font-size-body); font-weight: var(--cds-font-weight-medium); margin: 0; }
+.pv p { margin: 0; line-height: 1.55; }
+.pv .muted { color: var(--color-fg-muted); }
+.pv .lede { font-size: 1.05rem; }
+.pv .num { font-variant-numeric: tabular-nums; }
+.pv-tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: var(--cds-gap-md); }
+.pv-tile { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); display: flex; flex-direction: column; gap: var(--cds-gap-xs); min-width: 0; }
+.pv-tile .lbl { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+.pv-tile .big { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: 2rem; font-variant-numeric: tabular-nums; line-height: 1.1; }
+.pv-tile .sub { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+.pv-sec { display: flex; flex-direction: column; gap: var(--cds-gap-md); }
+.pv-sec-head { display: flex; flex-direction: column; gap: var(--cds-gap-xs); max-width: 75ch; }
+.pv-theory { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); letter-spacing: .06em; text-transform: uppercase; }
+.pv-grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: var(--cds-gap-lg); }
+.pv-card { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); display: flex; flex-direction: column; gap: var(--cds-gap-sm); min-width: 0; }
+.pv-chart { position: relative; width: 100%; min-height: 260px; }
+.pv-chart.tall { min-height: 360px; }
+.pv-chart svg { display: block; overflow: visible; }
+.pv-chart text { font-size: var(--cds-font-size-caption); fill: var(--cds-text-secondary); font-family: var(--font-anthropic-sans); }
+.pv-chart .domain { stroke: var(--cds-chart-axis); }
+.pv-chart .tick line { stroke: var(--cds-chart-grid); }
+.pv-chart .anno { fill: var(--color-fg); font-size: 11px; }
+.pv-chart .fail { fill: var(--color-fg-muted); }
+.pv-legend { display: flex; flex-wrap: wrap; gap: var(--cds-gap-xs) var(--cds-gap-md); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); margin: 0; padding: 0; list-style: none; }
+.pv-legend li { display: inline-flex; align-items: center; gap: 6px; }
+.pv-sw { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
+.pv-sw.line { height: 3px; width: 14px; border-radius: 2px; }
+.pv-tip { position: absolute; pointer-events: none; background: var(--cds-surface-popover); border: 1px solid var(--cds-border); box-shadow: var(--cds-shadow-popover); border-radius: 6px; padding: 6px 9px; font-size: var(--cds-font-size-caption); color: var(--color-fg); white-space: nowrap; z-index: 5; font-variant-numeric: tabular-nums; }
+.pv-tip b { font-weight: var(--cds-font-weight-medium); }
+.pv-tablewrap { overflow-x: auto; }
+.pv-table { width: 100%; border-collapse: collapse; font-size: var(--cds-font-size-caption); font-variant-numeric: tabular-nums; }
+.pv-table th, .pv-table td { padding: 6px 8px; text-align: right; border-bottom: 1px solid var(--color-border-line); white-space: nowrap; }
+.pv-table th:first-child, .pv-table td:first-child { text-align: left; }
+.pv-table th { color: var(--color-fg-muted); font-weight: var(--cds-font-weight-medium); }
+.pv-table th button { all: unset; cursor: pointer; }
+.pv-table th button:focus-visible { outline: 2px solid var(--color-fg); }
+.pv-bar { display: inline-block; height: 8px; border-radius: 2px; vertical-align: middle; margin-right: 6px; }
+.pv-note { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+.pv details { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-md) var(--cds-pad-lg); }
+.pv details summary { cursor: pointer; font-weight: var(--cds-font-weight-medium); }
+.pv details dl { display: grid; grid-template-columns: minmax(140px, max-content) 1fr; gap: 6px 16px; margin: var(--cds-gap-md) 0 0; font-size: var(--cds-font-size-caption); }
+.pv details dt { font-weight: var(--cds-font-weight-medium); }
+.pv details dd { margin: 0; color: var(--color-fg-muted); line-height: 1.5; }
+.pv details ul { margin: var(--cds-gap-sm) 0 0; padding-left: 18px; font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); line-height: 1.55; }
+.pv-toc { display: flex; flex-wrap: wrap; gap: var(--cds-gap-xs) var(--cds-gap-md); font-size: var(--cds-font-size-caption); }
+.pv-toc a { color: var(--color-fg-muted); text-decoration: none; border-bottom: 1px solid var(--color-border-line); }
+.pv-toc a:hover, .pv-toc a:focus-visible { color: var(--color-fg); border-bottom-color: var(--color-fg); }
+.pv-ctrl { display: flex; flex-wrap: wrap; align-items: center; gap: var(--cds-gap-sm) var(--cds-gap-md); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+.pv-ctrl select { max-width: 100%; }
+.pv-tag { display: inline-block; padding: 1px 7px; border-radius: 999px; border: 1px solid var(--color-border-line); color: var(--color-fg-muted); font-size: 11px; }
+[data-dash-source-state=refreshing] { opacity: .5; }
+@media (max-width: 520px) { .pv h1 { font-size: 1.6rem; } .pv details dl { grid-template-columns: 1fr; } }
+</style>
+
+<div class="pv">
+  <header class="pv-head" id="topo">
+    <p class="pv-eyebrow">ACLED · Brasil e América Latina · 2018–2026</p>
+    <h1>Protesto e violência no Brasil</h1>
+    <p class="lede">Em 2025, <b class="num" data-draw="tv2025" data-source="brasil_ano" data-field="taxa_violencia" data-where="ano=2025">—</b>% das manifestações registradas no Brasil foram violentas, contra <b class="num" data-draw="tv2018" data-source="brasil_ano" data-field="taxa_violencia" data-where="ano=2018">—</b>% em 2018. O volume de protestos <span data-draw="tendencia">—</span>, mas o repertório ficou mais confrontacional.</p>
+    <p class="lede">Ao mesmo tempo, a violência política armada cresceu: em 2025 houve <b class="num" data-draw="eco-vc25" data-source="brasil_ecologia" data-field="violencia_civis" data-where="ano=2025">—</b> ataques contra civis e <b class="num" data-draw="eco-bt25" data-source="brasil_ecologia" data-field="confrontos_armados" data-where="ano=2025">—</b> confrontos armados, contra <b class="num" data-draw="eco-pr25" data-source="brasil_ecologia" data-field="protestos" data-where="ano=2025">—</b> protestos.</p>
+    <p class="muted">Leitura pela teoria do confronto político: repertório (Tilly), ciclos de protesto (Tarrow), nexo repressão–dissenso (Davenport, Lichbach), escalada e flanco radical (della Porta) e violência difusa de atores armados não estatais. 2026 cobre até 31 de outubro.</p>
+    <nav class="pv-toc" aria-label="Seções">
+      <a href="#ecologia">Ecologia da violência</a>
+      <a href="#regiao">Brasil na região</a>
+      <a href="#repertorio">Repertório</a>
+      <a href="#ciclos">Ciclos</a>
+      <a href="#letalidade">Letalidade e exposição</a>
+      <a href="#repressao">Repressão</a>
+      <a href="#trajetorias">Trajetórias</a>
+      <a href="#geografia">Território</a>
+      <a href="#global">Mundo</a>
+    </nav>
+  </header>
+
+  <section class="pv-tiles" id="indicadores" aria-label="Indicadores principais, Brasil 2018–2025">
+    <div class="pv-tile">
+      <span class="lbl">Manifestações · 2018–2025</span>
+      <span class="big" data-draw="k-dem" data-source="kpi_brasil" data-field="demonstracoes" data-row="0">—</span>
+      <span class="sub">protestos e motins por manifestantes</span>
+    </div>
+    <div class="pv-tile">
+      <span class="lbl">Taxa de violência · 2018–2025</span>
+      <span class="big"><span data-draw="k-tv" data-source="kpi_brasil" data-field="taxa_violencia" data-row="0">—</span>%</span>
+      <span class="sub">manifestações violentas ÷ total</span>
+    </div>
+    <div class="pv-tile">
+      <span class="lbl">Taxa de repressão · 2018–2025</span>
+      <span class="big"><span data-draw="k-tr" data-source="kpi_brasil" data-field="taxa_repressao" data-row="0">—</span>%</span>
+      <span class="sub">intervenção ou força excessiva do Estado</span>
+    </div>
+    <div class="pv-tile">
+      <span class="lbl">Violência de turba · 2018–2025</span>
+      <span class="big" data-draw="k-turba" data-source="kpi_brasil" data-field="turba" data-row="0">—</span>
+      <span class="sub">eventos, sobretudo linchamentos</span>
+    </div>
+    <div class="pv-tile">
+      <span class="lbl">Mortes em protestos e turbas</span>
+      <span class="big" data-draw="k-mortes" data-source="kpi_brasil" data-field="mortes_protesto" data-row="0">—</span>
+      <span class="sub">2018–2025, mortes reportadas</span>
+    </div>
+    <div class="pv-tile">
+      <span class="lbl">Mortes em violência política</span>
+      <span class="big" data-draw="k-mvp" data-source="kpi_ecologia" data-field="mortes_vp" data-row="0">—</span>
+      <span class="sub">2018–2025, confrontos e ataques a civis</span>
+    </div>
+  </section>
+
+  <section class="pv-sec" id="ecologia">
+    <div class="pv-sec-head">
+      <span class="pv-theory">Violência política difusa · atores armados não estatais</span>
+      <h2>O protesto recua enquanto a violência armada avança</h2>
+      <p class="muted">No Brasil, a maior parte da violência política registrada pela ACLED envolve facções, milícias e forças policiais, não manifestantes. Comparar o protesto com esse pano de fundo separa o confronto político aberto da violência armada cotidiana. Em <b class="num" data-draw="eco-cruz" data-source="eco_cruzamento" data-field="ano" data-row="0">—</b>, os ataques contra civis passaram a superar os protestos e não voltaram a ficar abaixo deles.</p>
+    </div>
+    <div class="pv-grid2">
+      <div class="pv-card" id="card-ecologia">
+        <h3>Eventos por tipo, Brasil, por ano</h3>
+        <ul class="pv-legend">
+          <li><span class="pv-sw line" data-swatch="0"></span>Protestos</li>
+          <li><span class="pv-sw line" data-swatch="1"></span>Motins (manifestações violentas e turba)</li>
+          <li><span class="pv-sw line" data-swatch="3"></span>Confrontos armados</li>
+          <li><span class="pv-sw line" data-swatch="5"></span>Violência contra civis</li>
+        </ul>
+        <div class="pv-chart" data-draw="ecologia" data-source="brasil_ecologia"></div>
+      </div>
+      <div class="pv-card" id="card-mortes">
+        <h3>Mortes reportadas por tipo de evento</h3>
+        <ul class="pv-legend">
+          <li><span class="pv-sw" data-swatch="3"></span>Confrontos armados</li>
+          <li><span class="pv-sw" data-swatch="5"></span>Violência contra civis</li>
+          <li><span class="pv-sw" data-swatch="2"></span>Demais eventos</li>
+        </ul>
+        <div class="pv-chart" data-draw="mortes" data-source="brasil_ecologia"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pv-sec" id="regiao">
+    <div class="pv-sec-head">
+      <span class="pv-theory">Contexto regional · violência contra civis</span>
+      <h2>Muitos eventos, letalidade menor que a do México</h2>
+      <p class="muted">Desde 2018, o Brasil concentra <b class="num" data-draw="rg-pct-vp" data-source="regiao_participacao" data-field="pct_vp" data-row="0">—</b>% dos eventos de violência política registrados na América Latina e no Caribe, mais que qualquer outro país, mas responde por <b class="num" data-draw="rg-pct-mc" data-source="regiao_participacao" data-field="pct_mortes_civis" data-row="0">—</b>% das mortes de civis da região. No Brasil, <b class="num" data-draw="rg-br-pct" data-source="civis_latam" data-field="pct_mortes_civis" data-where="pais=Brazil">—</b>% das mortes em violência política são de civis; no México, <b class="num" data-draw="rg-mx-pct" data-source="civis_latam" data-field="pct_mortes_civis" data-where="pais=Mexico">—</b>%.</p>
+    </div>
+    <div class="pv-grid2">
+      <div class="pv-card" id="card-vp-mes">
+        <h3>Eventos de violência política por mês</h3>
+        <ul class="pv-legend">
+          <li><span class="pv-sw line" data-swatch="1"></span>Brasil</li>
+          <li><span class="pv-sw line" data-swatch="0"></span>México</li>
+          <li><span class="pv-sw line" data-swatch="3"></span>Colômbia</li>
+          <li><span class="pv-sw line" data-swatch="2"></span>Demais países da região</li>
+        </ul>
+        <div class="pv-chart" data-draw="vp-mes" data-source="vp_mes"></div>
+        <p class="pv-note">Inclui confrontos armados, explosões, violência contra civis e violência de turba. Outubro de 2026 é o último mês.</p>
+      </div>
+      <div class="pv-card" id="card-civis">
+        <h3>Violência contra civis por país, 2018–2025</h3>
+        <div class="pv-ctrl">
+          <label for="civis-sel">Medida</label>
+          <select id="civis-sel" class="dash-select" aria-label="Medida de violência contra civis">
+            <option value="mortes_civis">Mortes de civis</option>
+            <option value="eventos_contra_civis">Eventos contra civis</option>
+            <option value="pct_mortes_civis">Civis no total de mortes (%)</option>
+            <option value="mortes_por_evento">Mortes de civis por evento</option>
+          </select>
+        </div>
+        <div class="pv-chart" data-draw="civis" data-source="civis_latam"></div>
+        <p class="pv-note">Países com ao menos 300 mortes em violência política no período.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="pv-sec" id="repertorio">
+    <div class="pv-sec-head">
+      <span class="pv-theory">Repertório de confronto · Tilly</span>
+      <h2>Menos protestos, maior parcela violenta</h2>
+      <p class="muted">O repertório é o conjunto de formas de ação que um grupo conhece e usa. A queda do protesto pacífico após 2022 não veio acompanhada de queda proporcional das manifestações violentas, o que eleva a taxa de violência.</p>
+    </div>
+    <div class="pv-grid2">
+      <div class="pv-card" id="card-repertorio-ano">
+        <h3>Manifestações por forma de ação, por ano</h3>
+        <ul class="pv-legend">
+          <li><span class="pv-sw" data-swatch="0"></span>Pacífico</li>
+          <li><span class="pv-sw" data-swatch="1"></span>Violento</li>
+          <li><span class="pv-sw" data-swatch="2"></span>Reprimido pelo Estado</li>
+        </ul>
+        <div class="pv-chart" data-draw="repertorio" data-source="brasil_ano"></div>
+      </div>
+      <div class="pv-card" id="card-taxas">
+        <h3>Taxas de violência e repressão (%)</h3>
+        <ul class="pv-legend">
+          <li><span class="pv-sw line" data-swatch="1"></span>Taxa de violência</li>
+          <li><span class="pv-sw line" data-swatch="2"></span>Taxa de repressão</li>
+        </ul>
+        <div class="pv-chart" data-draw="taxas" data-source="brasil_ano"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pv-sec" id="ciclos">
+    <div class="pv-sec-head">
+      <span class="pv-theory">Ciclos de protesto · Tarrow</span>
+      <h2>Picos concentrados em crises nacionais</h2>
+      <p class="muted">Ciclos de protesto são fases de mobilização intensa que se difundem entre setores e territórios e depois declinam. O maior pico mensal foi <b class="num" data-draw="pico-mes" data-source="pico_mensal" data-field="mes" data-row="0">—</b>, com <b class="num" data-draw="pico-total" data-source="pico_mensal" data-field="total" data-row="0">—</b> manifestações.</p>
+    </div>
+    <div class="pv-card" id="card-ciclos">
+      <h3>Manifestações por mês no Brasil</h3>
+      <ul class="pv-legend">
+        <li><span class="pv-sw" data-swatch="0"></span>Pacíficas</li>
+        <li><span class="pv-sw line" data-swatch="1"></span>Violentas</li>
+        <li><span class="pv-sw line" data-swatch="4"></span>Violência de turba</li>
+      </ul>
+      <div class="pv-chart tall" data-draw="ciclos" data-source="brasil_mes"></div>
+      <p class="pv-note">Marcos anotados: greve dos caminhoneiros (mai/2018), Tsunami da Educação (mai/2019), atos de 7 de setembro (set/2021), bloqueios após o 2º turno (out/2022), ataques de 8 de janeiro (jan/2023).</p>
+    </div>
+  </section>
+
+  <section class="pv-sec" id="letalidade">
+    <div class="pv-sec-head">
+      <span class="pv-theory">Escalada e flanco radical · della Porta</span>
+      <h2>Manifestação violenta expõe mais gente, mas raramente mata</h2>
+      <p class="muted">A letalidade mede mortes por 100 eventos; a exposição, a população média que vive no entorno de cada evento (estimativa da ACLED). Uma manifestação violenta expõe em média <b class="num" data-draw="lt-pop-vd" data-source="brasil_subtipo" data-field="pop_media" data-where="sub_event_type=Violent%20demonstration">—</b> pessoas, contra <b class="num" data-draw="lt-pop-pp" data-source="brasil_subtipo" data-field="pop_media" data-where="sub_event_type=Peaceful%20protest">—</b> num protesto pacífico. Já a violência de turba, com linchamentos, tem letalidade de <b class="num" data-draw="lt-mob" data-source="brasil_subtipo" data-field="letalidade" data-where="sub_event_type=Mob%20violence">—</b> mortes por 100 eventos.</p>
+    </div>
+    <div class="pv-card" id="card-subtipos">
+      <h3>Subtipos de evento no Brasil, 2018–out/2026</h3>
+      <div class="pv-tablewrap">
+        <table class="pv-table" data-source="brasil_subtipo" data-row-key="sub_event_type">
+          <thead>
+            <tr>
+              <th data-field="sub_event_type">Subtipo de evento</th>
+              <th data-field="disorder_type">Categoria</th>
+              <th data-field="eventos">Eventos</th>
+              <th data-field="mortes">Mortes</th>
+              <th data-field="letalidade">Letalidade (por 100)</th>
+              <th data-field="pop_media">População exposta média</th>
+            </tr>
+          </thead>
+          <tbody data-draw="subtipos"></tbody>
+        </table>
+      </div>
+      <p class="pv-note">Subtipos com ao menos 50 eventos. Desenvolvimentos estratégicos (saques, depredação, prisões) não têm estimativa de exposição. A exposição soma a população no entorno de cada evento e pode contar a mesma pessoa mais de uma vez.</p>
+    </div>
+  </section>
+
+  <section class="pv-sec" id="repressao">
+    <div class="pv-sec-head">
+      <span class="pv-theory">Nexo repressão–dissenso · Davenport, Lichbach</span>
+      <h2>Brasil na América Latina: violência alta, repressão moderada</h2>
+      <p class="muted">Cada ponto é um país (2018–2025, mínimo de 500 manifestações). A posição horizontal mede quanto o Estado intervém nos protestos; a vertical, quanto os próprios manifestantes recorrem à violência. Regimes fechados (Cuba, Nicarágua) reprimem muito e registram pouca violência de rua; o Brasil tem <b class="num" data-draw="br-tv" data-source="latam_pais" data-field="taxa_violencia" data-where="pais=Brazil">—</b>% de manifestações violentas e <b class="num" data-draw="br-tr" data-source="latam_pais" data-field="taxa_repressao" data-where="pais=Brazil">—</b>% reprimidas.</p>
+    </div>
+    <div class="pv-card" id="card-dispersao">
+      <h3>Taxa de repressão × taxa de violência, por país</h3>
+      <p class="pv-note">Eixo horizontal em escala logarítmica. Tamanho do ponto = número de manifestações.</p>
+      <div class="pv-chart tall" data-draw="dispersao" data-source="latam_pais"></div>
+    </div>
+  </section>
+
+  <section class="pv-sec" id="trajetorias">
+    <div class="pv-sec-head">
+      <span class="pv-theory">Análise comparada · ciclos nacionais</span>
+      <h2>Trajetórias comparadas</h2>
+      <p class="muted">Escolha um país para comparar ano a ano com o Brasil. A explosão social chilena de 2019 e os protestos colombianos de 2021 mostram ciclos curtos e intensos; o Brasil tem uma trajetória mais estável.</p>
+    </div>
+    <div class="pv-card" id="card-trajetorias">
+      <div class="pv-ctrl">
+        <label for="pais-sel">Comparar o Brasil com</label>
+        <select id="pais-sel" class="dash-select" data-draw="pais-sel" aria-label="País para comparar" data-source="pais_ano"></select>
+        <label for="var-sel">Indicador</label>
+        <select id="var-sel" class="dash-select" aria-label="Indicador">
+          <option value="taxa_violencia">Taxa de violência (%)</option>
+          <option value="taxa_repressao">Taxa de repressão (%)</option>
+          <option value="demonstracoes">Manifestações</option>
+          <option value="turba">Violência de turba</option>
+          <option value="violencia_politica">Eventos de violência política</option>
+          <option value="mortes_vp">Mortes em violência política</option>
+        </select>
+      </div>
+      <ul class="pv-legend">
+        <li><span class="pv-sw line" data-swatch="1"></span>Brasil</li>
+        <li><span class="pv-sw line" data-swatch="0"></span>País escolhido</li>
+      </ul>
+      <div class="pv-chart" data-draw="trajetoria" data-source="pais_ano"></div>
+      <p class="pv-note">2026 é parcial (até 31/10). Países com ao menos 500 manifestações entre 2018 e 2025.</p>
+    </div>
+  </section>
+
+  <section class="pv-sec" id="geografia">
+    <div class="pv-sec-head">
+      <span class="pv-theory">Estrutura de oportunidades políticas · território</span>
+      <h2>Onde o protesto vira confronto</h2>
+      <p class="muted">São Paulo concentra o maior volume, mas a taxa de violência é maior no Nordeste: <span data-draw="uf-top">—</span> lidera, com <b class="num" data-draw="uf-top-tv" data-source="uf_ranking" data-field="taxa_violencia" data-row="0">—</b>% de manifestações violentas. Estados com mais violência armada (Rio de Janeiro, Bahia, Pernambuco) tendem a ter protestos mais violentos: a correlação de postos entre as duas medidas é <b class="num" data-draw="uf-rho" data-source="uf_correlacao">—</b> (Spearman, 27 UFs), uma associação moderada, não uma relação causal.</p>
+    </div>
+    <div class="pv-card" id="card-uf-dispersao">
+      <h3>Violência política armada × taxa de violência nos protestos, por UF</h3>
+      <p class="pv-note">Eixo horizontal em escala logarítmica: eventos de violência política (confrontos, ataques a civis, explosões) de 2018 a out/2026. Tamanho do ponto = manifestações.</p>
+      <div class="pv-chart tall" data-draw="uf-dispersao" data-source="brasil_uf"></div>
+    </div>
+    <div class="pv-card" id="card-ufs">
+      <div class="pv-tablewrap">
+        <table class="pv-table" data-source="brasil_uf" data-row-key="uf">
+          <thead>
+            <tr>
+              <th data-field="uf"><button type="button" data-sort="uf">UF</button></th>
+              <th data-field="demonstracoes"><button type="button" data-sort="demonstracoes">Manifestações</button></th>
+              <th data-field="violentas"><button type="button" data-sort="violentas">Violentas</button></th>
+              <th data-field="taxa_violencia"><button type="button" data-sort="taxa_violencia">Taxa de violência</button></th>
+              <th data-field="taxa_repressao"><button type="button" data-sort="taxa_repressao">Taxa de repressão</button></th>
+              <th data-field="turba"><button type="button" data-sort="turba">Turba</button></th>
+              <th data-field="saques_depredacao"><button type="button" data-sort="saques_depredacao">Saques e depredação</button></th>
+              <th data-field="violencia_politica"><button type="button" data-sort="violencia_politica">Violência política</button></th>
+              <th data-field="mortes_vp"><button type="button" data-sort="mortes_vp">Mortes (v. política)</button></th>
+            </tr>
+          </thead>
+          <tbody data-draw="ufs"></tbody>
+        </table>
+      </div>
+      <p class="pv-note">Período 2018–out/2026. Taxas em % do total de manifestações da UF. Clique no cabeçalho para ordenar.</p>
+    </div>
+  </section>
+
+  <section class="pv-sec" id="global">
+    <div class="pv-sec-head">
+      <span class="pv-theory">Contexto global</span>
+      <h2>O Brasil fora do topo mundial em 2025</h2>
+      <p class="muted">Em 2025 o Brasil ficou na <b class="num" data-draw="br-pos" data-source="global_2025" data-field="posicao" data-where="pais=Brazil">—</b>ª posição em número de manifestações registradas pela ACLED no mundo.</p>
+    </div>
+    <div class="pv-card" id="card-global">
+      <h3>Manifestações em 2025: 15 países com mais eventos e o Brasil</h3>
+      <div class="pv-chart tall" data-draw="global" data-source="global_2025"></div>
+    </div>
+  </section>
+
+  <details id="metodo">
+    <summary>Definições, método e limites dos dados</summary>
+    <dl>
+      <dt>Protesto pacífico</dt><dd>Manifestação pública sem violência dos participantes e sem intervenção do Estado (ACLED: Peaceful protest).</dd>
+      <dt>Protesto reprimido</dt><dd>Protesto pacífico dispersado ou contido pelas forças de segurança, sem força letal (Protest with intervention).</dd>
+      <dt>Força excessiva</dt><dd>Uso de força letal ou grave contra manifestantes desarmados (Excessive force against protesters). Somado ao anterior, compõe a taxa de repressão.</dd>
+      <dt>Manifestação violenta</dt><dd>Manifestantes praticam violência contra pessoas ou propriedade (Violent demonstration). Base da taxa de violência.</dd>
+      <dt>Violência de turba</dt><dd>Violência coletiva sem caráter de manifestação, incluindo linchamentos (Mob violence). Fica fora do total de manifestações.</dd>
+      <dt>Manifestações</dt><dd>Soma de protestos pacíficos, reprimidos, com força excessiva e manifestações violentas.</dd>
+      <dt>Confrontos armados</dt><dd>Embates entre grupos armados organizados, incluindo facções, milícias e polícia (Battles).</dd>
+      <dt>Violência contra civis</dt><dd>Ataques, sequestros e violência sexual de grupos armados contra pessoas desarmadas (Violence against civilians).</dd>
+      <dt>Desenvolvimentos estratégicos</dt><dd>Eventos não violentos mas relevantes, como saques e depredação, prisões e apreensões de armas (Strategic developments).</dd>
+      <dt>Letalidade</dt><dd>Mortes reportadas por 100 eventos do mesmo subtipo.</dd>
+      <dt>População exposta</dt><dd>Estimativa da ACLED da população que vive no entorno de cada evento; aqui, a média por evento.</dd>
+      <dt>Modelo SQL</dt><dd>Esquema estrelado em SQLite: dim_pais, dim_local (UF), dim_tipo_evento (com a classificação de repertório), fato_semana e fato_pais_ano. As tabelas deste painel são as views vw_brasil_ano, vw_brasil_mes, vw_brasil_uf_contexto, vw_brasil_ecologia, vw_brasil_subtipo, vw_pais_ano, vw_latam_pais, vw_global_2025, vw_vp_mes e vw_civis_latam (estas duas a partir das séries país-mês e país-ano da ACLED, carregadas em fato_pais_mes e fato_pais_ano).</dd>
+    </dl>
+    <ul>
+      <li>Dados agregados por semana, região administrativa e tipo de evento (ACLED, América Latina e Caribe, até a semana de 31/10/2026); séries país-ano e país-mês até 30/10/2026. A cobertura da ACLED para a região começa em 2018, então os anos anteriores ficam de fora.</li>
+      <li>Metodologia Brasil (ACLED): mais de 50 fontes em português e inglês por semana; fontes nacionais cobrem bem protestos e motins, mas a cobertura rural é menor, o que pode gerar viés urbano.</li>
+      <li>Mudanças de volume entre anos podem refletir mudanças na cobertura de fontes, não só no comportamento dos atores.</li>
+      <li>2026 é parcial; os indicadores agregados usam 2018–2025.</li>
+    </ul>
+  </details>
+
+  <section class="pv-sec pv-refs" id="referencias">
+    <div class="pv-sec-head">
+      <h2>Referências</h2>
+    </div>
+    <h3>Dados</h3>
+    <ol>
+      <li>ACLED – Armed Conflict Location &amp; Event Data. <i>Latin America &amp; the Caribbean: aggregated data</i> (dados semanais por região administrativa e tipo de evento, até a semana de 31 out. 2026). Disponível em: <a href="https://acleddata.com" target="_blank" rel="noopener">https://acleddata.com</a>. Acesso em: 10 nov. 2026.</li>
+      <li>ACLED – Armed Conflict Location &amp; Event Data. <i>Number of demonstration events, political violence events, events targeting civilians, reported fatalities and reported civilian fatalities by country-year</i>; <i>Number of political violence events by country-month-year</i> (atualizados até 30 out. 2026). Disponível em: <a href="https://acleddata.com" target="_blank" rel="noopener">https://acleddata.com</a>. Acesso em: 10 nov. 2026.</li>
+      <li>ACLED – Armed Conflict Location &amp; Event Data. <i>ACLED Codebook</i>. Disponível em: <a href="https://acleddata.com/methodology/acled-codebook" target="_blank" rel="noopener">https://acleddata.com/methodology/acled-codebook</a>. Acesso em: 13 nov. 2026.</li>
+      <li>ACLED – Armed Conflict Location &amp; Event Data. <i>ACLED's methodology: Brazil</i>. Disponível em: <a href="https://acleddata.com/methodology/acleds-methodology-brazil" target="_blank" rel="noopener">https://acleddata.com/methodology/acleds-methodology-brazil</a>. Acesso em: 13 nov. 2026.</li>
+      <li>RALEIGH, Clionadh; LINKE, Andrew; HEGRE, Håvard; KARLSEN, Joakim. Introducing ACLED: an Armed Conflict Location and Event Dataset. <i>Journal of Peace Research</i>, v. 47, n. 5, p. 651–660, 2010.</li>
+      <li>RALEIGH, Clionadh; KISHI, Roudabeh; LINKE, Andrew. Political instability patterns are obscured by conflict dataset scope conditions, sources, and coding choices. <i>Humanities and Social Sciences Communications</i>, v. 10, art. 74, 2023.</li>
+    </ol>
+    <h3>Teoria</h3>
+    <ol>
+      <li>DAVENPORT, Christian. State repression and political order. <i>Annual Review of Political Science</i>, v. 10, p. 1–23, 2007.</li>
+      <li>DELLA PORTA, Donatella. <i>Social movements, political violence, and the state</i>: a comparative analysis of Italy and Germany. Cambridge: Cambridge University Press, 1995.</li>
+      <li>HAINES, Herbert H. Black radicalization and the funding of civil rights: 1957–1970. <i>Social Problems</i>, v. 32, n. 1, p. 31–43, 1984.</li>
+      <li>LICHBACH, Mark Irving. Deterrence or escalation? The puzzle of aggregate studies of repression and dissent. <i>Journal of Conflict Resolution</i>, v. 31, n. 2, p. 266–297, 1987.</li>
+      <li>McADAM, Doug; TARROW, Sidney; TILLY, Charles. <i>Dynamics of contention</i>. Cambridge: Cambridge University Press, 2001.</li>
+      <li>TARROW, Sidney. <i>Power in movement</i>: social movements and contentious politics. 3. ed. Cambridge: Cambridge University Press, 2011.</li>
+      <li>TILLY, Charles. <i>Regimes and repertoires</i>. Chicago: University of Chicago Press, 2006.</li>
+    </ol>
+    <p class="pv-note">Processamento: dados organizados em banco SQLite (esquema estrelado) e agregados por views SQL; visualização em D3.js. Os dados ACLED estão sujeitos aos termos de uso da ACLED.</p>
+  </section>
+</div>
+
+<script>
+(function () {
+  const PT = { 'Mexico':'México','Brazil':'Brasil','Argentina':'Argentina','Venezuela':'Venezuela','Chile':'Chile','Colombia':'Colômbia','Peru':'Peru','Bolivia':'Bolívia','Paraguay':'Paraguai','Honduras':'Honduras','Ecuador':'Equador','Panama':'Panamá','Haiti':'Haiti','Guatemala':'Guatemala','Costa Rica':'Costa Rica','Nicaragua':'Nicarágua','El Salvador':'El Salvador','Trinidad and Tobago':'Trinidad e Tobago','Puerto Rico':'Porto Rico','Cuba':'Cuba','Jamaica':'Jamaica','Guadeloupe':'Guadalupe','Dominican Republic':'Rep. Dominicana','Guyana':'Guiana','Uruguay':'Uruguai','India':'Índia','United States':'Estados Unidos','Yemen':'Iêmen','Pakistan':'Paquistão','France':'França','South Korea':'Coreia do Sul','Turkey':'Turquia','Indonesia':'Indonésia','Spain':'Espanha','Iran':'Irã','Italy':'Itália','Serbia':'Sérvia','Bangladesh':'Bangladesh','Germany':'Alemanha' };
+  const UF = { 'Sao Paulo':'São Paulo','Para':'Pará','Parana':'Paraná','Amapa':'Amapá','Ceara':'Ceará','Espirito Santo':'Espírito Santo','Goias':'Goiás','Maranhao':'Maranhão','Paraiba':'Paraíba','Piaui':'Piauí','Rondonia':'Rondônia' };
+  const fmt = d3.format(',d');
+  const nf = (v) => fmt(v).replace(/,/g, '.');
+  const pct = (v) => (+v).toFixed(1).replace('.', ',');
+  window.PV = { PT, UF, nf, pct,
+    num(rows, keys) { return rows.map((r) => { const o = { ...r }; keys.forEach((k) => { o[k] = +r[k]; }); return o; }); },
+    tip(el) {
+      let t = el.querySelector(':scope > .pv-tip');
+      if (!t) { t = document.createElement('div'); t.className = 'pv-tip'; t.hidden = true; el.appendChild(t); }
+      return {
+        show(ev, lines) {
+          t.replaceChildren(...lines.map((l, i) => { const d = document.createElement('div'); if (i === 0) { const b = document.createElement('b'); b.textContent = l; d.appendChild(b); } else d.textContent = l; return d; }));
+          t.hidden = false;
+          const r = el.getBoundingClientRect(); const x = ev.clientX - r.left; const y = ev.clientY - r.top;
+          const w = t.offsetWidth; const left = Math.min(Math.max(0, x + 12), r.width - w);
+          t.style.left = (x + 12 + w > r.width ? Math.max(0, x - w - 12) : left) + 'px';
+          t.style.top = Math.max(0, y - t.offsetHeight - 8) + 'px';
+        },
+        hide() { t.hidden = true; }
+      };
+    },
+    fail(el, st) {
+      el.replaceChildren();
+      if (st === 'error') { const p = document.createElement('p'); p.className = 'pv-note'; p.textContent = 'Falha ao carregar'; el.appendChild(p); }
+    },
+    // esconde rótulos que encostam em outros já desenhados (na ordem dada)
+    declutter(nodes, pad = 2) {
+      const kept = [];
+      const hit = (a, b) => a.x < b.x + b.width + pad && b.x < a.x + a.width + pad && a.y < b.y + b.height + pad && b.y < a.y + a.height + pad;
+      nodes.forEach((n) => { const b = n.getBBox(); if (kept.some((k) => hit(b, k))) n.setAttribute('display', 'none'); else kept.push(b); });
+    },
+    textW(svg, s) { const t = svg.append('text').text(s); const w = t.node().getComputedTextLength(); t.remove(); return w; }
+  };
+})();
+
+dash.calc('kpi_brasil', {
+  title: 'Indicadores Brasil 2018–2025',
+  description: 'Somas e taxas do Brasil nos anos completos 2018–2025, a partir da série anual.',
+  inputs: ['brasil_ano'],
+  fn: (brasil_ano) => {
+    const r = brasil_ano.filter((d) => +d.ano >= 2018 && +d.ano <= 2025);
+    const s = (k) => d3.sum(r, (d) => +d[k]);
+    const dem = s('demonstracoes');
+    return [{
+      demonstracoes: dem,
+      turba: s('turba'),
+      mortes_protesto: s('mortes_protesto'),
+      taxa_violencia: Math.round(1000 * s('violentas') / dem) / 10,
+      taxa_repressao: Math.round(1000 * (s('com_intervencao') + s('forca_excessiva')) / dem) / 10
+    }];
+  }
+});
+
+dash.calc('pico_mensal', {
+  title: 'Mês de maior mobilização',
+  description: 'Mês com mais manifestações no Brasil (pacíficas + violentas + reprimidas).',
+  inputs: ['brasil_mes'],
+  fn: (brasil_mes) => {
+    const r = brasil_mes.map((d) => ({ mes: d.mes, total: +d.pacificos + +d.violentas + +d.reprimidas }));
+    const top = r.reduce((a, b) => (b.total > a.total ? b : a), r[0] || { mes: null, total: null });
+    return [top];
+  }
+});
+
+dash.calc('uf_ranking', {
+  title: 'UFs por taxa de violência',
+  description: 'UFs com pelo menos 300 manifestações, ordenadas pela taxa de violência.',
+  inputs: ['brasil_uf'],
+  fn: (brasil_uf) => brasil_uf.filter((d) => +d.demonstracoes >= 300)
+    .map((d) => ({ uf: d.uf, taxa_violencia: +d.taxa_violencia }))
+    .sort((a, b) => b.taxa_violencia - a.taxa_violencia)
+});
+</script>
+
+<script>
+// Números do texto e dos cartões
+(function () {
+  const { nf, pct, UF } = window.PV;
+  const cell = (id, where, field, f) => (el) => {
+    const s = dash.data(id);
+    if (s.status !== 'ok') { el.textContent = '—'; return; }
+    const r = where ? s.data.find((d) => d[where[0]] === where[1]) : s.data[0];
+    el.textContent = r && r[field] != null ? f(r[field]) : '—';
+  };
+  dash.draw('tv2025', cell('brasil_ano', ['ano', '2025'], 'taxa_violencia', pct));
+  dash.draw('tv2018', cell('brasil_ano', ['ano', '2018'], 'taxa_violencia', pct));
+  dash.draw('tendencia', (el) => {
+    const s = dash.data('brasil_ano');
+    if (s.status !== 'ok') { el.textContent = '—'; return; }
+    const a = s.data.find((d) => d.ano === '2018'); const b = s.data.find((d) => d.ano === '2025');
+    if (!a || !b) { el.textContent = '—'; return; }
+    const ch = (+b.demonstracoes - +a.demonstracoes) / +a.demonstracoes;
+    el.textContent = ch < 0 ? `caiu ${Math.round(-ch * 100)}% no período` : `subiu ${Math.round(ch * 100)}% no período`;
+  });
+  dash.draw('k-dem', cell('kpi_brasil', null, 'demonstracoes', nf));
+  dash.draw('k-tv', cell('kpi_brasil', null, 'taxa_violencia', pct));
+  dash.draw('k-tr', cell('kpi_brasil', null, 'taxa_repressao', pct));
+  dash.draw('k-turba', cell('kpi_brasil', null, 'turba', nf));
+  dash.draw('k-mortes', cell('kpi_brasil', null, 'mortes_protesto', nf));
+  const MES = ['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
+  dash.draw('pico-mes', cell('pico_mensal', null, 'mes', (m) => { const [y, mm] = m.split('-'); return `${MES[+mm - 1]}/${y}`; }));
+  dash.draw('pico-total', cell('pico_mensal', null, 'total', nf));
+  dash.draw('br-tv', cell('latam_pais', ['pais', 'Brazil'], 'taxa_violencia', pct));
+  dash.draw('br-tr', cell('latam_pais', ['pais', 'Brazil'], 'taxa_repressao', pct));
+  dash.draw('br-pos', cell('global_2025', ['pais', 'Brazil'], 'posicao', (v) => String(+v)));
+  dash.draw('uf-top', cell('uf_ranking', null, 'uf', (v) => UF[v] || v));
+  dash.draw('uf-top-tv', cell('uf_ranking', null, 'taxa_violencia', pct));
+  window.PV.MES = MES;
+})();
+</script>
+
+<script>
+// Repertório por ano (barras empilhadas) e taxas (linhas)
+(function () {
+  const P = window.PV;
+  dash.draw('repertorio', (el) => {
+    const s = dash.data('brasil_ano');
+    if (s.status !== 'ok') { P.fail(el, s.status); return; }
+    const rows = P.num(s.data, ['ano', 'pacificos', 'violentas', 'com_intervencao', 'forca_excessiva']).map((d) => ({ ano: d.ano, pacificos: d.pacificos, violentas: d.violentas, reprimidas: d.com_intervencao + d.forca_excessiva }));
+    const keys = ['pacificos', 'violentas', 'reprimidas'];
+    const names = { pacificos: 'Pacífico', violentas: 'Violento', reprimidas: 'Reprimido' };
+    const colors = { pacificos: dash.colors[0], violentas: dash.colors[1], reprimidas: dash.colors[2] };
+    el.replaceChildren();
+    const W = el.clientWidth, H = 260;
+    const svg = d3.select(el).append('svg').attr('width', '100%').attr('height', H).attr('viewBox', `0 0 ${W} ${H}`)
+      .attr('role', 'img').attr('aria-label', 'Barras empilhadas de manifestações por ano no Brasil, por forma de ação');
+    const maxV = d3.max(rows, (d) => d.pacificos + d.violentas + d.reprimidas);
+    const y = d3.scaleLinear().domain([0, maxV]).nice().range([H - 24, 8]);
+    const ml = P.textW(svg, P.nf(y.domain()[1])) + 10;
+    const x = d3.scaleBand().domain(rows.map((d) => d.ano)).range([ml, W - 4]).padding(0.25);
+    svg.append('g').attr('transform', `translate(${ml},0)`).call(d3.axisLeft(y).ticks(5).tickSize(-(W - ml - 4)).tickFormat(P.nf)).call((g) => g.select('.domain').remove());
+    svg.append('g').attr('transform', `translate(0,${H - 24})`).call(d3.axisBottom(x).tickSize(0).tickPadding(6).tickFormat((d) => (W < 420 ? `'${String(d).slice(2)}` : d)));
+    const st = d3.stack().keys(keys)(rows);
+    const tip = P.tip(el);
+    svg.append('g').selectAll('g').data(st).join('g').style('fill', (d) => colors[d.key])
+      .selectAll('rect').data((d) => d.map((v) => Object.assign(v, { key: d.key }))).join('rect')
+      .attr('x', (d) => x(d.data.ano)).attr('width', x.bandwidth())
+      .attr('y', (d) => y(d[1])).attr('height', (d) => Math.max(0, y(d[0]) - y(d[1])))
+      .on('pointermove', (ev, d) => tip.show(ev, [String(d.data.ano), ...keys.map((k) => `${names[k]}: ${P.nf(d.data[k])}`)]))
+      .on('pointerleave', () => tip.hide());
+    const last = rows[rows.length - 1];
+    if (last && last.ano === 2026) svg.append('text').attr('x', x(2026) + x.bandwidth() / 2).attr('y', y(last.pacificos + last.violentas + last.reprimidas) - 4).attr('text-anchor', 'middle').text('parcial');
+  });
+
+  dash.draw('taxas', (el) => {
+    const s = dash.data('brasil_ano');
+    if (s.status !== 'ok') { P.fail(el, s.status); return; }
+    const rows = P.num(s.data, ['ano', 'taxa_violencia', 'taxa_repressao']);
+    el.replaceChildren();
+    const W = el.clientWidth, H = 260;
+    const svg = d3.select(el).append('svg').attr('width', '100%').attr('height', H).attr('viewBox', `0 0 ${W} ${H}`)
+      .attr('role', 'img').attr('aria-label', 'Linhas da taxa de violência e da taxa de repressão nas manifestações do Brasil por ano');
+    const y = d3.scaleLinear().domain([0, d3.max(rows, (d) => d.taxa_violencia)]).nice().range([H - 24, 10]);
+    const ml = P.textW(svg, y.domain()[1] + '%') + 10;
+    const mr = P.textW(svg, '00,0%') + 8;
+    const x = d3.scalePoint().domain(rows.map((d) => d.ano)).range([ml + 6, W - mr]);
+    svg.append('g').attr('transform', `translate(${ml},0)`).call(d3.axisLeft(y).ticks(5).tickSize(-(W - ml - mr)).tickFormat((v) => v + '%')).call((g) => g.select('.domain').remove());
+    svg.append('g').attr('transform', `translate(0,${H - 24})`).call(d3.axisBottom(x).tickSize(0).tickPadding(6).tickFormat((d) => (W < 420 ? `'${String(d).slice(2)}` : d))).call((g) => g.select('.domain').remove());
+    const series = [['taxa_violencia', dash.colors[1], 'Violência'], ['taxa_repressao', dash.colors[2], 'Repressão']];
+    const tip = P.tip(el);
+    series.forEach(([k, c]) => {
+      svg.append('path').datum(rows).attr('fill', 'none').style('stroke', c).attr('stroke-width', 2.25)
+        .attr('d', d3.line().x((d) => x(d.ano)).y((d) => y(d[k])));
+      svg.append('g').selectAll('circle').data(rows).join('circle').attr('cx', (d) => x(d.ano)).attr('cy', (d) => y(d[k])).attr('r', 3).style('fill', c);
+      const l = rows[rows.length - 1];
+      svg.append('text').attr('x', x(l.ano) + 6).attr('y', y(l[k]) + 4).text(P.pct(l[k]) + '%');
+    });
+    svg.append('g').selectAll('rect').data(rows).join('rect')
+      .attr('x', (d) => x(d.ano) - (x.step() / 2)).attr('width', x.step()).attr('y', 0).attr('height', H).attr('fill', 'transparent')
+      .on('pointermove', (ev, d) => tip.show(ev, [String(d.ano), `Violência: ${P.pct(d.taxa_violencia)}%`, `Repressão: ${P.pct(d.taxa_repressao)}%`]))
+      .on('pointerleave', () => tip.hide());
+  });
+})();
+</script>
+
+<script>
+// Ciclos de protesto (mensal)
+(function () {
+  const P = window.PV;
+  const MARCOS = [['2018-05', 'Greve dos caminhoneiros'], ['2019-05', 'Tsunami da Educação'], ['2021-09', '7 de setembro'], ['2022-10', 'Bloqueios pós-eleição'], ['2023-01', '8 de janeiro']];
+  const parse = d3.utcParse('%Y-%m');
+  dash.draw('ciclos', (el) => {
+    const s = dash.data('brasil_mes');
+    if (s.status !== 'ok') { P.fail(el, s.status); return; }
+    const rows = P.num(s.data, ['pacificos', 'violentas', 'reprimidas', 'turba']).map((d) => ({ ...d, t: parse(d.mes) }));
+    el.replaceChildren();
+    const W = el.clientWidth, H = 360;
+    const svg = d3.select(el).append('svg').attr('width', '100%').attr('height', H).attr('viewBox', `0 0 ${W} ${H}`)
+      .attr('role', 'img').attr('aria-label', 'Série mensal de manifestações pacíficas, violentas e de violência de turba no Brasil desde 2018');
+    const y = d3.scaleLinear().domain([0, d3.max(rows, (d) => d.pacificos)]).nice().range([H - 24, 34]);
+    const ml = P.textW(svg, P.nf(y.domain()[1])) + 10;
+    const x = d3.scaleUtc().domain(d3.extent(rows, (d) => d.t)).range([ml, W - 8]);
+    svg.append('g').attr('transform', `translate(${ml},0)`).call(d3.axisLeft(y).ticks(5).tickSize(-(W - ml - 8)).tickFormat(P.nf)).call((g) => g.select('.domain').remove());
+    svg.append('g').attr('transform', `translate(0,${H - 24})`).call(d3.axisBottom(x).ticks(W < 500 ? d3.utcYear.every(2) : d3.utcYear.every(1)).tickFormat(d3.utcFormat('%Y')));
+    svg.append('path').datum(rows).style('fill', dash.colors[0]).attr('fill-opacity', 0.35)
+      .attr('d', d3.area().x((d) => x(d.t)).y0(y(0)).y1((d) => y(d.pacificos)));
+    svg.append('path').datum(rows).attr('fill', 'none').style('stroke', dash.colors[0]).attr('stroke-width', 1.5)
+      .attr('d', d3.line().x((d) => x(d.t)).y((d) => y(d.pacificos)));
+    [['violentas', dash.colors[1]], ['turba', dash.colors[4]]].forEach(([k, c]) => {
+      svg.append('path').datum(rows).attr('fill', 'none').style('stroke', c).attr('stroke-width', 2)
+        .attr('d', d3.line().x((d) => x(d.t)).y((d) => y(d[k])));
+    });
+    // marcos
+    const byMes = new Map(rows.map((d) => [d.mes, d]));
+    const placed = [];
+    MARCOS.forEach(([m, label]) => {
+      const d = byMes.get(m); if (!d) return;
+      const xx = x(d.t);
+      const anchor = xx > W - 90 ? 'end' : (xx < ml + 60 ? 'start' : 'middle');
+      const t = svg.append('text').attr('class', 'anno').attr('x', xx).attr('text-anchor', anchor).text(label);
+      let lvl = 0; let ok = false;
+      for (; lvl < 2 && !ok; lvl++) {
+        t.attr('y', 12 + lvl * 13);
+        const b = t.node().getBBox();
+        ok = !placed.some((p) => b.x < p.x + p.width + 6 && p.x < b.x + b.width + 6 && b.y < p.y + p.height && p.y < b.y + b.height);
+        if (ok) placed.push(b);
+      }
+      if (!ok) { t.remove(); return; }
+      const ty = 12 + (lvl - 1) * 13;
+      svg.insert('line', 'text.anno').attr('x1', xx).attr('x2', xx).attr('y1', ty + 3).attr('y2', y(d.pacificos)).style('stroke', 'var(--cds-chart-reference)').attr('stroke-dasharray', '2,3');
+    });
+    const tip = P.tip(el);
+    const focus = svg.append('line').attr('y1', 30).attr('y2', H - 24).style('stroke', 'var(--cds-chart-reference)').attr('hidden', true);
+    svg.append('rect').attr('x', ml).attr('y', 0).attr('width', W - ml - 8).attr('height', H - 24).attr('fill', 'transparent')
+      .on('pointermove', (ev) => {
+        const [mx] = d3.pointer(ev); const t = x.invert(mx);
+        const i = d3.bisector((d) => d.t).center(rows, t); const d = rows[i];
+        focus.attr('x1', x(d.t)).attr('x2', x(d.t)).attr('hidden', null);
+        const [yy, mm] = d.mes.split('-');
+        tip.show(ev, [`${P.MES[+mm - 1]}/${yy}`, `Pacíficas: ${P.nf(d.pacificos)}`, `Violentas: ${P.nf(d.violentas)}`, `Reprimidas: ${P.nf(d.reprimidas)}`, `Turba: ${P.nf(d.turba)}`]);
+      })
+      .on('pointerleave', () => { tip.hide(); focus.attr('hidden', true); });
+  });
+})();
+</script>
+
+<script>
+// Dispersão repressão × violência (América Latina)
+(function () {
+  const P = window.PV;
+  dash.draw('dispersao', (el) => {
+    const s = dash.data('latam_pais');
+    if (s.status !== 'ok') { P.fail(el, s.status); return; }
+    const rows = P.num(s.data, ['demonstracoes', 'violentas', 'reprimidas', 'mortes', 'taxa_violencia', 'taxa_repressao']);
+    el.replaceChildren();
+    const W = el.clientWidth, H = 380;
+    const svg = d3.select(el).append('svg').attr('width', '100%').attr('height', H).attr('viewBox', `0 0 ${W} ${H}`)
+      .attr('role', 'img').attr('aria-label', 'Dispersão dos países da América Latina: taxa de repressão no eixo horizontal e taxa de violência no eixo vertical');
+    const y = d3.scaleLinear().domain([0, d3.max(rows, (d) => d.taxa_violencia)]).nice().range([H - 36, 10]);
+    const ml = P.textW(svg, y.domain()[1] + '%') + 10;
+    const x = d3.scaleLog().domain([0.8, 25]).range([ml + 8, W - 16]).clamp(true);
+    const r = d3.scaleSqrt().domain([0, d3.max(rows, (d) => d.demonstracoes)]).range([3, W < 480 ? 16 : 24]);
+    svg.append('g').attr('transform', `translate(${ml},0)`).call(d3.axisLeft(y).ticks(5).tickSize(-(W - ml - 16)).tickFormat((v) => v + '%')).call((g) => g.select('.domain').remove());
+    svg.append('g').attr('transform', `translate(0,${H - 36})`).call(d3.axisBottom(x).tickValues([1, 2, 5, 10, 20]).tickFormat((v) => v + '%'));
+    svg.append('text').attr('x', W - 16).attr('y', H + 2).attr('text-anchor', 'end').text('Taxa de repressão →');
+    const yTitle = svg.append('text').attr('x', ml + 4).attr('y', 22).text('↑ Taxa de violência');
+    const tip = P.tip(el);
+    const g = svg.append('g');
+    const sorted = rows.slice().sort((a, b) => b.demonstracoes - a.demonstracoes);
+    g.selectAll('circle').data(sorted).join('circle')
+      .attr('cx', (d) => x(d.taxa_repressao)).attr('cy', (d) => y(d.taxa_violencia)).attr('r', (d) => r(d.demonstracoes))
+      .style('fill', (d) => (d.pais === 'Brazil' ? dash.colors[1] : 'var(--cds-chart-muted)'))
+      .attr('fill-opacity', (d) => (d.pais === 'Brazil' ? 0.9 : 0.55))
+      .style('stroke', 'var(--color-bg)').attr('stroke-width', 1)
+      .on('pointermove', (ev, d) => tip.show(ev, [P.PT[d.pais] || d.pais, `Manifestações: ${P.nf(d.demonstracoes)}`, `Violência: ${P.pct(d.taxa_violencia)}%`, `Repressão: ${P.pct(d.taxa_repressao)}%`, `Mortes (violentas + reprimidas): ${P.nf(d.mortes)}`]))
+      .on('pointerleave', () => tip.hide());
+    const label = new Set(['Brazil', 'Chile', 'Haiti', 'Nicaragua', 'Cuba', 'Mexico', 'Venezuela', 'Colombia', 'Argentina']);
+    g.selectAll('text.lbl').data(rows.filter((d) => label.has(d.pais) && (W >= 480 || ['Brazil', 'Haiti', 'Cuba', 'Nicaragua', 'Chile'].includes(d.pais)))).join('text')
+      .attr('class', 'lbl').attr('x', (d) => x(d.taxa_repressao) + r(d.demonstracoes) + 3).attr('y', (d) => y(d.taxa_violencia) + 4)
+      .attr('text-anchor', (d) => (x(d.taxa_repressao) > W - 110 ? 'end' : 'start'))
+      .attr('dx', (d) => (x(d.taxa_repressao) > W - 110 ? -2 * r(d.demonstracoes) - 6 : 0))
+      .style('fill', (d) => (d.pais === 'Brazil' ? 'var(--color-fg)' : null))
+      .style('font-weight', (d) => (d.pais === 'Brazil' ? 600 : null))
+      .text((d) => P.PT[d.pais] || d.pais);
+    const lbls = g.selectAll('text.lbl').nodes().sort((a, b) => (a.textContent === 'Brasil' ? -1 : b.textContent === 'Brasil' ? 1 : 0));
+    P.declutter([yTitle.node(), ...lbls]);
+  });
+})();
+</script>
+
+<script>
+// Tabela de UFs (ordenável) e ranking global
+(function () {
+  const P = window.PV;
+  let sortKey = 'demonstracoes'; let asc = false;
+  document.querySelectorAll('#card-ufs [data-sort]').forEach((b) => {
+    b.addEventListener('click', () => {
+      const k = b.getAttribute('data-sort');
+      if (k === sortKey) asc = !asc; else { sortKey = k; asc = k === 'uf'; }
+      dash.draw('ufs');
+    });
+  });
+  dash.draw('ufs', (tb) => {
+    const s = dash.data('brasil_uf');
+    tb.replaceChildren();
+    if (s.status !== 'ok') return;
+    const rows = P.num(s.data, ['demonstracoes', 'violentas', 'reprimidas', 'turba', 'taxa_violencia', 'taxa_repressao', 'saques_depredacao', 'violencia_politica', 'mortes_vp']);
+    rows.sort((a, b) => { const v = sortKey === 'uf' ? d3.ascending(a.uf, b.uf) : d3.ascending(a[sortKey], b[sortKey]); return asc ? v : -v; });
+    const maxTv = d3.max(rows, (d) => d.taxa_violencia);
+    const maxTr = d3.max(rows, (d) => d.taxa_repressao);
+    rows.forEach((d) => {
+      const tr = document.createElement('tr');
+      tr.setAttribute('data-key', encodeURIComponent(d.uf));
+      const td = (txt) => { const c = document.createElement('td'); c.textContent = txt; return c; };
+      const barTd = (v, max, color) => {
+        const c = document.createElement('td');
+        const b = document.createElement('span'); b.className = 'pv-bar'; b.style.width = Math.round(60 * v / max) + 'px'; b.style.background = color;
+        c.append(b, document.createTextNode(P.pct(v) + '%')); return c;
+      };
+      tr.append(td(P.UF[d.uf] || d.uf), td(P.nf(d.demonstracoes)), td(P.nf(d.violentas)),
+        barTd(d.taxa_violencia, maxTv, dash.colors[1]), barTd(d.taxa_repressao, maxTr, dash.colors[2]), td(P.nf(d.turba)),
+        td(P.nf(+d.saques_depredacao)), td(P.nf(+d.violencia_politica)), td(P.nf(+d.mortes_vp)));
+      tb.appendChild(tr);
+    });
+  });
+
+  dash.draw('global', (el) => {
+    const s = dash.data('global_2025');
+    if (s.status !== 'ok') { P.fail(el, s.status); return; }
+    const rows = P.num(s.data, ['demonstracoes', 'posicao']).sort((a, b) => a.posicao - b.posicao);
+    el.replaceChildren();
+    const W = el.clientWidth; const bh = 20; const H = rows.length * (bh + 4) + 8;
+    const svg = d3.select(el).append('svg').attr('width', '100%').attr('height', H).attr('viewBox', `0 0 ${W} ${H}`)
+      .attr('role', 'img').attr('aria-label', 'Barras horizontais com os países que mais registraram manifestações em 2025 e a posição do Brasil');
+    const lab = (d) => `${d.posicao}. ${P.PT[d.pais] || d.pais}`;
+    const ml = d3.max(rows, (d) => P.textW(svg, lab(d))) + 10;
+    const mr = P.textW(svg, '00.000') + 8;
+    const x = d3.scaleLinear().domain([0, d3.max(rows, (d) => d.demonstracoes)]).range([ml, W - mr]);
+    const tip = P.tip(el);
+    const g = svg.selectAll('g.r').data(rows).join('g').attr('class', 'r').attr('transform', (d, i) => `translate(0,${i * (bh + 4) + 4})`);
+    g.append('text').attr('x', ml - 8).attr('y', bh / 2 + 4).attr('text-anchor', 'end').text(lab)
+      .style('fill', (d) => (d.pais === 'Brazil' ? 'var(--color-fg)' : null)).style('font-weight', (d) => (d.pais === 'Brazil' ? 600 : null));
+    g.append('rect').attr('x', ml).attr('height', bh).attr('width', (d) => x(d.demonstracoes) - ml)
+      .style('fill', (d) => (d.pais === 'Brazil' ? dash.colors[1] : dash.colors[0]))
+      .on('pointermove', (ev, d) => tip.show(ev, [P.PT[d.pais] || d.pais, `Manifestações em 2025: ${P.nf(d.demonstracoes)}`, `Posição: ${d.posicao}ª`]))
+      .on('pointerleave', () => tip.hide());
+    g.append('text').attr('x', (d) => x(d.demonstracoes) + 4).attr('y', bh / 2 + 4).text((d) => P.nf(d.demonstracoes));
+  });
+})();
+</script>
+
+<script>
+// Novas variáveis: ecologia da violência, letalidade, trajetórias e contexto das UFs
+dash.calc('kpi_ecologia', {
+  title: 'Mortes em violência política, Brasil 2018–2025',
+  description: 'Soma das mortes em confrontos armados e em violência contra civis nos anos completos.',
+  inputs: ['brasil_ecologia'],
+  fn: (brasil_ecologia) => {
+    const r = brasil_ecologia.filter((d) => +d.ano >= 2018 && +d.ano <= 2025);
+    return [{ mortes_vp: d3.sum(r, (d) => +d.mortes_confrontos + +d.mortes_civis) }];
+  }
+});
+
+dash.calc('eco_cruzamento', {
+  title: 'Ano em que a violência contra civis supera o protesto',
+  description: 'Primeiro ano a partir do qual os eventos de violência contra civis ficam acima dos protestos em todos os anos seguintes.',
+  inputs: ['brasil_ecologia'],
+  fn: (brasil_ecologia) => {
+    const r = brasil_ecologia.map((d) => ({ ano: +d.ano, acima: +d.violencia_civis > +d.protestos })).sort((a, b) => a.ano - b.ano);
+    let ano = null;
+    for (let i = r.length - 1; i >= 0 && r[i].acima; i--) ano = r[i].ano;
+    return [{ ano }];
+  }
+});
+
+dash.calc('uf_correlacao', {
+  title: 'Correlação de Spearman entre violência política e taxa de violência nos protestos, por UF',
+  description: 'Correlação de postos entre os eventos de violência política e a taxa de manifestações violentas nas 27 UFs.',
+  inputs: ['brasil_uf'],
+  fn: (brasil_uf) => {
+    const rank = (v) => { const idx = v.map((x, i) => [x, i]).sort((a, b) => a[0] - b[0]); const r = new Array(v.length); let i = 0;
+      while (i < idx.length) { let j = i; while (j + 1 < idx.length && idx[j + 1][0] === idx[i][0]) j++; for (let k = i; k <= j; k++) r[idx[k][1]] = (i + j) / 2 + 1; i = j + 1; } return r; };
+    const a = rank(brasil_uf.map((d) => +d.violencia_politica)); const b = rank(brasil_uf.map((d) => +d.taxa_violencia));
+    const ma = d3.mean(a), mb = d3.mean(b);
+    const num = d3.sum(a, (x, i) => (x - ma) * (b[i] - mb));
+    const den = Math.sqrt(d3.sum(a, (x) => (x - ma) ** 2) * d3.sum(b, (x) => (x - mb) ** 2));
+    return Math.round(100 * num / den) / 100;
+  }
+});
+
+(function () {
+  const P = window.PV;
+  const C = (i) => dash.colors[i % dash.colors.length];
+  const SUB = { 'Attack': 'Ataque', 'Armed clash': 'Confronto armado', 'Peaceful protest': 'Protesto pacífico', 'Other': 'Outros desenvolvimentos', 'Looting/property destruction': 'Saque/depredação', 'Violent demonstration': 'Manifestação violenta', 'Mob violence': 'Violência de turba', 'Remote explosive/landmine/IED': 'Explosivo remoto/IED', 'Abduction/forced disappearance': 'Sequestro/desaparecimento', 'Protest with intervention': 'Protesto com intervenção', 'Arrests': 'Prisões', 'Disrupted weapons use': 'Uso de armas frustrado', 'Sexual violence': 'Violência sexual', 'Change to group/activity': 'Mudança de grupo/atividade', 'Excessive force against protesters': 'Força excessiva contra manifestantes' };
+  const CAT = { 'Political violence': 'Violência política', 'Demonstrations': 'Manifestação', 'Strategic developments': 'Desenv. estratégico', 'Political violence; Demonstrations': 'Manifestação reprimida' };
+  P.SUB = SUB;
+  const cell = (id, where, field, f) => (el) => {
+    const s = dash.data(id);
+    if (s.status !== 'ok') { el.textContent = '—'; return; }
+    const r = where ? s.data.find((d) => d[where[0]] === where[1]) : s.data[0];
+    el.textContent = r && r[field] != null && r[field] !== '' ? f(r[field]) : '—';
+  };
+  dash.draw('eco-vc25', cell('brasil_ecologia', ['ano', '2025'], 'violencia_civis', P.nf));
+  dash.draw('eco-bt25', cell('brasil_ecologia', ['ano', '2025'], 'confrontos_armados', P.nf));
+  dash.draw('eco-pr25', cell('brasil_ecologia', ['ano', '2025'], 'protestos', P.nf));
+  dash.draw('k-mvp', cell('kpi_ecologia', null, 'mortes_vp', P.nf));
+  dash.draw('eco-cruz', cell('eco_cruzamento', null, 'ano', (v) => String(v)));
+  dash.draw('lt-pop-vd', cell('brasil_subtipo', ['sub_event_type', 'Violent demonstration'], 'pop_media', (v) => P.nf(Math.round(+v))));
+  dash.draw('lt-pop-pp', cell('brasil_subtipo', ['sub_event_type', 'Peaceful protest'], 'pop_media', (v) => P.nf(Math.round(+v))));
+  dash.draw('lt-mob', cell('brasil_subtipo', ['sub_event_type', 'Mob violence'], 'letalidade', P.pct));
+  dash.draw('uf-rho', (el) => { const s = dash.data('uf_correlacao'); el.textContent = s.status === 'ok' && s.data != null ? String(s.data).replace('.', ',') : '—'; });
+
+  const yearAxis = (svg, x, H, W) => svg.append('g').attr('transform', `translate(0,${H - 24})`).call(d3.axisBottom(x).tickSize(0).tickPadding(6).tickFormat((d) => (W < 420 ? `'${String(d).slice(2)}` : d))).call((g) => g.select('.domain').remove());
+
+  dash.draw('ecologia', (el) => {
+    const s = dash.data('brasil_ecologia');
+    if (s.status !== 'ok') { P.fail(el, s.status); return; }
+    const rows = P.num(s.data, ['ano', 'protestos', 'motins', 'confrontos_armados', 'violencia_civis']);
+    el.replaceChildren();
+    const W = el.clientWidth, H = 260;
+    const svg = d3.select(el).append('svg').attr('width', '100%').attr('height', H).attr('viewBox', `0 0 ${W} ${H}`)
+      .attr('role', 'img').attr('aria-label', 'Linhas de protestos, motins, confrontos armados e violência contra civis no Brasil por ano');
+    const series = [['protestos', C(0), 'Protestos'], ['motins', C(1), 'Motins'], ['confrontos_armados', C(3), 'Confrontos armados'], ['violencia_civis', C(5), 'Violência contra civis']];
+    const y = d3.scaleLinear().domain([0, d3.max(rows, (d) => Math.max(...series.map(([k]) => d[k])))]).nice().range([H - 24, 10]);
+    const ml = P.textW(svg, P.nf(y.domain()[1])) + 10;
+    const x = d3.scalePoint().domain(rows.map((d) => d.ano)).range([ml + 6, W - 10]);
+    svg.append('g').attr('transform', `translate(${ml},0)`).call(d3.axisLeft(y).ticks(5).tickSize(-(W - ml - 10)).tickFormat(P.nf)).call((g) => g.select('.domain').remove());
+    yearAxis(svg, x, H, W);
+    series.forEach(([k, c]) => {
+      svg.append('path').datum(rows).attr('fill', 'none').style('stroke', c).attr('stroke-width', 2.25).attr('d', d3.line().x((d) => x(d.ano)).y((d) => y(d[k])));
+      svg.append('g').selectAll('circle').data(rows).join('circle').attr('cx', (d) => x(d.ano)).attr('cy', (d) => y(d[k])).attr('r', 2.5).style('fill', c);
+    });
+    const tip = P.tip(el);
+    svg.append('g').selectAll('rect').data(rows).join('rect').attr('x', (d) => x(d.ano) - x.step() / 2).attr('width', x.step()).attr('y', 0).attr('height', H).attr('fill', 'transparent')
+      .on('pointermove', (ev, d) => tip.show(ev, [String(d.ano) + (d.ano === 2026 ? ' (parcial)' : ''), ...series.map(([k, , n]) => `${n}: ${P.nf(d[k])}`)]))
+      .on('pointerleave', () => tip.hide());
+  });
+
+  dash.draw('mortes', (el) => {
+    const s = dash.data('brasil_ecologia');
+    if (s.status !== 'ok') { P.fail(el, s.status); return; }
+    const rows = P.num(s.data, ['ano', 'mortes_confrontos', 'mortes_civis', 'mortes_total']).map((d) => ({ ...d, outras: d.mortes_total - d.mortes_confrontos - d.mortes_civis }));
+    const keys = ['mortes_confrontos', 'mortes_civis', 'outras'];
+    const names = { mortes_confrontos: 'Confrontos armados', mortes_civis: 'Violência contra civis', outras: 'Demais eventos' };
+    const colors = { mortes_confrontos: C(3), mortes_civis: C(5), outras: C(2) };
+    el.replaceChildren();
+    const W = el.clientWidth, H = 260;
+    const svg = d3.select(el).append('svg').attr('width', '100%').attr('height', H).attr('viewBox', `0 0 ${W} ${H}`)
+      .attr('role', 'img').attr('aria-label', 'Barras empilhadas de mortes reportadas por tipo de evento no Brasil por ano');
+    const y = d3.scaleLinear().domain([0, d3.max(rows, (d) => d.mortes_total)]).nice().range([H - 24, 8]);
+    const ml = P.textW(svg, P.nf(y.domain()[1])) + 10;
+    const x = d3.scaleBand().domain(rows.map((d) => d.ano)).range([ml, W - 4]).padding(0.25);
+    svg.append('g').attr('transform', `translate(${ml},0)`).call(d3.axisLeft(y).ticks(5).tickSize(-(W - ml - 4)).tickFormat(P.nf)).call((g) => g.select('.domain').remove());
+    svg.append('g').attr('transform', `translate(0,${H - 24})`).call(d3.axisBottom(x).tickSize(0).tickPadding(6).tickFormat((d) => (W < 420 ? `'${String(d).slice(2)}` : d)));
+    const tip = P.tip(el);
+    svg.append('g').selectAll('g').data(d3.stack().keys(keys)(rows)).join('g').style('fill', (d) => colors[d.key])
+      .selectAll('rect').data((d) => d).join('rect')
+      .attr('x', (d) => x(d.data.ano)).attr('width', x.bandwidth()).attr('y', (d) => y(d[1])).attr('height', (d) => Math.max(0, y(d[0]) - y(d[1])))
+      .on('pointermove', (ev, d) => tip.show(ev, [String(d.data.ano) + (d.data.ano === 2026 ? ' (parcial)' : ''), ...keys.map((k) => `${names[k]}: ${P.nf(d.data[k])}`), `Total: ${P.nf(d.data.mortes_total)}`]))
+      .on('pointerleave', () => tip.hide());
+  });
+
+  dash.draw('subtipos', (tb) => {
+    const s = dash.data('brasil_subtipo');
+    tb.replaceChildren();
+    if (s.status !== 'ok') return;
+    const rows = P.num(s.data, ['eventos', 'mortes', 'letalidade']).map((d) => ({ ...d, pop: d.pop_media === '' || d.pop_media == null ? null : Math.round(+d.pop_media) }));
+    const maxL = d3.max(rows, (d) => d.letalidade); const maxP = d3.max(rows, (d) => d.pop || 0);
+    rows.forEach((d) => {
+      const tr = document.createElement('tr');
+      tr.setAttribute('data-key', encodeURIComponent(d.sub_event_type));
+      const td = (txt) => { const c = document.createElement('td'); c.textContent = txt; return c; };
+      const bar = (v, max, color, txt) => { const c = document.createElement('td'); if (v == null) { c.textContent = '—'; return c; }
+        const b = document.createElement('span'); b.className = 'pv-bar'; b.style.width = Math.round(60 * v / max) + 'px'; b.style.background = color; c.append(b, document.createTextNode(txt)); return c; };
+      const cat = document.createElement('td'); const tag = document.createElement('span'); tag.className = 'pv-tag'; tag.textContent = CAT[d.disorder_type] || d.disorder_type; cat.appendChild(tag);
+      tr.append(td(SUB[d.sub_event_type] || d.sub_event_type), cat, td(P.nf(d.eventos)), td(P.nf(d.mortes)),
+        bar(d.letalidade, maxL, C(5), P.pct(d.letalidade)), bar(d.pop, maxP, C(0), d.pop == null ? '' : P.nf(d.pop)));
+      tb.appendChild(tr);
+    });
+  });
+
+  // Trajetórias comparadas
+  let pais = 'Chile';
+  const varSel = document.getElementById('var-sel');
+  if (varSel) varSel.addEventListener('change', () => dash.draw('trajetoria'));
+  dash.draw('pais-sel', (sel) => {
+    const s = dash.data('pais_ano');
+    const ps = s.status === 'ok' ? [...new Set(s.data.map((d) => d.pais))].filter((p) => p !== 'Brazil').sort((a, b) => (P.PT[a] || a).localeCompare(P.PT[b] || b, 'pt')) : [];
+    sel.replaceChildren(...ps.map((p) => new Option(P.PT[p] || p, p)));
+    if (ps.includes(pais)) sel.value = pais;
+    sel.onchange = () => { pais = sel.value; dash.draw('trajetoria'); };
+  });
+  dash.draw('trajetoria', (el) => {
+    const s = dash.data('pais_ano');
+    if (s.status !== 'ok') { P.fail(el, s.status); return; }
+    const k = varSel ? varSel.value : 'taxa_violencia';
+    const isPct = k.startsWith('taxa');
+    const pick = (p) => s.data.filter((d) => d.pais === p).map((d) => ({ ano: +d.ano, v: +d[k] })).sort((a, b) => a.ano - b.ano);
+    const br = pick('Brazil'); const ot = pick(pais);
+    el.replaceChildren();
+    const W = el.clientWidth, H = 280;
+    const svg = d3.select(el).append('svg').attr('width', '100%').attr('height', H).attr('viewBox', `0 0 ${W} ${H}`)
+      .attr('role', 'img').attr('aria-label', `Linhas comparando Brasil e ${P.PT[pais] || pais} por ano`);
+    const f = isPct ? (v) => P.pct(v) + '%' : P.nf;
+    const y = d3.scaleLinear().domain([0, d3.max([...br, ...ot], (d) => d.v) || 1]).nice().range([H - 24, 10]);
+    const ml = P.textW(svg, f(y.domain()[1])) + 10;
+    const mr = Math.max(P.textW(svg, 'Brasil'), P.textW(svg, P.PT[pais] || pais)) + 10;
+    const anos = [...new Set([...br, ...ot].map((d) => d.ano))].sort();
+    const x = d3.scalePoint().domain(anos).range([ml + 6, W - mr]);
+    svg.append('g').attr('transform', `translate(${ml},0)`).call(d3.axisLeft(y).ticks(5).tickSize(-(W - ml - mr)).tickFormat(isPct ? (v) => v + '%' : P.nf)).call((g) => g.select('.domain').remove());
+    yearAxis(svg, x, H, W);
+    const ends = [];
+    [[br, C(1), 'Brasil'], [ot, C(0), P.PT[pais] || pais]].forEach(([rows, c, n]) => {
+      if (!rows.length) return;
+      svg.append('path').datum(rows).attr('fill', 'none').style('stroke', c).attr('stroke-width', 2.25).attr('d', d3.line().x((d) => x(d.ano)).y((d) => y(d.v)));
+      svg.append('g').selectAll('circle').data(rows).join('circle').attr('cx', (d) => x(d.ano)).attr('cy', (d) => y(d.v)).attr('r', 3).style('fill', c);
+      const l = rows[rows.length - 1]; ends.push({ y: y(l.v), x: x(l.ano), n, c });
+    });
+    if (ends.length === 2 && Math.abs(ends[0].y - ends[1].y) < 13) { const up = ends[0].y < ends[1].y ? 0 : 1; ends[up].y -= 7; ends[1 - up].y += 7; }
+    ends.forEach((e) => svg.append('text').attr('x', e.x + 6).attr('y', e.y + 4).style('fill', 'var(--color-fg)').text(e.n));
+    const tip = P.tip(el);
+    const byA = (rows, a) => rows.find((d) => d.ano === a);
+    svg.append('g').selectAll('rect').data(anos).join('rect').attr('x', (a) => x(a) - x.step() / 2).attr('width', x.step()).attr('y', 0).attr('height', H).attr('fill', 'transparent')
+      .on('pointermove', (ev, a) => { const b = byA(br, a), o = byA(ot, a);
+        tip.show(ev, [String(a) + (a === 2026 ? ' (parcial)' : ''), `Brasil: ${b ? f(b.v) : '—'}`, `${P.PT[pais] || pais}: ${o ? f(o.v) : '—'}`]); })
+      .on('pointerleave', () => tip.hide());
+  });
+
+  dash.draw('uf-dispersao', (el) => {
+    const s = dash.data('brasil_uf');
+    if (s.status !== 'ok') { P.fail(el, s.status); return; }
+    const rows = P.num(s.data, ['demonstracoes', 'taxa_violencia', 'violencia_politica', 'mortes_vp']).filter((d) => d.violencia_politica > 0);
+    el.replaceChildren();
+    const W = el.clientWidth, H = 360;
+    const svg = d3.select(el).append('svg').attr('width', '100%').attr('height', H).attr('viewBox', `0 0 ${W} ${H}`)
+      .attr('role', 'img').attr('aria-label', 'Dispersão das UFs: eventos de violência política no eixo horizontal e taxa de violência nos protestos no eixo vertical');
+    const y = d3.scaleLinear().domain([0, d3.max(rows, (d) => d.taxa_violencia)]).nice().range([H - 36, 10]);
+    const ml = P.textW(svg, y.domain()[1] + '%') + 10;
+    const x = d3.scaleLog().domain(d3.extent(rows, (d) => d.violencia_politica)).nice().range([ml + 14, W - 20]);
+    const r = d3.scaleSqrt().domain([0, d3.max(rows, (d) => d.demonstracoes)]).range([3, W < 480 ? 14 : 20]);
+    svg.append('g').attr('transform', `translate(${ml},0)`).call(d3.axisLeft(y).ticks(5).tickSize(-(W - ml - 20)).tickFormat((v) => v + '%')).call((g) => g.select('.domain').remove());
+    const [x0, x1] = x.domain();
+    const tv = (W < 480 ? [100, 1000, 10000] : [100, 300, 1000, 3000, 10000]).filter((v) => v >= x0 && v <= x1);
+    svg.append('g').attr('transform', `translate(0,${H - 36})`).call(d3.axisBottom(x).tickValues(tv).tickFormat(P.nf));
+    svg.append('text').attr('x', W - 20).attr('y', H + 2).attr('text-anchor', 'end').text('Eventos de violência política →');
+    const yTitle = svg.append('text').attr('x', ml + 4).attr('y', 22).text('↑ Taxa de violência nos protestos');
+    const tip = P.tip(el);
+    svg.append('g').selectAll('circle').data(rows.slice().sort((a, b) => b.demonstracoes - a.demonstracoes)).join('circle')
+      .attr('cx', (d) => x(d.violencia_politica)).attr('cy', (d) => y(d.taxa_violencia)).attr('r', (d) => r(d.demonstracoes))
+      .style('fill', C(1)).attr('fill-opacity', 0.55).style('stroke', 'var(--color-bg)').attr('stroke-width', 1)
+      .on('pointermove', (ev, d) => tip.show(ev, [P.UF[d.uf] || d.uf, `Manifestações: ${P.nf(d.demonstracoes)}`, `Taxa de violência: ${P.pct(d.taxa_violencia)}%`, `Violência política: ${P.nf(d.violencia_politica)} eventos`, `Mortes (v. política): ${P.nf(d.mortes_vp)}`]))
+      .on('pointerleave', () => tip.hide());
+    const lbl = new Set(['Sao Paulo', 'Rio de Janeiro', 'Bahia', 'Pernambuco', 'Alagoas', 'Minas Gerais', 'Distrito Federal', 'Rio Grande do Sul']);
+    const tl = svg.append('g').selectAll('text').data(rows.filter((d) => lbl.has(d.uf) && (W >= 480 || ['Rio de Janeiro', 'Alagoas', 'Sao Paulo'].includes(d.uf)))).join('text')
+      .attr('x', (d) => x(d.violencia_politica) + r(d.demonstracoes) + 3).attr('y', (d) => y(d.taxa_violencia) + 4)
+      .attr('text-anchor', (d) => (x(d.violencia_politica) > W - 110 ? 'end' : 'start'))
+      .attr('dx', (d) => (x(d.violencia_politica) > W - 110 ? -2 * r(d.demonstracoes) - 6 : 0))
+      .text((d) => P.UF[d.uf] || d.uf);
+    P.declutter([yTitle.node(), ...tl.nodes()]);
+  });
+})();
+</script>
+
+<script>
+// Contexto regional: violência política mensal e violência contra civis
+dash.calc('regiao_participacao', {
+  title: 'Participação do Brasil na região',
+  description: 'Parcela do Brasil nos eventos de violência política (2018–out/2026) e nas mortes de civis (2018–2025) da América Latina e do Caribe.',
+  inputs: ['vp_mes', 'civis_latam'],
+  fn: (vp_mes, civis_latam) => {
+    const br = d3.sum(vp_mes, (d) => +d.brasil);
+    const tot = d3.sum(vp_mes, (d) => +d.brasil + +d.mexico + +d.colombia + +d.outros_latam);
+    const mcBr = d3.sum(civis_latam.filter((d) => d.pais === 'Brazil'), (d) => +d.mortes_civis);
+    const mcTot = d3.sum(civis_latam, (d) => +d.mortes_civis);
+    return [{ pct_vp: Math.round(1000 * br / tot) / 10, pct_mortes_civis: Math.round(1000 * mcBr / mcTot) / 10 }];
+  }
+});
+
+(function () {
+  const P = window.PV;
+  const C = (i) => dash.colors[i % dash.colors.length];
+  const cell = (id, where, field, f) => (el) => {
+    const s = dash.data(id);
+    if (s.status !== 'ok') { el.textContent = '—'; return; }
+    const r = where ? s.data.find((d) => d[where[0]] === where[1]) : s.data[0];
+    el.textContent = r && r[field] != null ? f(r[field]) : '—';
+  };
+  dash.draw('rg-pct-vp', cell('regiao_participacao', null, 'pct_vp', P.pct));
+  dash.draw('rg-pct-mc', cell('regiao_participacao', null, 'pct_mortes_civis', P.pct));
+  dash.draw('rg-br-pct', cell('civis_latam', ['pais', 'Brazil'], 'pct_mortes_civis', P.pct));
+  dash.draw('rg-mx-pct', cell('civis_latam', ['pais', 'Mexico'], 'pct_mortes_civis', P.pct));
+
+  const parse = d3.utcParse('%Y-%m');
+  dash.draw('vp-mes', (el) => {
+    const s = dash.data('vp_mes');
+    if (s.status !== 'ok') { P.fail(el, s.status); return; }
+    const rows = P.num(s.data, ['brasil', 'mexico', 'colombia', 'outros_latam', 'pct_brasil']).map((d) => ({ ...d, t: parse(d.mes) }));
+    const series = [['outros_latam', C(2), 'Demais países'], ['colombia', C(3), 'Colômbia'], ['mexico', C(0), 'México'], ['brasil', C(1), 'Brasil']];
+    el.replaceChildren();
+    const W = el.clientWidth, H = 260;
+    const svg = d3.select(el).append('svg').attr('width', '100%').attr('height', H).attr('viewBox', `0 0 ${W} ${H}`)
+      .attr('role', 'img').attr('aria-label', 'Linhas mensais de eventos de violência política no Brasil, México, Colômbia e demais países da América Latina desde 2018');
+    const y = d3.scaleLinear().domain([0, d3.max(rows, (d) => Math.max(...series.map(([k]) => d[k])))]).nice().range([H - 24, 10]);
+    const ml = P.textW(svg, P.nf(y.domain()[1])) + 10;
+    const x = d3.scaleUtc().domain(d3.extent(rows, (d) => d.t)).range([ml, W - 8]);
+    svg.append('g').attr('transform', `translate(${ml},0)`).call(d3.axisLeft(y).ticks(5).tickSize(-(W - ml - 8)).tickFormat(P.nf)).call((g) => g.select('.domain').remove());
+    svg.append('g').attr('transform', `translate(0,${H - 24})`).call(d3.axisBottom(x).ticks(d3.utcYear.every(W < 520 ? 2 : 1)).tickFormat(d3.utcFormat('%Y')));
+    series.forEach(([k, c]) => svg.append('path').datum(rows).attr('fill', 'none').style('stroke', c).attr('stroke-width', k === 'brasil' ? 2.25 : 1.5)
+      .attr('d', d3.line().x((d) => x(d.t)).y((d) => y(d[k]))));
+    const tip = P.tip(el);
+    const focus = svg.append('line').attr('y1', 10).attr('y2', H - 24).style('stroke', 'var(--cds-chart-reference)').attr('hidden', true);
+    svg.append('rect').attr('x', ml).attr('y', 0).attr('width', W - ml - 8).attr('height', H - 24).attr('fill', 'transparent')
+      .on('pointermove', (ev) => {
+        const [mx] = d3.pointer(ev); const d = rows[d3.bisector((r) => r.t).center(rows, x.invert(mx))];
+        focus.attr('x1', x(d.t)).attr('x2', x(d.t)).attr('hidden', null);
+        const [yy, mm] = d.mes.split('-');
+        tip.show(ev, [`${P.MES[+mm - 1]}/${yy}`, ...series.slice().reverse().map(([k, , n]) => `${n}: ${P.nf(d[k])}`), `Parcela do Brasil: ${P.pct(d.pct_brasil)}%`]);
+      })
+      .on('pointerleave', () => { tip.hide(); focus.attr('hidden', true); });
+  });
+
+  const sel = document.getElementById('civis-sel');
+  if (sel) sel.addEventListener('change', () => dash.draw('civis'));
+  dash.draw('civis', (el) => {
+    const s = dash.data('civis_latam');
+    if (s.status !== 'ok') { P.fail(el, s.status); return; }
+    const k = sel ? sel.value : 'mortes_civis';
+    const f = k === 'pct_mortes_civis' ? (v) => P.pct(v) + '%' : k === 'mortes_por_evento' ? (v) => (+v).toFixed(2).replace('.', ',') : P.nf;
+    const rows = s.data.map((d) => ({ pais: d.pais, v: +d[k], mc: +d.mortes_civis, ev: +d.eventos_contra_civis, pct: +d.pct_mortes_civis })).sort((a, b) => b.v - a.v);
+    el.replaceChildren();
+    const W = el.clientWidth; const bh = 16; const H = rows.length * (bh + 4) + 6;
+    const svg = d3.select(el).append('svg').attr('width', '100%').attr('height', H).attr('viewBox', `0 0 ${W} ${H}`)
+      .attr('role', 'img').attr('aria-label', 'Barras horizontais de violência contra civis por país da América Latina, 2018 a 2025');
+    const ml = d3.max(rows, (d) => P.textW(svg, P.PT[d.pais] || d.pais)) + 10;
+    const mr = d3.max(rows, (d) => P.textW(svg, f(d.v))) + 8;
+    const x = d3.scaleLinear().domain([0, d3.max(rows, (d) => d.v)]).range([ml, W - mr]);
+    const tip = P.tip(el);
+    const g = svg.selectAll('g.r').data(rows).join('g').attr('class', 'r').attr('transform', (d, i) => `translate(0,${i * (bh + 4) + 3})`);
+    g.append('text').attr('x', ml - 8).attr('y', bh / 2 + 4).attr('text-anchor', 'end').text((d) => P.PT[d.pais] || d.pais)
+      .style('fill', (d) => (d.pais === 'Brazil' ? 'var(--color-fg)' : null)).style('font-weight', (d) => (d.pais === 'Brazil' ? 600 : null));
+    g.append('rect').attr('x', ml).attr('height', bh).attr('width', (d) => Math.max(0, x(d.v) - ml))
+      .style('fill', (d) => (d.pais === 'Brazil' ? C(1) : 'var(--cds-chart-muted)'))
+      .on('pointermove', (ev, d) => tip.show(ev, [P.PT[d.pais] || d.pais, `Mortes de civis: ${P.nf(d.mc)}`, `Eventos contra civis: ${P.nf(d.ev)}`, `Civis no total de mortes: ${P.pct(d.pct)}%`]))
+      .on('pointerleave', () => tip.hide());
+    g.append('text').attr('x', (d) => x(d.v) + 4).attr('y', bh / 2 + 4).text((d) => f(d.v));
+  });
+})();
+</script>
+
+<script>
+// Amostras de cor das legendas
+document.querySelectorAll('.pv [data-swatch]').forEach((s) => { s.style.background = dash.colors[+s.getAttribute('data-swatch') % dash.colors.length] || 'currentColor'; });
+</script>
+
+</div>
+<script>
+dash._runAll();
+let pvW = window.innerWidth;
+window.addEventListener('resize', () => { if (Math.abs(window.innerWidth - pvW) < 8) return; pvW = window.innerWidth; clearTimeout(window.pvT); window.pvT = setTimeout(() => dash._runAll(), 150); });
+</script>
+</body>
+</html>
