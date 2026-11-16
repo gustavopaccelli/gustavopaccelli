@@ -556,6 +556,7 @@ p { text-wrap: pretty; }
 
 /* ---------- Projetos ---------- */
 .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 24px; }
+.projects-group + .projects-group { margin-top: 56px; }
 .project-card {
     background: var(--canvas);
     border: 1px solid var(--hairline);
